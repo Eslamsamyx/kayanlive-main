@@ -1,0 +1,24 @@
+{
+  "navigation": {
+    "home": "الرئيسية",
+    "about": "من نحن",
+    "services": "الخدمات",
+    "contact": "اتصل بنا"
+  },
+  "home": {
+    "title": "مرحباً بك في كيان لايف",
+    "subtitle": "منصتك المميزة للبث المباشر",
+    "cta": "ابدأ الآن"
+  },
+  "common": {
+    "language": "اللغة",
+    "signin": "تسجيل الدخول",
+    "signout": "تسجيل الخروج",
+    "signup": "إنشاء حساب"
+  },
+  "watch": "شاهد",
+  "streamer": "مذيع",
+  "noStreamsAvailable": "لا توجد بثوث متاحة حالياً",
+  "liveStreams": "البثوث المباشرة",
+  "popularStreams": "البثوث الشائعة"
+}
