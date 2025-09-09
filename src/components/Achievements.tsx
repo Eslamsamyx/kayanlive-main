@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const imgMaskGroup = "/assets/638442c54db92ce49b3ad8194a062a52ba973004.png";
 const imgEllipse1 = "/assets/575a92ae113574b10651d37ad7654adf9fb7bd85.svg";
 const imgEllipse2 = "/assets/dcc83c6de9d9f4b919b448af6ce767c528855540.svg";
@@ -16,7 +18,7 @@ export default function Achievements() {
           top: '179px'
         }}
       >
-        <img src={imgEllipse2} alt="" className="w-full h-full opacity-60" />
+        <Image src={imgEllipse2} alt="" fill className="opacity-60" />
       </div>
       
       {/* Smaller purple ellipse - right side */}
@@ -29,7 +31,7 @@ export default function Achievements() {
           top: '345px'
         }}
       >
-        <img src={imgEllipse1} alt="" className="w-full h-full opacity-50" />
+        <Image src={imgEllipse1} alt="" fill className="opacity-50" />
       </div>
       
       {/* Pattern overlay - right side */}

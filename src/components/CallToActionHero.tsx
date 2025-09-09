@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 // Assets from Figma
 const imgRectangle6 = "/assets/29064c5a0d86395e45b642fe4e6daf670490f723.png";
@@ -36,7 +37,7 @@ export default function CallToActionHero() {
           <div className="flex-none rotate-[7.038deg] skew-x-[0.038deg]">
             <div className="h-[845.341px] relative w-[499.932px]">
               <div className="absolute inset-[-29.57%_-50.01%]">
-                <img alt="" className="block max-w-none size-full" src={imgVector449} />
+                <Image alt="" className="block max-w-none" src={imgVector449} fill />
               </div>
             </div>
           </div>

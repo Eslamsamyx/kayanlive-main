@@ -89,7 +89,7 @@ export default function Hero() {
             width: '875px'
           }}
         >
-          Welcome to KayanLive, GCC's Top Event Experts
+          Welcome to KayanLive, GCC&apos;s Top Event Experts
         </div>
 
         {/* Slide Indicators */}

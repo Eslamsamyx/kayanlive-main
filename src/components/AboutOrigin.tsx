@@ -107,7 +107,7 @@ export default function AboutOrigin() {
                 <p className="mb-0">
                   <span>What began as a response to regional breakdowns now operates as a trusted name among the </span>
                   <span className="text-[#2c2c2b]">best event management companies</span>
-                  <span> in the region. Recognized across the Emirates and broader GCC regions, we've earned trust through clarity and execution.</span>
+                  <span> in the region. Recognized across the Emirates and broader GCC regions, we&apos;ve earned trust through clarity and execution.</span>
                 </p>
                 <p className="mb-0">&nbsp;</p>
                 <p className="mb-0">Every layer of planning, production, and performance exists in one unified structure.</p>

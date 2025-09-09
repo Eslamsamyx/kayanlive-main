@@ -1,9 +1,7 @@
 'use client';
-import Image from 'next/image';
 
 const imgEventPhoto = "/assets/29064c5a0d86395e45b642fe4e6daf670490f723.png";
 const imgKayanLogo = "/assets/823c27de600ccd2f92af3e073c8e10df3a192e5c.png";
-const imgArrowIcon = "/assets/8a76b0efb00c25590ab9d1ef32b64ab745f386ba.svg";
 
 export default function AboutServices() {
   return (
@@ -34,7 +32,7 @@ export default function AboutServices() {
           </p>
           
           <p className="text-[#888888] text-[32px] leading-[40px]">
-            <span>We're Not Your Typical Event Planning Or Exhibitions Company. When The Plan Shifts And Pressure's On, We Bring The </span>
+            <span>We&apos;re Not Your Typical Event Planning Or Exhibitions Company. When The Plan Shifts And Pressure&apos;s On, We Bring The </span>
             <span className="font-bold text-[#2c2c2b]">Team</span>
             <span>, The </span>
             <span className="font-bold text-[#2c2c2b]">System</span>
