@@ -46,21 +46,20 @@ export default async function ClientsPartnersPage({
         />
         
         {/* Mobile Centered Content */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="flex flex-col items-center justify-center w-[296px]">
+        <div className="absolute inset-0 flex items-center justify-center px-4">
+          <div className="flex flex-col items-center justify-center w-full max-w-[340px]">
             {/* Mobile Title */}
             <h1 
-              className="font-bold text-center mb-[-20px]"
+              className="font-bold text-center mb-[-20px] w-full"
               style={{
-                fontSize: '80px',
-                lineHeight: '70px',
+                fontSize: 'clamp(70px, 18vw, 80px)',
+                lineHeight: 'clamp(60px, 16vw, 70px)',
                 background: 'linear-gradient(135deg, #a095e1 0%, #74cfaa 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
                 fontFamily: "'Aeonik', sans-serif",
-                textTransform: 'capitalize',
-                width: '294px'
+                textTransform: 'capitalize'
               }}
             >
               Clients<br />& Partners

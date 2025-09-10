@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, ReactNode } from 'react';
+import Image from 'next/image';
 
 // Common assets
 const imgPattern = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
@@ -49,7 +50,7 @@ export default function InfoSectionTemplate({
       return <span className="text-[#231f20]">{item.text}</span>;
     }
 
-    let result: ReactNode[] = [];
+    const result: ReactNode[] = [];
     let lastIndex = 0;
     
     item.highlights.forEach((highlight, index) => {
@@ -114,7 +115,7 @@ export default function InfoSectionTemplate({
               <div className="flex flex-col gap-4">
                 {checklistItems.map((item, index) => (
                   <div key={index} className="flex items-start gap-[9px]">
-                    <img src={imgCheckmark} alt="" className="w-[30px] h-[30px] mt-[2px]" />
+                    <Image src={imgCheckmark} alt="" className="w-[30px] h-[30px] mt-[2px]" width={30} height={30} />
                     <p className="text-[24px] leading-[32px] capitalize">
                       {renderChecklistText(item)}
                     </p>
@@ -226,10 +227,12 @@ export default function InfoSectionTemplate({
                   transform: isHovered ? 'translateX(10px)' : 'translateX(0)'
                 }}
               >
-                <img 
+                <Image 
                   src={imgArrowCircle} 
                   alt="" 
                   className="w-full h-full"
+                  fill
+                  style={{objectFit: 'cover'}}
                 />
               </div>
             </div>

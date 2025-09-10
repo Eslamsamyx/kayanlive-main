@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 // Assets from Figma
 const imgRectangle4242 = "/assets/e05fec393f295d237ade9dff2ad26793496382ba.png"; // 2D/3D Content
 const imgRectangle4243 = "/assets/8980a40c08a52f165b1c17b24158f20160d003cc.png"; // Video Editing
@@ -57,7 +59,7 @@ export default function ServicesGrid() {
                 maxWidth: 'clamp(280px, 86vw, 1298px)'
               }}
             >
-              We create high-resolution 2D and 3D animation for event environments—from stylized motion graphics to cinematic renderings, character loops, and dynamic product sequences. Whether it's an explainer wall, architectural fly-through, or ambient content for LED tunnels, our in-house motion team delivers visuals that move people—literally and emotionally.
+              We create high-resolution 2D and 3D animation for event environments—from stylized motion graphics to cinematic renderings, character loops, and dynamic product sequences. Whether it&apos;s an explainer wall, architectural fly-through, or ambient content for LED tunnels, our in-house motion team delivers visuals that move people—literally and emotionally.
               <br /><br />
               Trusted by cultural commissions and enterprise brands for digital content that commands attention.
             </p>
@@ -72,7 +74,7 @@ export default function ServicesGrid() {
               height: 'clamp(32px, 3.2vw, 48.575px)'
             }}
           >
-            <img src={imgFrame1618874049} alt="" className="block max-w-none size-full" />
+            <Image src={imgFrame1618874049} alt="" className="block max-w-none size-full" fill style={{objectFit: 'cover'}} />
           </div>
         </div>
 

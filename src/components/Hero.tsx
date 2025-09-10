@@ -7,10 +7,7 @@ import Image from 'next/image';
 const imgScreenshot1 = "/assets/01f5d49d03c8455dc99b2ad32446b6657b1949e0.png";
 const imgScreenshot3 = "/assets/b0d9ec6faacc00d7ed8b82f3f45ecaa371425181.png";
 const imgFrame1 = "/assets/bac2af3eca424e14c720bab9f5fabec434faaa31.svg";
-const imgPattern0212 = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
-const imgPattern0331 = "/assets/2e5da0ba94a7081a8e8355ba87266411fee96738.png";
 const imgKayanLogo = "/assets/823c27de600ccd2f92af3e073c8e10df3a192e5c.png";
-const imgArrow1 = "/assets/35f8e962d2ce4403cee4cf1b70df11920a8fa4b6.svg";
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -73,7 +70,7 @@ export default function Hero() {
             right: '0', 
             top: '-39.99%' 
           }}>
-            <img alt="" className="block w-full h-full max-w-none" src={imgFrame1} />
+            <Image alt="" className="block w-full h-full max-w-none" src={imgFrame1} fill style={{objectFit: 'contain'}} />
           </div>
         </div>
 
@@ -191,7 +188,7 @@ export default function Hero() {
             transform: 'rotate(-30deg)'
           }}
         >
-          <img src={imgFrame1} alt="" className="w-full h-full object-contain" style={{ filter: 'hue-rotate(260deg)' }} />
+          <Image src={imgFrame1} alt="" className="w-full h-full object-contain" fill style={{ filter: 'hue-rotate(260deg)', objectFit: 'contain' }} />
         </div>
 
         {/* CTA Button */}

@@ -1,5 +1,4 @@
-import { initTRPC, TRPCError } from '@trpc/server';
-import { type NextRequest } from 'next/server';
+import { initTRPC } from '@trpc/server';
 import superjson from 'superjson';
 import { ZodError } from 'zod';
 import { prisma } from '@/lib/prisma';

@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 // Assets from Figma
 const imgRectangle4241 = "/assets/b74a7a7d29dd66a6cd62e4edfe0512fa5a3b97ad.png";
 const imgRectangle4240 = "/assets/776958ae56ed264aecd4c182054c75bc576a1d2f.png";
@@ -27,7 +29,7 @@ export default function WorkOutcomes() {
       <div className="absolute flex h-[939px] items-center justify-center left-0 top-[216px] w-[517px]">
         <div className="flex-none rotate-[180deg] scale-y-[-100%]">
           <div className="h-[939px] relative w-[517px]">
-            <img alt="" className="block max-w-none size-full" src={imgRectangle4241} />
+            <Image alt="" className="block max-w-none size-full" src={imgRectangle4241} fill style={{objectFit: 'cover'}} />
           </div>
         </div>
       </div>
@@ -35,38 +37,38 @@ export default function WorkOutcomes() {
       {/* Right Image with Social Icons */}
       <div className="absolute h-[939px] left-[995px] overflow-clip top-[216px] w-[517px]">
         <div className="absolute h-[939px] left-0 top-0 w-[517px]">
-          <img alt="" className="block max-w-none size-full" src={imgRectangle4240} />
+          <Image alt="" className="block max-w-none size-full" src={imgRectangle4240} fill style={{objectFit: 'cover'}} />
         </div>
         <div className="absolute h-[579px] left-[325px] top-[658px] w-[300px]">
           <div className="absolute inset-[-34.54%_-66.67%]">
-            <img alt="" className="block max-w-none size-full" src={imgEllipse3625} />
+            <Image alt="" className="block max-w-none size-full" src={imgEllipse3625} fill style={{objectFit: 'cover'}} />
           </div>
         </div>
         <div className="absolute contents left-[376px] top-[618px]">
           <div className="absolute bg-white left-[376px] overflow-clip rounded-[900px] size-[62.264px] top-[885.74px]">
             <div className="absolute size-[29px] translate-x-[-50%] translate-y-[-50%]" style={{ top: "calc(50% - 0.368px)", left: "calc(50% + 0.368px)" }}>
-              <img alt="" className="block max-w-none size-full" src={imgMdiTwitter} />
+              <Image alt="" className="block max-w-none size-full" src={imgMdiTwitter} fill style={{objectFit: 'cover'}} />
             </div>
           </div>
           <div className="absolute flex h-[82.195px] items-center justify-center left-[380.67px] top-[714.51px] w-[82.195px]">
             <div className="flex-none rotate-[24.014deg]">
               <div className="bg-white blur-[0.5px] filter opacity-80 overflow-clip relative rounded-[900px] size-[62.264px]">
                 <div className="absolute size-5 translate-x-[-50%] translate-y-[-50%]" style={{ top: "calc(50% - 0.494px)", left: "calc(50% + 0.095px)" }}>
-                  <img alt="" className="block max-w-none size-full" src={imgLogosFacebook} />
+                  <Image alt="" className="block max-w-none size-full" src={imgLogosFacebook} fill style={{objectFit: 'cover'}} />
                 </div>
               </div>
             </div>
           </div>
           <div className="absolute bg-white blur-[1px] filter left-[444.49px] opacity-[0.34] overflow-clip rounded-[900px] size-[62.264px] top-[618px]">
             <div className="absolute size-5 translate-x-[-50%] translate-y-[-50%]" style={{ top: "calc(50% - 0.132px)", left: "calc(50% + 0.377px)" }}>
-              <img alt="" className="block max-w-none size-full" src={imgIcomoonFreeLinkedin2} />
+              <Image alt="" className="block max-w-none size-full" src={imgIcomoonFreeLinkedin2} fill style={{objectFit: 'cover'}} />
             </div>
           </div>
           <div className="absolute flex h-[78.06px] items-center justify-center left-[449.16px] top-[807.91px] w-[78.06px]">
             <div className="flex-none rotate-[342.54deg]">
               <div className="bg-white opacity-90 overflow-clip relative rounded-[900px] size-[62.264px]">
                 <div className="absolute overflow-clip size-[21px] translate-x-[-50%] translate-y-[-50%]" style={{ top: "calc(50% - 0.085px)", left: "calc(50% - 0.007px)" }}>
-                  <img alt="" className="block max-w-none size-full" src={imgSkillIconsInstagram} />
+                  <Image alt="" className="block max-w-none size-full" src={imgSkillIconsInstagram} fill style={{objectFit: 'cover'}} />
                 </div>
               </div>
             </div>

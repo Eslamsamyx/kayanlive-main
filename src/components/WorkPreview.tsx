@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 // Assets from Figma
 const imgRectangle4236 = "/assets/1402feda00b479d56347dca419118793a7b45676.png";
 const imgRectangle4237 = "/assets/5482ea96fa4b448d8ca09a0a3ec25b2abda42297.png";
@@ -14,10 +16,12 @@ export default function WorkPreview() {
       <div className="absolute left-[226px] top-0">
         {/* Image 3 - Rightmost */}
         <div className="absolute h-[948px] left-[813px] top-0 w-[631px] overflow-hidden">
-          <img 
+          <Image 
             alt="" 
             className="block max-w-none size-full object-cover" 
             src={imgRectangle4236}
+            fill
+            style={{objectFit: 'cover'}}
           />
           {/* Fade overlay for bottom and left */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#2c2c2b] from-0% via-[#2c2c2b]/50 via-30% to-transparent to-60% opacity-80" />
@@ -26,10 +30,12 @@ export default function WorkPreview() {
         
         {/* Image 2 - Middle */}
         <div className="absolute h-[948px] left-[406px] top-0 w-[631px] overflow-hidden">
-          <img 
+          <Image 
             alt="" 
             className="block max-w-none size-full object-cover" 
             src={imgRectangle4237}
+            fill
+            style={{objectFit: 'cover'}}
           />
           {/* Fade overlay for bottom and left */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#2c2c2b] from-0% via-[#2c2c2b]/50 via-30% to-transparent to-60% opacity-80" />
@@ -38,10 +44,12 @@ export default function WorkPreview() {
         
         {/* Image 1 - Leftmost */}
         <div className="absolute h-[948px] left-0 top-0 w-[631px] overflow-hidden">
-          <img 
+          <Image 
             alt="" 
             className="block max-w-none size-full object-cover" 
             src={imgRectangle4238}
+            fill
+            style={{objectFit: 'cover'}}
           />
           {/* Fade overlay for bottom and left */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#2c2c2b] from-0% via-[#2c2c2b]/50 via-30% to-transparent to-60% opacity-80" />
@@ -73,7 +81,7 @@ export default function WorkPreview() {
           {/* All title text in one container */}
           <div className="text-white w-full space-y-2">
             <p className="mb-0" style={{ lineHeight: 'clamp(4.5rem, 8.5vw, 129px)' }}>A Preview</p>
-            <p className="mb-0" style={{ lineHeight: 'clamp(4.5rem, 8.5vw, 129px)' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of What's</p>
+            <p className="mb-0" style={{ lineHeight: 'clamp(4.5rem, 8.5vw, 129px)' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of What&apos;s</p>
             <p 
               className="mb-0 bg-clip-text bg-gradient-to-r from-[#a095e1] to-[#74cfaa]" 
               style={{ 

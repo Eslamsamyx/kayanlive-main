@@ -4,7 +4,33 @@ import { useState, useEffect, useRef } from 'react';
 
 const imgOutline1 = "/assets/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.png";
 
-export default function WorkHero() {
+interface HeroTemplateProps {
+  ariaLabel: string;
+  // Mobile/Tablet content
+  mobileTitle: string;
+  mobileSubtitleGradient: string[];
+  mobileSubtitleWhite: string;
+  mobileBodyParagraphs: string[];
+  // Desktop content
+  desktopTitle: string;
+  desktopScreenReaderTitle: string;
+  desktopSubtitleGradient: string;
+  desktopSubtitleWhite: string;
+  desktopBodyParagraphs: string[];
+}
+
+export default function HeroTemplate({
+  ariaLabel,
+  mobileTitle,
+  mobileSubtitleGradient,
+  mobileSubtitleWhite,
+  mobileBodyParagraphs,
+  desktopTitle,
+  desktopScreenReaderTitle,
+  desktopSubtitleGradient,
+  desktopSubtitleWhite,
+  desktopBodyParagraphs
+}: HeroTemplateProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -44,7 +70,7 @@ export default function WorkHero() {
       ref={sectionRef}
       className="relative bg-[#2c2c2b] overflow-hidden rounded-[25px] md:rounded-[43px] lg:rounded-[61px] w-full"
       style={{ aspectRatio: '375/500' }}
-      aria-label="Our Work hero section"
+      aria-label={ariaLabel}
     >
       <style>{`
         @keyframes fadeUp {
@@ -138,11 +164,6 @@ export default function WorkHero() {
           animation: pulseGlowDesktop 3s ease-in-out infinite;
         }
         
-        @media (max-width: 767px) {
-          section {
-            aspect-ratio: 375/650 !important;
-          }
-        }
         @media (min-width: 768px) {
           section {
             aspect-ratio: 768/600 !important;
@@ -182,7 +203,7 @@ export default function WorkHero() {
               paddingRight: "clamp(16px, 4vw, 20px)"
             }}
           >
-            <h1>Our Work</h1>
+            <h1>{mobileTitle}</h1>
           </header>
 
           <div
@@ -198,15 +219,17 @@ export default function WorkHero() {
               textTransform: 'capitalize'
             }}
           >
-            <div style={{
-              background: 'linear-gradient(to right, #a095e1, #74cfaa)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
-            }}>
-              Quality-Driven Process.
-            </div>
-            <div className="text-white">Results-Driven Outcomes.</div>
+            {mobileSubtitleGradient.map((line, index) => (
+              <div key={index} style={{
+                background: 'linear-gradient(to right, #a095e1, #74cfaa)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}>
+                {line}
+              </div>
+            ))}
+            <div className="text-white">{mobileSubtitleWhite}</div>
           </div>
 
           <div
@@ -220,17 +243,15 @@ export default function WorkHero() {
               paddingRight: "clamp(20px, 5vw, 24px)"
             }}
           >
-            <p className="mb-0">
-              At KayanLive, every project begins with a single purpose: to create an experience that moves people, aligns stakeholders, and delivers measurable value. We design for emotional engagement and build for operational reliability—without sacrificing either.
-            </p>
-            <p className="mb-0">&nbsp;</p>
-            <p className="mb-0">
-              Impact is not a side effect. It is the standard.
-            </p>
-            <p className="mb-0">&nbsp;</p>
-            <p className="mb-0">
-              From high-visibility activations in city centers to executive forums staged under time constraints, our exhibition company enters with full alignment and delivers across every touchpoint. When other vendors pause, we shift into high gear. When decisions are delayed, we absorb pressure and maintain clarity. And when the goal changes midstream, we adjust without error. Trusted as a top event planner in the GCC, we don&apos;t decorate—we deliver.
-            </p>
+            {mobileBodyParagraphs.map((paragraph, index) => (
+              paragraph.trim() === '' ? (
+                <p key={index} className="mb-0">&nbsp;</p>
+              ) : (
+                <p key={index} className="mb-0">
+                  {paragraph}
+                </p>
+              )
+            ))}
           </div>
           </div>
           <div></div>
@@ -252,8 +273,8 @@ export default function WorkHero() {
               fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', 'Poppins', sans-serif"
             }}
           >
-            <h1 className="sr-only">KayanLive Work</h1>
-            <span aria-hidden="true">Our Work</span>
+            <h1 className="sr-only">{desktopScreenReaderTitle}</h1>
+            <span aria-hidden="true">{desktopTitle}</span>
           </header>
 
           <div
@@ -275,9 +296,9 @@ export default function WorkHero() {
               backgroundClip: 'text',
               display: 'block'
             }}>
-              Quality-Driven Process.
+              {desktopSubtitleGradient}
             </div>
-            <div className="text-white">Results-Driven Outcomes.</div>
+            <div className="text-white">{desktopSubtitleWhite}</div>
           </div>
 
           <div
@@ -291,17 +312,15 @@ export default function WorkHero() {
               fontFamily: "'Aeonik', 'Poppins', sans-serif"
             }}
           >
-            <p className="mb-0">
-              At KayanLive, every project begins with a single purpose: to create an experience that moves people, aligns stakeholders, and delivers measurable value. We design for emotional engagement and build for operational reliability—without sacrificing either.
-            </p>
-            <p className="mb-0">&nbsp;</p>
-            <p className="mb-0">
-              Impact is not a side effect. It is the standard.
-            </p>
-            <p className="mb-0">&nbsp;</p>
-            <p className="mb-0">
-              From high-visibility activations in city centers to executive forums staged under time constraints, our exhibition company enters with full alignment and delivers across every touchpoint. When other vendors pause, we shift into high gear. When decisions are delayed, we absorb pressure and maintain clarity. And when the goal changes midstream, we adjust without error. Trusted as a top event planner in the GCC, we don&apos;t decorate—we deliver.
-            </p>
+            {desktopBodyParagraphs.map((paragraph, index) => (
+              paragraph.trim() === '' ? (
+                <p key={index} className="mb-0">&nbsp;</p>
+              ) : (
+                <p key={index} className="mb-0">
+                  {paragraph}
+                </p>
+              )
+            ))}
           </div>
         </div>
 

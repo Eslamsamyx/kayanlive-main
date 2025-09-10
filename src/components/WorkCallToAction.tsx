@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 // Assets from Figma
 const imgOutline1 = "/assets/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.png";
@@ -104,7 +105,7 @@ export default function WorkCallToAction() {
               }}
             >
               <div className="absolute inset-[-96.46%_-84.27%]">
-                <img alt="" className="block max-w-none size-full" src={imgEllipse3626} />
+                <Image alt="" className="block max-w-none size-full" src={imgEllipse3626} fill style={{objectFit: 'cover'}} />
               </div>
             </div>
           </div>
@@ -140,7 +141,7 @@ export default function WorkCallToAction() {
                 paddingBottom: 'clamp(8px, 1vw, 12px)'
               }}
             >
-              Let's Walk You Through It
+              Let&apos;s Walk You Through It
             </div>
 
             {/* Content Text - Responsive */}
@@ -203,7 +204,7 @@ export default function WorkCallToAction() {
               transform: isHovered ? 'translateX(10px)' : 'translateX(0)'
             }}
           >
-            <img alt="" className="block max-w-none size-full" src={imgFrame1618874015} />
+            <Image alt="" className="block max-w-none size-full" src={imgFrame1618874015} fill style={{objectFit: 'cover'}} />
           </div>
         </div>
       </div>

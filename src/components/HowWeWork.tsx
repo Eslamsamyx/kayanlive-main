@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 // Assets from the existing pattern
 const imgPattern = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
@@ -95,10 +96,12 @@ export default function HowWeWork() {
                   transform: isHovered ? 'translateX(10px)' : 'translateX(0)'
                 }}
               >
-                <img 
+                <Image 
                   src={imgFrame1618874015} 
                   alt="" 
                   className="w-full h-full"
+                  fill
+                  style={{objectFit: 'cover'}}
                 />
               </div>
             </div>

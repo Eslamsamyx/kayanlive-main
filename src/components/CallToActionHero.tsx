@@ -48,7 +48,7 @@ export default function CallToActionHero() {
           <div className="flex-none rotate-[7.015deg]">
             <div className="h-[627.184px] relative w-[370.943px]">
               <div className="absolute inset-[-15.94%_-26.96%]">
-                <img alt="" className="block max-w-none size-full" src={imgVector450} />
+                <Image alt="" className="block max-w-none size-full" src={imgVector450} fill style={{objectFit: 'cover'}} />
               </div>
             </div>
           </div>
@@ -59,7 +59,7 @@ export default function CallToActionHero() {
           <div className="flex-none rotate-[7.022deg]">
             <div className="h-[485.732px] relative w-[287.262px]">
               <div className="absolute inset-[-24.91%_-42.12%]">
-                <img alt="" className="block max-w-none size-full" src={imgVector451} />
+                <Image alt="" className="block max-w-none size-full" src={imgVector451} fill style={{objectFit: 'cover'}} />
               </div>
             </div>
           </div>
@@ -70,7 +70,7 @@ export default function CallToActionHero() {
           <div className="flex-none rotate-[7.027deg]">
             <div className="h-[322.356px] relative w-[190.644px]">
               <div className="absolute inset-[-37.54%_-63.47%]">
-                <img alt="" className="block max-w-none size-full" src={imgVector452} />
+                <Image alt="" className="block max-w-none size-full" src={imgVector452} fill style={{objectFit: 'cover'}} />
               </div>
             </div>
           </div>
@@ -121,7 +121,7 @@ export default function CallToActionHero() {
               transform: isHovered ? 'translateX(10px)' : 'translateX(0)'
             }}
           >
-            <img alt="" className="block max-w-none size-full" src={imgFrame1618874015} />
+            <Image alt="" className="block max-w-none size-full" src={imgFrame1618874015} fill style={{objectFit: 'cover'}} />
           </div>
         </div>
       </div>

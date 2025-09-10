@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
-const imgMapBackground = "/assets/a4bd38b73259c4fd4f099d834871f17ed5486466.png";
 const imgPattern = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
 const imgCheckmark = "/assets/d57e8b023cc2954fe2c89c41bd7f2153074ba9c1.svg";
 const imgArrowCircle = "/assets/56835058c52a4359de96b664c4f5e9d586e4da1d.svg";
@@ -41,7 +41,7 @@ export default function WhereWeWork() {
             {/* Location Items */}
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-[9px]">
-                <img src={imgCheckmark} alt="" className="w-[30px] h-[30px]" />
+                <Image src={imgCheckmark} alt="" className="w-[30px] h-[30px]" width={30} height={30} />
                 <p className="text-[24px] leading-[32px] capitalize">
                   <span className="font-bold text-[#231f20]">Riyadh, Jeddah, Dammam</span>
                   <span className="text-[#231f20]">, and key </span>
@@ -51,7 +51,7 @@ export default function WhereWeWork() {
               </div>
               
               <div className="flex items-center gap-[9px]">
-                <img src={imgCheckmark} alt="" className="w-[30px] h-[30px]" />
+                <Image src={imgCheckmark} alt="" className="w-[30px] h-[30px]" width={30} height={30} />
                 <p className="text-[24px] leading-[32px] capitalize">
                   <span className="font-bold text-[#231f20]">Dubai, Abu Dhabi, Sharjah, </span>
                   <span className="text-[#231f20]">and the wider</span>
@@ -60,7 +60,7 @@ export default function WhereWeWork() {
               </div>
               
               <div className="flex items-start gap-[9px]">
-                <img src={imgCheckmark} alt="" className="w-[30px] h-[30px] mt-[2px]" />
+                <Image src={imgCheckmark} alt="" className="w-[30px] h-[30px] mt-[2px]" width={30} height={30} />
                 <p className="text-[24px] leading-[32px] capitalize">
                   <span className="text-[#231f20]">And through partner networks in</span>
                   <span className="font-bold text-[#231f20]"> Qatar, Oman, Bahrain, and Kuwait</span>
@@ -143,7 +143,7 @@ export default function WhereWeWork() {
               onMouseLeave={() => setIsHovered(false)}
             >
               <button className="bg-white rounded-[900px] px-[25px] py-[18px] flex items-center gap-3">
-                <span className="text-[#2c2c2b] text-[20px] capitalize">Let's Build Together</span>
+                <span className="text-[#2c2c2b] text-[20px] capitalize">Let&apos;s Build Together</span>
               </button>
               <div 
                 className="bg-white rounded-full flex items-center justify-center transition-all duration-300"
@@ -153,10 +153,12 @@ export default function WhereWeWork() {
                   transform: isHovered ? 'translateX(10px)' : 'translateX(0)'
                 }}
               >
-                <img 
+                <Image 
                   src={imgArrowCircle} 
                   alt="" 
                   className="w-full h-full"
+                  fill
+                  style={{objectFit: 'cover'}}
                 />
               </div>
             </div>

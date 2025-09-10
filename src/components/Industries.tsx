@@ -7,9 +7,6 @@ const imgGovernment = "/assets/cb192ab808312901ac705768d1f69f35ae3c9f61.png";
 const imgMultinational = "/assets/79b8becbbe666db19c2c2dfdebe436eebf271e2e.png";
 const imgRealEstate = "/assets/97b98a652c6210a2b4e884e84040708ab75a45fc.png";
 const imgEventPlanners = "/assets/123269087423c903b101b9352bd92acdab49d86a.png";
-const imgEllipse1 = "/assets/be40b19cedb243ae93c978dbef58efa811bad082.svg";
-const imgEllipse2 = "/assets/b4cb37a55c71d9acc45332ad3ce54be582b29566.svg";
-const imgDiamond = "/assets/f2a30b54eacd563613218afa6cb14b43a4778e09.svg";
 
 export default function Industries() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -305,7 +302,7 @@ export default function Industries() {
                 fontSize: '16px',
                 lineHeight: '22px'
               }}>
-                We've Supported Ministries, Tourism Boards, And Royal Initiatives On Events Aligned With Vision 2030, Expo 2020, And National Day Celebrations. We Understand Protocol. We Anticipate Obstacles. We Handle Stress Before It Reaches You.
+                We&apos;ve Supported Ministries, Tourism Boards, And Royal Initiatives On Events Aligned With Vision 2030, Expo 2020, And National Day Celebrations. We Understand Protocol. We Anticipate Obstacles. We Handle Stress Before It Reaches You.
               </p>
             </div>
           </div>

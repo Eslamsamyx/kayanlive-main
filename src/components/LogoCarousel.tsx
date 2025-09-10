@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function LogoCarousel() {
   const [isPaused, setIsPaused] = useState(false);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | undefined>(undefined);
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<number>(0);
 

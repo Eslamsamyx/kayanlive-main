@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 // Assets from Figma
 const imgPattern0453 = "/assets/6cdd4333a240b46dead9df86c5a83772e81b76fc.png";
 const imgKansi1 = "/assets/bdd0b482d2a4b06725b67356c9cb8f5f989799c7.png";
@@ -89,10 +91,12 @@ export default function ExperienceCenters() {
         }}
       >
         <div className="absolute bottom-0 left-[-0.5px] right-[-0.5px] top-0">
-          <img 
+          <Image 
             alt="" 
             className="block max-w-none size-full" 
             src={imgVector8} 
+            fill
+            style={{objectFit: 'cover'}}
           />
         </div>
       </div>
@@ -141,10 +145,12 @@ export default function ExperienceCenters() {
             width: '85.163px'
           }}
         >
-          <img 
+          <Image 
             alt="" 
             className="block max-w-none size-full" 
             src={imgGroup36136} 
+            fill
+            style={{objectFit: 'cover'}}
           />
         </div>
         
@@ -211,10 +217,12 @@ export default function ExperienceCenters() {
                 width: '85.163px'
               }}
             >
-              <img 
+              <Image 
                 alt="" 
                 className="block max-w-none size-full" 
                 src={imgGroup36137} 
+                fill
+                style={{objectFit: 'cover'}}
               />
             </div>
             
@@ -298,10 +306,12 @@ export default function ExperienceCenters() {
             width: '85.163px'
           }}
         >
-          <img 
+          <Image 
             alt="" 
             className="block max-w-none size-full" 
             src={imgGroup36136} 
+            fill
+            style={{objectFit: 'cover'}}
           />
         </div>
         
@@ -389,10 +399,12 @@ export default function ExperienceCenters() {
                 width: '85.163px'
               }}
             >
-              <img 
+              <Image 
                 alt="" 
                 className="block max-w-none size-full" 
                 src={imgGroup36137} 
+                fill
+                style={{objectFit: 'cover'}}
               />
             </div>
             
@@ -476,10 +488,12 @@ export default function ExperienceCenters() {
             width: '85.163px'
           }}
         >
-          <img 
+          <Image 
             alt="" 
             className="block max-w-none size-full" 
             src={imgGroup36136} 
+            fill
+            style={{objectFit: 'cover'}}
           />
         </div>
         

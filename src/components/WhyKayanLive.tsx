@@ -82,7 +82,7 @@ export default function WhyKayanLive() {
             <span className="text-[#2c2c2b] font-semibold">Khalid Alhasan</span>
             <span>, A Regional Leader In Experiential Strategy And Event Tech. After Over A Decade Leading High-Profile Activations Through A Leading UAE/Saudi Technology Company, He Launched KayanLive To Bring </span>
             <span className="text-[#2c2c2b] font-semibold">Full-Scale, Cross-Functional Event Delivery</span>
-            <span> To Clients Who Need More Than Just A Tech Vendor—They Need A Team Who Understands What's At Stake, And Knows How To Deliver Under Pressure.</span>
+            <span> To Clients Who Need More Than Just A Tech Vendor—They Need A Team Who Understands What&apos;s At Stake, And Knows How To Deliver Under Pressure.</span>
           </p>
         </div>
 
@@ -93,11 +93,11 @@ export default function WhyKayanLive() {
           marginBottom: '66px'
         }}>
           <p className="text-[#888888] text-[24px] leading-[32px] text-left mb-6">
-            "Kayan" In Arabic Means Being, Identity, And Existence—And That's Exactly What We're About. We Believe Every Brand, Every Organization, And Every Idea Has Something Real Behind It—An Essence That Deserves To Be Seen, Felt, And Remembered.
+            &quot;Kayan&quot; In Arabic Means Being, Identity, And Existence—And That&apos;s Exactly What We&apos;re About. We Believe Every Brand, Every Organization, And Every Idea Has Something Real Behind It—An Essence That Deserves To Be Seen, Felt, And Remembered.
           </p>
           
           <p className="text-[#888888] text-[24px] leading-[32px] text-left">
-            That's Why Our Team Is Built To Work From Pitch To Show Day As One Unit—With No Handoffs, No Friction, And No Gaps.
+            That&apos;s Why Our Team Is Built To Work From Pitch To Show Day As One Unit—With No Handoffs, No Friction, And No Gaps.
           </p>
         </div>
 
@@ -108,11 +108,11 @@ export default function WhyKayanLive() {
           margin: '0 auto'
         }}>
             <p className="text-[#888888] text-[24px] leading-[32px] text-left mb-6">
-              We've Been The Silent Force Behind Headline Events In Saudi Arabia, Rapid-Turnaround Brand Activations In Riyadh, And Exhibition Setups Across The GCC. Our Speed Doesn't Sacrifice Quality. It Protects It.
+              We&apos;ve Been The Silent Force Behind Headline Events In Saudi Arabia, Rapid-Turnaround Brand Activations In Riyadh, And Exhibition Setups Across The GCC. Our Speed Doesn&apos;t Sacrifice Quality. It Protects It.
             </p>
             
           <p className="text-[#888888] text-[24px] leading-[32px] text-left">
-            Whether You're Launching A Pavilion, Opening A Cultural Event, Or Fixing Someone Else's Mess, We're The Partner You Call When The Clock Is Already Ticking.
+            Whether You&apos;re Launching A Pavilion, Opening A Cultural Event, Or Fixing Someone Else&apos;s Mess, We&apos;re The Partner You Call When The Clock Is Already Ticking.
           </p>
         </div>
       </div>

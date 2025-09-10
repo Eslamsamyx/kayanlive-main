@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
 const imgKayanLogoOpenFile31 = "/assets/823c27de600ccd2f92af3e073c8e10df3a192e5c.png";
-const imgEllipse10 = "/assets/1918a35cdd924803848278275d7d9e759f06510e.svg";
 const imgArrow1 = "/assets/35f8e962d2ce4403cee4cf1b70df11920a8fa4b6.svg";
 
 interface NavbarProps {

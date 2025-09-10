@@ -118,7 +118,7 @@ export default function AboutValues() {
   const animProgressRef = useRef(0);
   const targetProgressRef = useRef(0);
   const totalLengthRef = useRef(0);
-  const rafRef = useRef<number>();
+  const rafRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);

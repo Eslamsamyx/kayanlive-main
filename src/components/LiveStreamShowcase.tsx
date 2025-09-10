@@ -21,7 +21,7 @@ interface LiveStreamShowcaseProps {
 }
 
 export default function LiveStreamShowcase({
-  streamId,
+  streamId: _streamId,
   title,
   description = '',
   streamerName,
@@ -32,7 +32,7 @@ export default function LiveStreamShowcase({
   category,
   tags = [],
   isFollowing = false,
-  streamUrl = '#'
+  streamUrl: _streamUrl = '#'
 }: LiveStreamShowcaseProps) {
   const t = useTranslations();
   const [isLiked, setIsLiked] = useState(false);

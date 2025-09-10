@@ -62,7 +62,7 @@ export default function ExecutionSection() {
                   height: 'clamp(560px, 56vh, 845px)' 
                 }}>
                   <div className="absolute" style={{ inset: '-29.57% -50.01%' }}>
-                    <img alt="" className="block w-full h-full max-w-none" src={imgVector449} />
+                    <Image alt="" className="block w-full h-full max-w-none" src={imgVector449} fill style={{objectFit: 'cover'}} />
                   </div>
                 </div>
               </div>
@@ -82,7 +82,7 @@ export default function ExecutionSection() {
                   height: 'clamp(415px, 42vh, 627px)' 
                 }}>
                   <div className="absolute" style={{ inset: '-15.94% -26.96%' }}>
-                    <img alt="" className="block w-full h-full max-w-none" src={imgVector450} />
+                    <Image alt="" className="block w-full h-full max-w-none" src={imgVector450} fill style={{objectFit: 'cover'}} />
                   </div>
                 </div>
               </div>
@@ -102,7 +102,7 @@ export default function ExecutionSection() {
                   height: 'clamp(320px, 32vh, 486px)' 
                 }}>
                   <div className="absolute" style={{ inset: '-24.91% -42.12%' }}>
-                    <img alt="" className="block w-full h-full max-w-none" src={imgVector451} />
+                    <Image alt="" className="block w-full h-full max-w-none" src={imgVector451} fill style={{objectFit: 'cover'}} />
                   </div>
                 </div>
               </div>
@@ -122,7 +122,7 @@ export default function ExecutionSection() {
                   height: 'clamp(215px, 21vh, 322px)' 
                 }}>
                   <div className="absolute" style={{ inset: '-37.54% -63.47%' }}>
-                    <img alt="" className="block w-full h-full max-w-none" src={imgVector452} />
+                    <Image alt="" className="block w-full h-full max-w-none" src={imgVector452} fill style={{objectFit: 'cover'}} />
                   </div>
                 </div>
               </div>
@@ -175,7 +175,7 @@ export default function ExecutionSection() {
                   width: 'clamp(50px, 5vw, 65px)',
                   height: 'clamp(50px, 5vw, 65px)'
                 }}>
-                <img alt="" className="block w-full h-full" src={imgFrame1618874015} />
+                <Image alt="" className="block w-full h-full" src={imgFrame1618874015} fill style={{objectFit: 'cover'}} />
               </div>
             </div>
           </div>

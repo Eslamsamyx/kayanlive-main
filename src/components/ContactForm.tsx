@@ -5,7 +5,6 @@ import Image from 'next/image';
 
 const imgConcertBg1 = "/assets/cf27cb2a37e9e3bfd30c1ada4fe4988496b10bbb.png";
 const imgEllipse3624 = "/assets/fcf30dee2c13353872f07b1e13a3de14f4d2f85e.svg";
-const imgFrame1618874015 = "/assets/4a3ffff37e95986459c2da2bd6d49aaab2861815.svg";
 
 export default function ContactForm() {
   const [isUrgent, setIsUrgent] = useState<'yes' | 'no' | null>(null);
@@ -62,7 +61,7 @@ export default function ContactForm() {
         goals: ''
       });
       setIsUrgent(null);
-    } catch (error) {
+    } catch {
       alert('Error submitting form. Please try again.');
     } finally {
       setIsSubmitting(false);

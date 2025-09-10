@@ -1,6 +1,6 @@
 import AboutHero from '@/components/AboutHero';
 import AboutOrigin from '@/components/AboutOrigin';
-import AboutValues from '@/components/AboutValuesSimple';
+import AboutValues from '@/components/AboutValues';
 import HowWeWork from '@/components/HowWeWork';
 
 export default async function AboutUsPage({
@@ -20,7 +20,7 @@ export default async function AboutUsPage({
       </div>
 
       {/* Origin Section - Figma Design */}
-      <div className="-mx-4 mb-8">
+      <div className="-mx-4">
         <AboutOrigin />
       </div>
 
