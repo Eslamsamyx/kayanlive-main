@@ -15,7 +15,7 @@ export default async function AboutUsPage({
   return (
     <div>
       {/* Hero Section - Figma Design */}
-      <div className="mx-4">
+      <div className="mx-4 md:mx-8 lg:mx-0">
         <AboutHero />
       </div>
 

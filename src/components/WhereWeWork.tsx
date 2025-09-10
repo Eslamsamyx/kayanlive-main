@@ -12,9 +12,9 @@ export default function WhereWeWork() {
 
   return (
     <div className="bg-white w-full py-12 md:py-24">
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-20">
+      <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20">
         {/* Desktop Version - Top Section - Where We Work */}
-        <div className="hidden md:flex justify-between gap-7 items-end mb-24">
+        <div className="hidden md:flex justify-between gap-7 items-end mb-6 md:mb-12 lg:mb-16">
           {/* Left Column */}
           <div className="flex flex-col gap-[30px] flex-1 max-w-[543px]">
             {/* Badge */}
@@ -71,7 +71,7 @@ export default function WhereWeWork() {
         </div>
 
         {/* Mobile Version - True Single Column Layout matching reference exactly */}
-        <section className="md:hidden flex flex-col gap-[31px] items-start px-[27px] mb-12">
+        <section className="md:hidden flex flex-col gap-[31px] items-start px-[27px] mb-6 md:mb-12 lg:mb-16">
           {/* Badge - Mobile version */}
           <div className="bg-[rgba(122,253,214,0.26)] h-[50px] rounded-[900px] relative w-auto">
             <div className="box-border flex gap-2.5 h-[50px] items-center justify-center overflow-clip px-[27px] py-6 relative">

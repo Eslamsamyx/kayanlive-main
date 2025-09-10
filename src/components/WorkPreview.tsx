@@ -36,7 +36,7 @@ export default function WorkPreview() {
         {/* Mobile Title Section - Centered and Responsive */}
         <div className="absolute flex flex-col items-center justify-center w-full px-4" style={{ top: 'clamp(20px, 5vh, 40px)' }}>
           <div className="text-white text-center font-medium" style={{
-            fontFamily: "'FONTSPRING DEMO - Visby CF Medium:Regular', sans-serif",
+            fontFamily: '"Poppins", sans-serif',
             fontSize: 'clamp(56px, 15vw, 90px)',
             lineHeight: 'clamp(60px, 16vw, 95px)',
             letterSpacing: '-2px',
@@ -49,7 +49,7 @@ export default function WorkPreview() {
             className="bg-clip-text bg-gradient-to-l from-[#74cfaa] to-[#a095e1] text-center font-medium" 
             style={{ 
               WebkitTextFillColor: "transparent",
-              fontFamily: "'FONTSPRING DEMO - Visby CF Medium:Regular', sans-serif",
+              fontFamily: '"Poppins", sans-serif',
               fontSize: 'clamp(56px, 15vw, 90px)',
               lineHeight: 'clamp(60px, 16vw, 95px)',
               letterSpacing: '-2px'

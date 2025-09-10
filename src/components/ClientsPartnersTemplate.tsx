@@ -313,7 +313,7 @@ export default function ClientsPartnersTemplate({
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
-            fontFamily: "'Aeonik', sans-serif",
+            fontFamily: '"Poppins", sans-serif',
             letterSpacing: '-0.7px'
           }}
         >
@@ -432,7 +432,7 @@ export default function ClientsPartnersTemplate({
                     marginBottom: isMobile ? '8px' : '12px',
                     lineHeight: 1.1,
                     fontSize: '20px',
-                    fontFamily: "'Aeonik', sans-serif"
+                    fontFamily: '"Poppins", sans-serif'
                   }}>
                     {card.title}
                   </h3>
@@ -442,7 +442,7 @@ export default function ClientsPartnersTemplate({
                       color: 'rgba(255, 255, 255, 0.9)',
                       fontSize: '12px',
                       lineHeight: '16px',
-                      fontFamily: "'Aeonik', sans-serif"
+                      fontFamily: '"Poppins", sans-serif'
                     }}>
                       {card.mobileDescription}
                     </p>
@@ -482,7 +482,7 @@ export default function ClientsPartnersTemplate({
                     textAlign: 'center',
                     lineHeight: 1.1,
                     fontSize: getClampValue('cardTitleSize'),
-                    fontFamily: "'Aeonik', sans-serif"
+                    fontFamily: '"Poppins", sans-serif'
                   }}>
                     {/* Mobile title variation */}
                     {card.mobileTitle && isMobile && (

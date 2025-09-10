@@ -31,14 +31,14 @@ export default function CallToActionBanner({
 
   return (
     <div className={`bg-white w-full ${topPadding} ${bottomPadding}`}>
-      <div className="max-w-[1600px] mx-auto px-20">
+      <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20">
         
         {/* Title Section - Positioned above the banner */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-6 md:mb-12 lg:mb-16">
           <h1 
             className="font-bold text-[90px] leading-[85px] capitalize tracking-[-2.7px] text-[#515151]"
             style={{
-              fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', sans-serif"
+              fontFamily: '"Poppins", sans-serif'
             }}
           >
             {title}
@@ -149,7 +149,7 @@ export default function CallToActionBanner({
 
           {/* Content - Mobile: Centered and moved down, Desktop: Left-aligned */}
           <div className="absolute left-0 md:left-[137px] top-20 md:top-20 w-full md:w-[567px] flex flex-col gap-[30px] md:gap-[42px] items-center md:items-start justify-start z-10 px-8 md:px-0">
-            <h3 className="text-white text-[30px] md:text-[50px] leading-[30px] md:leading-[51px] capitalize text-center md:text-left max-w-[290px] md:max-w-none md:w-auto">
+            <h3 className="text-white text-[30px] md:text-[50px] leading-[30px] md:leading-[51px] capitalize text-center md:text-left max-w-[290px] md:max-w-none md:w-auto" style={{ fontFamily: '"Poppins", sans-serif' }}>
               {subtitle}
             </h3>
             
@@ -163,7 +163,7 @@ export default function CallToActionBanner({
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
-                <span className="text-[#2c2c2b] text-[14px] md:text-[20px] capitalize text-center leading-tight">
+                <span className="text-[#2c2c2b] text-[14px] md:text-[20px] capitalize text-center leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }}>
                   {buttonText}
                 </span>
               </ButtonComponent>

@@ -124,10 +124,10 @@ export default function CallToActionHero() {
         }}
       >
         {/* Main Title */}
-        <div className="capitalize font-['Aeonik:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[80px] text-white w-[524px]">
+        <div className="capitalize font-['Poppins',_sans-serif] leading-[0] not-italic relative shrink-0 text-[80px] text-white w-[524px]">
           <p className="leading-[77px]">
             <span>Where </span>
-            <span className="font-['Aeonik:Regular',_sans-serif] lowercase not-italic">Others Struggle, We Execute with Precision</span>
+            <span className="font-['Poppins',_sans-serif] lowercase not-italic">Others Struggle, We Execute with Precision</span>
           </p>
         </div>
         
@@ -143,7 +143,7 @@ export default function CallToActionHero() {
               background: 'linear-gradient(90deg, #7afdd6 0%, #a095e1 60%, #b8a4ff 90%)'
             }}
           >
-            <div className="capitalize font-['Aeonik:Regular',_sans-serif] leading-[28px] not-italic text-[#231f20] text-[20px] text-nowrap">
+            <div className="capitalize font-['Poppins',_sans-serif] leading-[28px] not-italic text-[#231f20] text-[20px] text-nowrap">
               get support today
             </div>
           </div>
@@ -190,10 +190,10 @@ export default function CallToActionHero() {
             left: "50%" 
           }}
         >
-          <div className="capitalize font-['Aeonik:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[56px] text-center text-white">
+          <div className="capitalize font-['Poppins',_sans-serif] leading-[0] not-italic relative shrink-0 text-[56px] text-center text-white">
             <p className="leading-[60px]">
               <span>Where </span>
-              <span className="font-['Aeonik:Regular',_sans-serif] lowercase not-italic">Others Struggle, We Execute with Precision</span>
+              <span className="font-['Poppins',_sans-serif] lowercase not-italic">Others Struggle, We Execute with Precision</span>
             </p>
           </div>
           
@@ -208,7 +208,7 @@ export default function CallToActionHero() {
                 background: 'linear-gradient(90deg, #7afdd6 0%, #a095e1 60%, #b8a4ff 90%)'
               }}
             >
-              <div className="capitalize font-['Aeonik:Regular',_sans-serif] leading-[28px] not-italic text-[#231f20] text-[18px] text-nowrap">
+              <div className="capitalize font-['Poppins',_sans-serif] leading-[28px] not-italic text-[#231f20] text-[18px] text-nowrap">
                 get support today
               </div>
             </div>
@@ -232,10 +232,10 @@ export default function CallToActionHero() {
         />
         <div className="flex flex-col gap-[31px] items-center justify-center px-[27px] py-0 relative h-full">
           <div className="bg-[rgba(255,255,255,0.03)] backdrop-blur-md box-border flex flex-col gap-[60px] items-start justify-center overflow-clip px-[32px] py-[40px] relative rounded-[20px] shrink-0 w-full">
-            <div className="capitalize font-['Aeonik:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-left text-white w-full">
+            <div className="capitalize font-['Poppins',_sans-serif] leading-[0] not-italic relative shrink-0 text-left text-white w-full">
               <p className="leading-[50px] text-[48px]">
                 <span>Where </span>
-                <span className="font-['Aeonik:Regular',_sans-serif] lowercase not-italic">Others Struggle, We Execute with Precision</span>
+                <span className="font-['Poppins',_sans-serif] lowercase not-italic">Others Struggle, We Execute with Precision</span>
               </p>
             </div>
             <div 
@@ -249,7 +249,7 @@ export default function CallToActionHero() {
                   background: 'linear-gradient(90deg, #7afdd6 0%, #a095e1 60%, #b8a4ff 90%)'
                 }}
               >
-                <div className="capitalize font-['Aeonik:Regular',_sans-serif] leading-[28px] not-italic text-[#231f20] text-[16px] text-nowrap">
+                <div className="capitalize font-['Poppins',_sans-serif] leading-[28px] not-italic text-[#231f20] text-[16px] text-nowrap">
                   get support today
                 </div>
               </div>

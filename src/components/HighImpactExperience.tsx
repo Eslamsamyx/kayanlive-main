@@ -12,7 +12,7 @@ export default function HighImpactExperience() {
   return (
     <>
       {/* Mobile Layout */}
-      <div className="block lg:hidden mx-4 mt-8 mb-8">
+      <div className="block lg:hidden mx-4 mt-8 mb-6 md:mb-12 lg:mb-16">
         <div 
           className="bg-[#2c2c2b] overflow-hidden rounded-[25px] relative w-full"
           style={{ height: '645px' }}
@@ -55,7 +55,7 @@ export default function HighImpactExperience() {
                 width: 'calc(100% - 36px)',
                 left: '0px',
                 top: '45.5px',
-                fontFamily: "'FONTSPRING DEMO - Visby CF Medium', sans-serif",
+                fontFamily: '"Poppins", sans-serif',
                 fontSize: 'clamp(50px, 14vw, 75px)',
                 letterSpacing: '-2.4px'
               }}
@@ -103,7 +103,7 @@ export default function HighImpactExperience() {
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden lg:block relative mx-4 mt-8 mb-8">
+      <div className="hidden lg:block relative mx-4 mt-8 mb-6 md:mb-12 lg:mb-16">
       <div
         className="relative overflow-hidden rounded-tl-[61px] rounded-tr-[61px] rounded-bl-[20px] rounded-br-[20px] bg-center bg-cover bg-no-repeat"
         style={{ 

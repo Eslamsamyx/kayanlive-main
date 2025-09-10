@@ -12,7 +12,7 @@ export default function HowWeWork() {
 
   return (
     <div className="bg-white w-full py-24">
-      <div className="max-w-[1600px] mx-auto px-20">
+      <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20">
         {/* CTA Banner - Same structure as NotSureWhereToStart */}
         <div 
           className="relative overflow-hidden rounded-[48px]"

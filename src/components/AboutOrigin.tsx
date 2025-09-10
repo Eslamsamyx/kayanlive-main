@@ -23,7 +23,7 @@ export default function AboutOrigin() {
       )}
       
       {/* Mobile Layout */}
-      <div className={`block lg:hidden min-h-screen py-12 transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`block lg:hidden min-h-screen py-8 md:py-16 transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         
         {/* Mobile Background Pattern 1 */}
         <div 
@@ -66,21 +66,21 @@ export default function AboutOrigin() {
         </div>
 
         {/* Mobile Content */}
-        <div className="relative px-4 py-8">
-          <div className="flex flex-col gap-6 max-w-4xl mx-auto">
+        <div className="relative px-4 md:px-8 py-8 md:py-12">
+          <div className="flex flex-col gap-6 md:gap-8 max-w-4xl mx-auto">
             
             {/* Mobile Card 1 */}
-            <article className="bg-white/80 backdrop-blur-sm border border-[#74cfaa] rounded-[35px] p-6 relative z-10">
+            <article className="bg-white/80 backdrop-blur-sm border border-[#74cfaa] rounded-[35px] p-6 md:p-8 relative z-10">
               <header className="mb-8">
                 <h2 
-                  className="font-bold capitalize text-2xl leading-tight"
+                  className="font-bold capitalize text-2xl md:text-3xl leading-tight"
                   style={{
                     background: 'linear-gradient(to right, #a095e1, #74cfaa)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
                     letterSpacing: '-0.5px',
-                    fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', 'Poppins', sans-serif"
+                    fontFamily: '"Poppins", sans-serif'
                   }}
                 >
                   The Origin of Capability
@@ -90,7 +90,7 @@ export default function AboutOrigin() {
               <div 
                 className="text-[#808184] capitalize text-base leading-relaxed"
                 style={{
-                  fontFamily: "'Aeonik', 'Poppins', sans-serif"
+                  fontFamily: '"Poppins", sans-serif'
                 }}
               >
                 <p className="mb-4">
@@ -110,17 +110,17 @@ export default function AboutOrigin() {
             </article>
 
             {/* Mobile Card 2 */}
-            <article className="bg-white/80 backdrop-blur-sm border border-[#74cfaa] rounded-[35px] p-6 relative z-10">
+            <article className="bg-white/80 backdrop-blur-sm border border-[#74cfaa] rounded-[35px] p-6 md:p-8 relative z-10">
               <header className="mb-8">
                 <h2 
-                  className="font-bold capitalize text-2xl leading-tight"
+                  className="font-bold capitalize text-2xl md:text-3xl leading-tight"
                   style={{
                     background: 'linear-gradient(to right, #a095e1, #74cfaa)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
                     letterSpacing: '-0.5px',
-                    fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', 'Poppins', sans-serif"
+                    fontFamily: '"Poppins", sans-serif'
                   }}
                 >
                   Built to Lead. Proven to Deliver.
@@ -130,7 +130,7 @@ export default function AboutOrigin() {
               <div 
                 className="text-[#808184] capitalize text-base leading-relaxed"
                 style={{
-                  fontFamily: "'Aeonik', 'Poppins', sans-serif"
+                  fontFamily: '"Poppins", sans-serif'
                 }}
               >
                 <p className="mb-4">Our leadership team spans disciplines and industries. From creative directors and AV producers to engineers and logistics specialists, each expert understands what success looks like in high-stakes environments. With years of cumulative experience and region-wide execution, we guide with confidence and act with certainty.</p>
@@ -203,7 +203,7 @@ export default function AboutOrigin() {
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
                     letterSpacing: '-1px',
-                    fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', 'Poppins', sans-serif"
+                    fontFamily: '"Poppins", sans-serif'
                   }}
                 >
                   The Origin of Capability
@@ -215,7 +215,7 @@ export default function AboutOrigin() {
                 style={{
                   fontSize: "clamp(1.0vw, 1.45vw, 22px)",
                   lineHeight: "1.27em",
-                  fontFamily: "'Aeonik', 'Poppins', sans-serif"
+                  fontFamily: '"Poppins", sans-serif'
                 }}
               >
                 <p className="mb-0">
@@ -249,7 +249,7 @@ export default function AboutOrigin() {
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
                     letterSpacing: '-1px',
-                    fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', 'Poppins', sans-serif"
+                    fontFamily: '"Poppins", sans-serif'
                   }}
                 >
                   Built to Lead. Proven to Deliver.
@@ -261,7 +261,7 @@ export default function AboutOrigin() {
                 style={{
                   fontSize: "clamp(1.0vw, 1.45vw, 22px)",
                   lineHeight: "1.27em",
-                  fontFamily: "'Aeonik', 'Poppins', sans-serif"
+                  fontFamily: '"Poppins", sans-serif'
                 }}
               >
                 <p className="mb-0">Our leadership team spans disciplines and industries. From creative directors and AV producers to engineers and logistics specialists, each expert understands what success looks like in high-stakes environments. With years of cumulative experience and region-wide execution, we guide with confidence and act with certainty.</p>

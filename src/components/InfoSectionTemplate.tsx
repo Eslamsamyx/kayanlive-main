@@ -85,10 +85,10 @@ export default function InfoSectionTemplate({
 
   return (
     <div className="bg-white w-full py-24">
-      <div className="max-w-[1600px] mx-auto px-20">
+      <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20">
         {/* Top Section */}
         {showTopSection && (
-          <div className="flex justify-between gap-7 items-end mb-24">
+          <div className="flex justify-between gap-7 items-end mb-6 md:mb-12 lg:mb-16">
             {/* Left Column */}
             <div className="flex flex-col gap-[30px] flex-1 max-w-[543px]">
               {/* Badge */}

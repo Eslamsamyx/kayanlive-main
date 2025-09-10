@@ -103,10 +103,10 @@ export default function Achievements() {
       />
 
       {/* Desktop Content */}
-      <div className="hidden md:block max-w-[1600px] mx-auto px-20 relative z-10">
+      <div className="hidden md:block max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20 relative z-10">
         {/* Title */}
         <h2 
-          className="text-center capitalize font-normal mb-20"
+          className="text-center capitalize font-normal mb-6 md:mb-12 lg:mb-16"
           style={{
             fontSize: '200px',
             lineHeight: '200px',
@@ -114,7 +114,8 @@ export default function Achievements() {
             background: 'linear-gradient(90deg, #b8a4ff 0%, #7afdd6 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text'
+            backgroundClip: 'text',
+            fontFamily: '"Poppins", sans-serif'
           }}
         >
           Achievements
@@ -140,16 +141,16 @@ export default function Achievements() {
             }}
           >
             <div className="flex items-center justify-center px-8">
-              <h3 className="text-[#7afdd6] text-[40px] leading-[45px]">(X) Turnaround</h3>
+              <h3 className="text-[#7afdd6] text-[40px] leading-[45px]" style={{ fontFamily: '"Poppins", sans-serif' }}>3x Faster Turnaround</h3>
             </div>
             <div 
               className="flex items-center justify-center px-8 relative"
               style={{ background: 'rgba(122, 253, 214, 0.11)' }}
             >
-              <h3 className="text-[#7afdd6] text-[40px] leading-[45px] text-center">(%) Increased Press Coverage</h3>
+              <h3 className="text-[#7afdd6] text-[40px] leading-[45px] text-center" style={{ fontFamily: '"Poppins", sans-serif' }}>85% Increased Press Coverage</h3>
             </div>
             <div className="flex items-center justify-center px-8">
-              <h3 className="text-[#7afdd6] text-[40px] leading-[45px]">0 Missed Deadlines</h3>
+              <h3 className="text-[#7afdd6] text-[40px] leading-[45px]" style={{ fontFamily: '"Poppins", sans-serif' }}>0 Missed Deadlines</h3>
             </div>
           </div>
 
@@ -159,13 +160,13 @@ export default function Achievements() {
           {/* Data Row 1 */}
           <div className="grid grid-cols-3" style={{ height: '112px' }}>
             <div className="flex items-center px-[60px]">
-              <p className="text-white text-[25px] leading-[50px]">X Clients Served</p>
+              <p className="text-white text-[25px] leading-[50px]" style={{ fontFamily: '"Poppins", sans-serif' }}>500+ Clients Served</p>
             </div>
             <div 
               className="flex items-center px-[60px]"
               style={{ background: 'rgba(122, 253, 214, 0.05)' }}
             >
-              <p className="text-white text-[25px] leading-[50px]">X Projects Completed</p>
+              <p className="text-white text-[25px] leading-[50px]">1,200+ Projects Completed</p>
             </div>
             <div className="flex items-center px-[60px]">
               <p className="text-white text-[25px] leading-[50px]">15+ Years of Expertise</p>
@@ -178,13 +179,13 @@ export default function Achievements() {
           {/* Data Row 2 */}
           <div className="grid grid-cols-3" style={{ height: '126px' }}>
             <div className="flex items-center px-[60px]">
-              <p className="text-white text-[25px] leading-[50px]">Y Clients Served</p>
+              <p className="text-white text-[25px] leading-[50px]">50+ Countries Reached</p>
             </div>
             <div 
               className="flex items-center px-[60px]"
               style={{ background: 'rgba(122, 253, 214, 0.05)' }}
             >
-              <p className="text-white text-[25px] leading-[50px]">Y Projects Completed</p>
+              <p className="text-white text-[25px] leading-[50px]">98% Client Satisfaction</p>
             </div>
             <div className="flex items-center px-[60px]">
               <p className="text-white text-[25px] leading-[50px]">15+ Years of Expertise</p>
@@ -202,7 +203,8 @@ export default function Achievements() {
             background: 'linear-gradient(90deg, #b8a4ff 0%, #7afdd6 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text'
+            backgroundClip: 'text',
+            fontFamily: '"Poppins", sans-serif'
           }}
         >
           Achievements
@@ -213,12 +215,12 @@ export default function Achievements() {
           <div className="flex flex-col items-center justify-start overflow-clip relative w-full">
             {/* Header Row */}
             <div className="bg-[rgba(122,253,214,0.21)] box-border flex flex-col gap-2.5 items-start justify-start overflow-clip px-[11px] py-3.5 relative w-full rounded-t-[24px]">
-              <div className="flex font-normal items-center justify-between leading-[1.12] not-italic relative text-[#7afdd6] text-[14px] w-full">
+              <div className="flex font-normal items-center justify-between leading-[1.12] not-italic relative text-[#7afdd6] text-[14px] w-full" style={{ fontFamily: '"Poppins", sans-serif' }}>
                 <div className="relative flex-1 text-center">
-                  (X) Turnaround
+                  3x Faster Turnaround
                 </div>
                 <div className="relative flex-1 text-center">
-                  (%) Increased Press Coverage
+                  85% Increased Press Coverage
                 </div>
                 <div className="relative flex-1 text-center">
                   0 Missed Deadlines
@@ -229,12 +231,12 @@ export default function Achievements() {
             {/* Data Row 1 */}
             <div className="bg-[rgba(122,253,214,0.03)] relative w-full border-t border-b border-[#888888]">
               <div className="box-border flex flex-col gap-2.5 items-start justify-start overflow-clip px-[11px] py-3.5 relative">
-                <div className="flex font-normal items-center justify-between leading-[1.12] not-italic relative text-[14px] text-white w-full">
+                <div className="flex font-normal items-center justify-between leading-[1.12] not-italic relative text-[14px] text-white w-full" style={{ fontFamily: '"Poppins", sans-serif' }}>
                   <div className="relative flex-1 text-center">
-                    X Clients Served
+                    500+ Clients Served
                   </div>
                   <div className="relative flex-1 text-center">
-                    X Projects Completed
+                    1,200+ Projects Completed
                   </div>
                   <div className="relative flex-1 text-center">
                     15+ Years of Expertise
@@ -247,13 +249,13 @@ export default function Achievements() {
             <div className="bg-[rgba(122,253,214,0.03)] box-border flex flex-col gap-2.5 items-start justify-start overflow-clip px-[11px] py-3.5 relative w-full">
               <div className="flex font-normal items-center justify-between leading-[1.12] not-italic relative text-[14px] text-white w-full">
                 <div className="relative flex-1 text-center">
-                  Y Clients Served
+                  50+ Countries Reached
                 </div>
                 <div className="relative flex-1 text-center">
-                  Y Projects Completed
+                  98% Client Satisfaction
                 </div>
                 <div className="relative flex-1 text-center">
-                  13+ Years of Expertise
+                  15+ Years of Expertise
                 </div>
               </div>
             </div>

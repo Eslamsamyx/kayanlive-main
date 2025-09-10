@@ -35,7 +35,7 @@ export default function ValueCard({
         <h3 
           className="text-white font-bold text-base mb-2 capitalize"
           style={{
-            fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', 'Poppins', sans-serif"
+            fontFamily: '"Poppins", sans-serif'
           }}
         >
           {title}
@@ -43,7 +43,7 @@ export default function ValueCard({
         <p 
           className="text-[#aab0bb] text-sm leading-relaxed m-0 capitalize"
           style={{
-            fontFamily: "'Aeonik', 'Poppins', sans-serif"
+            fontFamily: '"Poppins", sans-serif'
           }}
         >
           {description}

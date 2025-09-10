@@ -74,9 +74,9 @@ export default function ExperienceCenters() {
         {/* Title - Optimized Mobile-First Typography */}
         <div className="text-center mb-8 px-6 sm:px-8 md:px-12">
           <h1 
-            className="font-bold capitalize tracking-[-2.7px] text-[90px] leading-[85px] md:text-[48px] md:leading-[52px] lg:text-[68px] lg:leading-[74px] xl:text-[90px] xl:leading-[98px] 2xl:text-[120px] 2xl:leading-[130px]"
+            className="font-bold capitalize tracking-[-2.7px] text-[48px] leading-[52px] md:text-[68px] md:leading-[74px] lg:text-[90px] lg:leading-[98px] xl:text-[120px] xl:leading-[130px]"
             style={{
-              fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', sans-serif"
+              fontFamily: '"Poppins", sans-serif'
             }}
           >
             <span 
@@ -107,7 +107,7 @@ export default function ExperienceCenters() {
             <div 
               className="absolute capitalize leading-[0] not-italic text-[19px] text-nowrap text-white" 
               style={{ 
-                fontFamily: "'Aeonik', sans-serif",
+                fontFamily: '"Poppins", sans-serif',
                 fontWeight: 'bold',
                 top: "calc(50% - 6px)", 
                 left: "calc(50% - 31px)" 
@@ -165,7 +165,7 @@ export default function ExperienceCenters() {
               <div 
                 className="bg-clip-text bg-gradient-to-r capitalize not-italic relative text-center w-full"
                 style={{
-                  fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', sans-serif",
+                  fontFamily: '"Poppins", sans-serif',
                   fontSize: 'clamp(18px, 4vw, 22px)',
                   lineHeight: '1.2',
                   background: 'linear-gradient(to right, #a095e1 12.378%, #74cfaa 95.173%)',
@@ -184,7 +184,7 @@ export default function ExperienceCenters() {
                 card.isDark ? 'text-neutral-400' : 'text-[#888888]'
               }`}
               style={{ 
-                fontFamily: "'Aeonik', sans-serif",
+                fontFamily: '"Poppins", sans-serif',
                 fontSize: 'clamp(14px, 3.5vw, 16px)',
                 lineHeight: '1.5'
               }}
@@ -244,7 +244,7 @@ export default function ExperienceCenters() {
         <h1 
           className="font-bold"
           style={{
-            fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', sans-serif",
+            fontFamily: '"Poppins", sans-serif',
             fontSize: '90px',
             lineHeight: '98px'
           }}
@@ -302,7 +302,7 @@ export default function ExperienceCenters() {
         <div 
           className="absolute capitalize not-italic text-nowrap text-white"
           style={{
-            fontFamily: "'Aeonik', sans-serif",
+            fontFamily: '"Poppins", sans-serif',
             fontWeight: 'bold',
             fontSize: '19px',
             lineHeight: '0',
@@ -359,7 +359,7 @@ export default function ExperienceCenters() {
             <div 
               className="bg-clip-text bg-gradient-to-r capitalize not-italic text-center"
               style={{
-                fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', sans-serif",
+                fontFamily: '"Poppins", sans-serif',
                 background: 'linear-gradient(to right, #a095e1 12.378%, #74cfaa 95.173%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
@@ -376,7 +376,7 @@ export default function ExperienceCenters() {
           <div 
             className="relative shrink-0 text-neutral-400 w-full lowercase not-italic"
             style={{
-              fontFamily: "'Aeonik', sans-serif",
+              fontFamily: '"Poppins", sans-serif',
               fontSize: '19px',
               lineHeight: '0'
             }}
@@ -436,7 +436,7 @@ export default function ExperienceCenters() {
                     <div 
                       className="bg-clip-text bg-gradient-to-r capitalize not-italic text-center"
                       style={{
-                        fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', sans-serif",
+                        fontFamily: '"Poppins", sans-serif',
                         background: 'linear-gradient(to right, #a095e1 12.378%, #74cfaa 95.173%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
@@ -460,7 +460,7 @@ export default function ExperienceCenters() {
                   <div 
                     className="relative text-[#6b6b81] w-full lowercase not-italic"
                     style={{
-                      fontFamily: "'Aeonik', sans-serif",
+                      fontFamily: '"Poppins", sans-serif',
                       fontSize: '19px',
                       lineHeight: '24px'
                     }}
@@ -527,7 +527,7 @@ export default function ExperienceCenters() {
                     <div 
                       className="bg-clip-text bg-gradient-to-r capitalize not-italic text-center"
                       style={{
-                        fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', sans-serif",
+                        fontFamily: '"Poppins", sans-serif',
                         background: 'linear-gradient(to right, #a095e1 12.378%, #74cfaa 95.173%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
@@ -551,7 +551,7 @@ export default function ExperienceCenters() {
                   <div 
                     className="relative text-[#6b6b81] w-full lowercase not-italic"
                     style={{
-                      fontFamily: "'Aeonik', sans-serif",
+                      fontFamily: '"Poppins", sans-serif',
                       fontSize: '19px',
                       lineHeight: '24px'
                     }}
@@ -618,7 +618,7 @@ export default function ExperienceCenters() {
                     <div 
                       className="bg-clip-text bg-gradient-to-r capitalize not-italic text-center"
                       style={{
-                        fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', sans-serif",
+                        fontFamily: '"Poppins", sans-serif',
                         background: 'linear-gradient(to right, #a095e1 12.378%, #74cfaa 95.173%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
@@ -642,7 +642,7 @@ export default function ExperienceCenters() {
                   <div 
                     className="relative text-[#6b6b81] w-full lowercase not-italic"
                     style={{
-                      fontFamily: "'Aeonik', sans-serif",
+                      fontFamily: '"Poppins", sans-serif',
                       fontSize: '19px',
                       lineHeight: '24px'
                     }}
@@ -709,7 +709,7 @@ export default function ExperienceCenters() {
                     <div 
                       className="bg-clip-text bg-gradient-to-r capitalize not-italic text-center"
                       style={{
-                        fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', sans-serif",
+                        fontFamily: '"Poppins", sans-serif',
                         background: 'linear-gradient(to right, #a095e1 12.378%, #74cfaa 95.173%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
@@ -733,7 +733,7 @@ export default function ExperienceCenters() {
                   <div 
                     className="relative text-[#6b6b81] w-full lowercase not-italic"
                     style={{
-                      fontFamily: "'Aeonik', sans-serif",
+                      fontFamily: '"Poppins", sans-serif',
                       fontSize: '19px',
                       lineHeight: '24px'
                     }}

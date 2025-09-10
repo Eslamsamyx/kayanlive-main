@@ -8,7 +8,7 @@ export default function AboutServices() {
     <div className="bg-[#f3f3f3] w-full py-12 sm:py-16 md:py-20">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-8 md:px-12 lg:px-20">
         {/* Company Description */}
-        <div className="text-center mb-12 sm:mb-16 md:mb-20">
+        <div className="text-center mb-6 md:mb-12 lg:mb-16">
           <p className="text-[#888888] mb-6 sm:mb-8" style={{ fontSize: 'clamp(18px, 4vw, 32px)', lineHeight: 'clamp(24px, 5vw, 40px)' }}>
             <span>KayanLive Is A Full-Service </span>
             <span className="font-bold text-[#2c2c2b]">Event Management Company</span>

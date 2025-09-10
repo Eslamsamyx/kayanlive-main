@@ -16,12 +16,12 @@ export default async function WorkPage({
   return (
     <div>
       {/* Hero Section - Figma Design */}
-      <div className="mx-4 mb-8">
+      <div className="mx-4 md:mx-8 lg:mx-0 mb-6 md:mb-12 lg:mb-16">
         <WorkHero />
       </div>
       
       {/* Work Preview Section - Coming Soon */}
-      <div className="mx-4">
+      <div className="mx-4 md:mx-8 lg:mx-0">
         <WorkPreview />
       </div>
       

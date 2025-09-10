@@ -69,7 +69,7 @@ export default function WorkCallToAction() {
           <div 
             className="bg-clip-text bg-gradient-to-r capitalize from-[#a095e1] to-[#74cfaa] w-[200px]"
             style={{
-              fontFamily: "'Aeonik', sans-serif",
+              fontFamily: '"Poppins", sans-serif',
               fontWeight: 'bold',
               fontSize: '30px',
               lineHeight: '31px',
@@ -82,7 +82,7 @@ export default function WorkCallToAction() {
           
           {/* Content Text */}
           <div className="capitalize w-full" style={{
-            fontFamily: "'Aeonik', sans-serif",
+            fontFamily: '"Poppins", sans-serif',
             fontSize: '16px',
             lineHeight: '20px',
             color: '#c3c3c3'
@@ -112,7 +112,7 @@ export default function WorkCallToAction() {
             <div 
               className="capitalize text-[#2c2c2b] text-nowrap"
               style={{
-                fontFamily: "'Aeonik', sans-serif",
+                fontFamily: '"Poppins", sans-serif',
                 fontSize: '16px',
                 lineHeight: '28px'
               }}

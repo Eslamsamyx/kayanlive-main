@@ -193,7 +193,7 @@ export default function HeroTemplate({
               width: "clamp(260px, 70vw, 380px)",
               fontSize: "clamp(60px, 11vw, 85px)",
               lineHeight: "clamp(52px, 9.5vw, 75px)",
-              fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', 'Poppins', sans-serif",
+              fontFamily: '"Poppins", sans-serif',
               background: 'linear-gradient(to right, #a095e1, #74cfaa)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -212,7 +212,7 @@ export default function HeroTemplate({
               width: "clamp(280px, 75vw, 420px)",
               fontSize: "clamp(22px, 3.8vw, 32px)",
               lineHeight: "clamp(24px, 4vw, 34px)",
-              fontFamily: "'FONTSPRING DEMO - Visby CF Medium', 'Poppins', sans-serif",
+              fontFamily: '"Poppins", sans-serif',
               marginBottom: "clamp(25px, 5vw, 35px)",
               paddingLeft: "clamp(20px, 5vw, 24px)",
               paddingRight: "clamp(20px, 5vw, 24px)",
@@ -238,7 +238,7 @@ export default function HeroTemplate({
               width: "clamp(280px, 75vw, 480px)",
               fontSize: "clamp(15px, 2.3vw, 18px)",
               lineHeight: "clamp(19px, 3vw, 24px)",
-              fontFamily: "'Aeonik', 'Poppins', sans-serif",
+              fontFamily: '"Poppins", sans-serif',
               paddingLeft: "clamp(20px, 5vw, 24px)",
               paddingRight: "clamp(20px, 5vw, 24px)"
             }}
@@ -270,7 +270,7 @@ export default function HeroTemplate({
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', 'Poppins', sans-serif"
+              fontFamily: '"Poppins", sans-serif'
             }}
           >
             <h1 className="sr-only">{desktopScreenReaderTitle}</h1>
@@ -285,7 +285,7 @@ export default function HeroTemplate({
               width: "50%",
               fontSize: "clamp(1.8vw, 3.2vw, 48px)",
               lineHeight: "1.3em",
-              fontFamily: "'FONTSPRING DEMO - Visby CF Medium', 'Poppins', sans-serif",
+              fontFamily: '"Poppins", sans-serif',
               textTransform: 'capitalize'
             }}
           >
@@ -309,7 +309,7 @@ export default function HeroTemplate({
               width: "43.5%",
               fontSize: "clamp(0.8vw, 1.5vw, 22px)",
               lineHeight: "1.27em",
-              fontFamily: "'Aeonik', 'Poppins', sans-serif"
+              fontFamily: '"Poppins", sans-serif'
             }}
           >
             {desktopBodyParagraphs.map((paragraph, index) => (

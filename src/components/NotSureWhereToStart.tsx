@@ -12,14 +12,14 @@ export default function NotSureWhereToStart() {
 
   return (
     <div className="bg-white w-full py-24">
-      <div className="max-w-[1600px] mx-auto px-20">
+      <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20">
         
         {/* Title Section - Positioned above the banner */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-6 md:mb-12 lg:mb-16">
           <h1 
             className="font-bold text-[90px] leading-[85px] capitalize tracking-[-2.7px]"
             style={{
-              fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', sans-serif"
+              fontFamily: '"Poppins", sans-serif'
             }}
           >
             <span 

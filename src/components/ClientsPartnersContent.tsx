@@ -8,7 +8,7 @@ export default function ClientsPartnersContent() {
           <div 
             className="text-center w-full"
             style={{ 
-              fontFamily: "'Aeonik', sans-serif",
+              fontFamily: '"Poppins", sans-serif',
               fontSize: 'clamp(1.1rem, 2.2vw, 1.5rem)',
               lineHeight: 'clamp(1.6rem, 3vw, 2.1rem)',
               color: 'rgba(35,31,32,0.73)'
@@ -37,7 +37,7 @@ export default function ClientsPartnersContent() {
           <p 
             className="font-bold mb-0"
             style={{ 
-              fontFamily: "'Aeonik', sans-serif",
+              fontFamily: '"Poppins", sans-serif',
               fontSize: 'clamp(1.1rem, 2.2vw, 1.5rem)',
               lineHeight: 'clamp(1.6rem, 3vw, 2.1rem)',
               color: 'rgba(35,31,32,0.73)'

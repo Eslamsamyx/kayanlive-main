@@ -88,7 +88,7 @@ function ValueCard({ value, className = "" }: ValueCardProps) {
         <h3 
           className="text-white font-bold text-base mb-1.5 capitalize"
           style={{
-            fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', 'Poppins', sans-serif"
+            fontFamily: '"Poppins", sans-serif'
           }}
         >
           {value.title}
@@ -96,7 +96,7 @@ function ValueCard({ value, className = "" }: ValueCardProps) {
         <p 
           className="text-[#aab0bb] text-xs leading-relaxed m-0 capitalize"
           style={{
-            fontFamily: "'Aeonik', 'Poppins', sans-serif"
+            fontFamily: '"Poppins", sans-serif'
           }}
         >
           {value.description}
@@ -382,7 +382,7 @@ export default function AboutValues() {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', 'Poppins', sans-serif"
+              fontFamily: '"Poppins", sans-serif'
             }}
           >
             Values That<br />Activate Outcomes

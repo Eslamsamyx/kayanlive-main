@@ -42,7 +42,7 @@ export default function WhyKayanLive() {
       </div>
 
       {/* Desktop Content Container */}
-      <div className="hidden md:block max-w-[1600px] mx-auto px-20 relative z-10" style={{ paddingTop: '85px', paddingBottom: '100px' }}>
+      <div className="hidden md:block max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20 relative z-10" style={{ paddingTop: '85px', paddingBottom: '100px' }}>
         {/* Why heading - Original position */}
         <h2 
           className="text-[#2c2c2b] font-medium capitalize"
@@ -51,7 +51,8 @@ export default function WhyKayanLive() {
             lineHeight: '168px',
             letterSpacing: '-2.2px',
             marginLeft: '117px',
-            marginBottom: '37px'
+            marginBottom: '37px',
+            fontFamily: '"Poppins", sans-serif'
           }}
         >
           Why
@@ -77,7 +78,7 @@ export default function WhyKayanLive() {
           marginRight: '0',
           marginBottom: '259px'
         }}>
-          <p className="text-[#888888] text-[24px] leading-[32px] text-left">
+          <p className="text-[#888888] text-[24px] leading-[32px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}>
             <span>KayanLive Was Founded By </span>
             <span className="text-[#2c2c2b] font-semibold">Khalid Alhasan</span>
             <span>, A Regional Leader In Experiential Strategy And Event Tech. After Over A Decade Leading High-Profile Activations Through A Leading UAE/Saudi Technology Company, He Launched KayanLive To Bring </span>
@@ -92,11 +93,11 @@ export default function WhyKayanLive() {
           maxWidth: '995px',
           marginBottom: '66px'
         }}>
-          <p className="text-[#888888] text-[24px] leading-[32px] text-left mb-6">
+          <p className="text-[#888888] text-[24px] leading-[32px] text-left mb-6" style={{ fontFamily: '"Poppins", sans-serif' }}>
             &quot;Kayan&quot; In Arabic Means Being, Identity, And Existence—And That&apos;s Exactly What We&apos;re About. We Believe Every Brand, Every Organization, And Every Idea Has Something Real Behind It—An Essence That Deserves To Be Seen, Felt, And Remembered.
           </p>
           
-          <p className="text-[#888888] text-[24px] leading-[32px] text-left">
+          <p className="text-[#888888] text-[24px] leading-[32px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}>
             That&apos;s Why Our Team Is Built To Work From Pitch To Show Day As One Unit—With No Handoffs, No Friction, And No Gaps.
           </p>
         </div>
@@ -107,11 +108,11 @@ export default function WhyKayanLive() {
           maxWidth: '995px',
           margin: '0 auto'
         }}>
-            <p className="text-[#888888] text-[24px] leading-[32px] text-left mb-6">
+            <p className="text-[#888888] text-[24px] leading-[32px] text-left mb-6" style={{ fontFamily: '"Poppins", sans-serif' }}>
               We&apos;ve Been The Silent Force Behind Headline Events In Saudi Arabia, Rapid-Turnaround Brand Activations In Riyadh, And Exhibition Setups Across The GCC. Our Speed Doesn&apos;t Sacrifice Quality. It Protects It.
             </p>
             
-          <p className="text-[#888888] text-[24px] leading-[32px] text-left">
+          <p className="text-[#888888] text-[24px] leading-[32px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}>
             Whether You&apos;re Launching A Pavilion, Opening A Cultural Event, Or Fixing Someone Else&apos;s Mess, We&apos;re The Partner You Call When The Clock Is Already Ticking.
           </p>
         </div>
@@ -125,7 +126,8 @@ export default function WhyKayanLive() {
             className="font-medium text-[#2c2c2b] leading-tight tracking-tight"
             style={{
               fontSize: 'clamp(4.5rem, 16vw, 7rem)',
-              letterSpacing: 'clamp(-1.5px, -0.2vw, -1.2px)'
+              letterSpacing: 'clamp(-1.5px, -0.2vw, -1.2px)',
+              fontFamily: '"Poppins", sans-serif'
             }}
           >
             Why
@@ -154,7 +156,8 @@ export default function WhyKayanLive() {
                 fontSize: 'clamp(0.875rem, 3vw, 1rem)',
                 lineHeight: 'clamp(1.4, 4vw, 1.6)',
                 maxWidth: '45ch',
-                margin: '0 auto'
+                margin: '0 auto',
+                fontFamily: '"Poppins", sans-serif'
               }}
             >
               KayanLive was founded by{' '}
@@ -175,7 +178,8 @@ export default function WhyKayanLive() {
                   fontSize: 'clamp(0.875rem, 3vw, 1rem)',
                   lineHeight: 'clamp(1.4, 4vw, 1.6)',
                   maxWidth: '50ch',
-                  margin: '0 auto'
+                  margin: '0 auto',
+                  fontFamily: '"Poppins", sans-serif'
                 }}
               >
                 "Kayan" in Arabic means being, identity, and existence—and that's exactly what we're about. We believe every brand, every organization, and every idea has something real behind it—an essence that deserves to be seen, felt, and remembered.
@@ -187,7 +191,8 @@ export default function WhyKayanLive() {
                   fontSize: 'clamp(0.875rem, 3vw, 1rem)',
                   lineHeight: 'clamp(1.4, 4vw, 1.6)',
                   maxWidth: '50ch',
-                  margin: '0 auto'
+                  margin: '0 auto',
+                  fontFamily: '"Poppins", sans-serif'
                 }}
               >
                 That's why our team is built to work from pitch to show day as one unit—with no handoffs, no friction, and no gaps.
@@ -205,7 +210,8 @@ export default function WhyKayanLive() {
                   fontSize: 'clamp(0.875rem, 3vw, 1rem)',
                   lineHeight: 'clamp(1.4, 4vw, 1.6)',
                   maxWidth: '50ch',
-                  margin: '0 auto'
+                  margin: '0 auto',
+                  fontFamily: '"Poppins", sans-serif'
                 }}
               >
                 We've been the silent force behind headline events in Saudi Arabia, rapid-turnaround brand activations in Riyadh, and exhibition setups across the GCC. Our speed doesn't sacrifice quality. It protects it.
@@ -217,7 +223,8 @@ export default function WhyKayanLive() {
                   fontSize: 'clamp(0.875rem, 3vw, 1rem)',
                   lineHeight: 'clamp(1.4, 4vw, 1.6)',
                   maxWidth: '50ch',
-                  margin: '0 auto'
+                  margin: '0 auto',
+                  fontFamily: '"Poppins", sans-serif'
                 }}
               >
                 Whether you're launching a pavilion, opening a cultural event, or fixing someone else's mess, we're the partner you call when the clock is already ticking.

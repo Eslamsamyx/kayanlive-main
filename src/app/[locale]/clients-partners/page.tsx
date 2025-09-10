@@ -14,7 +14,7 @@ export default async function ClientsPartnersPage({
   return (
     <div>
       {/* Mobile Hero Section - Figma Design */}
-      <section className="relative bg-[#2c2c2b] overflow-hidden rounded-[25px] w-full mb-8 md:hidden" style={{ aspectRatio: '375/500' }}>
+      <section className="relative bg-[#2c2c2b] overflow-hidden rounded-[25px] w-full mb-6 md:mb-12 lg:mb-16 md:hidden" style={{ aspectRatio: '375/500' }}>
         {/* Mobile Decorative Outline 1 - Top Right */}
         <div 
           className="absolute opacity-50"
@@ -161,7 +161,7 @@ export default async function ClientsPartnersPage({
       </section>
 
       {/* Desktop Hero Section - Existing */}
-      <section className="relative bg-[#2c2c2b] overflow-hidden rounded-[25px] md:rounded-[43px] lg:rounded-[61px] w-full mb-8 min-h-[500px] md:min-h-[600px] lg:min-h-[700px] hidden md:block">
+      <section className="relative bg-[#2c2c2b] overflow-hidden rounded-[25px] md:rounded-[43px] lg:rounded-[61px] w-full mb-6 md:mb-12 lg:mb-16 min-h-[500px] md:min-h-[600px] lg:min-h-[700px] hidden md:block">
         {/* Background Image */}
         <div 
           className="absolute inset-0 opacity-10"
@@ -301,17 +301,17 @@ export default async function ClientsPartnersPage({
       </section>
       
       {/* Full-Width Content Section */}
-      <div className="-mx-4 relative min-h-[600px] bg-white px-8 md:px-12 lg:px-16">
+      <div className="-mx-4 relative min-h-[600px] bg-white px-4 md:px-8 lg:px-20">
         <ClientsPartnersContent />
       </div>
 
       {/* Our Partners Section */}
-      <div className="-mx-4 mb-8">
+      <div className="-mx-4 mb-6 md:mb-12 lg:mb-16">
         <OurPartners />
       </div>
 
       {/* Join Our Network Section */}
-      <div className="-mx-4 mb-8">
+      <div className="-mx-4 mb-6 md:mb-12 lg:mb-16">
         <CallToActionBanner
           title="Join Our Network"
           subtitle="Looking to collaborate on future events, activations, or long-term initiatives?"

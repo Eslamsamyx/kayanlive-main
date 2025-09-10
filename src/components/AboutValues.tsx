@@ -148,17 +148,17 @@ export default function AboutValues() {
         minHeight: calculatedHeight > 0 ? `${calculatedHeight}px` : 'auto'
       }}
     >
-      <div ref={contentRef} className="max-w-7xl mx-auto px-6 relative">
+      <div ref={contentRef} className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 relative">
         {/* Title with SVG Logo */}
-        <div className="relative mb-20">
+        <div className="relative mb-6 md:mb-12 lg:mb-16">
           <h2 
-            className="text-[150px] font-bold leading-[144px] capitalize"
+            className="text-[100px] md:text-[130px] lg:text-[150px] font-bold leading-[96px] md:leading-[120px] lg:leading-[144px] capitalize"
             style={{
               background: 'linear-gradient(90deg, #a095e1, #74cfaa)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              fontFamily: 'FONTSPRING_DEMO_-_Visby_CF_Demi_Bold, sans-serif'
+              fontFamily: '"Poppins", sans-serif'
             }}
           >
             Values That Activate Outcomes
@@ -253,7 +253,7 @@ export default function AboutValues() {
                   transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
                 }}
               >
-                <div className="w-full max-w-md">
+                <div className="w-full max-w-sm md:max-w-md lg:max-w-lg">
                   {/* Card Image */}
                   <div 
                     className="aspect-[4/3] rounded-3xl bg-cover bg-center mb-4"
@@ -265,10 +265,10 @@ export default function AboutValues() {
                   
                   {/* Card Content */}
                   <div className="px-2">
-                    <h3 className="text-white text-xl font-bold mb-2">
+                    <h3 className="text-white text-lg md:text-xl lg:text-2xl font-bold mb-2" style={{ fontFamily: '"Poppins", sans-serif' }}>
                       {value.title}
                     </h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">
+                    <p className="text-gray-400 text-sm leading-relaxed" style={{ fontFamily: '"Poppins", sans-serif' }}>
                       {value.description}
                     </p>
                   </div>

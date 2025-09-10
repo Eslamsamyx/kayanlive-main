@@ -63,7 +63,7 @@ export default async function HomePage({
       </div>
       
       {/* Call to Action Hero Section */}
-      <div className="mb-8">
+      <div className="mb-6 md:mb-12 lg:mb-16">
         <CallToActionHero />
       </div>
       

@@ -44,7 +44,7 @@ export default function WorkOutcomes() {
           {/* Title Section */}
           <div className="capitalize flex flex-col gap-3 items-center justify-center text-center w-full max-w-[321px]">
             <div style={{
-              fontFamily: "'FONTSPRING DEMO - Visby CF Medium:Regular', sans-serif",
+              fontFamily: '"Poppins", sans-serif',
               fontSize: '50px',
               lineHeight: '52px',
               letterSpacing: '-2px',
@@ -56,7 +56,7 @@ export default function WorkOutcomes() {
             <div 
               className="bg-clip-text bg-gradient-to-r from-[#a095e1] to-[#74cfaa] w-full"
               style={{
-                fontFamily: "'FONTSPRING DEMO - Visby CF Medium:Regular', sans-serif",
+                fontFamily: '"Poppins", sans-serif',
                 fontSize: '55px',
                 lineHeight: '58px',
                 letterSpacing: '-2.2px',
@@ -81,7 +81,7 @@ export default function WorkOutcomes() {
 
           {/* Text Content */}
           <div className="capitalize text-center w-full max-w-[321px]" style={{
-            fontFamily: "'Aeonik', sans-serif",
+            fontFamily: '"Poppins", sans-serif',
             fontSize: '16px',
             lineHeight: '20px',
             color: '#888888'
@@ -90,7 +90,7 @@ export default function WorkOutcomes() {
             <p className="mb-0">
               <span>We do not rely on vague claims or polished slogans. </span>
               <span style={{ 
-                fontFamily: "'Aeonik', sans-serif",
+                fontFamily: '"Poppins", sans-serif',
                 fontWeight: 'bold',
                 color: '#2c2c2b' 
               }}>We let results speak</span>

@@ -13,7 +13,7 @@ export default async function ContactPage({
   return (
     <div>
       {/* Contact Hero Section - Figma Design */}
-      <div className="mx-3 mb-4 sm:mx-4 sm:mb-6 lg:mb-8">
+      <div className="mx-3 mb-4 sm:mx-4 sm:mb-6 md:mx-6 md:mb-8 lg:mb-10">
         <ContactHero />
       </div>
       

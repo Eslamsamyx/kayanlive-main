@@ -7,7 +7,7 @@ export default function Footer() {
       {/* Container for centered content */}
       <div className="relative w-full max-w-[1600px] mx-auto px-4">
         {/* Logo - centered and prominent */}
-        <div className="flex justify-center mb-12">
+        <div className="flex justify-center mb-6 md:mb-12 lg:mb-16">
           <div
             className="bg-center bg-contain bg-no-repeat"
             style={{ 
@@ -22,7 +22,7 @@ export default function Footer() {
         <div className="text-center">
           <p className="text-[25px] tracking-[0.25px]">
             <span className="text-[#2c2c2b] font-semibold">2025</span>
-            <span className="text-[#999999]"> all right reserves </span>
+            <span className="text-[#999999]"> all rights reserved </span>
             <span className="text-[#2c2c2b] font-semibold">KayanLive.com</span>
           </p>
         </div>
