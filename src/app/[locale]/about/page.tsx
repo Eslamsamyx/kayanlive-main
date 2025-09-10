@@ -1,7 +1,7 @@
 import AboutHero from '@/components/AboutHero';
 import AboutOrigin from '@/components/AboutOrigin';
 import AboutValues from '@/components/AboutValues';
-import HowWeWork from '@/components/HowWeWork';
+import CallToActionBanner from '@/components/CallToActionBanner';
 
 export default async function AboutUsPage({
   params
@@ -31,7 +31,13 @@ export default async function AboutUsPage({
 
       {/* How We Work Section */}
       <div className="-mx-4">
-        <HowWeWork />
+        <CallToActionBanner
+          title=""
+          subtitle="Ready to transform your next event into an unforgettable experience?"
+          buttonText="Start Your Project"
+          topPadding="pt-0"
+          bottomPadding="pb-24"
+        />
       </div>
     </div>
   );

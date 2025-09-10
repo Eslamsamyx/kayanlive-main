@@ -7,26 +7,30 @@ import Image from 'next/image';
 const imgPattern = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
 const imgFrame1618874015 = "/assets/154289bd0be3bf0eddab560357bd09aa27f634bc.svg";
 
-interface JoinOurNetworkTemplateProps {
+interface CallToActionBannerProps {
   title: string;
   subtitle: string;
   buttonText: string;
   buttonHref?: string;
+  topPadding?: string;
+  bottomPadding?: string;
 }
 
-export default function JoinOurNetworkTemplate({
+export default function CallToActionBanner({
   title,
   subtitle,
   buttonText,
-  buttonHref
-}: JoinOurNetworkTemplateProps) {
+  buttonHref,
+  topPadding = "pt-24",
+  bottomPadding = "pb-24"
+}: CallToActionBannerProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   const ButtonComponent = buttonHref ? 'a' : 'button';
   const buttonProps = buttonHref ? { href: buttonHref } : {};
 
   return (
-    <div className="bg-white w-full py-24">
+    <div className={`bg-white w-full ${topPadding} ${bottomPadding}`}>
       <div className="max-w-[1600px] mx-auto px-20">
         
         {/* Title Section - Positioned above the banner */}

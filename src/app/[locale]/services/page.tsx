@@ -1,7 +1,7 @@
 import ServicesHero from '@/components/ServicesHero';
 import ServicesGrid from '@/components/ServicesGrid';
 import ExperienceCenters from '@/components/ExperienceCenters';
-import NotSureWhereToStart from '@/components/NotSureWhereToStart';
+import CallToActionBanner from '@/components/CallToActionBanner';
 
 export default async function ServicesPage({
   params
@@ -32,7 +32,42 @@ export default async function ServicesPage({
 
       {/* Not Sure Where To Start Section - Figma Design */}
       <div className="-mx-4">
-        <NotSureWhereToStart />
+        <div className="bg-white w-full py-24">
+          <div className="max-w-[1600px] mx-auto px-20">
+            {/* Custom styled title that should remain */}
+            <div className="text-center mb-16">
+              <h1 
+                className="font-bold text-[90px] leading-[85px] capitalize tracking-[-2.7px]"
+                style={{
+                  fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', sans-serif"
+                }}
+              >
+                <span 
+                  style={{
+                    background: 'linear-gradient(to right, #a095e1, #74cfaa)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}
+                >
+                  Not Sure Where{' '}
+                </span>
+                <span className="text-[#2c2c2b]">
+                  To Start?
+                </span>
+              </h1>
+            </div>
+          </div>
+        </div>
+        
+        {/* Use CallToActionBanner for the actual CTA */}
+        <CallToActionBanner
+          title=""
+          subtitle="Every project begins with a single conversation."
+          buttonText="Speak With Our Strategy Team"
+          topPadding="pt-0"
+          bottomPadding="pb-24"
+        />
       </div>
     </div>
   );

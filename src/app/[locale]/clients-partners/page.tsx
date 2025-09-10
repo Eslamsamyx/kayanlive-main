@@ -1,6 +1,6 @@
 import ClientsPartnersContent from '@/components/ClientsPartnersContent';
 import OurPartners from '@/components/OurPartners';
-import JoinOurNetwork from '@/components/JoinOurNetwork';
+import CallToActionBanner from '@/components/CallToActionBanner';
 
 export default async function ClientsPartnersPage({
   params
@@ -312,7 +312,11 @@ export default async function ClientsPartnersPage({
 
       {/* Join Our Network Section */}
       <div className="-mx-4 mb-8">
-        <JoinOurNetwork />
+        <CallToActionBanner
+          title="Join Our Network"
+          subtitle="Looking to collaborate on future events, activations, or long-term initiatives?"
+          buttonText="Explore a Strategic Collaboration"
+        />
       </div>
     </div>
   );
