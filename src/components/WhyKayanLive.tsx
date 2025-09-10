@@ -1,12 +1,14 @@
+import Image from 'next/image';
+
 const imgPattern = "/assets/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.png";
 const kayanLogo = "/assets/a01d943cb7ebcf5598b83131f56810cf97a4e883.png";
 
 export default function WhyKayanLive() {
   return (
-    <div className="bg-white relative w-full overflow-hidden min-h-screen md:min-h-[1450px]">
-      {/* Left Pattern - positioned exactly as in Figma with black filter - Hidden on mobile */}
+    <div className="bg-white relative w-full overflow-hidden min-h-screen lg:min-h-[1450px]">
+      {/* Left Pattern - positioned exactly as in Figma with black filter - Hidden on mobile and tablet */}
       <div 
-        className="absolute bg-center bg-cover bg-no-repeat z-0 hidden md:block"
+        className="absolute bg-center bg-cover bg-no-repeat z-0 hidden lg:block"
         style={{ 
           backgroundImage: `url('${imgPattern}')`,
           width: '370px',
@@ -19,9 +21,9 @@ export default function WhyKayanLive() {
         }}
       />
       
-      {/* Right Pattern - Bottom (rotated 180 degrees with black filter) - Hidden on mobile */}
+      {/* Right Pattern - Bottom (rotated 180 degrees with black filter) - Hidden on mobile and tablet */}
       <div 
-        className="absolute z-0 hidden md:block"
+        className="absolute z-0 hidden lg:block"
         style={{ 
           width: '370px',
           height: '572px',
@@ -42,7 +44,7 @@ export default function WhyKayanLive() {
       </div>
 
       {/* Desktop Content Container */}
-      <div className="hidden md:block max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20 relative z-10" style={{ paddingTop: '85px', paddingBottom: '100px' }}>
+      <div className="hidden lg:block max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20 relative z-10" style={{ paddingTop: '85px', paddingBottom: '100px' }}>
         {/* Why heading - Original position */}
         <h2 
           className="text-[#2c2c2b] font-medium capitalize"
@@ -119,7 +121,7 @@ export default function WhyKayanLive() {
       </div>
 
       {/* Mobile Content Container - Optimized for responsive best practices */}
-      <section className="md:hidden flex flex-col items-center justify-center w-full min-h-screen py-8 px-4 sm:px-6 gap-8 sm:gap-10">
+      <section className="lg:hidden flex flex-col items-center justify-center w-full min-h-screen py-8 px-4 sm:px-6 md:px-8 gap-8 sm:gap-10 md:gap-12">
         {/* Why heading - Mobile version with larger fluid typography */}
         <header className="text-center">
           <h1 
@@ -136,11 +138,13 @@ export default function WhyKayanLive() {
         
         {/* KayanLive Logo - Mobile version with larger size */}
         <div className="flex justify-center w-full max-w-sm">
-          <img 
+          <Image 
             src={kayanLogo}
             alt="KayanLive Logo" 
             className="w-full h-auto max-w-[320px] object-contain"
-            loading="eager"
+            priority
+            width={320}
+            height={107}
             style={{ aspectRatio: '267/89' }}
           />
         </div>
@@ -164,7 +168,7 @@ export default function WhyKayanLive() {
               <span className="text-[#2c2c2b] font-semibold">Khalid Alhasan</span>
               , a regional leader in experiential strategy and event tech. After over a decade leading high-profile activations through a leading UAE/Saudi technology company, he launched KayanLive to bring{' '}
               <span className="text-[#2c2c2b] font-semibold">full-scale, cross-functional event delivery</span>
-              {' '}to clients who need more than just a tech vendor—they need a team who understands what's at stake, and knows how to deliver under pressure.
+              {' '}to clients who need more than just a tech vendor—they need a team who understands what&apos;s at stake, and knows how to deliver under pressure.
             </p>
           </section>
           
@@ -182,7 +186,7 @@ export default function WhyKayanLive() {
                   fontFamily: '"Poppins", sans-serif'
                 }}
               >
-                "Kayan" in Arabic means being, identity, and existence—and that's exactly what we're about. We believe every brand, every organization, and every idea has something real behind it—an essence that deserves to be seen, felt, and remembered.
+                &quot;Kayan&quot; in Arabic means being, identity, and existence—and that&apos;s exactly what we&apos;re about. We believe every brand, every organization, and every idea has something real behind it—an essence that deserves to be seen, felt, and remembered.
               </p>
               
               <p 
@@ -195,7 +199,7 @@ export default function WhyKayanLive() {
                   fontFamily: '"Poppins", sans-serif'
                 }}
               >
-                That's why our team is built to work from pitch to show day as one unit—with no handoffs, no friction, and no gaps.
+                That&apos;s why our team is built to work from pitch to show day as one unit—with no handoffs, no friction, and no gaps.
               </p>
             </div>
           </section>
@@ -214,7 +218,7 @@ export default function WhyKayanLive() {
                   fontFamily: '"Poppins", sans-serif'
                 }}
               >
-                We've been the silent force behind headline events in Saudi Arabia, rapid-turnaround brand activations in Riyadh, and exhibition setups across the GCC. Our speed doesn't sacrifice quality. It protects it.
+                We&apos;ve been the silent force behind headline events in Saudi Arabia, rapid-turnaround brand activations in Riyadh, and exhibition setups across the GCC. Our speed doesn&apos;t sacrifice quality. It protects it.
               </p>
               
               <p 
@@ -227,7 +231,7 @@ export default function WhyKayanLive() {
                   fontFamily: '"Poppins", sans-serif'
                 }}
               >
-                Whether you're launching a pavilion, opening a cultural event, or fixing someone else's mess, we're the partner you call when the clock is already ticking.
+                Whether you&apos;re launching a pavilion, opening a cultural event, or fixing someone else&apos;s mess, we&apos;re the partner you call when the clock is already ticking.
               </p>
             </div>
           </section>

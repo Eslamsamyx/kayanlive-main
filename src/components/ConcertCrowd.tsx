@@ -74,18 +74,10 @@ export default function ConcertCrowd() {
           <div 
             className="absolute inset-0 bg-center bg-cover bg-no-repeat"
             style={{ 
-              backgroundImage: `url('${imgCrowd}')`,
-              filter: 'brightness(0.9)'
+              backgroundImage: `url('${imgCrowd}')`
             }}
           />
           
-          {/* Gradient overlay for depth */}
-          <div 
-            className="absolute inset-0"
-            style={{
-              background: 'linear-gradient(to top, rgba(44, 44, 43, 0.4) 0%, transparent 50%, rgba(44, 44, 43, 0.2) 100%)'
-            }}
-          />
           
           {/* Moving flashlights representing people with phones moving at concert */}
           {movingFlashlights.map((flashlight) => (

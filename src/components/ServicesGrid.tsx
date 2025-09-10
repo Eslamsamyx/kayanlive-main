@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 
 // Assets from Figma
 const imgRectangle4242 = "/assets/e05fec393f295d237ade9dff2ad26793496382ba.png"; // 2D/3D Content
@@ -12,7 +11,6 @@ const imgRectangle4247 = "/assets/123269087423c903b101b9352bd92acdab49d86a.png";
 const imgRectangle4248 = "/assets/d4096bba6c0158e37ce51f8a24f9565b007aaa92.png"; // Immersive AV
 const imgRectangle4249 = "/assets/409f7073bcfac7c1d7eea78ab2e23cc10f6a16fb.png"; // Tech Driven
 const imgRectangle4250 = "/assets/cf27cb2a37e9e3bfd30c1ada4fe4988496b10bbb.png"; // Live Events
-const imgFrame1618874049 = "/assets/42a41a16a7cbe5973271220c9e7befa820aa0f6a.svg"; // Arrow icon
 
 export default function ServicesGrid() {
   return (
@@ -33,7 +31,7 @@ export default function ServicesGrid() {
           className="col-span-2 bg-cover bg-center bg-no-repeat overflow-hidden relative rounded-[30px] md:rounded-[61px]"
           style={{ 
             backgroundImage: `url('${imgRectangle4242}')`,
-            height: 'clamp(400px, 54.8vw, 828px)'
+            height: 'clamp(300px, 45vw, 600px)'
           }}
           role="article"
           aria-labelledby="service-2d-3d-title"
@@ -52,8 +50,8 @@ export default function ServicesGrid() {
               id="service-2d-3d-title"
               className="text-white font-bold mb-4 md:mb-7 capitalize"
               style={{
-                fontSize: 'clamp(24px, 4vw, 60px)',
-                lineHeight: 'clamp(26px, 4.1vw, 62px)',
+                fontSize: 'clamp(24px, 3.5vw, 50px)',
+                lineHeight: 'clamp(26px, 3.6vw, 52px)',
                 fontFamily: '"Poppins", sans-serif'
               }}
             >
@@ -81,7 +79,7 @@ export default function ServicesGrid() {
           className="bg-cover bg-center bg-no-repeat overflow-hidden relative rounded-[30px] md:rounded-[61px]"
           style={{ 
             backgroundImage: `url('${imgRectangle4243}')`,
-            height: 'clamp(400px, 54.8vw, 828px)'
+            height: 'clamp(300px, 45vw, 600px)'
           }}
           role="article"
           aria-labelledby="service-video-editing-title"
@@ -119,7 +117,7 @@ export default function ServicesGrid() {
           className="bg-cover bg-center bg-no-repeat overflow-hidden relative rounded-[30px] md:rounded-[61px]"
           style={{ 
             backgroundImage: `url('${imgRectangle4244}')`,
-            height: 'clamp(400px, 54.8vw, 828px)'
+            height: 'clamp(300px, 45vw, 600px)'
           }}
           role="article"
           aria-labelledby="service-conferences-title"
@@ -157,7 +155,7 @@ export default function ServicesGrid() {
           className="col-span-2 bg-cover bg-center bg-no-repeat overflow-hidden relative rounded-[30px] md:rounded-[61px]"
           style={{ 
             backgroundImage: `url('${imgRectangle4245}')`,
-            height: 'clamp(400px, 54.8vw, 828px)'
+            height: 'clamp(300px, 45vw, 600px)'
           }}
           role="article"
           aria-labelledby="service-hologram-title"
@@ -176,8 +174,8 @@ export default function ServicesGrid() {
               id="service-hologram-title"
               className="text-white font-bold capitalize"
               style={{
-                fontSize: 'clamp(32px, 4vw, 60px)',
-                lineHeight: 'clamp(34px, 4.1vw, 62px)',
+                fontSize: 'clamp(28px, 3.5vw, 50px)',
+                lineHeight: 'clamp(30px, 3.6vw, 52px)',
                 maxWidth: 'clamp(530px, 70.2vw, 1061px)',
                 fontFamily: '"Poppins", sans-serif'
               }}
@@ -195,7 +193,7 @@ export default function ServicesGrid() {
           className="bg-cover bg-center bg-no-repeat overflow-hidden relative rounded-[30px] md:rounded-[61px]"
           style={{ 
             backgroundImage: `url('${imgRectangle4246}')`,
-            height: 'clamp(400px, 54.8vw, 828px)'
+            height: 'clamp(300px, 45vw, 600px)'
           }}
           role="article"
           aria-labelledby="service-interactive-title"
@@ -234,7 +232,7 @@ export default function ServicesGrid() {
           className="bg-cover bg-center bg-no-repeat overflow-hidden relative rounded-[30px] md:rounded-[61px]"
           style={{ 
             backgroundImage: `url('${imgRectangle4250}')`,
-            height: 'clamp(400px, 54.8vw, 828px)'
+            height: 'clamp(300px, 45vw, 600px)'
           }}
           role="article"
           aria-labelledby="service-live-events-title"
@@ -273,7 +271,7 @@ export default function ServicesGrid() {
           className="col-span-2 bg-cover bg-center bg-no-repeat overflow-hidden relative rounded-[30px] md:rounded-[61px]"
           style={{ 
             backgroundImage: `url('${imgRectangle4247}')`,
-            height: 'clamp(400px, 54.8vw, 828px)'
+            height: 'clamp(300px, 45vw, 600px)'
           }}
           role="article"
           aria-labelledby="service-corporate-title"
@@ -292,8 +290,8 @@ export default function ServicesGrid() {
               id="service-corporate-title"
               className="text-white font-bold capitalize"
               style={{
-                fontSize: 'clamp(32px, 4vw, 60px)',
-                lineHeight: 'clamp(34px, 4.1vw, 62px)',
+                fontSize: 'clamp(28px, 3.5vw, 50px)',
+                lineHeight: 'clamp(30px, 3.6vw, 52px)',
                 maxWidth: 'clamp(530px, 70.2vw, 1061px)',
                 fontFamily: '"Poppins", sans-serif'
               }}
@@ -311,7 +309,7 @@ export default function ServicesGrid() {
           className="bg-cover bg-center bg-no-repeat overflow-hidden relative rounded-[30px] md:rounded-[61px]"
           style={{ 
             backgroundImage: `url('${imgRectangle4248}')`,
-            height: 'clamp(400px, 54.8vw, 828px)'
+            height: 'clamp(300px, 45vw, 600px)'
           }}
           role="article"
           aria-labelledby="service-av-production-title"
@@ -349,7 +347,7 @@ export default function ServicesGrid() {
           className="bg-cover bg-center bg-no-repeat overflow-hidden relative rounded-[30px] md:rounded-[61px]"
           style={{ 
             backgroundImage: `url('${imgRectangle4249}')`,
-            height: 'clamp(400px, 54.8vw, 828px)'
+            height: 'clamp(300px, 45vw, 600px)'
           }}
           role="article"
           aria-labelledby="service-tech-driven-title"

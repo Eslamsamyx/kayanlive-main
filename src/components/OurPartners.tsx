@@ -8,8 +8,6 @@ const imgRectangle6 = "/assets/0599bc8efb3df6cbf4d2b5cc07e1932dc0d2a400.png";
 const imgRectangle7 = "/assets/d079f823333ca8bce293bcab9a39cb1aea4b5439.png";
 const imgPattern0212 = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
 const imgPattern0453 = "/assets/6cdd4333a240b46dead9df86c5a83772e81b76fc.png";
-const imgEllipse3622 = "/assets/be40b19cedb243ae93c978dbef58efa811bad082.svg";
-const imgEllipse3623 = "/assets/b4cb37a55c71d9acc45332ad3ce54be582b29566.svg";
 
 const cards: CardConfig[] = [
   {

@@ -131,7 +131,7 @@ export default function ExecutionSection() {
           
           {/* Bottom left pattern - responsive */}
           <div
-            className="absolute bg-center bg-cover bg-no-repeat hidden md:block opacity-60"
+            className="absolute bg-center bg-cover bg-no-repeat hidden lg:block opacity-60"
             style={{ 
               backgroundImage: `url('${imgPattern0212}')`,
               width: 'clamp(400px, 57vw, 862px)',

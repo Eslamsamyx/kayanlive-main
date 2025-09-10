@@ -53,7 +53,7 @@ export default function Hero() {
       {/* Mobile Layout */}
       <div 
         className="relative bg-[#2c2c2b] overflow-hidden rounded-[25px] mx-4 mb-8 lg:hidden"
-        style={{ height: '100vh', maxHeight: '800px' }}
+        style={{ height: 'clamp(600px, 85vh, 800px)' }}
         onTouchStart={() => setIsPaused(true)}
         onTouchEnd={() => setIsPaused(false)}
       >

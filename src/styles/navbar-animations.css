@@ -1,0 +1,54 @@
+/* Navbar Animations */
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-slideIn {
+  animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus ring improvements for better visibility */
+.focus-ring-enhanced {
+  box-shadow: 0 0 0 3px rgba(122, 253, 214, 0.4);
+}
+
+/* High contrast focus indicators for accessibility */
+@media (prefers-contrast: high) {
+  .focus:outline-none:focus {
+    outline: 2px solid #7afdd6 !important;
+    outline-offset: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-slideIn {
+    animation: none;
+  }
+  
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* RTL support for Arabic */
+[dir="rtl"] .rotate-180 {
+  transform: scaleX(-1) rotate(180deg);
+}
+
+/* Ensure touch targets are at least 44px */
+@media (pointer: coarse) {
+  .min-touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}

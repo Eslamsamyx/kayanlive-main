@@ -88,7 +88,6 @@ export default function ClientsPartnersTemplate({
 
   const isMobile = windowWidth < 768;
   const isTablet = windowWidth >= 768 && windowWidth < 1024;
-  const isDesktop = windowWidth >= 1024;
 
   // Calculate responsive values
   const getResponsiveValue = (mobileValue: string, desktopValue: string) => {
@@ -330,7 +329,7 @@ export default function ClientsPartnersTemplate({
           maxWidth: isMobile ? '384px' : 'none',
           margin: isMobile ? '0 auto' : undefined
         }}>
-          {cards.map((card, index) => (
+          {cards.map((card) => (
             <div 
               key={card.id}
               style={{

@@ -11,19 +11,19 @@ const imgPattern0341 = "/assets/6ebbb286c787b4009100c9f8cd397942ae83de56.png";
 export default function HighImpactExperience() {
   return (
     <>
-      {/* Mobile Layout */}
+      {/* Mobile/Tablet Layout */}
       <div className="block lg:hidden mx-4 mt-8 mb-6 md:mb-12 lg:mb-16">
         <div 
           className="bg-[#2c2c2b] overflow-hidden rounded-[25px] relative w-full"
-          style={{ height: '645px' }}
+          style={{ height: 'clamp(645px, 85vh, 750px)' }}
         >
-            {/* Mobile Concert Image - Bottom Section */}
+            {/* Mobile/Tablet Concert Image - Bottom Section */}
             <div 
               className="absolute bg-center bg-cover bg-no-repeat w-full"
               style={{ 
-                height: '367px',
+                height: 'clamp(367px, 50vh, 420px)',
                 left: '0px',
-                top: '278px',
+                top: 'clamp(320px, 45vh, 380px)',
                 backgroundImage: `url('${img202508031915NeonConcert}')` 
               }}
             >
@@ -36,34 +36,34 @@ export default function HighImpactExperience() {
               />
             </div>
 
-            {/* Mobile Dark Blur Element */}
+            {/* Mobile/Tablet Dark Blur Element */}
             <div 
               className="absolute bg-[#2c2c2b] filter"
               style={{
                 width: 'calc(100% + 130px)',
-                height: '132px',
+                height: 'clamp(132px, 18vh, 160px)',
                 left: '-65px',
-                top: '560px',
+                top: 'clamp(600px, 80vh, 680px)',
                 filter: 'blur(29.5px)'
               }}
             />
 
-            {/* Mobile Text Content */}
+            {/* Mobile/Tablet Text Content */}
             <div 
-              className="absolute capitalize flex flex-col items-center justify-start leading-[0] text-center px-[18px]"
+              className="absolute capitalize flex flex-col items-center justify-start leading-[0] text-center px-[18px] md:px-[32px]"
               style={{
                 width: 'calc(100% - 36px)',
                 left: '0px',
-                top: '45.5px',
+                top: 'clamp(30px, 5vh, 50px)',
                 fontFamily: '"Poppins", sans-serif',
-                fontSize: 'clamp(50px, 14vw, 75px)',
-                letterSpacing: '-2.4px'
+                fontSize: 'clamp(50px, 12vw, 85px)',
+                letterSpacing: 'clamp(-2.4px, -0.3vw, -3px)'
               }}
             >
               {/* "High" text */}
               <div 
                 className="text-white w-full relative text-center"
-                style={{ lineHeight: 'clamp(60px, 16.8vw, 90px)' }}
+                style={{ lineHeight: 'clamp(60px, 14vw, 95px)' }}
               >
                 <p className="mb-0 text-center">high</p>
               </div>
@@ -71,7 +71,7 @@ export default function HighImpactExperience() {
               {/* "Impact" text */}
               <div 
                 className="text-white w-full relative text-center"
-                style={{ lineHeight: 'clamp(60px, 16.8vw, 90px)' }}
+                style={{ lineHeight: 'clamp(60px, 14vw, 95px)' }}
               >
                 <p className="mb-0 text-center">impact</p>
               </div>
@@ -81,7 +81,9 @@ export default function HighImpactExperience() {
                 className="w-full relative bg-gradient-to-l from-[#74cfaa] to-[#a095e1] bg-clip-text text-center"
                 style={{ 
                   WebkitTextFillColor: 'transparent',
-                  lineHeight: 'clamp(60px, 16.8vw, 90px)'
+                  lineHeight: 'clamp(60px, 14vw, 95px)',
+                  marginTop: 'clamp(8px, 1.5vh, 15px)',
+                  marginBottom: 'clamp(40px, 8vh, 60px)'
                 }}
               >
                 <p className="mb-0 text-center">experience</p>

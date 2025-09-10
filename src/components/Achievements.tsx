@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 
 const imgMaskGroup = "/assets/638442c54db92ce49b3ad8194a062a52ba973004.png";
@@ -53,7 +53,7 @@ export default function Achievements() {
       {/* Desktop Background Decorative Elements - Hidden on mobile */}
       {/* Large teal ellipse blur - right side */}
       <div 
-        className="absolute hidden md:block"
+        className="absolute hidden lg:block"
         style={{
           width: '668px',
           height: '689px',
@@ -66,7 +66,7 @@ export default function Achievements() {
       
       {/* Smaller purple ellipse - right side */}
       <div 
-        className="absolute hidden md:block"
+        className="absolute hidden lg:block"
         style={{
           width: '346px',
           height: '357px',
@@ -91,7 +91,7 @@ export default function Achievements() {
 
       {/* Diamond decoration - left side */}
       <div 
-        className="absolute hidden md:block"
+        className="absolute hidden lg:block"
         style={{
           width: '40px',
           height: '40px',
@@ -103,7 +103,7 @@ export default function Achievements() {
       />
 
       {/* Desktop Content */}
-      <div className="hidden md:block max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20 relative z-10">
+      <div className="hidden lg:block max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20 relative z-10">
         {/* Title */}
         <h2 
           className="text-center capitalize font-normal mb-6 md:mb-12 lg:mb-16"
@@ -195,7 +195,7 @@ export default function Achievements() {
       </div>
 
       {/* Mobile Version - Matches Figma Design Exactly */}
-      <section className="md:hidden flex flex-col gap-[31px] items-center justify-center px-[27px] py-0 relative w-full">
+      <section className="lg:hidden flex flex-col gap-[31px] items-center justify-center px-[27px] py-0 relative w-full">
         {/* Mobile Title */}
         <div 
           className="text-center capitalize font-normal text-[50px] leading-[137px] tracking-[-0.5px] w-full"
