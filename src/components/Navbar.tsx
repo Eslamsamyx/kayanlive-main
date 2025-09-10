@@ -338,7 +338,7 @@ export default function Navbar({ locale }: NavbarProps) {
             </svg>
           </button>
           
-          {/* Dropdown Menu - Tablet (exact same styling as desktop) */}
+          {/* Dropdown Menu - Tablet (opens downward normally) */}
           <div className={`absolute top-full ${locale === 'ar' ? 'left-0' : 'right-0'} mt-2 w-56 z-50 transition-all duration-300 ease-out ${
             state.isLanguageDropdownOpen 
               ? 'opacity-100 visible translate-y-0' 
@@ -440,36 +440,31 @@ export default function Navbar({ locale }: NavbarProps) {
               : 'opacity-0 invisible -translate-y-2'
           }`}>
             <div 
-              className="bg-[#1a1a19] backdrop-blur-xl border border-[#3a3a39] rounded-2xl shadow-2xl overflow-hidden"
+              className="bg-[#1a1a19] border border-[#333] rounded-xl shadow-xl overflow-hidden backdrop-blur-sm"
               role="menu"
-              aria-label="Language selection menu"
+              aria-labelledby="language-dropdown-button"
             >
               {languages.map((language, index) => (
                 <button
                   key={language.code}
                   onClick={() => handleLanguageChange(language.code)}
-                  disabled={language.code === locale}
-                  className={`w-full px-4 py-3 text-left hover:bg-[#2a2a29] focus:outline-none focus:bg-[#2a2a29] focus:text-[#7afdd6] transition-all duration-200 flex items-center gap-3 group min-h-[44px] ${
-                    language.code === locale 
-                      ? 'bg-[#7afdd6]/10 text-[#7afdd6] cursor-default' 
-                      : 'text-white hover:text-[#7afdd6]'
-                  } ${index === 0 ? 'rounded-t-2xl' : ''} ${index === languages.length - 1 ? 'rounded-b-2xl' : ''} ${state.focusedIndex === index ? 'bg-[#2a2a29] text-[#7afdd6]' : ''}`}
+                  className={`w-full px-4 py-3 text-left hover:bg-[#333] transition-all duration-200 flex items-center gap-3 ${
+                    language.code === locale ? 'bg-[#333] text-[#7afdd6]' : 'text-[#b2b2b2] hover:text-white'
+                  } ${state.focusedIndex === index ? 'bg-[#333]' : ''}`}
                   role="menuitem"
-                  aria-current={language.code === locale ? 'true' : undefined}
+                  tabIndex={-1}
                 >
-                  <span 
-                    className="text-xl group-hover:scale-110 transition-transform duration-200 text-lg" 
-                    role="img" 
-                    aria-label={`${language.name} flag`}
-                  >
+                  <span className="text-lg" role="img" aria-label={language.name}>
                     {language.flag}
                   </span>
                   <div className="flex-1">
-                    <div className="font-medium text-sm">{language.nativeName}</div>
-                    <div className="text-xs opacity-60">{language.name}</div>
+                    <div className="font-medium">{language.nativeName}</div>
+                    <div className="text-xs opacity-70">{language.name}</div>
                   </div>
                   {language.code === locale && (
-                    <div className="w-2 h-2 bg-[#7afdd6] rounded-full animate-pulse" aria-label="Currently selected" />
+                    <svg className="w-4 h-4 text-[#7afdd6]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
                   )}
                 </button>
               ))}
@@ -559,7 +554,7 @@ export default function Navbar({ locale }: NavbarProps) {
                     </span>
                     <span>{currentLanguage.nativeName}</span>
                     <svg 
-                      className={`w-5 h-5 transition-transform duration-300 ${state.isMobileLanguageDropdownOpen ? 'rotate-180' : ''}`}
+                      className={`w-5 h-5 transition-transform duration-300 ${state.isMobileLanguageDropdownOpen ? 'rotate-0' : 'rotate-180'}`}
                       fill="none" 
                       stroke="currentColor" 
                       viewBox="0 0 24 24"
@@ -569,11 +564,11 @@ export default function Navbar({ locale }: NavbarProps) {
                     </svg>
                   </button>
                   
-                  {/* Mobile Dropdown Menu */}
-                  <div className={`mt-2 transition-all duration-300 ease-out overflow-hidden ${
+                  {/* Mobile Dropdown Menu (opens upward) */}
+                  <div className={`absolute bottom-full left-0 right-0 mb-2 transition-all duration-300 ease-out overflow-hidden z-50 ${
                     state.isMobileLanguageDropdownOpen 
                       ? 'opacity-100 visible translate-y-0 max-h-96' 
-                      : 'opacity-0 invisible -translate-y-2 max-h-0'
+                      : 'opacity-0 invisible translate-y-2 max-h-0'
                   }`}>
                     <div 
                       className="bg-[#1a1a19] backdrop-blur-xl border border-[#3a3a39] rounded-2xl shadow-2xl overflow-hidden"
