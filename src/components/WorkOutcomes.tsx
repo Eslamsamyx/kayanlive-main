@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 // Assets from Figma
@@ -11,7 +12,107 @@ const imgLogosFacebook = "/assets/69e31bfddbf7233cc0877c3ef5b4edc8be21a2aa.svg";
 const imgIcomoonFreeLinkedin2 = "/assets/29c078eff0cb9c150c3699b142068664db1faceb.svg";
 const imgSkillIconsInstagram = "/assets/83fa7d33c676fd60c6236412ca0aa58eee80b908.svg";
 
+// Mobile Assets - using the same images from Figma mobile design
+const imgRectangle4246 = "/assets/5fe3ba66a055c9a5b01ea404941b7097da5ffdb0.png";
+const imgRectangle4247 = "/assets/c57c28aa85c3935c2914aa9ff408c9f8c8f2fe68.png";
+
 export default function WorkOutcomes() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Prevent hydration mismatch
+  if (!mounted) {
+    return null;
+  }
+
+  if (isMobile) {
+    // Mobile Layout - Based on Figma Design
+    return (
+      <div className="bg-white w-full py-10">
+        <div className="flex flex-col gap-10 items-center justify-center px-6">
+          {/* Title Section */}
+          <div className="capitalize flex flex-col gap-3 items-center justify-center text-center w-full max-w-[321px]">
+            <div style={{
+              fontFamily: "'FONTSPRING DEMO - Visby CF Medium:Regular', sans-serif",
+              fontSize: '50px',
+              lineHeight: '52px',
+              letterSpacing: '-2px',
+              color: '#2c2c2b'
+            }}>
+              <p className="mb-0">Measurable</p>
+              <p>Outcomes.</p>
+            </div>
+            <div 
+              className="bg-clip-text bg-gradient-to-r from-[#a095e1] to-[#74cfaa] w-full"
+              style={{
+                fontFamily: "'FONTSPRING DEMO - Visby CF Medium:Regular', sans-serif",
+                fontSize: '55px',
+                lineHeight: '58px',
+                letterSpacing: '-2.2px',
+                WebkitTextFillColor: 'transparent',
+                paddingTop: '4px',
+                paddingBottom: '4px'
+              }}
+            >
+              <p>Real Environments</p>
+            </div>
+          </div>
+
+          {/* First Image */}
+          <div className="relative h-[226px] w-full max-w-[321px] rounded-[22px] overflow-hidden">
+            <Image 
+              src={imgRectangle4246}
+              alt="Event showcase"
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          {/* Text Content */}
+          <div className="capitalize text-center w-full max-w-[321px]" style={{
+            fontFamily: "'Aeonik', sans-serif",
+            fontSize: '16px',
+            lineHeight: '20px',
+            color: '#888888'
+          }}>
+            <p className="mb-2">Each case will break down what was delivered, how it was structured, and why it succeeded. For now, our team is available to walk through these highlights and share detailed visual decks on request.</p>
+            <p className="mb-0">
+              <span>We do not rely on vague claims or polished slogans. </span>
+              <span style={{ 
+                fontFamily: "'Aeonik', sans-serif",
+                fontWeight: 'bold',
+                color: '#2c2c2b' 
+              }}>We let results speak</span>
+              <span style={{ color: '#2c2c2b' }}>.</span>
+            </p>
+          </div>
+
+          {/* Second Image */}
+          <div className="relative h-[226px] w-full max-w-[321px] rounded-[22px] overflow-hidden">
+            <Image 
+              src={imgRectangle4247}
+              alt="Event showcase"
+              fill
+              className="object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Desktop Layout - Original Design
   return (
     <div className="h-[1214px] overflow-clip relative w-full bg-white">
       {/* Title Section */}

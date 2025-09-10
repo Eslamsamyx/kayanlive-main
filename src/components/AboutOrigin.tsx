@@ -15,7 +15,6 @@ export default function AboutOrigin() {
   return (
     <section 
       className="relative bg-[#f0f1fa] overflow-hidden w-full"
-      style={{ aspectRatio: '1512/960', height: 'auto' }}
       aria-label="About KayanLive origin and capability section"
     >
       {/* Loading state */}
@@ -23,32 +22,33 @@ export default function AboutOrigin() {
         <div className="absolute inset-0 animate-pulse bg-gray-200" />
       )}
       
-      <div className={`relative h-full transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Mobile Layout */}
+      <div className={`block lg:hidden min-h-screen py-12 transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         
-        {/* Background Pattern 1 - Bottom Left */}
+        {/* Mobile Background Pattern 1 */}
         <div 
-          className="absolute opacity-40 hidden lg:block"
+          className="absolute opacity-20"
           style={{
             backgroundImage: `url('${imgPattern0212}')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
-            height: '92%', // 884px / 960px = 92%
-            width: '59%', // 894px / 1512px = 59%
-            left: '-39%', // -918px / 1512px * 50% = -39% (adjust for Figma positioning)
-            bottom: '-50%' // -484px / 960px = -50%
+            height: '60%',
+            width: '40%',
+            left: '-30%',
+            bottom: '10%'
           }}
           aria-hidden="true"
         />
 
-        {/* Background Pattern 2 - Bottom Right (rotated) */}
+        {/* Mobile Background Pattern 2 */}
         <div 
-          className="absolute opacity-40 hidden lg:block"
+          className="absolute opacity-20"
           style={{
-            height: '102%', // 978px / 960px = 102%
-            width: '64%', // 967px / 1512px = 64%
-            right: '-18%', // -273px / 1512px = -18%
-            bottom: '-58%', // -553px / 960px = -58%
+            height: '60%',
+            width: '40%',
+            right: '-25%',
+            top: '10%',
             transform: 'rotate(90deg) scaleY(-100%)'
           }}
           aria-hidden="true"
@@ -65,12 +65,133 @@ export default function AboutOrigin() {
           />
         </div>
 
-        {/* Main Content - Two Cards */}
-        <div className="absolute inset-0 flex items-center justify-center px-4">
-          <div className="flex gap-6 max-w-7xl w-full flex-col lg:flex-row">
+        {/* Mobile Content */}
+        <div className="relative px-4 py-8">
+          <div className="flex flex-col gap-6 max-w-4xl mx-auto">
             
-            {/* Card 1 - The Origin of Capability */}
-            <article className="bg-white/60 backdrop-blur-sm border border-[#74cfaa] rounded-[35px] p-12 lg:p-16 flex-1 relative">
+            {/* Mobile Card 1 */}
+            <article className="bg-white/80 backdrop-blur-sm border border-[#74cfaa] rounded-[35px] p-6 relative z-10">
+              <header className="mb-8">
+                <h2 
+                  className="font-bold capitalize text-2xl leading-tight"
+                  style={{
+                    background: 'linear-gradient(to right, #a095e1, #74cfaa)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    letterSpacing: '-0.5px',
+                    fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', 'Poppins', sans-serif"
+                  }}
+                >
+                  The Origin of Capability
+                </h2>
+              </header>
+              
+              <div 
+                className="text-[#808184] capitalize text-base leading-relaxed"
+                style={{
+                  fontFamily: "'Aeonik', 'Poppins', sans-serif"
+                }}
+              >
+                <p className="mb-4">
+                  <span>After years of directing high-level brand activations and immersive showcases across the GCC, our founder, </span>
+                  <span className="text-[#2c2c2b]">Khalid Alhasan</span>
+                  <span>, recognized a pattern: most vendors stalled when speed was critical, and cracked when pressure mounted.</span>
+                </p>
+                <p className="mb-4">KayanLive was engineered to change the equation.</p>
+                <p className="mb-4">
+                  <span>What began as a response to regional breakdowns now operates as a trusted name among the </span>
+                  <span className="text-[#2c2c2b]">best event management companies</span>
+                  <span> in the region. Recognized across the Emirates and broader GCC regions, we&apos;ve earned trust through clarity and execution.</span>
+                </p>
+                <p className="mb-4">Every layer of planning, production, and performance exists in one unified structure.</p>
+                <p>Ideas move faster here because teams align faster. No gaps. No wasted time. Every second is accounted for.</p>
+              </div>
+            </article>
+
+            {/* Mobile Card 2 */}
+            <article className="bg-white/80 backdrop-blur-sm border border-[#74cfaa] rounded-[35px] p-6 relative z-10">
+              <header className="mb-8">
+                <h2 
+                  className="font-bold capitalize text-2xl leading-tight"
+                  style={{
+                    background: 'linear-gradient(to right, #a095e1, #74cfaa)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    letterSpacing: '-0.5px',
+                    fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', 'Poppins', sans-serif"
+                  }}
+                >
+                  Built to Lead. Proven to Deliver.
+                </h2>
+              </header>
+              
+              <div 
+                className="text-[#808184] capitalize text-base leading-relaxed"
+                style={{
+                  fontFamily: "'Aeonik', 'Poppins', sans-serif"
+                }}
+              >
+                <p className="mb-4">Our leadership team spans disciplines and industries. From creative directors and AV producers to engineers and logistics specialists, each expert understands what success looks like in high-stakes environments. With years of cumulative experience and region-wide execution, we guide with confidence and act with certainty.</p>
+                <p className="mb-4 text-[#2c2c2b]">No chaos. No handoffs. No breakdowns.</p>
+                <p>This approach has positioned KayanLive as a trusted execution partner for national ceremonies, multinational product launches, large-scale conferences, and last-call takeovers. The scale adapts, but the outcome remains the same: impact without compromise.</p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop Layout - Original Design */}
+      <div className={`hidden lg:block relative transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ aspectRatio: '1512/960', height: 'auto' }}>
+        
+        {/* Desktop Background Pattern 1 - Bottom Left */}
+        <div 
+          className="absolute opacity-40"
+          style={{
+            backgroundImage: `url('${imgPattern0212}')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            height: '92%', // 884px / 960px = 92%
+            width: '59%', // 894px / 1512px = 59%
+            left: '-39%', // Original positioning
+            bottom: '-50%' // Original positioning
+          }}
+          aria-hidden="true"
+        />
+
+        {/* Desktop Background Pattern 2 - Bottom Right (rotated) */}
+        <div 
+          className="absolute opacity-40"
+          style={{
+            height: '102%', // 978px / 960px = 102%
+            width: '64%', // 967px / 1512px = 64%
+            right: '-18%', // Original positioning
+            bottom: '-58%', // Original positioning
+            transform: 'rotate(90deg) scaleY(-100%)'
+          }}
+          aria-hidden="true"
+        >
+          <div 
+            style={{
+              backgroundImage: `url('${imgPattern0212}')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              height: '100%',
+              width: '100%'
+            }}
+          />
+        </div>
+
+        {/* Desktop Content - Original Absolute Positioning */}
+        <div className="absolute inset-0 flex items-center justify-center px-4">
+          <div className="flex gap-6 max-w-7xl w-full">
+            
+            {/* Desktop Card 1 */}
+            <article className="bg-white/60 backdrop-blur-sm border border-[#74cfaa] rounded-[35px] p-16 flex-1 relative">
               <header className="mb-11">
                 <h2 
                   className="font-bold capitalize"
@@ -115,8 +236,8 @@ export default function AboutOrigin() {
               </div>
             </article>
 
-            {/* Card 2 - Built to Lead. Proven to Deliver */}
-            <article className="bg-white/60 backdrop-blur-sm border border-[#74cfaa] rounded-[35px] p-12 lg:p-16 flex-1 relative">
+            {/* Desktop Card 2 */}
+            <article className="bg-white/60 backdrop-blur-sm border border-[#74cfaa] rounded-[35px] p-16 flex-1 relative">
               <header className="mb-11">
                 <h2 
                   className="font-bold capitalize"

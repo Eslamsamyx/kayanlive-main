@@ -1,12 +1,12 @@
 const imgPattern = "/assets/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.png";
-const imgKayanLogo = "/assets/a01d943cb7ebcf5598b83131f56810cf97a4e883.png";
+const kayanLogo = "/assets/a01d943cb7ebcf5598b83131f56810cf97a4e883.png";
 
 export default function WhyKayanLive() {
   return (
-    <div className="bg-white relative w-full overflow-hidden" style={{ minHeight: '1450px' }}>
-      {/* Left Pattern - positioned exactly as in Figma with black filter */}
+    <div className="bg-white relative w-full overflow-hidden min-h-screen md:min-h-[1450px]">
+      {/* Left Pattern - positioned exactly as in Figma with black filter - Hidden on mobile */}
       <div 
-        className="absolute bg-center bg-cover bg-no-repeat z-0"
+        className="absolute bg-center bg-cover bg-no-repeat z-0 hidden md:block"
         style={{ 
           backgroundImage: `url('${imgPattern}')`,
           width: '370px',
@@ -19,9 +19,9 @@ export default function WhyKayanLive() {
         }}
       />
       
-      {/* Right Pattern - Bottom (rotated 180 degrees with black filter) */}
+      {/* Right Pattern - Bottom (rotated 180 degrees with black filter) - Hidden on mobile */}
       <div 
-        className="absolute z-0"
+        className="absolute z-0 hidden md:block"
         style={{ 
           width: '370px',
           height: '572px',
@@ -41,8 +41,8 @@ export default function WhyKayanLive() {
         />
       </div>
 
-      {/* Main Content Container */}
-      <div className="max-w-[1600px] mx-auto px-20 relative z-10" style={{ paddingTop: '85px', paddingBottom: '100px' }}>
+      {/* Desktop Content Container */}
+      <div className="hidden md:block max-w-[1600px] mx-auto px-20 relative z-10" style={{ paddingTop: '85px', paddingBottom: '100px' }}>
         {/* Why heading - Original position */}
         <h2 
           className="text-[#2c2c2b] font-medium capitalize"
@@ -61,7 +61,7 @@ export default function WhyKayanLive() {
         <div 
           className="bg-center bg-contain bg-no-repeat"
           style={{ 
-            backgroundImage: `url('${imgKayanLogo}')`,
+            backgroundImage: `url('${kayanLogo}')`,
             width: '865px',
             height: '289px',
             marginLeft: 'auto',
@@ -116,6 +116,116 @@ export default function WhyKayanLive() {
           </p>
         </div>
       </div>
+
+      {/* Mobile Content Container - Optimized for responsive best practices */}
+      <section className="md:hidden flex flex-col items-center justify-center w-full min-h-screen py-8 px-4 sm:px-6 gap-8 sm:gap-10">
+        {/* Why heading - Mobile version with larger fluid typography */}
+        <header className="text-center">
+          <h1 
+            className="font-medium text-[#2c2c2b] leading-tight tracking-tight"
+            style={{
+              fontSize: 'clamp(4.5rem, 16vw, 7rem)',
+              letterSpacing: 'clamp(-1.5px, -0.2vw, -1.2px)'
+            }}
+          >
+            Why
+          </h1>
+        </header>
+        
+        {/* KayanLive Logo - Mobile version with larger size */}
+        <div className="flex justify-center w-full max-w-sm">
+          <img 
+            src={kayanLogo}
+            alt="KayanLive Logo" 
+            className="w-full h-auto max-w-[320px] object-contain"
+            loading="eager"
+            style={{ aspectRatio: '267/89' }}
+          />
+        </div>
+        
+        {/* Content Section with proper semantic structure */}
+        <article className="w-full max-w-lg space-y-6 text-center">
+          {/* Founder introduction */}
+          <section>
+            <h2 className="sr-only">Company Foundation</h2>
+            <p 
+              className="text-[#555555] leading-relaxed"
+              style={{
+                fontSize: 'clamp(0.875rem, 3vw, 1rem)',
+                lineHeight: 'clamp(1.4, 4vw, 1.6)',
+                maxWidth: '45ch',
+                margin: '0 auto'
+              }}
+            >
+              KayanLive was founded by{' '}
+              <span className="text-[#2c2c2b] font-semibold">Khalid Alhasan</span>
+              , a regional leader in experiential strategy and event tech. After over a decade leading high-profile activations through a leading UAE/Saudi technology company, he launched KayanLive to bring{' '}
+              <span className="text-[#2c2c2b] font-semibold">full-scale, cross-functional event delivery</span>
+              {' '}to clients who need more than just a tech vendor—they need a team who understands what's at stake, and knows how to deliver under pressure.
+            </p>
+          </section>
+          
+          {/* Company philosophy */}
+          <section>
+            <h2 className="sr-only">Our Philosophy</h2>
+            <div className="space-y-4">
+              <p 
+                className="text-[#555555] leading-relaxed"
+                style={{
+                  fontSize: 'clamp(0.875rem, 3vw, 1rem)',
+                  lineHeight: 'clamp(1.4, 4vw, 1.6)',
+                  maxWidth: '50ch',
+                  margin: '0 auto'
+                }}
+              >
+                "Kayan" in Arabic means being, identity, and existence—and that's exactly what we're about. We believe every brand, every organization, and every idea has something real behind it—an essence that deserves to be seen, felt, and remembered.
+              </p>
+              
+              <p 
+                className="text-[#555555] leading-relaxed"
+                style={{
+                  fontSize: 'clamp(0.875rem, 3vw, 1rem)',
+                  lineHeight: 'clamp(1.4, 4vw, 1.6)',
+                  maxWidth: '50ch',
+                  margin: '0 auto'
+                }}
+              >
+                That's why our team is built to work from pitch to show day as one unit—with no handoffs, no friction, and no gaps.
+              </p>
+            </div>
+          </section>
+          
+          {/* Company experience and approach */}
+          <section>
+            <h2 className="sr-only">Our Experience</h2>
+            <div className="space-y-4">
+              <p 
+                className="text-[#555555] leading-relaxed"
+                style={{
+                  fontSize: 'clamp(0.875rem, 3vw, 1rem)',
+                  lineHeight: 'clamp(1.4, 4vw, 1.6)',
+                  maxWidth: '50ch',
+                  margin: '0 auto'
+                }}
+              >
+                We've been the silent force behind headline events in Saudi Arabia, rapid-turnaround brand activations in Riyadh, and exhibition setups across the GCC. Our speed doesn't sacrifice quality. It protects it.
+              </p>
+              
+              <p 
+                className="text-[#555555] leading-relaxed"
+                style={{
+                  fontSize: 'clamp(0.875rem, 3vw, 1rem)',
+                  lineHeight: 'clamp(1.4, 4vw, 1.6)',
+                  maxWidth: '50ch',
+                  margin: '0 auto'
+                }}
+              >
+                Whether you're launching a pavilion, opening a cultural event, or fixing someone else's mess, we're the partner you call when the clock is already ticking.
+              </p>
+            </div>
+          </section>
+        </article>
+      </section>
     </div>
   );
 }

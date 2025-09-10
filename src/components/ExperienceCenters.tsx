@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 // Assets from Figma
@@ -9,7 +10,194 @@ const imgVector8 = "/assets/47dd71beee42449fc1b6e4720f3ab2a5045e6f9b.svg";
 const imgGroup36136 = "/assets/380f31701fab090e70ff718bcec4f0d9f13c7c16.svg";
 const imgGroup36137 = "/assets/998232e7f2b2bfc71ea2796c3386b0489faa3a1a.svg";
 
+// Mobile version assets
+const imgVector8Mobile = "/assets/1eb3acc2c8c88219785b7efeb93b6f426b4134dd.svg";
+
 export default function ExperienceCenters() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Prevent hydration mismatch
+  if (!mounted) {
+    return null;
+  }
+
+  if (isMobile) {
+    // Mobile Layout - Based on Figma Design
+    const cards = [
+      {
+        title: "Digital Experience Centers",
+        description: "We design and build digital experience centers across the GCC—spaces where interaction meets innovation. These are permanent environments that blend immersive storytelling, interactive surfaces, and real-time content to inform, engage, and inspire.",
+        isDark: true
+      },
+      {
+        title: "Digital Museums",
+        description: "KayanLive builds fully immersive digital museums, combining projection mapping, AR and VR exhibits, gesture-based controls, and responsive media. Our work brings history, culture, and innovation to life in ways that are engaging, educational, and emotionally resonant.",
+        isDark: false
+      },
+      {
+        title: "Expo Pavilions",
+        description: "We design and deliver full-scale expo pavilions, ready for global exhibitions, tourism showcases, and national storytelling. Our pavilions fuse architecture, digital content, spatial choreography, and visitor analytics into seamless, high-impact environments.",
+        isDark: false
+      },
+      {
+        title: "Innovation Centers", 
+        description: "Innovation deserves a stage. We build innovation centers that combine interactive demos, holographic displays, robotics, and smart content systems—all within flexible, modular environments. These hubs attract investors, impress officials, and showcase progress with style and clarity.",
+        isDark: false
+      },
+      {
+        title: "Permanent Installations",
+        description: "From national storytelling zones to branded flagship experiences, we deliver permanent installations that fuse architecture, lighting, and digital content into one cohesive space. Built to last. Designed to evolve. As a leading event and exhibition company, we transform venues into interactive environments that live well beyond the launch date.",
+        isDark: false
+      }
+    ];
+
+    return (
+      <div 
+        className="bg-[#f3f3f3] box-border flex flex-col gap-[32px] items-center justify-start px-4 py-[48px] relative overflow-hidden"
+        style={{ 
+          width: '100vw',
+          marginLeft: 'calc(-50vw + 50%)'
+        }}
+      >
+        {/* Title - Optimized Mobile-First Typography */}
+        <div className="text-center mb-8 px-6 sm:px-8 md:px-12">
+          <h1 
+            className="font-bold capitalize tracking-[-2.7px] text-[90px] leading-[85px] md:text-[48px] md:leading-[52px] lg:text-[68px] lg:leading-[74px] xl:text-[90px] xl:leading-[98px] 2xl:text-[120px] 2xl:leading-[130px]"
+            style={{
+              fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', sans-serif"
+            }}
+          >
+            <span 
+              style={{
+                background: 'linear-gradient(to right, #a095e1, #74cfaa)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}
+            >
+              Experience Centers and
+            </span>
+            <br />
+            <span style={{
+              color: '#2c2c2b',
+              WebkitTextFillColor: '#2c2c2b'
+            }}>
+              Permanent Installations
+            </span>
+          </h1>
+        </div>
+
+        {/* Impact Badge with Dotted Line */}
+        <div className="relative flex flex-col items-center">
+          {/* Impact Badge */}
+          <div className="overflow-clip relative rounded-[900px] size-[98px] z-20">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#a095e1] to-[#74cfaa]"></div>
+            <div 
+              className="absolute capitalize leading-[0] not-italic text-[19px] text-nowrap text-white" 
+              style={{ 
+                fontFamily: "'Aeonik', sans-serif",
+                fontWeight: 'bold',
+                top: "calc(50% - 6px)", 
+                left: "calc(50% - 31px)" 
+              }}
+            >
+              <p className="leading-[24px] whitespace-pre">impact</p>
+            </div>
+          </div>
+
+          {/* Vertical Line - Starting from impact badge center */}
+          <div className="absolute w-0 left-1/2 transform -translate-x-1/2 z-0" style={{ 
+            top: "49px", 
+            height: `${cards.length * 320 + cards.length * 40}px` 
+          }}>
+            <div className="absolute left-[-0.5px] right-[-0.5px] h-full">
+              <Image src={imgVector8Mobile} alt="" fill style={{objectFit: 'cover'}} />
+            </div>
+          </div>
+        </div>
+
+        {/* Background decorative elements - Better positioning */}
+        <div 
+          className="absolute bg-center bg-cover bg-no-repeat h-[120px] w-[92px] pointer-events-none" 
+          style={{ 
+            backgroundImage: `url('${imgKansi1}')`, 
+            left: "-46px", 
+            top: "180px" 
+          }} 
+        />
+        <div 
+          className="absolute bg-center bg-cover bg-no-repeat h-[180px] w-[120px] pointer-events-none" 
+          style={{ 
+            backgroundImage: `url('${imgPattern0453}')`, 
+            right: "-60px", 
+            bottom: "60px" 
+          }} 
+        />
+
+        {/* Cards - Optimized spacing and positioning */}
+        {cards.map((card, index) => (
+          <div 
+            key={index}
+            className={`backdrop-blur-[3.5px] backdrop-filter box-border flex flex-col gap-6 items-center justify-start overflow-clip px-6 py-8 relative rounded-[20px] w-full max-w-[380px] mx-auto z-10 ${
+              card.isDark 
+                ? 'bg-[#2c2c2b] shadow-[0px_75px_70px_0px_rgba(0,0,0,0.11)]'
+                : 'bg-white/60 shadow-[0px_20px_30px_0px_rgba(0,0,0,0.06)]'
+            }`}
+          >
+            {/* Header Badge - Centered */}
+            <div 
+              className={`box-border flex gap-2.5 items-center justify-center overflow-clip px-4 py-5 relative rounded-[900px] w-full ${
+                card.isDark ? 'bg-[rgba(66,62,63,0.93)]' : 'bg-[rgba(255,255,255,0.93)]'
+              }`}
+            >
+              <div 
+                className="bg-clip-text bg-gradient-to-r capitalize not-italic relative text-center w-full"
+                style={{
+                  fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', sans-serif",
+                  fontSize: 'clamp(18px, 4vw, 22px)',
+                  lineHeight: '1.2',
+                  background: 'linear-gradient(to right, #a095e1 12.378%, #74cfaa 95.173%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
+                }}
+              >
+                <p>{card.title}</p>
+              </div>
+            </div>
+            
+            {/* Description - Centered */}
+            <div 
+              className={`lowercase not-italic relative text-center w-full ${
+                card.isDark ? 'text-neutral-400' : 'text-[#888888]'
+              }`}
+              style={{ 
+                fontFamily: "'Aeonik', sans-serif",
+                fontSize: 'clamp(14px, 3.5vw, 16px)',
+                lineHeight: '1.5'
+              }}
+            >
+              <p>{card.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // Desktop Layout - Original Design
   return (
     <div 
       className="bg-[#f3f3f3] relative overflow-hidden" 
@@ -44,25 +232,21 @@ export default function ExperienceCenters() {
         data-name="Pattern 045 3"
       />
 
-      {/* Title Section */}
+      {/* Title Section - Desktop Optimized */}
       <div 
-        className="absolute bg-clip-text capitalize not-italic text-center tracking-[-2.7px] translate-x-[-50%]"
+        className="absolute capitalize not-italic text-center tracking-[-2.7px] translate-x-[-50%] z-30"
         style={{
-          fontFamily: "'FONTSPRING DEMO - Visby CF Medium', sans-serif",
-          fontSize: '0px',
-          lineHeight: '0',
           top: '91px',
           left: 'calc(50% + 0.5px)',
-          width: '969px',
-          WebkitTextFillColor: 'transparent'
+          width: '969px'
         }}
       >
-        <p 
+        <h1 
           className="font-bold"
           style={{
             fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', sans-serif",
             fontSize: '90px',
-            lineHeight: '85px'
+            lineHeight: '98px'
           }}
         >
           <span 
@@ -73,21 +257,25 @@ export default function ExperienceCenters() {
               backgroundClip: 'text'
             }}
           >
-            Experience Centers and{' '}
+            Experience Centers and
           </span>
-          <span className="text-[#2c2c2b]">
+          <br />
+          <span style={{
+            color: '#2c2c2b',
+            WebkitTextFillColor: '#2c2c2b'
+          }}>
             Permanent Installations
           </span>
-        </p>
+        </h1>
       </div>
 
       {/* Central Timeline Line */}
       <div 
-        className="absolute left-1/2 translate-x-[-50%]"
+        className="absolute left-1/2 translate-x-[-50%] z-0"
         style={{
           height: '1835.5px',
           width: '0',
-          top: '407.5px'
+          top: '548px'
         }}
       >
         <div className="absolute bottom-0 left-[-0.5px] right-[-0.5px] top-0">
@@ -103,11 +291,11 @@ export default function ExperienceCenters() {
 
       {/* Impact Badge */}
       <div 
-        className="absolute left-1/2 overflow-clip rounded-[900px] translate-x-[-50%]"
+        className="absolute left-1/2 overflow-clip rounded-[900px] translate-x-[-50%] z-20"
         style={{
           width: '98px',
           height: '98px',
-          top: '319px'
+          top: '450px'
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-[#a095e1] to-[#74cfaa]"></div>
@@ -135,7 +323,7 @@ export default function ExperienceCenters() {
         className="absolute content-stretch flex items-center justify-start"
         style={{
           left: 'calc(50% - 26px)',
-          top: '468px'
+          top: '559px'
         }}
       >
         <div 
@@ -205,7 +393,7 @@ export default function ExperienceCenters() {
         className="absolute flex items-center justify-center"
         style={{
           right: 'calc(50% - 26px)',
-          top: '835px'
+          top: '886px'
         }}
       >
         <div className="flex-none rotate-[180deg] scale-y-[-100%]">
@@ -296,7 +484,7 @@ export default function ExperienceCenters() {
         className="absolute content-stretch flex items-center justify-start"
         style={{
           left: 'calc(50% - 26px)',
-          top: '1190px'
+          top: '1201px'
         }}
       >
         <div 
@@ -387,7 +575,7 @@ export default function ExperienceCenters() {
         className="absolute flex items-center justify-center"
         style={{
           right: 'calc(50% - 26px)',
-          top: '1557px'
+          top: '1528px'
         }}
       >
         <div className="flex-none rotate-[180deg] scale-y-[-100%]">
@@ -478,7 +666,7 @@ export default function ExperienceCenters() {
         className="absolute content-stretch flex items-center justify-start"
         style={{
           left: 'calc(50% - 26px)',
-          top: '1914px'
+          top: '1855px'
         }}
       >
         <div 

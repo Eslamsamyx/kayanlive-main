@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 // Assets from Figma
@@ -10,8 +10,130 @@ const imgFreepikTheStyleIsCandidImagePhotographyWithNatural627961 = "/assets/0a0
 const imgEllipse3626 = "/assets/34146dbe8aeb9c1892f700cd9059e41d476db4b0.svg";
 const imgFrame1618874015 = "/assets/ba2718e4fa15b12b3ad4fd4e91c67919d3e1c6f3.svg";
 
+// Mobile-specific assets
+const imgFrame1618874025 = "/assets/0a0c21416d9d9b2c97aedc8aa51e7c6619486a15.png";
+const imgFrame1618874015Mobile = "/assets/26d787dbe898c245016f8e4796e8af5507840604.svg";
+
 export default function WorkCallToAction() {
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Prevent hydration mismatch
+  if (!mounted) {
+    return null;
+  }
+
+  if (isMobile) {
+    // Mobile Layout - Based on Figma Design
+    return (
+      <div className="bg-[#2c2c2b] box-border flex flex-col gap-[31px] items-center justify-center px-[27px] py-16 relative w-full overflow-hidden">
+        {/* Decorative Pattern - Mobile - White - Bigger and partially outside */}
+        <div 
+          className="absolute bg-center bg-cover bg-no-repeat h-[280px] w-[180px]"
+          style={{ 
+            backgroundImage: `url('${imgPattern0452}')`,
+            right: '-50px',
+            top: '300px',
+            filter: 'brightness(0) invert(1)',
+            opacity: 0.8
+          }} 
+        />
+        
+        {/* Business Meeting Image */}
+        <div 
+          className="bg-center bg-cover bg-no-repeat h-[239px] rounded-[20px] w-full max-w-[420px]"
+          style={{ backgroundImage: `url('${imgFrame1618874025}')` }}
+        />
+        
+        {/* Content Card with Glass Morphism */}
+        <div className="bg-white/[0.03] backdrop-blur-md box-border flex flex-col gap-[25px] items-start justify-center px-[30px] py-[35px] relative rounded-[35px] w-full max-w-[420px] overflow-hidden">
+          {/* Gradient Border */}
+          <div 
+            aria-hidden="true" 
+            className="absolute border border-[#74cfaa] border-solid inset-0 pointer-events-none rounded-[35px]" 
+          />
+          
+          {/* Gradient Title */}
+          <div 
+            className="bg-clip-text bg-gradient-to-r capitalize from-[#a095e1] to-[#74cfaa] w-[200px]"
+            style={{
+              fontFamily: "'Aeonik', sans-serif",
+              fontWeight: 'bold',
+              fontSize: '30px',
+              lineHeight: '31px',
+              letterSpacing: '-0.6px',
+              WebkitTextFillColor: 'transparent'
+            }}
+          >
+            <p>Let&apos;s Walk You Through It</p>
+          </div>
+          
+          {/* Content Text */}
+          <div className="capitalize w-full" style={{
+            fontFamily: "'Aeonik', sans-serif",
+            fontSize: '16px',
+            lineHeight: '20px',
+            color: '#c3c3c3'
+          }}>
+            <p className="mb-0">Need proof of execution?</p>
+            <p className="mb-0">Examples of speed under pressure?</p>
+            <p className="mb-0">A breakdown of results?</p>
+            <p className="mb-0">&nbsp;</p>
+            <p className="mb-0 text-white font-bold">Ask for a preview.</p>
+            <p className="mb-0">&nbsp;</p>
+            <p>Our strategy team will share capability decks, sample builds, and visual walkthroughs relevant to your brief.</p>
+          </div>
+        </div>
+        
+        {/* CTA Button with Animation */}
+        <div 
+          className="flex items-center justify-start"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <div 
+            className="box-border flex gap-2.5 h-11 items-center justify-center overflow-clip px-[18px] py-5 rounded-full transition-all duration-300"
+            style={{
+              background: 'linear-gradient(90deg, #7afdd6 0%, #a095e1 60%, #b8a4ff 90%)'
+            }}
+          >
+            <div 
+              className="capitalize text-[#2c2c2b] text-nowrap"
+              style={{
+                fontFamily: "'Aeonik', sans-serif",
+                fontSize: '16px',
+                lineHeight: '28px'
+              }}
+            >
+              Speak With Our Producers
+            </div>
+          </div>
+          <div 
+            className="relative w-[45px] h-[45px] transition-all duration-300"
+            style={{
+              transform: isHovered ? 'translateX(10px)' : 'translateX(0)'
+            }}
+          >
+            <Image alt="" className="block max-w-none size-full" src={imgFrame1618874015Mobile} fill style={{objectFit: 'cover'}} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Desktop Layout - Original Design
 
   return (
     <div 
@@ -29,6 +151,7 @@ export default function WorkCallToAction() {
           width: 'clamp(400px, 46.6vw, 704px)'
         }} 
       />
+      {/* Top-Right Pattern - Completely White */}
       <div 
         className="absolute bg-center bg-cover bg-no-repeat" 
         style={{ 
@@ -37,28 +160,8 @@ export default function WorkCallToAction() {
           left: 'clamp(800px, 84.2vw, 1273px)',
           top: 'clamp(-40px, -4.3vw, -65px)',
           width: 'clamp(180px, 20.2vw, 305px)',
-          filter: 'grayscale(100%) brightness(1.8)',
-          opacity: 0.25
-        }} 
-      />
-      
-      {/* Light Grey Overlay for Top-Right Pattern */}
-      <div 
-        className="absolute bg-gray-300"
-        style={{ 
-          height: 'clamp(280px, 30.8vw, 466px)',
-          left: 'clamp(800px, 84.2vw, 1273px)',
-          top: 'clamp(-40px, -4.3vw, -65px)',
-          width: 'clamp(180px, 20.2vw, 305px)',
-          opacity: 0.3,
-          mask: `url('${imgPattern0452}')`,
-          WebkitMask: `url('${imgPattern0452}')`,
-          maskSize: 'cover',
-          WebkitMaskSize: 'cover',
-          maskPosition: 'center',
-          WebkitMaskPosition: 'center',
-          maskRepeat: 'no-repeat',
-          WebkitMaskRepeat: 'no-repeat'
+          filter: 'brightness(0) invert(1)',
+          opacity: 0.8
         }} 
       />
 

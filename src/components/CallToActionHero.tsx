@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
 // Assets from Figma
@@ -15,12 +15,44 @@ const imgFrame1618874015 = "/assets/4a3ffff37e95986459c2da2bd6d49aaab2861815.svg
 
 export default function CallToActionHero() {
   const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const componentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Trigger animation when component is at center of viewport
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+          setIsVisible(true);
+          // Optional: Add console log for debugging
+          // console.log('CallToActionHero animation triggered', { intersectionRatio: entry.intersectionRatio });
+        }
+      },
+      {
+        threshold: [0, 0.25, 0.5, 0.75, 1], // Multiple thresholds for more reliable detection
+        rootMargin: '-5% 0px -5% 0px' // Slight margin for better triggering
+      }
+    );
+
+    const currentElement = componentRef.current;
+    if (currentElement) {
+      observer.observe(currentElement);
+    }
+
+    return () => {
+      if (currentElement) {
+        observer.unobserve(currentElement);
+      }
+    };
+  }, []);
 
   return (
-    <div 
-      className="overflow-clip relative rounded-[82px] -mx-4"
-      style={{ height: '807px' }}
-    >
+    <div ref={componentRef} className="w-full">
+      {/* Desktop Version */}
+      <div 
+        className="overflow-clip relative rounded-[82px] -mx-4 hidden lg:block"
+        style={{ height: '807px' }}
+      >
       {/* Background Image */}
       <div 
         className="absolute bg-center bg-cover bg-no-repeat h-[807px] left-0 rounded-[48px] top-0 w-[1512px]"
@@ -30,7 +62,7 @@ export default function CallToActionHero() {
       {/* Blur Effect */}
       <div className="absolute bg-[#2c2c2b] blur-[200px] filter h-[1500px] left-[-412px] top-[-284px] w-[983px]" />
       
-      {/* Decorative Vector Elements - Left Side */}
+      {/* Decorative Vector Elements - Left Side - Desktop Only */}
       <div className="absolute left-[322.69px] top-[-350.91px]">
         {/* Vector 1 - Largest */}
         <div className="absolute flex h-[900.283px] items-center justify-center left-[322.99px] top-[-350.91px] w-[599.173px]">
@@ -77,13 +109,13 @@ export default function CallToActionHero() {
         </div>
       </div>
       
-      {/* Pattern Overlay - Bottom Left */}
+      {/* Pattern Overlay - Bottom Left - Desktop Only */}
       <div 
         className="absolute bg-center bg-cover bg-no-repeat bottom-[-447px] h-[853px] right-[1049px] w-[862px]"
         style={{ backgroundImage: `url('${imgPattern0212}')` }}
       />
       
-      {/* Main Content Box */}
+      {/* Main Content Box - Desktop Only */}
       <div 
         className="absolute bg-white/[0.03] backdrop-blur-md box-border content-stretch flex flex-col gap-[140px] items-start justify-start overflow-hidden px-[61px] py-[68px] rounded-[76px] translate-x-[-50%] translate-y-[-50%] w-[854px]"
         style={{ 
@@ -126,11 +158,113 @@ export default function CallToActionHero() {
         </div>
       </div>
       
-      {/* Pattern Overlay - Top Right */}
+      {/* Pattern Overlay - Top Right - White with Entrance Animation - Desktop Only */}
       <div 
-        className="absolute bg-center bg-cover bg-no-repeat h-[666px] left-[1108px] top-[-17px] w-[437px]"
-        style={{ backgroundImage: `url('${imgPattern0452}')` }}
+        className="absolute bg-center bg-cover bg-no-repeat h-[666px] left-[1108px] w-[437px] transition-all duration-1500 ease-out"
+        style={{ 
+          backgroundImage: `url('${imgPattern0452}')`,
+          filter: 'brightness(0) invert(1)',
+          transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
+          top: isVisible ? '-17px' : '-683px',
+          opacity: isVisible ? 1 : 0,
+          transitionDelay: isVisible ? '200ms' : '0ms'
+        }}
       />
+      </div>
+
+      {/* Tablet Version */}
+      <div 
+        className="overflow-clip relative rounded-[48px] -mx-4 hidden md:block lg:hidden"
+        style={{ height: '600px' }}
+      >
+        <div 
+          className="absolute bg-center bg-cover bg-no-repeat h-full left-0 rounded-[48px] top-0 w-full"
+          style={{ backgroundImage: `url('${imgRectangle6}')` }}
+        />
+        <div className="absolute bg-[#2c2c2b] blur-[150px] filter h-[1000px] left-[-300px] top-[-200px] w-[700px]" />
+        
+        <div 
+          className="absolute bg-white/[0.03] backdrop-blur-md box-border flex flex-col gap-[80px] items-center justify-center overflow-hidden px-[40px] py-[50px] rounded-[48px] translate-x-[-50%] translate-y-[-50%] w-[90%] max-w-[600px]"
+          style={{ 
+            top: "50%", 
+            left: "50%" 
+          }}
+        >
+          <div className="capitalize font-['Aeonik:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[56px] text-center text-white">
+            <p className="leading-[60px]">
+              <span>Where </span>
+              <span className="font-['Aeonik:Regular',_sans-serif] lowercase not-italic">Others Struggle, We Execute with Precision</span>
+            </p>
+          </div>
+          
+          <div 
+            className="flex items-center justify-center relative shrink-0"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <div 
+              className="rounded-full flex items-center justify-center h-[56px] px-[22px]"
+              style={{ 
+                background: 'linear-gradient(90deg, #7afdd6 0%, #a095e1 60%, #b8a4ff 90%)'
+              }}
+            >
+              <div className="capitalize font-['Aeonik:Regular',_sans-serif] leading-[28px] not-italic text-[#231f20] text-[18px] text-nowrap">
+                get support today
+              </div>
+            </div>
+            <div 
+              className="relative shrink-0 size-[56px] transition-all duration-300"
+              style={{
+                transform: isHovered ? 'translateX(10px)' : 'translateX(0)'
+              }}
+            >
+              <Image alt="" className="block max-w-none size-full" src={imgFrame1618874015} fill style={{objectFit: 'cover'}} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Version - Matches Figma Design Exactly */}
+      <div className="md:hidden overflow-clip relative rounded-[24px] -mx-4" style={{ height: '500px' }}>
+        <div 
+          className="absolute bg-center bg-cover bg-no-repeat h-full left-0 rounded-[24px] top-0 w-full"
+          style={{ backgroundImage: `url('${imgRectangle6}')` }}
+        />
+        <div className="flex flex-col gap-[31px] items-center justify-center px-[27px] py-0 relative h-full">
+          <div className="bg-[rgba(255,255,255,0.03)] backdrop-blur-md box-border flex flex-col gap-[60px] items-start justify-center overflow-clip px-[32px] py-[40px] relative rounded-[20px] shrink-0 w-full">
+            <div className="capitalize font-['Aeonik:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-left text-white w-full">
+              <p className="leading-[50px] text-[48px]">
+                <span>Where </span>
+                <span className="font-['Aeonik:Regular',_sans-serif] lowercase not-italic">Others Struggle, We Execute with Precision</span>
+              </p>
+            </div>
+            <div 
+              className="flex items-center justify-start relative shrink-0"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <div 
+                className="rounded-full flex items-center justify-center h-[44px] px-[18px]"
+                style={{ 
+                  background: 'linear-gradient(90deg, #7afdd6 0%, #a095e1 60%, #b8a4ff 90%)'
+                }}
+              >
+                <div className="capitalize font-['Aeonik:Regular',_sans-serif] leading-[28px] not-italic text-[#231f20] text-[16px] text-nowrap">
+                  get support today
+                </div>
+              </div>
+              <div 
+                className="relative shrink-0 size-[44px] transition-all duration-300"
+                style={{
+                  transform: isHovered ? 'translateX(10px)' : 'translateX(0)'
+                }}
+              >
+                <Image alt="" className="block max-w-none size-full" src={imgFrame1618874015} fill style={{objectFit: 'cover'}} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

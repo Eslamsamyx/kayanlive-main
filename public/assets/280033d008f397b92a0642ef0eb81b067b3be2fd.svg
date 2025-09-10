@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 421 238" fill="none" xmlns="http://www.w3.org/2000/svg">
+<foreignObject x="0" y="0" width="421" height="238"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(8px);clip-path:url(#bgblur_0_165_252_clip_path);height:100%;width:100%"></div></foreignObject><g id="Vector" filter="url(#filter0_f_165_252)" data-figma-bg-blur-radius="16">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M371 188H50V50H371C371 52.2045 371 119.873 371 122.748C371 125.623 371 184.252 371 188Z" fill="var(--fill-0, white)" fill-opacity="0.2"/>
+</g>
+<defs>
+<filter id="filter0_f_165_252" x="0" y="0" width="421" height="238" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="25" result="effect1_foregroundBlur_165_252"/>
+</filter>
+<clipPath id="bgblur_0_165_252_clip_path" transform="translate(0 0)"><path fill-rule="evenodd" clip-rule="evenodd" d="M371 188H50V50H371C371 52.2045 371 119.873 371 122.748C371 125.623 371 184.252 371 188Z"/>
+</clipPath></defs>
+</svg>

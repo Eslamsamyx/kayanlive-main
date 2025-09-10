@@ -30,12 +30,12 @@ export default async function ServicesPage({
       </div>
 
 
-      {/* Not Sure Where To Start Section - Figma Design */}
+      {/* Not Sure Where To Start Section - Optimized spacing */}
       <div className="-mx-4">
-        <div className="bg-white w-full py-24">
-          <div className="max-w-[1600px] mx-auto px-20">
+        <div className="bg-white w-full py-12 md:py-16">
+          <div className="max-w-[1600px] mx-auto px-4 md:px-20">
             {/* Custom styled title that should remain */}
-            <div className="text-center mb-16">
+            <div className="text-center mb-6">
               <h1 
                 className="font-bold text-[90px] leading-[85px] capitalize tracking-[-2.7px]"
                 style={{
@@ -66,7 +66,7 @@ export default async function ServicesPage({
           subtitle="Every project begins with a single conversation."
           buttonText="Speak With Our Strategy Team"
           topPadding="pt-0"
-          bottomPadding="pb-24"
+          bottomPadding="pb-12 md:pb-16"
         />
       </div>
     </div>

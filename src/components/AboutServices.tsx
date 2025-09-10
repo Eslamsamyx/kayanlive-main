@@ -5,18 +5,18 @@ const imgKayanLogo = "/assets/823c27de600ccd2f92af3e073c8e10df3a192e5c.png";
 
 export default function AboutServices() {
   return (
-    <div className="bg-[#f3f3f3] w-full py-20">
-      <div className="max-w-[1600px] mx-auto px-20">
+    <div className="bg-[#f3f3f3] w-full py-12 sm:py-16 md:py-20">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-8 md:px-12 lg:px-20">
         {/* Company Description */}
-        <div className="text-center mb-20">
-          <p className="text-[#888888] text-[32px] leading-[40px] mb-8">
+        <div className="text-center mb-12 sm:mb-16 md:mb-20">
+          <p className="text-[#888888] mb-6 sm:mb-8" style={{ fontSize: 'clamp(18px, 4vw, 32px)', lineHeight: 'clamp(24px, 5vw, 40px)' }}>
             <span>KayanLive Is A Full-Service </span>
             <span className="font-bold text-[#2c2c2b]">Event Management Company</span>
             <span> With Active Offices In The GCC, Strategically Positioned To Deliver </span>
             <span className="font-bold text-[#2c2c2b]">High-Impact Experiences.</span>
           </p>
           
-          <p className="text-[#888888] text-[32px] leading-[40px] mb-8">
+          <p className="text-[#888888] mb-6 sm:mb-8" style={{ fontSize: 'clamp(18px, 4vw, 32px)', lineHeight: 'clamp(24px, 5vw, 40px)' }}>
             <span>We Create Tech-Driven Experiences That Engage, Inform, And Impress—From </span>
             <span className="font-bold text-[#2c2c2b]">
               2D/3D Animation And Holograms To Robotics, AR/VR, And Interactive Environments.
@@ -27,11 +27,11 @@ export default function AboutServices() {
             </span>
           </p>
           
-          <p className="text-[#888888] text-[32px] leading-[40px] mb-8">
+          <p className="text-[#888888] mb-6 sm:mb-8" style={{ fontSize: 'clamp(18px, 4vw, 32px)', lineHeight: 'clamp(24px, 5vw, 40px)' }}>
             While Others Hesitate, We Execute—Combining Forward-Thinking Creativity With Technical Expertise To Bring Your Vision To Life Swiftly And Seamlessly.
           </p>
           
-          <p className="text-[#888888] text-[32px] leading-[40px]">
+          <p className="text-[#888888]" style={{ fontSize: 'clamp(18px, 4vw, 32px)', lineHeight: 'clamp(24px, 5vw, 40px)' }}>
             <span>We&apos;re Not Your Typical Event Planning Or Exhibitions Company. When The Plan Shifts And Pressure&apos;s On, We Bring The </span>
             <span className="font-bold text-[#2c2c2b]">Team</span>
             <span>, The </span>
@@ -43,11 +43,10 @@ export default function AboutServices() {
         </div>
 
         {/* Service Cards - Full width between navbar edges */}
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           {/* Live Events Card with Image */}
           <div 
-            className="bg-[#7afdd6] rounded-[40px] overflow-hidden relative"
-            style={{ height: '491px' }}
+            className="bg-[#7afdd6] rounded-[40px] overflow-hidden relative min-h-[300px] lg:h-[491px]"
           >
             <div 
               className="absolute inset-0 bg-center bg-cover bg-no-repeat"
@@ -59,77 +58,25 @@ export default function AboutServices() {
               <div 
                 className="flex items-center justify-center"
                 style={{ 
-                  width: '302px',
-                  height: '302px',
+                  width: 'clamp(200px, 40vw, 302px)',
+                  height: 'clamp(200px, 40vw, 302px)',
                   transform: 'rotate(-45deg)'
                 }}
               >
                 <div 
-                  className="flex items-center justify-center relative overflow-hidden"
+                  className="flex items-center justify-center relative overflow-hidden bg-white/[0.4] backdrop-blur-3xl box-border"
                   style={{ 
-                    width: '214px',
-                    height: '214px',
-                    background: 'rgba(200, 200, 200, 0.4)',
-                    backdropFilter: 'blur(60px) saturate(150%)',
-                    WebkitBackdropFilter: 'blur(60px) saturate(150%)',
-                    border: '2px solid rgba(220, 220, 220, 0.5)',
-                    boxShadow: `
-                      inset 0 0 20px rgba(255, 255, 255, 0.3),
-                      0 0 40px rgba(255, 255, 255, 0.2)
-                    `
+                    width: 'clamp(140px, 28vw, 214px)',
+                    height: 'clamp(140px, 28vw, 214px)'
                   }}
                 >
-                  {/* Grayish frosted center with 40% opacity */}
-                  <div 
-                    className="absolute inset-0"
-                    style={{
-                      background: `
-                        radial-gradient(
-                          circle at center,
-                          rgba(180, 180, 180, 0.4) 0%,
-                          rgba(200, 200, 200, 0.25) 40%,
-                          rgba(220, 220, 220, 0.15) 70%,
-                          rgba(255, 255, 255, 0.1) 90%
-                        )
-                      `,
-                      backdropFilter: 'blur(20px)',
-                      WebkitBackdropFilter: 'blur(20px)',
-                      pointerEvents: 'none'
-                    }}
-                  />
-                  
-                  {/* Light noise pattern overlay */}
-                  <div 
-                    className="absolute inset-0"
-                    style={{
-                      opacity: 0.15,
-                      backgroundImage: `
-                        repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,.05) 2px, rgba(255,255,255,.05) 4px),
-                        repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(255,255,255,.05) 2px, rgba(255,255,255,.05) 4px)
-                      `,
-                      pointerEvents: 'none'
-                    }}
-                  />
-                  
-                  {/* All edges lighting effect */}
-                  <div 
-                    className="absolute inset-0"
-                    style={{
-                      background: `
-                        linear-gradient(to right, rgba(255, 255, 255, 0.3) 0%, transparent 10%, transparent 90%, rgba(255, 255, 255, 0.3) 100%),
-                        linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, transparent 10%, transparent 90%, rgba(255, 255, 255, 0.3) 100%)
-                      `,
-                      pointerEvents: 'none'
-                    }}
-                  />
-                  
                   {/* KayanLive Logo inside diamond */}
                   <div 
                     className="bg-center bg-contain bg-no-repeat relative z-10"
                     style={{ 
                       backgroundImage: `url('${imgKayanLogo}')`,
-                      width: '159px',
-                      height: '53px',
+                      width: 'clamp(100px, 20vw, 159px)',
+                      height: 'clamp(33px, 7vw, 53px)',
                       transform: 'rotate(45deg)',
                       filter: 'brightness(1.1)'
                     }}
@@ -141,16 +88,15 @@ export default function AboutServices() {
 
           {/* Live Events & Shows Text Card */}
           <div 
-            className="bg-white rounded-[35px] border border-[#74cfaa] px-12 py-16 flex flex-col justify-between"
-            style={{ height: '491px' }}
+            className="bg-white rounded-[35px] border border-[#74cfaa] px-6 sm:px-8 lg:px-12 py-8 sm:py-12 lg:py-16 flex flex-col justify-between min-h-[300px] lg:h-[491px]"
           >
             <div>
               <h3 
-                className="font-normal bg-gradient-to-r from-[#a095e1] to-[#74cfaa] bg-clip-text mb-8"
+                className="font-normal bg-gradient-to-r from-[#a095e1] to-[#74cfaa] bg-clip-text mb-6 sm:mb-8"
                 style={{
-                  fontSize: '80px',
-                  lineHeight: '68px',
-                  letterSpacing: '-1.6px',
+                  fontSize: 'clamp(32px, 8vw, 80px)',
+                  lineHeight: 'clamp(28px, 7vw, 68px)',
+                  letterSpacing: 'clamp(-0.8px, -0.2vw, -1.6px)',
                   WebkitTextFillColor: 'transparent',
                   WebkitBackgroundClip: 'text',
                   backgroundClip: 'text'
@@ -159,7 +105,7 @@ export default function AboutServices() {
                 Live Events &<br />Shows
               </h3>
               
-              <div className="text-[#888888] text-[22px] leading-[28px]">
+              <div className="text-[#888888]" style={{ fontSize: 'clamp(16px, 3vw, 22px)', lineHeight: 'clamp(22px, 4vw, 28px)' }}>
                 <p className="mb-6">
                   From Ceremonies And Public Performances To Cultural Spectacles, We Direct And Deliver Stagecraft, Crowd Flow, AV, And Full-Scale Live Show Logistics—Down To Every Last Second Of The Run-Of-Show.
                 </p>
@@ -175,7 +121,7 @@ export default function AboutServices() {
         </div>
 
         {/* CTA Button */}
-        <div className="flex justify-center mt-12">
+        <div className="flex justify-center mt-8 sm:mt-10 md:mt-12">
           <style>{`
             @keyframes slideLeftRight {
               0%, 100% { transform: translateX(0); }
@@ -193,12 +139,12 @@ export default function AboutServices() {
               className="rounded-full flex items-center justify-center pointer-events-none"
               style={{ 
                 background: 'linear-gradient(90deg, #7afdd6 0%, #a095e1 60%, #b8a4ff 90%)',
-                height: '65px',
-                paddingLeft: '36px',
-                paddingRight: '36px'
+                height: 'clamp(50px, 8vw, 65px)',
+                paddingLeft: 'clamp(20px, 4vw, 36px)',
+                paddingRight: 'clamp(20px, 4vw, 36px)'
               }}
             >
-              <span className="text-[#2c2c2b] text-[20px] font-normal">
+              <span className="text-[#2c2c2b] font-normal" style={{ fontSize: 'clamp(16px, 3vw, 20px)' }}>
                 Explore Our Capabilities
               </span>
             </div>
@@ -207,12 +153,12 @@ export default function AboutServices() {
             <div 
               className="arrow-circle rounded-full bg-[#b8a4ff] flex items-center justify-center pointer-events-none"
               style={{ 
-                width: '65px',
-                height: '65px',
+                width: 'clamp(50px, 8vw, 65px)',
+                height: 'clamp(50px, 8vw, 65px)',
                 flexShrink: 0
               }}
             >
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="clamp(20, 4vw, 26)" height="clamp(20, 4vw, 26)" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>

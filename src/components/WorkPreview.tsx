@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 // Assets from Figma
@@ -10,6 +11,144 @@ const imgPattern0341 = "/assets/6ebbb286c787b4009100c9f8cd397942ae83de56.png";
 const imgPattern0212 = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
 
 export default function WorkPreview() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Prevent hydration mismatch
+  if (!mounted) {
+    return null;
+  }
+  if (isMobile) {
+    // Mobile Layout - Based on Figma Design
+    return (
+      <div className="bg-[#2c2c2b] overflow-hidden relative rounded-[25px] w-full" style={{ height: 'clamp(600px, 90vh, 750px)' }}>
+        {/* Mobile Title Section - Centered and Responsive */}
+        <div className="absolute flex flex-col items-center justify-center w-full px-4" style={{ top: 'clamp(20px, 5vh, 40px)' }}>
+          <div className="text-white text-center font-medium" style={{
+            fontFamily: "'FONTSPRING DEMO - Visby CF Medium:Regular', sans-serif",
+            fontSize: 'clamp(56px, 15vw, 90px)',
+            lineHeight: 'clamp(60px, 16vw, 95px)',
+            letterSpacing: '-2px',
+            marginBottom: '8px'
+          }}>
+            <p className="mb-0">A Preview</p>
+            <p className="mb-0">of What&apos;s</p>
+          </div>
+          <div 
+            className="bg-clip-text bg-gradient-to-l from-[#74cfaa] to-[#a095e1] text-center font-medium" 
+            style={{ 
+              WebkitTextFillColor: "transparent",
+              fontFamily: "'FONTSPRING DEMO - Visby CF Medium:Regular', sans-serif",
+              fontSize: 'clamp(56px, 15vw, 90px)',
+              lineHeight: 'clamp(60px, 16vw, 95px)',
+              letterSpacing: '-2px'
+            }}
+          >
+            <p className="mb-0">Coming</p>
+          </div>
+        </div>
+        
+        {/* Mobile Images - Tilted/overlapping layout filling component width */}
+        <div className="absolute left-0 right-0" style={{ top: 'clamp(260px, 37vh, 320px)' }}>
+          {/* Image 1 - Leftmost */}
+          <div 
+            className="absolute overflow-hidden" 
+            style={{
+              height: 'clamp(280px, 40vh, 360px)',
+              width: 'clamp(420px, 105vw, 500px)',
+              left: 'clamp(-120px, -30vw, -100px)',
+              top: '0',
+              maskImage: 'linear-gradient(to top, transparent 0%, black 25%, black 100%)',
+              WebkitMaskImage: 'linear-gradient(to top, transparent 0%, black 25%, black 100%)'
+            }}
+          >
+            <Image 
+              alt="" 
+              className="block max-w-none size-full object-cover" 
+              src={imgRectangle4238}
+              fill
+              style={{objectFit: 'cover'}}
+            />
+          </div>
+          
+          {/* Image 2 - Middle - Overlapping with Image 1 */}
+          <div 
+            className="absolute overflow-hidden" 
+            style={{
+              height: 'clamp(280px, 40vh, 360px)',
+              width: 'clamp(420px, 105vw, 500px)',
+              left: 'clamp(50px, 12.5vw, 90px)',
+              top: '0',
+              maskImage: 'linear-gradient(to top, transparent 0%, black 25%, black 100%)',
+              WebkitMaskImage: 'linear-gradient(to top, transparent 0%, black 25%, black 100%)'
+            }}
+          >
+            <Image 
+              alt="" 
+              className="block max-w-none size-full object-cover" 
+              src={imgRectangle4237}
+              fill
+              style={{objectFit: 'cover'}}
+            />
+          </div>
+          
+          {/* Image 3 - Rightmost - Overlapping with Image 2 */}
+          <div 
+            className="absolute overflow-hidden" 
+            style={{
+              height: 'clamp(280px, 40vh, 360px)',
+              width: 'clamp(420px, 105vw, 500px)',
+              right: 'clamp(-120px, -30vw, -100px)',
+              top: '0',
+              maskImage: 'linear-gradient(to top, transparent 0%, black 25%, black 100%)',
+              WebkitMaskImage: 'linear-gradient(to top, transparent 0%, black 25%, black 100%)'
+            }}
+          >
+            <Image 
+              alt="" 
+              className="block max-w-none size-full object-cover" 
+              src={imgRectangle4236}
+              fill
+              style={{objectFit: 'cover'}}
+            />
+          </div>
+        </div>
+        
+        {/* Mobile Blur Effect - White */}
+        <div className="absolute bg-white/15 blur-[20px] filter w-full" style={{
+          height: 'clamp(80px, 12vh, 120px)',
+          bottom: 'clamp(80px, 12vh, 120px)',
+          left: '0'
+        }} />
+        
+        {/* Mobile Pattern - Bottom - White */}
+        <div 
+          className="absolute bg-center bg-cover bg-no-repeat left-1/2 transform -translate-x-1/2"
+          style={{ 
+            bottom: 'clamp(-60px, -10vh, -80px)',
+            height: 'clamp(120px, 20vh, 160px)',
+            width: 'clamp(200px, 50vw, 280px)',
+            backgroundImage: `url('${imgPattern0341}')`,
+            filter: 'brightness(0) invert(1)',
+            opacity: 0.8
+          }}
+        />
+      </div>
+    );
+  }
+
+  // Desktop Layout - Original Design
   return (
     <div className="bg-[#2c2c2b] overflow-clip relative rounded-bl-[20px] rounded-br-[20px] rounded-tl-[61px] rounded-tr-[61px] w-full h-[1031px]">
       {/* Three Event Images - Right Side */}

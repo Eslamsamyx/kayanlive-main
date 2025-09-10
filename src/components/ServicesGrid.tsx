@@ -64,18 +64,6 @@ export default function ServicesGrid() {
               Trusted by cultural commissions and enterprise brands for digital content that commands attention.
             </p>
           </div>
-          
-          {/* Arrow Icon */}
-          <div 
-            className="absolute left-4 md:left-[47px]"
-            style={{
-              top: 'clamp(300px, 47.6vw, 720px)',
-              width: 'clamp(25px, 2.5vw, 37.627px)',
-              height: 'clamp(32px, 3.2vw, 48.575px)'
-            }}
-          >
-            <Image src={imgFrame1618874049} alt="" className="block max-w-none size-full" fill style={{objectFit: 'cover'}} />
-          </div>
         </div>
 
         {/* Row 2 Left: Video Editing - Half Width */}
