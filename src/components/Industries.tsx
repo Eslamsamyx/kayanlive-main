@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import ClientsPartnersTemplate, { CardConfig, BackgroundElement } from './ClientsPartnersTemplate';
 
 const imgPattern = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
@@ -9,48 +10,6 @@ const imgRealEstate = "/assets/97b98a652c6210a2b4e884e84040708ab75a45fc.png";
 const imgEventPlanners = "/assets/123269087423c903b101b9352bd92acdab49d86a.png";
 const imgPattern0453 = "/assets/6cdd4333a240b46dead9df86c5a83772e81b76fc.png";
 
-const cards: CardConfig[] = [
-  {
-    id: 'government',
-    image: imgGovernment,
-    layout: 'center',
-    title: 'Government & Semi-Government Bodies',
-    gradientOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.6) 0%, rgba(122, 253, 214, 0.5) 100%)',
-    gradientHoverOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.6) 0%, rgba(122, 253, 214, 0.5) 100%)',
-    hasBlurEffect: true,
-    aspectRatio: 'clamp(320px, 50vw, 465px)'
-  },
-  {
-    id: 'multinational',
-    image: imgMultinational,
-    layout: 'center',
-    title: 'Multinational & Enterprise Brands',
-    gradientOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.5) 0%, rgba(122, 253, 214, 0.4) 100%)',
-    gradientHoverOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.5) 0%, rgba(122, 253, 214, 0.4) 100%)',
-    hasBlurEffect: true,
-    aspectRatio: 'clamp(320px, 50vw, 465px)'
-  },
-  {
-    id: 'real-estate',
-    image: imgRealEstate,
-    layout: 'center',
-    title: 'Real Estate & Automotive Developers',
-    gradientOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.55) 0%, rgba(122, 253, 214, 0.45) 100%)',
-    gradientHoverOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.55) 0%, rgba(122, 253, 214, 0.45) 100%)',
-    hasBlurEffect: true,
-    aspectRatio: 'clamp(320px, 50vw, 465px)'
-  },
-  {
-    id: 'event-planners',
-    image: imgEventPlanners,
-    layout: 'center',
-    title: 'Event Planners & Marketing Agencies',
-    gradientOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.45) 0%, rgba(122, 253, 214, 0.5) 100%)',
-    gradientHoverOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.45) 0%, rgba(122, 253, 214, 0.5) 100%)',
-    hasBlurEffect: true,
-    aspectRatio: '465px'
-  }
-];
 
 const backgroundElements: BackgroundElement[] = [
   // Top Right Angular Decorative Element
@@ -151,11 +110,56 @@ const backgroundElements: BackgroundElement[] = [
 ];
 
 export default function Industries() {
+  const t = useTranslations();
+  
+  const cards: CardConfig[] = [
+    {
+      id: 'government',
+      image: imgGovernment,
+      layout: 'center',
+      title: t('industries.government'),
+      gradientOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.6) 0%, rgba(122, 253, 214, 0.5) 100%)',
+      gradientHoverOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.6) 0%, rgba(122, 253, 214, 0.5) 100%)',
+      hasBlurEffect: true,
+      aspectRatio: 'clamp(320px, 50vw, 465px)'
+    },
+    {
+      id: 'multinational',
+      image: imgMultinational,
+      layout: 'center',
+      title: t('industries.enterprise'),
+      gradientOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.5) 0%, rgba(122, 253, 214, 0.4) 100%)',
+      gradientHoverOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.5) 0%, rgba(122, 253, 214, 0.4) 100%)',
+      hasBlurEffect: true,
+      aspectRatio: 'clamp(320px, 50vw, 465px)'
+    },
+    {
+      id: 'real-estate',
+      image: imgRealEstate,
+      layout: 'center',
+      title: t('industries.realEstate'),
+      gradientOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.55) 0%, rgba(122, 253, 214, 0.45) 100%)',
+      gradientHoverOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.55) 0%, rgba(122, 253, 214, 0.45) 100%)',
+      hasBlurEffect: true,
+      aspectRatio: 'clamp(320px, 50vw, 465px)'
+    },
+    {
+      id: 'event-planners',
+      image: imgEventPlanners,
+      layout: 'center',
+      title: t('industries.agencies'),
+      gradientOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.45) 0%, rgba(122, 253, 214, 0.5) 100%)',
+      gradientHoverOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.45) 0%, rgba(122, 253, 214, 0.5) 100%)',
+      hasBlurEffect: true,
+      aspectRatio: '465px'
+    }
+  ];
+  
   return (
     <ClientsPartnersTemplate
-      badgeText="Who We Work With"
+      badgeText={t('industries.badge')}
       badgeWidth="266px"
-      title="Industries"
+      title={t('industries.title')}
       cards={cards}
       interactionType="gradient"
       backgroundElements={backgroundElements}

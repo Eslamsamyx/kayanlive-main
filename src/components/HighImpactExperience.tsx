@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 const imgBackground = "/assets/29064c5a0d86395e45b642fe4e6daf670490f723.png";
 const imgRectangle = "/assets/3f0c70e340a28d47867891894e77a32ca1a022f1.png";
@@ -9,6 +10,7 @@ const img202508031915NeonConcert = "/assets/3f0c70e340a28d47867891894e77a32ca1a0
 const imgPattern0341 = "/assets/6ebbb286c787b4009100c9f8cd397942ae83de56.png";
 
 export default function HighImpactExperience() {
+  const t = useTranslations();
   return (
     <>
       {/* Mobile/Tablet Layout */}
@@ -65,7 +67,7 @@ export default function HighImpactExperience() {
                 className="text-white w-full relative text-center"
                 style={{ lineHeight: 'clamp(60px, 14vw, 95px)' }}
               >
-                <p className="mb-0 text-center">high</p>
+                <p className="mb-0 text-center">{t('highImpact.high').toLowerCase()}</p>
               </div>
               
               {/* "Impact" text */}
@@ -73,7 +75,7 @@ export default function HighImpactExperience() {
                 className="text-white w-full relative text-center"
                 style={{ lineHeight: 'clamp(60px, 14vw, 95px)' }}
               >
-                <p className="mb-0 text-center">impact</p>
+                <p className="mb-0 text-center">{t('highImpact.impact').toLowerCase()}</p>
               </div>
               
               {/* "Experience" with gradient */}
@@ -86,7 +88,7 @@ export default function HighImpactExperience() {
                   marginBottom: 'clamp(40px, 8vh, 60px)'
                 }}
               >
-                <p className="mb-0 text-center">experience</p>
+                <p className="mb-0 text-center">{t('highImpact.experience').toLowerCase()}</p>
               </div>
             </div>
 
@@ -149,8 +151,8 @@ export default function HighImpactExperience() {
                   letterSpacing: '-0.04em'
                 }}
               >
-                <span className="block">High</span>
-                <span className="block">Impact</span>
+                <span className="block">{t('highImpact.high')}</span>
+                <span className="block">{t('highImpact.impact')}</span>
               </h2>
               
               {/* "Experience" with gradient */}
@@ -166,7 +168,7 @@ export default function HighImpactExperience() {
                   backgroundClip: 'text'
                 }}
               >
-                Experience
+                {t('highImpact.experience')}
               </h2>
             </div>
           </div>

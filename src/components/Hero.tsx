@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 // Assets
 const imgScreenshot1 = "/assets/01f5d49d03c8455dc99b2ad32446b6657b1949e0.png";
@@ -29,6 +30,7 @@ const imgVector459 = "/assets/0b8b87749ddbac7e694af683b0ade373c2c2ec6a.svg";
 const imgArrow1 = "/assets/d40495f3a82dbc1b73402bf2e9b45f90c56a4c70.svg";
 
 export default function Hero() {
+  const t = useTranslations();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const totalSlides = 3;
@@ -101,7 +103,7 @@ export default function Hero() {
               width: '281px'
             }}
           >
-            Welcome to KayanLive, GCC&apos;s Top Event Experts
+            {t('hero.title')}
           </div>
 
           {/* Mobile Slide Indicators */}
@@ -113,7 +115,7 @@ export default function Hero() {
                   onClick={() => goToSlide(index)}
                   className="relative flex items-center justify-center"
                   style={{ width: '20.661px', height: '20.66px' }}
-                  aria-label={`Go to slide ${index + 1}`}
+                  aria-label={t('hero.slideNavigation', { index: index + 1 })}
                 >
                   <div className="flex-none" style={{ transform: 'rotate(224.999deg)' }}>
                     <div 
@@ -239,7 +241,7 @@ export default function Hero() {
                   onClick={() => goToSlide(index)}
                   className="relative flex items-center justify-center"
                   style={{ width: '20.661px', height: '20.66px' }}
-                  aria-label={`Go to slide ${index + 1}`}
+                  aria-label={t('hero.slideNavigation', { index: index + 1 })}
                 >
                   <div className="flex-none" style={{ transform: 'rotate(224.999deg)' }}>
                     <div 
@@ -425,7 +427,7 @@ export default function Hero() {
                 lineHeight: '28px'
               }}
             >
-              Schedule a consultation
+              {t('hero.cta')}
             </div>
             <div className="relative flex items-center justify-center" style={{ width: '16px', height: '16px' }}>
               <Image alt="" className="block max-w-none size-full" src={imgArrow1} fill style={{ objectFit: 'contain' }} />
@@ -441,7 +443,7 @@ export default function Hero() {
                   onClick={() => goToSlide(index)}
                   className="relative flex items-center justify-center"
                   style={{ width: '20.661px', height: '20.66px' }}
-                  aria-label={`Go to slide ${index + 1}`}
+                  aria-label={t('hero.slideNavigation', { index: index + 1 })}
                 >
                   <div className="flex-none" style={{ transform: 'rotate(224.999deg)' }}>
                     <div 
@@ -530,7 +532,7 @@ export default function Hero() {
               width: '875px'
             }}
           >
-            Welcome to KayanLive, GCC&apos;s Top Event Experts
+            {t('hero.title')}
           </div>
 
           {/* Desktop Slide Indicators */}
@@ -542,7 +544,7 @@ export default function Hero() {
                   onClick={() => goToSlide(index)}
                   className="relative flex items-center justify-center"
                   style={{ width: '35.355px', height: '35.355px' }}
-                  aria-label={`Go to slide ${index + 1}`}
+                  aria-label={t('hero.slideNavigation', { index: index + 1 })}
                 >
                   <div className="flex-none" style={{ transform: 'rotate(315deg)' }}>
                     <div 
@@ -654,7 +656,7 @@ export default function Hero() {
                 lineHeight: '28px'
               }}
             >
-              Schedule A Consultation
+              {t('hero.cta')}
             </div>
             <svg 
               width="16" 
@@ -731,7 +733,7 @@ export default function Hero() {
                   onClick={() => goToSlide(index)}
                   className="relative flex items-center justify-center"
                   style={{ width: '35.355px', height: '35.355px' }}
-                  aria-label={`Go to slide ${index + 1}`}
+                  aria-label={t('hero.slideNavigation', { index: index + 1 })}
                 >
                   <div className="flex-none" style={{ transform: 'rotate(315deg)' }}>
                     <div 
@@ -868,10 +870,7 @@ export default function Hero() {
                         fontWeight: '500'
                       }}
                     >
-                      Premier Event Management in Saudi Arabia, Dubai, and Across 
-                      the GCC—Delivering Creativity, Innovation, and Execution All Under One Roof. 
-                      When Others Stall, Panic, or Back Down, We Get to Work. Bringing You Elite 
-                      Strategy, Fast Execution, And Cultural Fluency Without Compromise.
+                      {t('hero.description')}
                     </div>
                   </div>
                 </div>
@@ -888,7 +887,7 @@ export default function Hero() {
                   onClick={() => goToSlide(index)}
                   className="relative flex items-center justify-center"
                   style={{ width: '35.355px', height: '35.355px' }}
-                  aria-label={`Go to slide ${index + 1}`}
+                  aria-label={t('hero.slideNavigation', { index: index + 1 })}
                 >
                   <div className="flex-none" style={{ transform: 'rotate(315deg)' }}>
                     <div 

@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 const imgRectangle6 = "/assets/29064c5a0d86395e45b642fe4e6daf670490f723.png";
 const imgPattern0212 = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
@@ -12,6 +13,8 @@ const imgVector452 = "/assets/b435e1176051bfb6d5144bfe3e7069007ac2258c.svg";
 const imgFrame1618874015 = "/assets/ca9b4647bcda5167d4ae65dc099e9f345b86ecff.svg";
 
 export default function ExecutionSection() {
+  const t = useTranslations();
+  
   return (
     <div className="relative w-full bg-white overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-4 py-8 md:py-12 lg:py-20">
@@ -156,7 +159,7 @@ export default function ExecutionSection() {
                 fontSize: 'clamp(32px, 8vw, 80px)',
                 lineHeight: 'clamp(36px, 9vw, 77px)'
               }}>
-              Where <span className="lowercase">others struggle, we execute with precision</span>
+              {t('execution.heading')}
             </h2>
             
             {/* CTA Button - responsive */}
@@ -167,7 +170,7 @@ export default function ExecutionSection() {
                     fontSize: 'clamp(16px, 2vw, 20px)',
                     lineHeight: 'clamp(22px, 2.5vw, 28px)'
                   }}>
-                  get support today
+                  {t('execution.cta')}
                 </span>
               </button>
               <div className="relative ml-[-3px] md:ml-[-4px] lg:ml-[-5px]"

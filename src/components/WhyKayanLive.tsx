@@ -1,9 +1,12 @@
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 const imgPattern = "/assets/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.png";
 const kayanLogo = "/assets/a01d943cb7ebcf5598b83131f56810cf97a4e883.png";
 
 export default function WhyKayanLive() {
+  const t = useTranslations();
+  
   return (
     <div className="bg-white relative w-full overflow-hidden min-h-screen lg:min-h-[1450px]">
       {/* Left Pattern - positioned exactly as in Figma with black filter - Hidden on mobile and tablet */}
@@ -57,7 +60,7 @@ export default function WhyKayanLive() {
             fontFamily: '"Poppins", sans-serif'
           }}
         >
-          Why
+          {t('whyKayan.title')}
         </h2>
 
         {/* KayanLive Logo */}
@@ -81,11 +84,7 @@ export default function WhyKayanLive() {
           marginBottom: '259px'
         }}>
           <p className="text-[#888888] text-[24px] leading-[32px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}>
-            <span>KayanLive Was Founded By </span>
-            <span className="text-[#2c2c2b] font-semibold">Khalid Alhasan</span>
-            <span>, A Regional Leader In Experiential Strategy And Event Tech. After Over A Decade Leading High-Profile Activations Through A Leading UAE/Saudi Technology Company, He Launched KayanLive To Bring </span>
-            <span className="text-[#2c2c2b] font-semibold">Full-Scale, Cross-Functional Event Delivery</span>
-            <span> To Clients Who Need More Than Just A Tech Vendor—They Need A Team Who Understands What&apos;s At Stake, And Knows How To Deliver Under Pressure.</span>
+            {t('whyKayan.founderText')}
           </p>
         </div>
 
@@ -96,11 +95,11 @@ export default function WhyKayanLive() {
           marginBottom: '66px'
         }}>
           <p className="text-[#888888] text-[24px] leading-[32px] text-left mb-6" style={{ fontFamily: '"Poppins", sans-serif' }}>
-            &quot;Kayan&quot; In Arabic Means Being, Identity, And Existence—And That&apos;s Exactly What We&apos;re About. We Believe Every Brand, Every Organization, And Every Idea Has Something Real Behind It—An Essence That Deserves To Be Seen, Felt, And Remembered.
+            {t('whyKayan.philosophy1')}
           </p>
           
           <p className="text-[#888888] text-[24px] leading-[32px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}>
-            That&apos;s Why Our Team Is Built To Work From Pitch To Show Day As One Unit—With No Handoffs, No Friction, And No Gaps.
+            {t('whyKayan.philosophy2')}
           </p>
         </div>
 
@@ -111,11 +110,11 @@ export default function WhyKayanLive() {
           margin: '0 auto'
         }}>
             <p className="text-[#888888] text-[24px] leading-[32px] text-left mb-6" style={{ fontFamily: '"Poppins", sans-serif' }}>
-              We&apos;ve Been The Silent Force Behind Headline Events In Saudi Arabia, Rapid-Turnaround Brand Activations In Riyadh, And Exhibition Setups Across The GCC. Our Speed Doesn&apos;t Sacrifice Quality. It Protects It.
+              {t('whyKayan.experience1')}
             </p>
             
           <p className="text-[#888888] text-[24px] leading-[32px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}>
-            Whether You&apos;re Launching A Pavilion, Opening A Cultural Event, Or Fixing Someone Else&apos;s Mess, We&apos;re The Partner You Call When The Clock Is Already Ticking.
+            {t('whyKayan.experience2')}
           </p>
         </div>
       </div>
@@ -132,7 +131,7 @@ export default function WhyKayanLive() {
               fontFamily: '"Poppins", sans-serif'
             }}
           >
-            Why
+            {t('whyKayan.title')}
           </h1>
         </header>
         
@@ -164,11 +163,7 @@ export default function WhyKayanLive() {
                 fontFamily: '"Poppins", sans-serif'
               }}
             >
-              KayanLive was founded by{' '}
-              <span className="text-[#2c2c2b] font-semibold">Khalid Alhasan</span>
-              , a regional leader in experiential strategy and event tech. After over a decade leading high-profile activations through a leading UAE/Saudi technology company, he launched KayanLive to bring{' '}
-              <span className="text-[#2c2c2b] font-semibold">full-scale, cross-functional event delivery</span>
-              {' '}to clients who need more than just a tech vendor—they need a team who understands what&apos;s at stake, and knows how to deliver under pressure.
+              {t('whyKayan.founderText')}
             </p>
           </section>
           
@@ -186,7 +181,7 @@ export default function WhyKayanLive() {
                   fontFamily: '"Poppins", sans-serif'
                 }}
               >
-                &quot;Kayan&quot; in Arabic means being, identity, and existence—and that&apos;s exactly what we&apos;re about. We believe every brand, every organization, and every idea has something real behind it—an essence that deserves to be seen, felt, and remembered.
+                {t('whyKayan.philosophy1')}
               </p>
               
               <p 
@@ -199,7 +194,7 @@ export default function WhyKayanLive() {
                   fontFamily: '"Poppins", sans-serif'
                 }}
               >
-                That&apos;s why our team is built to work from pitch to show day as one unit—with no handoffs, no friction, and no gaps.
+                {t('whyKayan.philosophy2')}
               </p>
             </div>
           </section>
@@ -218,7 +213,7 @@ export default function WhyKayanLive() {
                   fontFamily: '"Poppins", sans-serif'
                 }}
               >
-                We&apos;ve been the silent force behind headline events in Saudi Arabia, rapid-turnaround brand activations in Riyadh, and exhibition setups across the GCC. Our speed doesn&apos;t sacrifice quality. It protects it.
+                {t('whyKayan.experience1')}
               </p>
               
               <p 
@@ -231,7 +226,7 @@ export default function WhyKayanLive() {
                   fontFamily: '"Poppins", sans-serif'
                 }}
               >
-                Whether you&apos;re launching a pavilion, opening a cultural event, or fixing someone else&apos;s mess, we&apos;re the partner you call when the clock is already ticking.
+                {t('whyKayan.experience2')}
               </p>
             </div>
           </section>

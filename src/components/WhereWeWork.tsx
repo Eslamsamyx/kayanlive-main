@@ -2,12 +2,14 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 const imgPattern = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
 const imgCheckmark = "/assets/d57e8b023cc2954fe2c89c41bd7f2153074ba9c1.svg";
 const imgArrowCircle = "/assets/56835058c52a4359de96b664c4f5e9d586e4da1d.svg";
 
 export default function WhereWeWork() {
+  const t = useTranslations();
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -22,20 +24,19 @@ export default function WhereWeWork() {
               className="inline-flex items-center justify-center rounded-[900px] border border-[#7afdd6] bg-[rgba(122,253,214,0.26)]"
               style={{ width: '225px', height: '62px' }}
             >
-              <span className="text-[#42967d] text-[20px] uppercase">Where We Work</span>
+              <span className="text-[#42967d] text-[20px] uppercase">{t('whereWeWork.badge')}</span>
             </div>
             
             {/* Description */}
             <p className="text-[#808184] text-[24px] leading-[32px] capitalize">
-              Headquartered in Saudi Arabia and Dubai, KayanLive delivers high-impact events, from public activations
-              and corporate launches to government-led showcases.
+              {t('whereWeWork.description')}
             </p>
           </div>
 
           {/* Right Column - Locations */}
           <div className="flex flex-col gap-6 flex-1 max-w-[697px]">
             <p className="text-[#808184] text-[24px] leading-[32px] capitalize">
-              We operate across the GCC:
+              {t('whereWeWork.operateText')}
             </p>
             
             {/* Location Items */}
@@ -43,27 +44,21 @@ export default function WhereWeWork() {
               <div className="flex items-center gap-[9px]">
                 <Image src={imgCheckmark} alt="" className="w-[30px] h-[30px]" width={30} height={30} />
                 <p className="text-[24px] leading-[32px] capitalize">
-                  <span className="font-bold text-[#231f20]">Riyadh, Jeddah, Dammam</span>
-                  <span className="text-[#231f20]">, and key </span>
-                  <span className="font-bold text-[#7afdd6]">Saudi</span>
-                  <span className="text-[#231f20]"> cities</span>
+                  {t('whereWeWork.saudi')}
                 </p>
               </div>
               
               <div className="flex items-center gap-[9px]">
                 <Image src={imgCheckmark} alt="" className="w-[30px] h-[30px]" width={30} height={30} />
                 <p className="text-[24px] leading-[32px] capitalize">
-                  <span className="font-bold text-[#231f20]">Dubai, Abu Dhabi, Sharjah, </span>
-                  <span className="text-[#231f20]">and the wider</span>
-                  <span className="font-bold text-[#231f20]"> UAE</span>
+                  {t('whereWeWork.uae')}
                 </p>
               </div>
               
               <div className="flex items-start gap-[9px]">
                 <Image src={imgCheckmark} alt="" className="w-[30px] h-[30px] mt-[2px]" width={30} height={30} />
                 <p className="text-[24px] leading-[32px] capitalize">
-                  <span className="text-[#231f20]">And through partner networks in</span>
-                  <span className="font-bold text-[#231f20]"> Qatar, Oman, Bahrain, and Kuwait</span>
+                  {t('whereWeWork.partners')}
                 </p>
               </div>
             </div>
@@ -76,7 +71,7 @@ export default function WhereWeWork() {
           <div className="bg-[rgba(122,253,214,0.26)] h-[50px] rounded-[900px] relative w-auto">
             <div className="box-border flex gap-2.5 h-[50px] items-center justify-center overflow-clip px-[27px] py-6 relative">
               <div className="text-[#42967d] text-[14px] text-center text-nowrap uppercase leading-[28px]">
-                Where We Work
+                {t('whereWeWork.badge')}
               </div>
             </div>
             <div aria-hidden="true" className="absolute border border-[#7afdd6] border-solid inset-0 pointer-events-none rounded-[900px]" />
@@ -84,12 +79,12 @@ export default function WhereWeWork() {
           
           {/* Description - Mobile version */}
           <div className="text-[#808184] text-[16px] leading-[20px] w-full capitalize">
-            Headquartered in Saudi Arabia and Dubai, KayanLive delivers high-impact events, from public activations and corporate launches to government-led showcases.
+            {t('whereWeWork.description')}
           </div>
 
           {/* GCC Section Header - As next item in single column */}
           <div className="text-[#808184] text-[20px] leading-[20px] capitalize w-full">
-            We operate across the GCC:
+            {t('whereWeWork.operateText')}
           </div>
           
           {/* Location Item 1 - As next item in single column */}
@@ -98,10 +93,7 @@ export default function WhereWeWork() {
               <Image src={imgCheckmark} alt="" className="block max-w-none size-full" width={25} height={25} />
             </div>
             <div className="text-[#231f20] text-[18px] leading-[20px] capitalize flex-1">
-              <span className="font-bold">Riyadh, Jeddah, Dammam</span>
-              <span>, and key </span>
-              <span className="font-bold text-[#7afdd6]">Saudi</span>
-              <span> cities</span>
+              {t('whereWeWork.saudi')}
             </div>
           </div>
           
@@ -111,9 +103,7 @@ export default function WhereWeWork() {
               <Image src={imgCheckmark} alt="" className="block max-w-none size-full" width={25} height={25} />
             </div>
             <div className="text-[#231f20] text-[18px] leading-[20px] capitalize flex-1">
-              <span className="font-bold">Dubai, Abu Dhabi, Sharjah, </span>
-              <span>and the wider</span>
-              <span className="font-bold"> UAE</span>
+              {t('whereWeWork.uae')}
             </div>
           </div>
           
@@ -123,8 +113,7 @@ export default function WhereWeWork() {
               <Image src={imgCheckmark} alt="" className="block max-w-none size-full" width={25} height={25} />
             </div>
             <div className="text-[#231f20] text-[18px] leading-[20px] capitalize flex-1">
-              <span>And through partner networks in</span>
-              <span className="font-bold"> Qatar, Oman, Bahrain, and Kuwait</span>
+              {t('whereWeWork.partners')}
             </div>
           </div>
         </section>
@@ -220,7 +209,7 @@ export default function WhereWeWork() {
                 margin: '0 auto'
               }}
             >
-              Planning <span className="lowercase">an event outside the uae or saudi arabia?</span>
+              {t('whereWeWork.question')}
             </h3>
             
             {/* CTA Button with Arrow - Responsive */}
@@ -235,7 +224,7 @@ export default function WhereWeWork() {
                     className="text-[#2c2c2b] capitalize whitespace-nowrap"
                     style={{ fontSize: 'clamp(0.875rem, 3vw, 1.25rem)' }}
                   >
-                    Let&apos;s Build Together
+                    {t('whereWeWork.cta')}
                   </span>
                 </button>
                 <div 

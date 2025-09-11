@@ -1,0 +1,82 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "about": "À Propos",
+    "services": "Services",
+    "contact": "Contact",
+    "aboutUs": "À Propos de Nous",
+    "ourWork": "Nos Projets",
+    "clientsPartners": "Clients & Partenaires"
+  },
+  "hero": {
+    "title": "Bienvenue chez KayanLive, Experts Événementiels de Premier Plan du CCG",
+    "description": "Gestion d'Événements de Premier Plan en Arabie Saoudite, à Dubaï et dans tout le CCG—Offrant Créativité, Innovation et Exécution Sous un Même Toit. Quand d'Autres Hésitent, Paniquent ou Reculent, Nous Passons à l'Action. Nous Vous Apportons une Stratégie d'Élite, une Exécution Rapide et une Maîtrise Culturelle Sans Compromis.",
+    "cta": "Planifier une Consultation",
+    "slideNavigation": "Aller à la diapositive {index}"
+  },
+  "highImpact": {
+    "high": "haute",
+    "impact": "impact",
+    "experience": "expérience"
+  },
+  "aboutServices": {
+    "description1": "KayanLive est une **Société de Gestion d'Événements** à Service Complet avec des Bureaux Actifs dans le CCG, Stratégiquement Positionnée pour Offrir des **Expériences à Fort Impact.**",
+    "description2": "Nous Créons des Expériences Technologiques qui Engagent, Informent et Impressionnent—De l'**Animation 2D/3D et Hologrammes à la Robotique, AR/VR et Environnements Interactifs.** Reconnus dans Toutes les Grandes Villes, d'Abu Dhabi à Riyadh, Notre Équipe Livre Tout en Interne—Rapidement, Parfaitement et Entièrement Intégré.",
+    "description3": "Pendant que d'Autres Hésitent, Nous Exécutons—Combinant Créativité Avant-gardiste avec Expertise Technique pour Donner Vie à Votre Vision Rapidement et Sans Effort.",
+    "description4": "Nous ne Sommes pas Votre Entreprise Typique de Planification d'Événements ou d'Expositions. Quand le Plan Change et que la Pression Monte, Nous Apportons l'**Équipe**, le **Système** et la **Vitesse** pour que Ça Marche.",
+    "serviceTitle": "Événements en Direct & Spectacles",
+    "serviceDescription": "Des Cérémonies et Performances Publiques aux Spectacles Culturels, Nous Dirigeons et Livrons la Scénographie, le Flux de Foule, l'AV et la Logistique Complète de Spectacles en Direct—Jusqu'à la Dernière Seconde du Déroulement du Spectacle.",
+    "idealFor": "Idéal pour la **Gestion d'Événements d'Entreprise** et les Commissions Nationales.",
+    "cta": "Explorez Nos Capacités"
+  },
+  "whyKayan": {
+    "title": "Pourquoi",
+    "founderText": "KayanLive a été Fondée par **Khalid Alhasan**, un Leader Régional en Stratégie Expérientielle et Technologie Événementielle. Après Plus d'une Décennie à Diriger des Activations de Haut Profil à Travers une Entreprise Technologique Leader UAE/Saoudienne, Il a Lancé KayanLive pour Apporter une **Livraison d'Événements Complète et Cross-Fonctionnelle** aux Clients qui ont Besoin de Plus qu'un Simple Fournisseur Tech—Ils ont Besoin d'une Équipe qui Comprend ce qui est en Jeu, et Sait Comment Livrer Sous Pression.",
+    "philosophy1": "\"Kayan\" en Arabe Signifie Être, Identité et Existence—et C'est Exactement ce que Nous Représentons. Nous Croyons que Chaque Marque, Chaque Organisation et Chaque Idée a Quelque Chose de Réel Derrière Elle—Une Essence qui Mérite d'Être Vue, Ressentie et Mémorisée.",
+    "philosophy2": "C'est Pourquoi Notre Équipe est Construite pour Travailler de la Proposition au Jour du Spectacle comme une Unité—Sans Transferts, Sans Friction et Sans Lacunes.",
+    "experience1": "Nous avons été la Force Silencieuse Derrière les Événements Phares en Arabie Saoudite, les Activations de Marque à Délai Rapide à Riyadh, et les Installations d'Exposition à Travers le CCG. Notre Vitesse ne Sacrifie pas la Qualité. Elle la Protège.",
+    "experience2": "Que Vous Lanciez un Pavillon, Ouvriez un Événement Culturel, ou Répariez le Désordre de Quelqu'un d'Autre, Nous Sommes le Partenaire que Vous Appelez Quand l'Horloge Tourne Déjà."
+  },
+  "industries": {
+    "badge": "Avec Qui Nous Travaillons",
+    "title": "Industries",
+    "government": "Organismes Gouvernementaux & Semi-Gouvernementaux",
+    "enterprise": "Marques Multinationales & d'Entreprise",
+    "realEstate": "Développeurs Immobiliers & Automobiles",
+    "agencies": "Planificateurs d'Événements & Agences Marketing"
+  },
+  "whereWeWork": {
+    "badge": "Où Nous Travaillons",
+    "description": "Basée en Arabie Saoudite et à Dubaï, KayanLive livre des événements à fort impact, des activations publiques et lancements d'entreprise aux présentations dirigées par le gouvernement.",
+    "operateText": "Nous opérons à travers le CCG:",
+    "saudi": "**Riyadh, Jeddah, Dammam**, et les principales villes **Saoudiennes**",
+    "uae": "**Dubaï, Abu Dhabi, Sharjah,** et les **EAU** plus larges",
+    "partners": "Et à travers des réseaux partenaires au **Qatar, Oman, Bahreïn et Koweït**",
+    "question": "Planifiez-vous un événement en dehors des **EAU ou de l'Arabie Saoudite** ?",
+    "cta": "Construisons Ensemble"
+  },
+  "achievements": {
+    "title": "Réalisations",
+    "fasterTurnaround": "3x Plus Rapide",
+    "pressCoverage": "85% d'Augmentation de Couverture Presse",
+    "missedDeadlines": "0 Échéance Manquée",
+    "clientsServed": "500+ Clients Servis",
+    "projectsCompleted": "1,200+ Projets Terminés",
+    "yearsExpertise": "15+ Années d'Expertise",
+    "countriesReached": "50+ Pays Atteints",
+    "clientSatisfaction": "98% Satisfaction Client"
+  },
+  "execution": {
+    "heading": "Là où d'autres peinent, nous exécutons avec précision",
+    "cta": "obtenir de l'aide aujourd'hui"
+  },
+  "common": {
+    "language": "Langue",
+    "signin": "Se Connecter",
+    "signout": "Se Déconnecter",
+    "signup": "S'Inscrire",
+    "learnMore": "En Savoir Plus",
+    "getStarted": "Commencer",
+    "contactUs": "Nous Contacter"
+  }
+}
