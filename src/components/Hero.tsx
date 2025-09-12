@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 // Assets
 const imgScreenshot1 = "/assets/01f5d49d03c8455dc99b2ad32446b6657b1949e0.png";
@@ -29,11 +29,111 @@ const imgVector458 = "/assets/2f1c0518048d573eddb0525c46e5cf3478830322.svg";
 const imgVector459 = "/assets/0b8b87749ddbac7e694af683b0ade373c2c2ec6a.svg";
 const imgArrow1 = "/assets/d40495f3a82dbc1b73402bf2e9b45f90c56a4c70.svg";
 
+// Custom hook for measuring text dimensions and calculating adaptive heights
+function useAdaptiveTextHeight() {
+  const [textMetrics, setTextMetrics] = useState({
+    mobileHeight: 600, // Base height for mobile
+    desktopHeight: 955, // Base height for desktop
+    mobileTitleHeight: 0,
+    desktopTitleHeight: 0,
+    desktopDescHeight: 0
+  });
+  const measureRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations();
+
+  const measureText = useCallback(() => {
+    if (!measureRef.current) return;
+
+    // Create temporary measuring elements
+    const tempContainer = document.createElement('div');
+    tempContainer.style.position = 'absolute';
+    tempContainer.style.visibility = 'hidden';
+    tempContainer.style.top = '-9999px';
+    document.body.appendChild(tempContainer);
+
+    try {
+      // Measure mobile title
+      const mobileTitleEl = document.createElement('div');
+      mobileTitleEl.innerHTML = t('hero.title');
+      mobileTitleEl.style.fontFamily = "'FONTSPRING DEMO - Visby CF Demi Bold', sans-serif";
+      mobileTitleEl.style.fontWeight = 'normal';
+      mobileTitleEl.style.fontSize = '30px';
+      mobileTitleEl.style.lineHeight = '32px';
+      mobileTitleEl.style.width = '281px';
+      mobileTitleEl.style.textAlign = 'center';
+      mobileTitleEl.style.textTransform = 'capitalize';
+      tempContainer.appendChild(mobileTitleEl);
+      const mobileTitleHeight = mobileTitleEl.offsetHeight;
+
+      // Measure desktop title
+      const desktopTitleEl = document.createElement('div');
+      desktopTitleEl.innerHTML = t('hero.title');
+      desktopTitleEl.style.fontWeight = 'bold';
+      desktopTitleEl.style.fontSize = '70px';
+      desktopTitleEl.style.lineHeight = '1.3';
+      desktopTitleEl.style.width = '875px';
+      desktopTitleEl.style.textTransform = 'capitalize';
+      tempContainer.appendChild(desktopTitleEl);
+      const desktopTitleHeight = desktopTitleEl.offsetHeight;
+
+      // Measure desktop description
+      const desktopDescEl = document.createElement('div');
+      desktopDescEl.innerHTML = t('hero.description');
+      desktopDescEl.style.fontSize = '28px';
+      desktopDescEl.style.lineHeight = '38px';
+      desktopDescEl.style.fontWeight = '500';
+      desktopDescEl.style.maxWidth = '627px';
+      desktopDescEl.style.textAlign = 'center';
+      desktopDescEl.style.textTransform = 'capitalize';
+      desktopDescEl.style.padding = '0 32px';
+      tempContainer.appendChild(desktopDescEl);
+      const desktopDescHeight = desktopDescEl.offsetHeight;
+
+      // Calculate adaptive heights based on text measurements with proper constraints
+      // Mobile: Base height 600px, adjust if title exceeds ~84px (3 lines), but cap at reasonable max
+      const mobileBaseHeight = 600;
+      const mobileTitleExpected = 84; // Expected height for 3 lines
+      const mobileHeightAdjustment = Math.max(0, mobileTitleHeight - mobileTitleExpected);
+      const adaptiveMobileHeight = Math.max(600, Math.min(900, mobileBaseHeight + mobileHeightAdjustment * 2));
+
+      // Desktop: Base height 955px, adjust if title exceeds ~273px (3 lines), but ensure reasonable max
+      const desktopBaseHeight = 955;
+      const desktopTitleExpected = 273; // Expected height for 3 lines at 70px font
+      const desktopDescExpected = 150; // Expected height for description
+      const desktopTitleAdjustment = Math.max(0, desktopTitleHeight - desktopTitleExpected);
+      const desktopDescAdjustment = Math.max(0, desktopDescHeight - desktopDescExpected);
+      const adaptiveDesktopHeight = Math.max(955, Math.min(1400, desktopBaseHeight + Math.max(desktopTitleAdjustment, desktopDescAdjustment) * 1.5));
+
+      setTextMetrics({
+        mobileHeight: adaptiveMobileHeight,
+        desktopHeight: adaptiveDesktopHeight,
+        mobileTitleHeight,
+        desktopTitleHeight,
+        desktopDescHeight
+      });
+    } catch (error) {
+      console.warn('Text measurement failed:', error);
+    } finally {
+      document.body.removeChild(tempContainer);
+    }
+  }, [t]);
+
+  useEffect(() => {
+    // Measure on mount and when translations change
+    const timer = setTimeout(measureText, 100);
+    return () => clearTimeout(timer);
+  }, [measureText]);
+
+  return { textMetrics, measureRef };
+}
+
 export default function Hero() {
   const t = useTranslations();
+  const locale = useLocale();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const totalSlides = 3;
+  const { textMetrics, measureRef } = useAdaptiveTextHeight();
 
   useEffect(() => {
     if (!isPaused) {
@@ -52,10 +152,13 @@ export default function Hero() {
 
   return (
     <>
+      {/* Hidden measuring container */}
+      <div ref={measureRef} className="sr-only" />
+      
       {/* Mobile Layout */}
       <div 
         className="relative bg-[#2c2c2b] overflow-hidden rounded-[25px] mx-4 mb-8 lg:hidden"
-        style={{ height: 'clamp(600px, 85vh, 800px)' }}
+        style={{ height: `clamp(${textMetrics.mobileHeight}px, 85vh, ${textMetrics.mobileHeight + 200}px)` }}
         onTouchStart={() => setIsPaused(true)}
         onTouchEnd={() => setIsPaused(false)}
       >
@@ -71,14 +174,14 @@ export default function Hero() {
             }}
           />
           
-          {/* Mobile Centered Logo */}
+          {/* Mobile/Tablet Centered Logo - Responsive */}
           <div 
             className="absolute backdrop-blur-[11.5px] backdrop-filter bg-center bg-cover bg-no-repeat opacity-[0.43] translate-x-[-50%] translate-y-[-50%]"
             style={{ 
               left: "calc(50% + 0.5px)",
               top: '50%',
-              width: '156px',
-              height: '248px',
+              width: 'clamp(156px, 20vw, 240px)',
+              height: 'clamp(248px, 32vw, 382px)',
               backgroundImage: `url('${imgKMobile}')` 
             }}
           />
@@ -90,17 +193,19 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Mobile Text Content */}
+          {/* Mobile Text Content - Always bottom anchored */}
           <div 
             className="absolute capitalize text-white text-center translate-x-[-50%]"
             style={{ 
               fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', sans-serif",
               fontWeight: 'normal',
               fontSize: '30px',
-              lineHeight: '28px',
+              lineHeight: '32px',
               left: '50%',
-              bottom: '100px',
-              width: '281px'
+              bottom: '80px',
+              width: '281px',
+              maxHeight: `${textMetrics.mobileHeight - 140}px`,
+              overflow: 'hidden'
             }}
           >
             {t('hero.title')}
@@ -115,7 +220,7 @@ export default function Hero() {
                   onClick={() => goToSlide(index)}
                   className="relative flex items-center justify-center"
                   style={{ width: '20.661px', height: '20.66px' }}
-                  aria-label={t('hero.slideNavigation', { index: index + 1 })}
+                  aria-label={`Go to slide ${index + 1}`}
                 >
                   <div className="flex-none" style={{ transform: 'rotate(224.999deg)' }}>
                     <div 
@@ -241,7 +346,7 @@ export default function Hero() {
                   onClick={() => goToSlide(index)}
                   className="relative flex items-center justify-center"
                   style={{ width: '20.661px', height: '20.66px' }}
-                  aria-label={t('hero.slideNavigation', { index: index + 1 })}
+                  aria-label={`Go to slide ${index + 1}`}
                 >
                   <div className="flex-none" style={{ transform: 'rotate(224.999deg)' }}>
                     <div 
@@ -420,7 +525,7 @@ export default function Hero() {
             }}
           >
             <div 
-              className="text-[#2c2c2b] capitalize whitespace-nowrap leading-[0] font-normal"
+              className="text-[#2c2c2b] capitalize whitespace-nowrap font-normal"
               style={{ 
                 fontFamily: "'Aeonik', sans-serif",
                 fontSize: '16px',
@@ -429,7 +534,14 @@ export default function Hero() {
             >
               {t('hero.cta')}
             </div>
-            <div className="relative flex items-center justify-center" style={{ width: '16px', height: '16px' }}>
+            <div 
+              className="relative flex items-center justify-center" 
+              style={{ 
+                width: '16px', 
+                height: '16px',
+                transform: locale === 'ar' ? 'scaleX(-1)' : 'none'
+              }}
+            >
               <Image alt="" className="block max-w-none size-full" src={imgArrow1} fill style={{ objectFit: 'contain' }} />
             </div>
           </div>
@@ -443,7 +555,7 @@ export default function Hero() {
                   onClick={() => goToSlide(index)}
                   className="relative flex items-center justify-center"
                   style={{ width: '20.661px', height: '20.66px' }}
-                  aria-label={t('hero.slideNavigation', { index: index + 1 })}
+                  aria-label={`Go to slide ${index + 1}`}
                 >
                   <div className="flex-none" style={{ transform: 'rotate(224.999deg)' }}>
                     <div 
@@ -475,10 +587,10 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Desktop Layout - Original Design */}
+      {/* Desktop Layout - Adaptive Design */}
       <div 
         className="relative bg-[#2c2c2b] overflow-hidden rounded-[61px] mx-4 mb-8 hidden lg:block"
-        style={{ height: '955px' }}
+        style={{ height: `${textMetrics.desktopHeight}px` }}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
@@ -486,12 +598,12 @@ export default function Hero() {
         <div className={`absolute inset-0 transition-opacity duration-1000 ${
           currentSlide === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}>
-          {/* Background Image - exact Figma dimensions */}
+          {/* Background Image - Responsive to dynamic height */}
           <div 
             className="absolute bg-center bg-cover bg-no-repeat"
             style={{ 
-              width: '1659px',
-              height: '955px',
+              width: `${Math.round(textMetrics.desktopHeight * 1.737)}px`,
+              height: `${textMetrics.desktopHeight}px`,
               top: '0px',
               left: 'calc(50% - 0.5px)',
               transform: 'translateX(-50%)',
@@ -499,44 +611,63 @@ export default function Hero() {
             }}
           />
           
-          {/* Decorative Frame */}
+          {/* Desktop Centered Decorative Logo */}
+          <div 
+            className="absolute backdrop-blur-[11.5px] backdrop-filter bg-center bg-cover bg-no-repeat opacity-[0.43] translate-x-[-50%] translate-y-[-50%]"
+            style={{ 
+              left: "calc(50% + 0.5px)",
+              top: '50%',
+              width: '280px',
+              height: '446px',
+              backgroundImage: `url('${imgKMobile}')` 
+            }}
+          />
+          
+          {/* Decorative Frame - Adaptive positioning */}
           <div 
             className="absolute"
             style={{ 
               width: '1445.84px',
               height: '290.092px',
-              top: '727px',
+              top: `${Math.max(727, 727 + (textMetrics.desktopHeight - 955) * 0.6)}px`,
               left: 'calc(50% - 0.08px)',
               transform: 'translateX(-50%)'
             }}
           >
             <div className="absolute" style={{ 
               bottom: '-32.03%', 
-              left: '-10.58%', 
-              right: '0', 
-              top: '-39.99%' 
+              [locale === 'ar' ? 'right' : 'left']: '-10.58%',
+              [locale === 'ar' ? 'left' : 'right']: '0',
+              top: '-39.99%',
+              transform: locale === 'ar' ? 'scaleX(-1)' : 'none'
             }}>
               <Image alt="" className="block w-full h-full max-w-none" src={imgFrame1} fill style={{objectFit: 'contain'}} />
             </div>
           </div>
 
-          {/* Text Content */}
+          {/* Text Content - Always bottom anchored */}
           <div 
-            className="absolute capitalize text-white text-left"
+            className="absolute capitalize text-white"
             style={{ 
               fontWeight: 'bold',
               fontSize: '70px',
               lineHeight: '1.3',
-              left: '42px',
-              top: '750px',
-              width: '875px'
+              [locale === 'ar' ? 'right' : 'left']: '42px',
+              bottom: '50px',
+              width: '875px',
+              maxHeight: `${textMetrics.desktopHeight - 240}px`,
+              overflow: 'hidden',
+              textAlign: locale === 'ar' ? 'right' : 'left'
             }}
           >
             {t('hero.title')}
           </div>
 
           {/* Desktop Slide Indicators */}
-          <div className="absolute" style={{ right: '76px', top: '424px' }}>
+          <div className="absolute" style={{ 
+            [locale === 'ar' ? 'left' : 'right']: '76px', 
+            top: '424px' 
+          }}>
             <div className="flex flex-col" style={{ gap: '35.355px' }}>
               {[0, 1, 2].map((index) => (
                 <button 
@@ -544,7 +675,7 @@ export default function Hero() {
                   onClick={() => goToSlide(index)}
                   className="relative flex items-center justify-center"
                   style={{ width: '35.355px', height: '35.355px' }}
-                  aria-label={t('hero.slideNavigation', { index: index + 1 })}
+                  aria-label={`Go to slide ${index + 1}`}
                 >
                   <div className="flex-none" style={{ transform: 'rotate(315deg)' }}>
                     <div 
@@ -576,205 +707,16 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Desktop Slide 2 - Schedule Consultation */}
+        {/* Desktop Slide 2 - About Text */}
         <div className={`absolute inset-0 transition-opacity duration-1000 ${
           currentSlide === 1 ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}>
-          {/* Dark gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#4a2b7c] via-[#2c2c2b] to-[#2c2c2b]" />
-          
-          {/* Light beams from top */}
-          <div className="absolute inset-0">
-            <div 
-              className="absolute"
-              style={{
-                top: '-20%',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                width: '60%',
-                height: '80%',
-                background: 'radial-gradient(ellipse at center top, rgba(122,253,214,0.3) 0%, transparent 50%)',
-                filter: 'blur(60px)'
-              }}
-            />
-            <div 
-              className="absolute"
-              style={{
-                top: '-10%',
-                left: '30%',
-                width: '20%',
-                height: '60%',
-                background: 'linear-gradient(180deg, rgba(184,164,255,0.2) 0%, transparent 70%)',
-                filter: 'blur(40px)',
-                transform: 'rotate(-15deg)'
-              }}
-            />
-            <div 
-              className="absolute"
-              style={{
-                top: '-10%',
-                right: '30%',
-                width: '20%',
-                height: '60%',
-                background: 'linear-gradient(180deg, rgba(184,164,255,0.2) 0%, transparent 70%)',
-                filter: 'blur(40px)',
-                transform: 'rotate(15deg)'
-              }}
-            />
-          </div>
-
-          {/* Large arrow on left */}
-          <div 
-            className="absolute opacity-20"
-            style={{
-              left: '-5%',
-              top: '15%',
-              width: '30%',
-              height: '50%',
-              transform: 'rotate(-30deg)'
-            }}
-          >
-            <Image src={imgFrame1} alt="" className="w-full h-full object-contain" fill style={{ filter: 'hue-rotate(260deg)', objectFit: 'contain' }} />
-          </div>
-
-          {/* CTA Button */}
-          <div 
-            className="absolute bg-white flex flex-row items-center justify-center gap-8 rounded-[900px] overflow-hidden"
-            style={{ 
-              width: '340px',
-              height: '74px',
-              top: 'calc(50% - 0.5px)',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              padding: '20px 25px'
-            }}
-          >
-            <div 
-              className="text-[#2c2c2b] capitalize whitespace-nowrap font-medium"
-              style={{ 
-                fontSize: '20px',
-                lineHeight: '28px'
-              }}
-            >
-              {t('hero.cta')}
-            </div>
-            <svg 
-              width="16" 
-              height="15" 
-              viewBox="0 0 16 15" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path 
-                d="M1 7.5H15M15 7.5L8.5 1M15 7.5L8.5 14" 
-                stroke="#2c2c2b" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-
-          {/* Floating diamonds pattern - organized grid */}
-          <div 
-            className="absolute"
-            style={{
-              bottom: '10%',
-              right: '8%',
-              width: '450px',
-              height: '350px'
-            }}
-          >
-            {/* Create a more organized diamond grid pattern */}
-            {/* Row 1 - Top */}
-            <div className="absolute w-12 h-12 rotate-45 bg-[#7afdd6]/20" style={{ top: '0px', right: '100px' }} />
-            <div className="absolute w-10 h-10 rotate-45 bg-[#7afdd6]/25" style={{ top: '5px', right: '180px' }} />
-            <div className="absolute w-8 h-8 rotate-45 bg-[#7afdd6]/15" style={{ top: '10px', right: '250px' }} />
-            
-            {/* Row 2 */}
-            <div className="absolute w-10 h-10 rotate-45 bg-[#7afdd6]/30" style={{ top: '60px', right: '60px' }} />
-            <div className="absolute w-14 h-14 rotate-45 bg-[#7afdd6]/35" style={{ top: '50px', right: '140px' }} />
-            <div className="absolute w-8 h-8 rotate-45 bg-[#7afdd6]/25" style={{ top: '65px', right: '220px' }} />
-            <div className="absolute w-6 h-6 rotate-45 bg-[#7afdd6]/20" style={{ top: '70px', right: '290px' }} />
-            
-            {/* Row 3 - Middle prominent */}
-            <div className="absolute w-8 h-8 rotate-45 bg-[#7afdd6]/25" style={{ top: '120px', right: '20px' }} />
-            <div className="absolute w-16 h-16 rotate-45 bg-[#7afdd6]/40" style={{ top: '110px', right: '90px' }} />
-            <div className="absolute w-12 h-12 rotate-45 bg-[#7afdd6]/30" style={{ top: '115px', right: '180px' }} />
-            <div className="absolute w-10 h-10 rotate-45 bg-[#7afdd6]/25" style={{ top: '120px', right: '260px' }} />
-            <div className="absolute w-6 h-6 rotate-45 bg-[#7afdd6]/15" style={{ top: '130px', right: '330px' }} />
-            
-            {/* Row 4 */}
-            <div className="absolute w-10 h-10 rotate-45 bg-[#7afdd6]/35" style={{ top: '180px', right: '50px' }} />
-            <div className="absolute w-14 h-14 rotate-45 bg-[#7afdd6]/30" style={{ top: '175px', right: '130px' }} />
-            <div className="absolute w-8 h-8 rotate-45 bg-[#7afdd6]/25" style={{ top: '185px', right: '220px' }} />
-            <div className="absolute w-10 h-10 rotate-45 bg-[#7afdd6]/20" style={{ top: '180px', right: '300px' }} />
-            
-            {/* Row 5 - Bottom */}
-            <div className="absolute w-12 h-12 rotate-45 bg-[#7afdd6]/25" style={{ top: '240px', right: '10px' }} />
-            <div className="absolute w-8 h-8 rotate-45 bg-[#7afdd6]/30" style={{ top: '245px', right: '80px' }} />
-            <div className="absolute w-14 h-14 rotate-45 bg-[#7afdd6]/35" style={{ top: '235px', right: '160px' }} />
-            <div className="absolute w-6 h-6 rotate-45 bg-[#7afdd6]/20" style={{ top: '250px', right: '250px' }} />
-            <div className="absolute w-8 h-8 rotate-45 bg-[#7afdd6]/15" style={{ top: '245px', right: '320px' }} />
-            
-            {/* Row 6 - Very bottom */}
-            <div className="absolute w-10 h-10 rotate-45 bg-[#7afdd6]/20" style={{ top: '300px', right: '40px' }} />
-            <div className="absolute w-12 h-12 rotate-45 bg-[#7afdd6]/25" style={{ top: '295px', right: '120px' }} />
-            <div className="absolute w-8 h-8 rotate-45 bg-[#7afdd6]/30" style={{ top: '305px', right: '200px' }} />
-            <div className="absolute w-10 h-10 rotate-45 bg-[#7afdd6]/15" style={{ top: '300px', right: '280px' }} />
-          </div>
-
-          {/* Desktop Slide Indicators */}
-          <div className="absolute" style={{ right: '76px', top: '424px' }}>
-            <div className="flex flex-col" style={{ gap: '35.355px' }}>
-              {[0, 1, 2].map((index) => (
-                <button 
-                  key={index}
-                  onClick={() => goToSlide(index)}
-                  className="relative flex items-center justify-center"
-                  style={{ width: '35.355px', height: '35.355px' }}
-                  aria-label={t('hero.slideNavigation', { index: index + 1 })}
-                >
-                  <div className="flex-none" style={{ transform: 'rotate(315deg)' }}>
-                    <div 
-                      className="relative backdrop-blur-[7.5px]"
-                      style={{ 
-                        width: '25px', 
-                        height: '25px',
-                        backgroundColor: currentSlide === index ? 'transparent' : 'rgba(255,255,255,0.01)',
-                        border: '2px solid #ffffff'
-                      }}
-                    >
-                      {currentSlide === index && (
-                        <div 
-                          className="absolute bg-white"
-                          style={{ 
-                            width: '15.79px',
-                            height: '15.79px',
-                            top: 'calc(50% + 0.23px)',
-                            left: 'calc(50% + 0.117px)',
-                            transform: 'translate(-50%, -50%)'
-                          }}
-                        />
-                      )}
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Desktop Slide 3 - About Text */}
-        <div className={`absolute inset-0 transition-opacity duration-1000 ${
-          currentSlide === 2 ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}>
-          {/* Background Image */}
+          {/* Background Image - Responsive to dynamic height */}
           <div 
             className="absolute bg-center bg-cover bg-no-repeat"
             style={{ 
-              width: '1454px',
-              height: '955px',
+              width: `${Math.round(textMetrics.desktopHeight * 1.522)}px`,
+              height: `${textMetrics.desktopHeight}px`,
               top: '0px',
               left: '50%',
               transform: 'translateX(-50%)',
@@ -867,7 +809,8 @@ export default function Hero() {
                         maxWidth: '627px',
                         fontSize: '28px',
                         lineHeight: '38px',
-                        fontWeight: '500'
+                        fontWeight: '500',
+                        minHeight: 'fit-content'
                       }}
                     >
                       {t('hero.description')}
@@ -879,7 +822,10 @@ export default function Hero() {
           </div>
 
           {/* Desktop Slide Indicators */}
-          <div className="absolute" style={{ right: '76px', top: '424px' }}>
+          <div className="absolute" style={{ 
+            [locale === 'ar' ? 'left' : 'right']: '76px', 
+            top: '424px' 
+          }}>
             <div className="flex flex-col" style={{ gap: '35.355px' }}>
               {[0, 1, 2].map((index) => (
                 <button 
@@ -887,7 +833,236 @@ export default function Hero() {
                   onClick={() => goToSlide(index)}
                   className="relative flex items-center justify-center"
                   style={{ width: '35.355px', height: '35.355px' }}
-                  aria-label={t('hero.slideNavigation', { index: index + 1 })}
+                  aria-label={`Go to slide ${index + 1}`}
+                >
+                  <div className="flex-none" style={{ transform: 'rotate(315deg)' }}>
+                    <div 
+                      className="relative backdrop-blur-[7.5px]"
+                      style={{ 
+                        width: '25px', 
+                        height: '25px',
+                        backgroundColor: currentSlide === index ? 'transparent' : 'rgba(255,255,255,0.01)',
+                        border: '2px solid #ffffff'
+                      }}
+                    >
+                      {currentSlide === index && (
+                        <div 
+                          className="absolute bg-white"
+                          style={{ 
+                            width: '15.79px',
+                            height: '15.79px',
+                            top: 'calc(50% + 0.23px)',
+                            left: 'calc(50% + 0.117px)',
+                            transform: 'translate(-50%, -50%)'
+                          }}
+                        />
+                      )}
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Slide 3 - Schedule Consultation */}
+        <div className={`absolute inset-0 transition-opacity duration-1000 ${
+          currentSlide === 2 ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}>
+          {/* Dark gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#4a2b7c] via-[#2c2c2b] to-[#2c2c2b]" />
+          
+          {/* Light beams from top */}
+          <div className="absolute inset-0">
+            <div 
+              className="absolute"
+              style={{
+                top: '-20%',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: '60%',
+                height: '80%',
+                background: 'radial-gradient(ellipse at center top, rgba(122,253,214,0.3) 0%, transparent 50%)',
+                filter: 'blur(60px)'
+              }}
+            />
+            <div 
+              className="absolute"
+              style={{
+                top: '-10%',
+                left: '30%',
+                width: '20%',
+                height: '60%',
+                background: 'linear-gradient(180deg, rgba(184,164,255,0.2) 0%, transparent 70%)',
+                filter: 'blur(40px)',
+                transform: 'rotate(-15deg)'
+              }}
+            />
+            <div 
+              className="absolute"
+              style={{
+                top: '-10%',
+                right: '30%',
+                width: '20%',
+                height: '60%',
+                background: 'linear-gradient(180deg, rgba(184,164,255,0.2) 0%, transparent 70%)',
+                filter: 'blur(40px)',
+                transform: 'rotate(15deg)'
+              }}
+            />
+          </div>
+
+          {/* Large arrow on left */}
+          <div 
+            className="absolute opacity-20"
+            style={{
+              [locale === 'ar' ? 'right' : 'left']: '-5%',
+              top: '15%',
+              width: '30%',
+              height: '50%',
+              transform: locale === 'ar' ? 'rotate(-30deg) scaleX(-1)' : 'rotate(-30deg)'
+            }}
+          >
+            <Image src={imgFrame1} alt="" className="w-full h-full object-contain" fill style={{ filter: 'hue-rotate(260deg)', objectFit: 'contain' }} />
+          </div>
+
+          {/* CTA Button */}
+          <div 
+            className="absolute bg-white flex flex-row items-center justify-center gap-8 rounded-[900px] overflow-hidden"
+            style={{ 
+              width: '340px',
+              height: '74px',
+              top: 'calc(50% - 0.5px)',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              padding: '20px 25px'
+            }}
+          >
+            <div 
+              className="text-[#2c2c2b] capitalize whitespace-nowrap font-medium"
+              style={{ 
+                fontSize: '20px',
+                lineHeight: '28px'
+              }}
+            >
+              {t('hero.cta')}
+            </div>
+            <svg 
+              width="16" 
+              height="15" 
+              viewBox="0 0 16 15" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg"
+              style={{ transform: locale === 'ar' ? 'scaleX(-1)' : 'none' }}
+            >
+              <path 
+                d="M1 7.5H15M15 7.5L8.5 1M15 7.5L8.5 14" 
+                stroke="#2c2c2b" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+
+          {/* RTL Diamond Pattern Styles */}
+          <style dangerouslySetInnerHTML={{
+            __html: `
+              .diamond-pattern-rtl {
+                right: 8% !important;
+              }
+              [dir="rtl"] .diamond-pattern-rtl {
+                right: auto !important;
+                left: 8% !important;
+                transform: scaleX(-1) !important;
+              }
+              /* Override inline styles for individual diamonds in RTL */
+              [dir="rtl"] .diamond-item[style*="right: 100px"] { right: auto !important; left: 100px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 180px"] { right: auto !important; left: 180px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 250px"] { right: auto !important; left: 250px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 60px"] { right: auto !important; left: 60px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 140px"] { right: auto !important; left: 140px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 220px"] { right: auto !important; left: 220px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 290px"] { right: auto !important; left: 290px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 20px"] { right: auto !important; left: 20px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 90px"] { right: auto !important; left: 90px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 260px"] { right: auto !important; left: 260px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 330px"] { right: auto !important; left: 330px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 50px"] { right: auto !important; left: 50px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 130px"] { right: auto !important; left: 130px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 300px"] { right: auto !important; left: 300px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 10px"] { right: auto !important; left: 10px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 80px"] { right: auto !important; left: 80px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 160px"] { right: auto !important; left: 160px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 320px"] { right: auto !important; left: 320px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 40px"] { right: auto !important; left: 40px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 120px"] { right: auto !important; left: 120px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 200px"] { right: auto !important; left: 200px !important; }
+              [dir="rtl"] .diamond-item[style*="right: 280px"] { right: auto !important; left: 280px !important; }
+            `
+          }} />
+
+          {/* Floating diamonds pattern - organized grid */}
+          <div 
+            className="absolute diamond-pattern-rtl"
+            style={{
+              bottom: '10%',
+              width: '450px',
+              height: '350px'
+            }}
+          >
+            {/* Create a more organized diamond grid pattern */}
+            {/* Row 1 - Top */}
+            <div className="absolute w-12 h-12 rotate-45 bg-[#7afdd6]/20 diamond-item" style={{ top: '0px', right: '100px' }} />
+            <div className="absolute w-10 h-10 rotate-45 bg-[#7afdd6]/25 diamond-item" style={{ top: '5px', right: '180px' }} />
+            <div className="absolute w-8 h-8 rotate-45 bg-[#7afdd6]/15 diamond-item" style={{ top: '10px', right: '250px' }} />
+            
+            {/* Row 2 */}
+            <div className="absolute w-10 h-10 rotate-45 bg-[#7afdd6]/30 diamond-item" style={{ top: '60px', right: '60px' }} />
+            <div className="absolute w-14 h-14 rotate-45 bg-[#7afdd6]/35 diamond-item" style={{ top: '50px', right: '140px' }} />
+            <div className="absolute w-8 h-8 rotate-45 bg-[#7afdd6]/25 diamond-item" style={{ top: '65px', right: '220px' }} />
+            <div className="absolute w-6 h-6 rotate-45 bg-[#7afdd6]/20 diamond-item" style={{ top: '70px', right: '290px' }} />
+            
+            {/* Row 3 - Middle prominent */}
+            <div className="absolute w-8 h-8 rotate-45 bg-[#7afdd6]/25 diamond-item" style={{ top: '120px', right: '20px' }} />
+            <div className="absolute w-16 h-16 rotate-45 bg-[#7afdd6]/40 diamond-item" style={{ top: '110px', right: '90px' }} />
+            <div className="absolute w-12 h-12 rotate-45 bg-[#7afdd6]/30 diamond-item" style={{ top: '115px', right: '180px' }} />
+            <div className="absolute w-10 h-10 rotate-45 bg-[#7afdd6]/25 diamond-item" style={{ top: '120px', right: '260px' }} />
+            <div className="absolute w-6 h-6 rotate-45 bg-[#7afdd6]/15 diamond-item" style={{ top: '130px', right: '330px' }} />
+            
+            {/* Row 4 */}
+            <div className="absolute w-10 h-10 rotate-45 bg-[#7afdd6]/35 diamond-item" style={{ top: '180px', right: '50px' }} />
+            <div className="absolute w-14 h-14 rotate-45 bg-[#7afdd6]/30 diamond-item" style={{ top: '175px', right: '130px' }} />
+            <div className="absolute w-8 h-8 rotate-45 bg-[#7afdd6]/25 diamond-item" style={{ top: '185px', right: '220px' }} />
+            <div className="absolute w-10 h-10 rotate-45 bg-[#7afdd6]/20 diamond-item" style={{ top: '180px', right: '300px' }} />
+            
+            {/* Row 5 - Bottom */}
+            <div className="absolute w-12 h-12 rotate-45 bg-[#7afdd6]/25 diamond-item" style={{ top: '240px', right: '10px' }} />
+            <div className="absolute w-8 h-8 rotate-45 bg-[#7afdd6]/30 diamond-item" style={{ top: '245px', right: '80px' }} />
+            <div className="absolute w-14 h-14 rotate-45 bg-[#7afdd6]/35 diamond-item" style={{ top: '235px', right: '160px' }} />
+            <div className="absolute w-6 h-6 rotate-45 bg-[#7afdd6]/20 diamond-item" style={{ top: '250px', right: '250px' }} />
+            <div className="absolute w-8 h-8 rotate-45 bg-[#7afdd6]/15 diamond-item" style={{ top: '245px', right: '320px' }} />
+            
+            {/* Row 6 - Very bottom */}
+            <div className="absolute w-10 h-10 rotate-45 bg-[#7afdd6]/20 diamond-item" style={{ top: '300px', right: '40px' }} />
+            <div className="absolute w-12 h-12 rotate-45 bg-[#7afdd6]/25 diamond-item" style={{ top: '295px', right: '120px' }} />
+            <div className="absolute w-8 h-8 rotate-45 bg-[#7afdd6]/30 diamond-item" style={{ top: '305px', right: '200px' }} />
+            <div className="absolute w-10 h-10 rotate-45 bg-[#7afdd6]/15 diamond-item" style={{ top: '300px', right: '280px' }} />
+          </div>
+
+          {/* Desktop Slide Indicators */}
+          <div className="absolute" style={{ 
+            [locale === 'ar' ? 'left' : 'right']: '76px', 
+            top: '424px' 
+          }}>
+            <div className="flex flex-col" style={{ gap: '35.355px' }}>
+              {[0, 1, 2].map((index) => (
+                <button 
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className="relative flex items-center justify-center"
+                  style={{ width: '35.355px', height: '35.355px' }}
+                  aria-label={`Go to slide ${index + 1}`}
                 >
                   <div className="flex-none" style={{ transform: 'rotate(315deg)' }}>
                     <div 

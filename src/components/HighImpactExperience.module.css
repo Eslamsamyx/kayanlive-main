@@ -1,0 +1,336 @@
+/* HighImpactExperience Component Styles */
+
+/* CSS Custom Properties for Dynamic Values */
+.container {
+  --gradient-primary: linear-gradient(90deg, #a095e1 0%, #74cfaa 100%);
+  --gradient-primary-rtl: linear-gradient(270deg, #a095e1 0%, #74cfaa 100%);
+  --gradient-secondary: linear-gradient(90deg, #74cfaa 0%, #a095e1 100%);
+  --gradient-secondary-rtl: linear-gradient(270deg, #74cfaa 0%, #a095e1 100%);
+  --bg-dark: #2c2c2b;
+  --text-white: #ffffff;
+  --shadow-inner: inset 0px 0px 119px 0px rgba(0,0,0,0.82);
+  --font-family: "Poppins", sans-serif;
+}
+
+/* Base Container */
+.experienceContainer {
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .experienceContainer {
+    margin-bottom: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .experienceContainer {
+    margin-bottom: 4rem;
+  }
+}
+
+/* Mobile/Tablet Layout */
+.mobileLayout {
+  display: block;
+  padding: 0 1rem;
+}
+
+@media (min-width: 1024px) {
+  .mobileLayout {
+    display: none;
+  }
+}
+
+.mobileCard {
+  background-color: var(--bg-dark);
+  border-radius: 25px;
+  position: relative;
+  width: 100%;
+  height: clamp(645px, 85vh, 750px);
+  overflow: hidden;
+}
+
+.mobileTextSection {
+  position: absolute;
+  top: clamp(30px, 5vh, 50px);
+  left: 0;
+  right: 0;
+  padding: 0 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: var(--font-family);
+  font-size: clamp(50px, 12vw, 85px);
+  letter-spacing: clamp(-2.4px, -0.3vw, -3px);
+  line-height: clamp(70px, 16vw, 110px);
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .mobileTextSection {
+    padding: 0 32px;
+  }
+}
+
+.mobileImageSection {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: clamp(367px, 50vh, 420px);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.mobileImageOverlay {
+  position: absolute;
+  inset: 0;
+  box-shadow: var(--shadow-inner);
+  pointer-events: none;
+}
+
+.mobileBlurElement {
+  position: absolute;
+  background-color: var(--bg-dark);
+  width: calc(100% + 130px);
+  height: clamp(132px, 18vh, 160px);
+  left: -65px;
+  bottom: clamp(-40px, -5vh, -20px);
+  filter: blur(29.5px);
+}
+
+.mobileDecorativePattern {
+  position: absolute;
+  bottom: -107px;
+  width: min(360px, 100vw);
+  height: 240px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Desktop Layout */
+.desktopLayout {
+  display: none;
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .desktopLayout {
+    display: block;
+  }
+}
+
+.desktopCard {
+  position: relative;
+  height: 873px;
+  border-radius: 61px 61px 20px 20px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.desktopImageOverlay {
+  position: absolute;
+  top: 0;
+  width: 1055px;
+  height: 873px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.desktopBlurOverlay {
+  position: absolute;
+  width: 1202px;
+  height: 1500px;
+  left: -412px;
+  top: -284px;
+  background-color: var(--bg-dark);
+  filter: blur(200px);
+}
+
+.desktopTextSection {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+.desktopTextContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-family: var(--font-family);
+}
+
+.desktopDecorativePattern {
+  position: absolute;
+  top: 531px;
+  width: 638px;
+  height: 426px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.desktopInnerShadow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Text Components */
+.textLine {
+  font-weight: 500;
+  margin: 0;
+}
+
+.textLineNeutral {
+  color: var(--text-white);
+}
+
+.textLineGradient {
+  /* Gradient styles are now handled inline for better browser compatibility */
+}
+
+.textLinesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (min-width: 1024px) {
+  .textLinesContainer {
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+.desktopTextLine {
+  font-size: clamp(80px, 12vw, 170px);
+  line-height: 1.3em;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* RTL Support */
+.rtl {
+  direction: rtl;
+}
+
+.rtl .mobileDecorativePattern {
+  left: 0;
+  right: auto;
+  transform: scaleX(-1);
+}
+
+.rtl .desktopImageOverlay {
+  left: 399px;
+  right: auto;
+}
+
+.rtl .desktopDecorativePattern {
+  left: 0;
+  right: auto;
+  transform: scaleX(-1);
+}
+
+.rtl .desktopTextSection {
+  transform: scaleX(-1);
+}
+
+.rtl .desktopTextContent {
+  padding-right: 3rem;
+  text-align: right;
+}
+
+.rtl .desktopInnerShadow {
+  box-shadow: inset 100px 0px 200px 0px #231f20;
+}
+
+/* LTR specific styles */
+.ltr .mobileDecorativePattern {
+  right: 0;
+  left: auto;
+}
+
+.ltr .desktopImageOverlay {
+  right: 399px;
+  left: auto;
+}
+
+.ltr .desktopDecorativePattern {
+  right: 0;
+  left: auto;
+}
+
+.ltr .desktopTextContent {
+  padding-left: 3rem;
+  text-align: left;
+}
+
+.ltr .desktopInnerShadow {
+  box-shadow: inset -100px 0px 200px 0px #231f20;
+}
+
+/* Gradient Utilities */
+.gradientPrimary {
+  background: var(--gradient-primary);
+}
+
+.gradientPrimaryRtl {
+  background: var(--gradient-primary-rtl);
+}
+
+.gradientSecondary {
+  background: var(--gradient-secondary);
+}
+
+.gradientSecondaryRtl {
+  background: var(--gradient-secondary-rtl);
+}
+
+/* Responsive Utilities */
+.hideOnDesktop {
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .hideOnDesktop {
+    display: none;
+  }
+}
+
+.showOnDesktop {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .showOnDesktop {
+    display: block;
+  }
+}
+
+/* Performance Optimizations */
+.experienceContainer * {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .experienceContainer * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

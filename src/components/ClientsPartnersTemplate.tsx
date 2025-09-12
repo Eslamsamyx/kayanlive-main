@@ -303,6 +303,7 @@ export default function ClientsPartnersTemplate({
 
         {/* Main Title */}
         <h1 
+          className="heading-overflow-safe"
           style={{
             fontWeight: 'bold',
             marginBottom: isMobile ? '32px' : '64px',
@@ -425,7 +426,7 @@ export default function ClientsPartnersTemplate({
                   left: isMobile ? '24px' : '32px',
                   right: isMobile ? '24px' : '32px'
                 }}>
-                  <h3 style={{
+                  <h3 className="heading-overflow-safe long-word-safe" style={{
                     color: 'white',
                     fontWeight: 'bold',
                     marginBottom: isMobile ? '8px' : '12px',
@@ -471,17 +472,20 @@ export default function ClientsPartnersTemplate({
                   position: 'absolute',
                   inset: 0,
                   display: 'flex',
-                  alignItems: 'center',
+                  alignItems: isTouchDevice ? 'end' : (hoveredCardId === card.id ? 'end' : 'center'),
                   justifyContent: 'center',
-                  padding: '32px'
+                  padding: '32px',
+                  transition: 'all 300ms ease'
                 }}>
-                  <h3 style={{
+                  <h3 className="heading-overflow-safe long-word-safe" style={{
                     color: 'white',
                     fontWeight: 'bold',
                     textAlign: 'center',
                     lineHeight: 1.1,
                     fontSize: getClampValue('cardTitleSize'),
-                    fontFamily: '"Poppins", sans-serif'
+                    fontFamily: '"Poppins", sans-serif',
+                    transform: isTouchDevice ? 'translateY(0)' : (hoveredCardId === card.id ? 'translateY(0)' : 'translateY(0)'),
+                    transition: 'transform 300ms ease'
                   }}>
                     {/* Mobile title variation */}
                     {card.mobileTitle && isMobile && (

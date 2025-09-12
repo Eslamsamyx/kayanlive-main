@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import './text-overflow.css';
 
 :root {
   --background: 0 0% 100%;

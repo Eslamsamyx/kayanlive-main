@@ -11,13 +11,12 @@
   "hero": {
     "title": "欢迎来到KayanLive，海湾合作委员会地区顶尖活动专家",
     "description": "沙特阿拉伯、迪拜和整个海湾合作委员会地区的高端活动管理——在一个屋檐下提供创意、创新和执行。当其他人犹豫、恐慌或退缩时，我们立即行动。为您提供精英策略、快速执行和不妥协的文化专业能力。",
-    "cta": "安排咨询",
-    "slideNavigation": "跳转到第{index}张幻灯片"
+    "cta": "安排咨询"
   },
   "highImpact": {
-    "high": "高",
-    "impact": "影响力",
-    "experience": "体验"
+    "high": "创意",
+    "impact": "非凡",
+    "experience": "艺术"
   },
   "aboutServices": {
     "description1": "KayanLive是一家全方位**活动管理公司**，在海湾合作委员会地区设有活跃办事处，战略定位于提供**高影响力体验**。",

@@ -3,22 +3,79 @@
     "home": "Home",
     "about": "About",
     "services": "Services",
-    "contact": "Contact"
+    "contact": "Contact",
+    "aboutUs": "About Us",
+    "ourWork": "Our Work",
+    "clientsPartners": "Clients & Partners"
   },
-  "home": {
-    "title": "Welcome to KayanLive",
-    "subtitle": "Your premium live streaming platform",
-    "cta": "Get Started"
+  "hero": {
+    "title": "Welcome to KayanLive, GCC's Top Event Experts",
+    "description": "Premier Event Management in Saudi Arabia, Dubai, and Across the GCC—Delivering Creativity, Innovation, and Execution All Under One Roof. When Others Stall, Panic, or Back Down, We Get to Work. Bringing You Elite Strategy, Fast Execution, And Cultural Fluency Without Compromise.",
+    "cta": "Schedule consultation"
+  },
+  "highImpact": {
+    "high": "High",
+    "impact": "Impact",
+    "experience": "Experience"
+  },
+  "aboutServices": {
+    "description1": "KayanLive is a full-service **event management company** with active offices in the GCC region, strategically positioned to deliver **high-impact experiences**.",
+    "description2": "We create tech-forward experiences that engage, inform, and dazzle—from **2D/3D animation and holograms to robotics, AR/VR, and interactive environments**. Recognized across all major cities from Abu Dhabi to Riyadh, our team delivers everything in-house—fast, flawless, and fully integrated.",
+    "description3": "While others hesitate, we execute—combining cutting-edge creativity with technical expertise to bring your vision to life, fast and seamlessly.",
+    "description4": "We're not your typical event planner or exhibit company. When plans shift and pressures mount, we bring the **team**, the **system**, and the **speed** to make it happen.",
+    "serviceTitle": "Live Events & Shows",
+    "serviceDescription": "From ceremonies and public performances to cultural spectacles, we direct and deliver stage craft, crowd flow, AV, and full-scale live production logistics—down to every last second of showtime run-of-show.",
+    "idealFor": "Ideal for **corporate event management** and national committees.",
+    "cta": "Explore Our Capabilities"
+  },
+  "whyKayan": {
+    "title": "Why",
+    "founderText": "KayanLive was founded by **Khalid Alhasan**, a regional leader in experience strategy and event technology. After over a decade leading high-profile activations through a leading UAE/Saudi tech firm, he launched KayanLive to bring **full-scale, cross-functional event delivery** to clients who need more than a tech vendor—they need a team that understands what's at stake and knows how to deliver under pressure.",
+    "philosophy1": "\"Kayan\" in Arabic means existence, identity, and being—and that's exactly what we stand for. We believe every brand, every organization, and every idea has something real behind it—an essence that deserves to be seen, felt, and remembered.",
+    "philosophy2": "That's why our team is built to work from proposal to showday as one unit—no handoffs, no friction, and no gaps.",
+    "experience1": "We've been the quiet force behind Saudi Arabia's landmark events, Riyadh's rapid brand activations, and exhibit installations across the GCC. Our speed doesn't sacrifice quality. It protects it.",
+    "experience2": "Whether you're launching a pavilion, opening a cultural event, or fixing someone else's mess, we're the partner you call when the clock is already ticking."
+  },
+  "industries": {
+    "badge": "Who We Work With",
+    "title": "Industries",
+    "government": "Government and Semi-Government Bodies",
+    "enterprise": "Multinational and Enterprise Brands",
+    "realEstate": "Real Estate and Automotive Developers",
+    "agencies": "Event Planners and Marketing Agencies"
+  },
+  "whereWeWork": {
+    "badge": "Where We Work",
+    "description": "Headquartered in Saudi Arabia and Dubai, KayanLive delivers high-impact events from public activations and corporate launches to government-led showcases.",
+    "operateText": "We operate across the GCC:",
+    "saudi": "**Riyadh, Jeddah, Dammam** and major **Saudi** cities",
+    "uae": "**Dubai, Abu Dhabi, Sharjah** and wider **UAE**",
+    "partners": "And through partner networks in **Qatar, Oman, Bahrain, and Kuwait**",
+    "question": "Planning an event outside the **UAE or Saudi Arabia**?",
+    "cta": "Let's Build Together"
+  },
+  "achievements": {
+    "title": "Achievements",
+    "fasterTurnaround": "3x Faster",
+    "pressCoverage": "85% Press Coverage Lift",
+    "missedDeadlines": "0 Missed Deadlines",
+    "clientsServed": "500+ Clients Served",
+    "projectsCompleted": "1,200+ Projects Completed",
+    "yearsExpertise": "15+ Years of Expertise",
+    "countriesReached": "50+ Countries Reached",
+    "clientSatisfaction": "98% Client Satisfaction"
+  },
+  "execution": {
+    "heading": "Where Others Struggle, We Execute with Precision",
+    "cta": "Get Support Today"
   },
   "common": {
     "language": "Language",
     "signin": "Sign In",
     "signout": "Sign Out",
-    "signup": "Sign Up"
-  },
-  "watch": "Watch",
-  "streamer": "Streamer",
-  "noStreamsAvailable": "No streams available at the moment",
-  "liveStreams": "Live Streams",
-  "popularStreams": "Popular Streams"
+    "signup": "Sign Up",
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us"
+  }
 }

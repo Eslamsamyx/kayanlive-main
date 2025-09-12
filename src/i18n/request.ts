@@ -4,20 +4,19 @@ export const locales = ['en', 'ar', 'fr', 'ru', 'zh'] as const;
 export type Locale = (typeof locales)[number];
 
 export default getRequestConfig(async ({locale}) => {
-  // Validate that the incoming `locale` parameter is valid
+  console.log(`🔍 getRequestConfig: incoming locale = "${locale}" (type: ${typeof locale})`);
+  
+  // Validate that the incoming `locale` parameter is valid  
   const validLocale: Locale = locales.includes(locale as Locale) ? (locale as Locale) : 'en';
+  
+  console.log(`🔍 getRequestConfig: mapped to validLocale = "${validLocale}"`);
 
-  try {
-    const messages = (await import(`../locales/${validLocale}.json`)).default;
-    return {
-      locale: validLocale,
-      messages
-    };
-  } catch (error) {
-    console.error(`Failed to load messages for locale ${validLocale}:`, error);
-    return {
-      locale: validLocale,
-      messages: {}
-    };
-  }
+  const messages = (await import(`../locales/${validLocale}.json`)).default;
+  
+  console.log(`🔍 getRequestConfig: loading messages for "${validLocale}", keys: ${Object.keys(messages).slice(0,3).join(', ')}...`);
+  
+  return {
+    locale: validLocale,
+    messages
+  };
 });

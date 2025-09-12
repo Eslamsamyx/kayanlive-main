@@ -1,22 +1,29 @@
+'use client';
+
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
+import { useRef } from 'react';
+import { getMarkdownHTML } from '@/utils/markdownUtils';
+import AnimatedPath from './AnimatedPath';
 
 const imgPattern = "/assets/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.png";
 const kayanLogo = "/assets/a01d943cb7ebcf5598b83131f56810cf97a4e883.png";
 
 export default function WhyKayanLive() {
   const t = useTranslations();
+  const locale = useLocale();
+  const sectionRef = useRef<HTMLDivElement>(null);
   
   return (
-    <div className="bg-white relative w-full overflow-hidden min-h-screen lg:min-h-[1450px]">
-      {/* Left Pattern - positioned exactly as in Figma with black filter - Hidden on mobile and tablet */}
+    <div ref={sectionRef} className="bg-white relative w-full overflow-hidden min-h-screen lg:min-h-[1450px]">
+      {/* Left/Right Pattern - positioned exactly as in Figma with black filter - Hidden on mobile and tablet */}
       <div 
         className="absolute bg-center bg-cover bg-no-repeat z-0 hidden lg:block"
         style={{ 
           backgroundImage: `url('${imgPattern}')`,
           width: '370px',
           height: '572px',
-          left: '-124px',
+          [locale === 'ar' ? 'right' : 'left']: '-124px',
           top: '3px',
           zIndex: 1,
           filter: 'invert(1) brightness(0)',
@@ -24,13 +31,13 @@ export default function WhyKayanLive() {
         }}
       />
       
-      {/* Right Pattern - Bottom (rotated 180 degrees with black filter) - Hidden on mobile and tablet */}
+      {/* Right/Left Pattern - Bottom (rotated 180 degrees with black filter) - Hidden on mobile and tablet */}
       <div 
         className="absolute z-0 hidden lg:block"
         style={{ 
           width: '370px',
           height: '572px',
-          left: '1084px',
+          [locale === 'ar' ? 'left' : 'right']: '84px',
           top: '899px',
           zIndex: 1
         }}
@@ -46,6 +53,9 @@ export default function WhyKayanLive() {
         />
       </div>
 
+      {/* Animated Path */}
+      <AnimatedPath containerRef={sectionRef} />
+
       {/* Desktop Content Container */}
       <div className="hidden lg:block max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20 relative z-10" style={{ paddingTop: '85px', paddingBottom: '100px' }}>
         {/* Why heading - Original position */}
@@ -53,7 +63,7 @@ export default function WhyKayanLive() {
           className="text-[#2c2c2b] font-medium capitalize"
           style={{
             fontSize: '220px',
-            lineHeight: '168px',
+            lineHeight: '230px',
             letterSpacing: '-2.2px',
             marginLeft: '117px',
             marginBottom: '37px',
@@ -83,9 +93,9 @@ export default function WhyKayanLive() {
           marginRight: '0',
           marginBottom: '259px'
         }}>
-          <p className="text-[#888888] text-[24px] leading-[32px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}>
-            {t('whyKayan.founderText')}
-          </p>
+          <p className="text-[#888888] text-[24px] leading-[32px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}
+            dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.founderText'))}
+          />
         </div>
 
         {/* First Text Block - Full width */}
@@ -94,13 +104,13 @@ export default function WhyKayanLive() {
           maxWidth: '995px',
           marginBottom: '66px'
         }}>
-          <p className="text-[#888888] text-[24px] leading-[32px] text-left mb-6" style={{ fontFamily: '"Poppins", sans-serif' }}>
-            {t('whyKayan.philosophy1')}
-          </p>
+          <p className="text-[#888888] text-[24px] leading-[32px] text-left mb-6" style={{ fontFamily: '"Poppins", sans-serif' }}
+            dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.philosophy1'))}
+          />
           
-          <p className="text-[#888888] text-[24px] leading-[32px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}>
-            {t('whyKayan.philosophy2')}
-          </p>
+          <p className="text-[#888888] text-[24px] leading-[32px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}
+            dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.philosophy2'))}
+          />
         </div>
 
         {/* Second Text Block - Full width */}
@@ -109,13 +119,13 @@ export default function WhyKayanLive() {
           maxWidth: '995px',
           margin: '0 auto'
         }}>
-            <p className="text-[#888888] text-[24px] leading-[32px] text-left mb-6" style={{ fontFamily: '"Poppins", sans-serif' }}>
-              {t('whyKayan.experience1')}
-            </p>
+            <p className="text-[#888888] text-[24px] leading-[32px] text-left mb-6" style={{ fontFamily: '"Poppins", sans-serif' }}
+              dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.experience1'))}
+            />
             
-          <p className="text-[#888888] text-[24px] leading-[32px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}>
-            {t('whyKayan.experience2')}
-          </p>
+          <p className="text-[#888888] text-[24px] leading-[32px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}
+            dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.experience2'))}
+          />
         </div>
       </div>
 
@@ -162,9 +172,8 @@ export default function WhyKayanLive() {
                 margin: '0 auto',
                 fontFamily: '"Poppins", sans-serif'
               }}
-            >
-              {t('whyKayan.founderText')}
-            </p>
+              dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.founderText'))}
+            />
           </section>
           
           {/* Company philosophy */}
@@ -180,9 +189,8 @@ export default function WhyKayanLive() {
                   margin: '0 auto',
                   fontFamily: '"Poppins", sans-serif'
                 }}
-              >
-                {t('whyKayan.philosophy1')}
-              </p>
+                dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.philosophy1'))}
+              />
               
               <p 
                 className="text-[#555555] leading-relaxed"
@@ -193,9 +201,8 @@ export default function WhyKayanLive() {
                   margin: '0 auto',
                   fontFamily: '"Poppins", sans-serif'
                 }}
-              >
-                {t('whyKayan.philosophy2')}
-              </p>
+                dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.philosophy2'))}
+              />
             </div>
           </section>
           
@@ -212,9 +219,8 @@ export default function WhyKayanLive() {
                   margin: '0 auto',
                   fontFamily: '"Poppins", sans-serif'
                 }}
-              >
-                {t('whyKayan.experience1')}
-              </p>
+                dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.experience1'))}
+              />
               
               <p 
                 className="text-[#555555] leading-relaxed"
@@ -225,9 +231,8 @@ export default function WhyKayanLive() {
                   margin: '0 auto',
                   fontFamily: '"Poppins", sans-serif'
                 }}
-              >
-                {t('whyKayan.experience2')}
-              </p>
+                dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.experience2'))}
+              />
             </div>
           </section>
         </article>

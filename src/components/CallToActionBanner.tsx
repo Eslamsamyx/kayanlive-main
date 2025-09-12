@@ -26,9 +26,6 @@ export default function CallToActionBanner({
 }: CallToActionBannerProps) {
   const [isHovered, setIsHovered] = useState(false);
 
-  const ButtonComponent = buttonHref ? 'a' : 'button';
-  const buttonProps = buttonHref ? { href: buttonHref } : {};
-
   return (
     <div className={`bg-white w-full ${topPadding} ${bottomPadding}`}>
       <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20">
@@ -94,10 +91,10 @@ export default function CallToActionBanner({
             />
           </div>
 
-          {/* Desktop Decorative Elements - Large screens only */}
-          {/* Pattern Overlay - Desktop only */}
+          {/* Desktop & Tablet Decorative Elements - Medium screens and up */}
+          {/* Pattern Overlay - Desktop: normal opacity, Tablet: very low opacity */}
           <div 
-            className="absolute hidden lg:block"
+            className="absolute hidden md:block"
             style={{
               width: '749px',
               height: '757px',
@@ -106,7 +103,7 @@ export default function CallToActionBanner({
             }}
           >
             <div 
-              className="w-full h-full bg-center bg-cover opacity-20"
+              className="w-full h-full bg-center bg-cover md:opacity-5 lg:opacity-20"
               style={{ 
                 backgroundImage: `url('${imgPattern}')`,
                 transform: 'rotate(90deg)'
@@ -153,35 +150,28 @@ export default function CallToActionBanner({
               {subtitle}
             </h3>
             
-            {/* CTA Button with Arrow - Height matched circle */}
+            {/* CTA Button - Matching CallToActionHero structure exactly */}
             <div 
-              className="flex items-center gap-0 mx-4 md:mx-0"
+              className="content-stretch flex items-center justify-start relative shrink-0"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              onClick={buttonHref ? () => window.location.href = buttonHref : undefined}
+              style={{ cursor: buttonHref ? 'pointer' : 'default' }}
             >
-              <ButtonComponent 
-                {...buttonProps}
-                className="bg-white rounded-[900px] px-3 md:px-[25px] py-3 md:py-[18px] flex items-center gap-2 md:gap-3 flex-1 max-w-[240px] md:max-w-none h-12 md:h-16"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-              >
-                <span className="text-[#2c2c2b] text-[14px] md:text-[20px] capitalize text-center leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }}>
-                  {buttonText}
-                </span>
-              </ButtonComponent>
               <div 
-                className="bg-white rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0 h-12 md:h-16 aspect-square"
+                className="rounded-full flex items-center justify-center h-[48px] md:h-[65px] px-[18px] md:px-[25px] bg-white"
+              >
+                <div className="capitalize font-['Poppins',_sans-serif] leading-[28px] not-italic text-[#231f20] text-[16px] md:text-[20px] text-nowrap">
+                  {buttonText}
+                </div>
+              </div>
+              <div 
+                className="relative shrink-0 size-[48px] md:size-[65px] transition-all duration-300"
                 style={{
                   transform: isHovered ? 'translateX(10px)' : 'translateX(0)'
                 }}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
               >
-                <Image 
-                  src={imgFrame1618874015} 
-                  alt="" 
-                  className="w-6 h-6 md:w-8 md:h-8"
-                  width={32}
-                  height={32}
-                />
+                <Image alt="" className="block max-w-none size-full" src={imgFrame1618874015} fill style={{objectFit: 'cover'}} />
               </div>
             </div>
           </div>

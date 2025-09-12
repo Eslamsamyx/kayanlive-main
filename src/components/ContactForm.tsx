@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
 const imgConcertBg1 = "/assets/cf27cb2a37e9e3bfd30c1ada4fe4988496b10bbb.png";
@@ -19,6 +19,8 @@ export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [toasts, setToasts] = useState<Toast[]>([]);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
     fullName: '',
     organization: '',
@@ -28,6 +30,32 @@ export default function ContactForm() {
     budget: '',
     goals: ''
   });
+
+  // Track scroll progress for decorative element animation
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      
+      const container = containerRef.current;
+      const containerTop = container.offsetTop;
+      const containerHeight = container.offsetHeight;
+      const currentScroll = window.scrollY;
+      const windowHeight = window.innerHeight;
+      
+      // Use viewport center as reference point
+      const viewportCenter = currentScroll + windowHeight / 2;
+      
+      // Calculate progress through ContactForm section (0% at start, 100% at end)
+      let progress = (viewportCenter - containerTop) / containerHeight;
+      progress = Math.max(0, Math.min(1, progress));
+      
+      setScrollProgress(progress);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -97,32 +125,13 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="relative w-full min-h-screen lg:h-[1049px] overflow-hidden">
+    <div ref={containerRef} className="relative w-full min-h-screen lg:h-[1049px] overflow-hidden">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-center bg-cover bg-no-repeat"
         style={{ backgroundImage: `url('${imgConcertBg1}')` }}
       />
 
-      {/* Decorative Ellipse - Hidden on mobile */}
-      <div 
-        className="absolute hidden lg:block"
-        style={{
-          height: '286px',
-          width: '601px',
-          left: '473px',
-          top: '63px'
-        }}
-      >
-        <div className="absolute inset-0" style={{ transform: 'scale(2.99, 1.89) translate(-16.7%, -52.4%)' }}>
-          <Image 
-            src={imgEllipse3624} 
-            alt="" 
-            fill
-            className="object-contain"
-          />
-        </div>
-      </div>
 
       {/* Main Form Container */}
       <div className="relative lg:absolute bg-black/30 backdrop-blur-md rounded-[24px] lg:rounded-[66px] mx-4 md:mx-8 lg:mx-0 my-6 md:my-10 lg:my-0 p-6 sm:p-8 md:p-12 lg:p-[87px_68px] lg:left-1/2 lg:top-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 max-w-6xl lg:w-[1107px] lg:h-[900px] border border-white/10">

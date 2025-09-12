@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { getMarkdownHTML } from '@/utils/markdownUtils';
 
 const imgPattern = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
 const imgCheckmark = "/assets/d57e8b023cc2954fe2c89c41bd7f2153074ba9c1.svg";
@@ -43,23 +44,23 @@ export default function WhereWeWork() {
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-[9px]">
                 <Image src={imgCheckmark} alt="" className="w-[30px] h-[30px]" width={30} height={30} />
-                <p className="text-[24px] leading-[32px] capitalize">
-                  {t('whereWeWork.saudi')}
-                </p>
+                <p className="text-[24px] leading-[32px] capitalize"
+                  dangerouslySetInnerHTML={getMarkdownHTML(t('whereWeWork.saudi'))}
+                />
               </div>
               
               <div className="flex items-center gap-[9px]">
                 <Image src={imgCheckmark} alt="" className="w-[30px] h-[30px]" width={30} height={30} />
-                <p className="text-[24px] leading-[32px] capitalize">
-                  {t('whereWeWork.uae')}
-                </p>
+                <p className="text-[24px] leading-[32px] capitalize"
+                  dangerouslySetInnerHTML={getMarkdownHTML(t('whereWeWork.uae'))}
+                />
               </div>
               
               <div className="flex items-start gap-[9px]">
                 <Image src={imgCheckmark} alt="" className="w-[30px] h-[30px] mt-[2px]" width={30} height={30} />
-                <p className="text-[24px] leading-[32px] capitalize">
-                  {t('whereWeWork.partners')}
-                </p>
+                <p className="text-[24px] leading-[32px] capitalize"
+                  dangerouslySetInnerHTML={getMarkdownHTML(t('whereWeWork.partners'))}
+                />
               </div>
             </div>
           </div>
@@ -92,9 +93,9 @@ export default function WhereWeWork() {
             <div className="relative shrink-0 size-[25px]">
               <Image src={imgCheckmark} alt="" className="block max-w-none size-full" width={25} height={25} />
             </div>
-            <div className="text-[#231f20] text-[18px] leading-[20px] capitalize flex-1">
-              {t('whereWeWork.saudi')}
-            </div>
+            <div className="text-[#231f20] text-[18px] leading-[20px] capitalize flex-1"
+              dangerouslySetInnerHTML={getMarkdownHTML(t('whereWeWork.saudi'))}
+            />
           </div>
           
           {/* Location Item 2 - As next item in single column */}
@@ -102,9 +103,9 @@ export default function WhereWeWork() {
             <div className="relative shrink-0 size-[25px]">
               <Image src={imgCheckmark} alt="" className="block max-w-none size-full" width={25} height={25} />
             </div>
-            <div className="text-[#231f20] text-[18px] leading-[20px] capitalize flex-1">
-              {t('whereWeWork.uae')}
-            </div>
+            <div className="text-[#231f20] text-[18px] leading-[20px] capitalize flex-1"
+              dangerouslySetInnerHTML={getMarkdownHTML(t('whereWeWork.uae'))}
+            />
           </div>
           
           {/* Location Item 3 - As next item in single column */}
@@ -112,9 +113,9 @@ export default function WhereWeWork() {
             <div className="relative shrink-0 size-[25px]">
               <Image src={imgCheckmark} alt="" className="block max-w-none size-full" width={25} height={25} />
             </div>
-            <div className="text-[#231f20] text-[18px] leading-[20px] capitalize flex-1">
-              {t('whereWeWork.partners')}
-            </div>
+            <div className="text-[#231f20] text-[18px] leading-[20px] capitalize flex-1"
+              dangerouslySetInnerHTML={getMarkdownHTML(t('whereWeWork.partners'))}
+            />
           </div>
         </section>
 
@@ -201,16 +202,15 @@ export default function WhereWeWork() {
           {/* Content - Responsive */}
           <div className="absolute left-4 top-12 md:left-[137px] md:top-20 w-[calc(100%-2rem)] md:w-[550px] flex flex-col gap-[30px] md:gap-[42px] z-10">
             <h3 
-              className="text-white capitalize text-center md:text-left"
+              className="text-white capitalize text-center md:text-left heading-overflow-safe"
               style={{
                 fontSize: 'clamp(1.875rem, 6vw, 3.125rem)',
                 lineHeight: 'clamp(1.2, 4vw, 1.3)',
                 maxWidth: '290px',
                 margin: '0 auto'
               }}
-            >
-              {t('whereWeWork.question')}
-            </h3>
+              dangerouslySetInnerHTML={getMarkdownHTML(t('whereWeWork.question'))}
+            />
             
             {/* CTA Button with Arrow - Responsive */}
             <div className="flex justify-center md:justify-start">
@@ -219,10 +219,10 @@ export default function WhereWeWork() {
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
-                <button className="bg-white rounded-[900px] px-[18px] md:px-[25px] py-[14px] md:py-[18px] flex items-center gap-3">
+                <button className="bg-white rounded-[900px] px-[18px] md:px-[25px] py-[14px] md:py-[18px] flex items-center gap-3 button-overflow-safe">
                   <span 
-                    className="text-[#2c2c2b] capitalize whitespace-nowrap"
-                    style={{ fontSize: 'clamp(0.875rem, 3vw, 1.25rem)' }}
+                    className="text-[#2c2c2b] capitalize long-word-safe"
+                    style={{ fontSize: 'clamp(0.875rem, 3vw, 1.25rem)', lineHeight: '1.2', whiteSpace: 'normal' }}
                   >
                     {t('whereWeWork.cta')}
                   </span>

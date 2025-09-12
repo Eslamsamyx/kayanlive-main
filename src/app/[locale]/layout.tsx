@@ -30,7 +30,8 @@ export default async function RootLayout({
   // Load messages for the current locale
   let messages;
   try {
-    messages = await getMessages();
+    console.log(`📋 Layout: loading messages for locale="${locale}"`);
+    messages = await getMessages({ locale });
   } catch (error) {
     console.error('Failed to load messages:', error);
     messages = {};
