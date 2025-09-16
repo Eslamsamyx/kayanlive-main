@@ -4,6 +4,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { getMarkdownHTML } from '@/utils/markdownUtils';
 import AnimatedServiceCard from './AnimatedServiceCard';
 import AnimatedServiceContent from './AnimatedServiceContent';
+import CTAButton from './CTAButton';
 
 const imgEventPhoto = "/assets/29064c5a0d86395e45b642fe4e6daf670490f723.png";
 const imgKayanLogo = "/assets/823c27de600ccd2f92af3e073c8e10df3a192e5c.png";
@@ -11,7 +12,7 @@ const imgKayanLogo = "/assets/823c27de600ccd2f92af3e073c8e10df3a192e5c.png";
 export default function AboutServices() {
   const t = useTranslations();
   const locale = useLocale();
-  
+
   return (
     <div className="bg-[#f3f3f3] w-full py-12 sm:py-16 md:py-20">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-8 md:px-12 lg:px-20">
@@ -20,15 +21,15 @@ export default function AboutServices() {
           <p className="text-[#888888] mb-6 sm:mb-8" style={{ fontSize: 'clamp(18px, 4vw, 32px)', lineHeight: 'clamp(24px, 5vw, 40px)' }}
             dangerouslySetInnerHTML={getMarkdownHTML(t('aboutServices.description1'))}
           />
-          
+
           <p className="text-[#888888] mb-6 sm:mb-8" style={{ fontSize: 'clamp(18px, 4vw, 32px)', lineHeight: 'clamp(24px, 5vw, 40px)' }}
             dangerouslySetInnerHTML={getMarkdownHTML(t('aboutServices.description2'))}
           />
-          
+
           <p className="text-[#888888] mb-6 sm:mb-8" style={{ fontSize: 'clamp(18px, 4vw, 32px)', lineHeight: 'clamp(24px, 5vw, 40px)' }}
             dangerouslySetInnerHTML={getMarkdownHTML(t('aboutServices.description3'))}
           />
-          
+
           <p className="text-[#888888]" style={{ fontSize: 'clamp(18px, 4vw, 32px)', lineHeight: 'clamp(24px, 5vw, 40px)' }}
             dangerouslySetInnerHTML={getMarkdownHTML(t('aboutServices.description4'))}
           />
@@ -38,37 +39,37 @@ export default function AboutServices() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           {/* Live Events Card with Image */}
           <AnimatedServiceCard delay={0}>
-            <div 
+            <div
               className="bg-[#7afdd6] rounded-[40px] overflow-hidden relative min-h-[300px] lg:h-[491px]"
             >
             <AnimatedServiceContent isImage={true} className="absolute inset-0">
-              <div 
+              <div
                 className="w-full h-full bg-center bg-cover bg-no-repeat"
                 style={{ backgroundImage: `url('${imgEventPhoto}')` }}
               />
             </AnimatedServiceContent>
-            
+
             {/* Glassmorphism Diamond Overlay */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div 
+              <div
                 className="flex items-center justify-center"
-                style={{ 
+                style={{
                   width: 'clamp(200px, 40vw, 302px)',
                   height: 'clamp(200px, 40vw, 302px)',
                   transform: 'rotate(-45deg)'
                 }}
               >
-                <div 
+                <div
                   className="flex items-center justify-center relative overflow-hidden bg-white/[0.4] backdrop-blur-3xl box-border"
-                  style={{ 
+                  style={{
                     width: 'clamp(140px, 28vw, 214px)',
                     height: 'clamp(140px, 28vw, 214px)'
                   }}
                 >
                   {/* KayanLive Logo inside diamond */}
-                  <div 
+                  <div
                     className="bg-center bg-contain bg-no-repeat relative z-10"
-                    style={{ 
+                    style={{
                       backgroundImage: `url('${imgKayanLogo}')`,
                       width: 'clamp(100px, 20vw, 159px)',
                       height: 'clamp(33px, 7vw, 53px)',
@@ -84,11 +85,11 @@ export default function AboutServices() {
 
           {/* Live Events & Shows Text Card */}
           <AnimatedServiceCard delay={0.1}>
-            <div 
+            <div
               className="bg-white rounded-[35px] border border-[#74cfaa] px-6 sm:px-8 lg:px-12 py-8 sm:py-12 lg:py-16 flex flex-col justify-between min-h-[300px] lg:h-[491px]"
             >
             <div>
-              <h3 
+              <h3
                 className="font-normal bg-gradient-to-r from-[#a095e1] to-[#74cfaa] bg-clip-text mb-6 sm:mb-8 heading-overflow-safe"
                 style={{
                   fontSize: 'clamp(32px, 8vw, 80px)',
@@ -104,14 +105,14 @@ export default function AboutServices() {
                     __html: t('aboutServices.serviceTitle').replace(' & ', ' &<br />')
                   }}
                 />
-              
+
               </h3>
-              
+
               <div className="text-[#888888]" style={{ fontSize: 'clamp(16px, 3vw, 22px)', lineHeight: 'clamp(22px, 4vw, 28px)' }}>
                 <p className="mb-6"
                   dangerouslySetInnerHTML={getMarkdownHTML(t('aboutServices.serviceDescription'))}
                 />
-                
+
                 <p className="mt-6"
                   dangerouslySetInnerHTML={getMarkdownHTML(t('aboutServices.idealFor'))}
                 />
@@ -122,61 +123,12 @@ export default function AboutServices() {
         </div>
 
         {/* CTA Button */}
-        <div className="flex justify-center mt-8 sm:mt-10 md:mt-12">
-          <style>{`
-            @keyframes slideLeftRight {
-              0%, 100% { transform: translateX(0); }
-              25% { transform: translateX(-5px); }
-              75% { transform: translateX(5px); }
-            }
-            @keyframes slideRightLeft {
-              0%, 100% { transform: translateX(0); }
-              25% { transform: translateX(5px); }
-              75% { transform: translateX(-5px); }
-            }
-            .cta-button:hover .arrow-circle {
-              animation: ${locale === 'ar' ? 'slideRightLeft' : 'slideLeftRight'} 1s ease-in-out infinite;
-            }
-          `}</style>
-          
-          <button className="cta-button flex items-center gap-2 group relative button-overflow-safe">
-            {/* Main button pill with gradient */}
-            <div 
-              className="rounded-full flex items-center justify-center pointer-events-none overflow-safe"
-              style={{ 
-                background: 'linear-gradient(90deg, #7afdd6 0%, #a095e1 60%, #b8a4ff 90%)',
-                minHeight: 'clamp(50px, 8vw, 65px)',
-                paddingLeft: 'clamp(20px, 4vw, 36px)',
-                paddingRight: 'clamp(20px, 4vw, 36px)',
-                paddingTop: 'clamp(10px, 2vw, 16px)',
-                paddingBottom: 'clamp(10px, 2vw, 16px)'
-              }}
-            >
-              <span className="text-[#2c2c2b] font-normal long-word-safe" style={{ fontSize: 'clamp(16px, 3vw, 20px)', lineHeight: '1.2' }}>
-                {t('aboutServices.cta')}
-              </span>
-            </div>
-            
-            {/* Arrow circle - animated on hover */}
-            <div 
-              className="arrow-circle rounded-full bg-[#b8a4ff] flex items-center justify-center pointer-events-none"
-              style={{ 
-                width: 'clamp(50px, 8vw, 65px)',
-                height: 'clamp(50px, 8vw, 65px)',
-                flexShrink: 0
-              }}
-            >
-              <svg width="clamp(20, 4vw, 26)" height="clamp(20, 4vw, 26)" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path 
-                  d={locale === 'ar' ? "M19 12H5M5 12L12 5M5 12L12 19" : "M5 12H19M19 12L12 5M19 12L12 19"} 
-                  stroke="white" 
-                  strokeWidth="2.5" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-          </button>
+        <div className="flex justify-center mt-6 sm:mt-8 md:mt-10 lg:mt-12 xl:mt-16">
+          <div className="max-w-[90vw] sm:max-w-none overflow-hidden">
+            <CTAButton ariaLabel={t('aboutServices.cta')}>
+              {t('aboutServices.cta')}
+            </CTAButton>
+          </div>
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import CTAButton from './CTAButton';
 
 // Assets from the Figma pattern
 const imgPattern = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
@@ -43,8 +44,8 @@ export default function CallToActionBanner({
         </div>
 
         {/* CTA Banner - Desktop: Original structure, Mobile: Tall Figma design */}
-        <div 
-          className="relative overflow-hidden rounded-[25px] md:rounded-[48px] h-[500px] md:h-[418px]"
+        <div
+          className="relative overflow-hidden rounded-[25px] md:rounded-[48px] h-[500px] md:h-[450px]"
           style={{ 
             background: 'linear-gradient(135deg, #a095e1 0%, #74cfaa 100%)'
           }}
@@ -82,11 +83,11 @@ export default function CallToActionBanner({
           >
             <div 
               className="w-[319px] h-[315px] bg-center bg-cover"
-              style={{ 
+              style={{
                 backgroundImage: `url('${imgPattern}')`,
                 transform: 'rotate(90deg)',
                 filter: 'brightness(0) invert(1)',
-                opacity: '1'
+                opacity: '0.3'
               }}
             />
           </div>
@@ -135,45 +136,29 @@ export default function CallToActionBanner({
             <div className="flex-none rotate-[90deg]">
               <div 
                 className="bg-center bg-cover bg-no-repeat h-[749px] w-[757px]" 
-                style={{ 
+                style={{
                   backgroundImage: `url('${imgPattern}')`,
                   filter: 'brightness(0) invert(1)',
-                  opacity: '1'
+                  opacity: '0.3'
                 }} 
               />
             </div>
           </div>
 
-          {/* Content - Mobile: Centered and moved down, Desktop: Left-aligned */}
-          <div className="absolute left-0 md:left-[137px] top-20 md:top-20 w-full md:w-[567px] flex flex-col gap-[30px] md:gap-[42px] items-center md:items-start justify-start z-10 px-8 md:px-0">
-            <h3 className="text-white text-[30px] md:text-[50px] leading-[30px] md:leading-[51px] capitalize text-center md:text-left max-w-[290px] md:max-w-none md:w-auto" style={{ fontFamily: '"Poppins", sans-serif' }}>
+          {/* Content - Mobile: Centered, Desktop: Left-aligned */}
+          <div className="absolute left-1/2 -translate-x-1/2 md:left-[137px] md:translate-x-0 top-20 md:top-20 w-full max-w-[90%] md:max-w-[567px] md:w-[567px] flex flex-col gap-[30px] md:gap-[42px] items-center md:items-start justify-start z-10 px-4 md:px-0">
+            <h3 className="text-white text-[30px] md:text-[50px] leading-[36px] md:leading-[60px] capitalize text-center md:text-left max-w-[290px] md:max-w-none md:w-auto" style={{ fontFamily: '"Poppins", sans-serif' }}>
               {subtitle}
             </h3>
             
-            {/* CTA Button - Matching CallToActionHero structure exactly */}
-            <div 
-              className="content-stretch flex items-center justify-start relative shrink-0"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-              onClick={buttonHref ? () => window.location.href = buttonHref : undefined}
-              style={{ cursor: buttonHref ? 'pointer' : 'default' }}
+            {/* CTA Button */}
+            <CTAButton
+              variant="white"
+              href={buttonHref}
+              ariaLabel={buttonText}
             >
-              <div 
-                className="rounded-full flex items-center justify-center h-[48px] md:h-[65px] px-[18px] md:px-[25px] bg-white"
-              >
-                <div className="capitalize font-['Poppins',_sans-serif] leading-[28px] not-italic text-[#231f20] text-[16px] md:text-[20px] text-nowrap">
-                  {buttonText}
-                </div>
-              </div>
-              <div 
-                className="relative shrink-0 size-[48px] md:size-[65px] transition-all duration-300"
-                style={{
-                  transform: isHovered ? 'translateX(10px)' : 'translateX(0)'
-                }}
-              >
-                <Image alt="" className="block max-w-none size-full" src={imgFrame1618874015} fill style={{objectFit: 'cover'}} />
-              </div>
-            </div>
+              {buttonText}
+            </CTAButton>
           </div>
         </div>
       </div>

@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { useTranslations, useLocale } from 'next-intl';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import CTAButton from './CTAButton';
 
 // Assets from Figma
 const imgRectangle6 = "/assets/29064c5a0d86395e45b642fe4e6daf670490f723.png";
@@ -13,12 +14,9 @@ const imgVector449 = "/assets/f7382026e38c26d5af789578200259cf00d646d5.svg";
 const imgVector450 = "/assets/2e7d38a51401314bc36af86961b4180f9a81bc96.svg";
 const imgVector451 = "/assets/27f7bc8b7057872a6c373109cb92fc81093df0cd.svg";
 const imgVector452 = "/assets/b435e1176051bfb6d5144bfe3e7069007ac2258c.svg";
-const imgFrame1618874015 = "/assets/4a3ffff37e95986459c2da2bd6d49aaab2861815.svg";
-
 export default function CallToActionHero() {
   const t = useTranslations();
   const locale = useLocale();
-  const [isHovered, setIsHovered] = useState(false);
   const componentRef = useRef<HTMLDivElement>(null);
 
   // Scroll-based animation setup
@@ -146,30 +144,9 @@ export default function CallToActionHero() {
         </div>
         
         {/* CTA Button */}
-        <div 
-          className="content-stretch flex items-center justify-start relative shrink-0"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <div 
-            className="rounded-full flex items-center justify-center h-[65px] px-[25px]"
-            style={{ 
-              background: 'linear-gradient(90deg, #7afdd6 0%, #a095e1 60%, #b8a4ff 90%)'
-            }}
-          >
-            <div className="capitalize font-['Poppins',_sans-serif] leading-[28px] not-italic text-[#231f20] text-[20px] text-nowrap">
-              {t('execution.cta')}
-            </div>
-          </div>
-          <div 
-            className="relative shrink-0 size-[65px] transition-all duration-300"
-            style={{
-              transform: isHovered ? 'translateX(10px)' : 'translateX(0)'
-            }}
-          >
-            <Image alt="" className="block max-w-none size-full" src={imgFrame1618874015} fill style={{objectFit: 'cover'}} />
-          </div>
-        </div>
+        <CTAButton ariaLabel={t('execution.cta')}>
+          {t('execution.cta')}
+        </CTAButton>
       </div>
       
       {/* Pattern Overlay - Top - White with Scroll-based Animation - Desktop Only */}
@@ -209,30 +186,9 @@ export default function CallToActionHero() {
             </p>
           </div>
           
-          <div 
-            className="flex items-center justify-center relative shrink-0"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            <div 
-              className="rounded-full flex items-center justify-center h-[56px] px-[22px]"
-              style={{ 
-                background: 'linear-gradient(90deg, #7afdd6 0%, #a095e1 60%, #b8a4ff 90%)'
-              }}
-            >
-              <div className="capitalize font-['Poppins',_sans-serif] leading-[28px] not-italic text-[#231f20] text-[18px] text-nowrap">
-                {t('execution.cta')}
-              </div>
-            </div>
-            <div 
-              className="relative shrink-0 size-[56px] transition-all duration-300"
-              style={{
-                transform: isHovered ? 'translateX(10px)' : 'translateX(0)'
-              }}
-            >
-              <Image alt="" className="block max-w-none size-full" src={imgFrame1618874015} fill style={{objectFit: 'cover'}} />
-            </div>
-          </div>
+          <CTAButton ariaLabel={t('execution.cta')}>
+            {t('execution.cta')}
+          </CTAButton>
         </div>
       </div>
 
@@ -249,30 +205,9 @@ export default function CallToActionHero() {
                 {t('execution.heading')}
               </p>
             </div>
-            <div 
-              className="flex items-center justify-start relative shrink-0"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            >
-              <div 
-                className="rounded-full flex items-center justify-center h-[44px] px-[18px]"
-                style={{ 
-                  background: 'linear-gradient(90deg, #7afdd6 0%, #a095e1 60%, #b8a4ff 90%)'
-                }}
-              >
-                <div className="capitalize font-['Poppins',_sans-serif] leading-[28px] not-italic text-[#231f20] text-[16px] text-nowrap">
-                  {t('execution.cta')}
-                </div>
-              </div>
-              <div 
-                className="relative shrink-0 size-[44px] transition-all duration-300"
-                style={{
-                  transform: isHovered ? 'translateX(10px)' : 'translateX(0)'
-                }}
-              >
-                <Image alt="" className="block max-w-none size-full" src={imgFrame1618874015} fill style={{objectFit: 'cover'}} />
-              </div>
-            </div>
+            <CTAButton ariaLabel={t('execution.cta')}>
+              {t('execution.cta')}
+            </CTAButton>
           </div>
         </div>
       </div>

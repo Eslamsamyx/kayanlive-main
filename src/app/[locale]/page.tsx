@@ -4,7 +4,6 @@ import HighImpactExperience from '@/components/HighImpactExperience';
 import AboutServices from '@/components/AboutServices';
 import WhyKayanLive from '@/components/WhyKayanLive';
 import Industries from '@/components/Industries';
-import WhereWeWork from '@/components/WhereWeWork';
 import CallToActionBanner from '@/components/CallToActionBanner';
 import Achievements from '@/components/Achievements';
 import ConcertCrowd from '@/components/ConcertCrowd';
@@ -16,8 +15,7 @@ export default async function HomePage({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // locale is required for Next.js App Router but not used directly in this component
+  void locale; // Required for Next.js App Router but not used directly
 
   return (
     <div>
@@ -49,8 +47,14 @@ export default async function HomePage({
         <Industries />
       </div>
       
-      {/* Where We Work section - Use proper responsive component */}
-      <WhereWeWork />
+      {/* Where We Work section */}
+      <div className="-mx-4">
+        <CallToActionBanner
+          title="Where We Work"
+          subtitle="Planning an event outside the UAE or Saudi Arabia?"
+          buttonText="Let's Build Together"
+        />
+      </div>
       
       {/* Achievements section */}
       <div className="-mx-4">

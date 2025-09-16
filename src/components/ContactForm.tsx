@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 const imgConcertBg1 = "/assets/cf27cb2a37e9e3bfd30c1ada4fe4988496b10bbb.png";
-const imgEllipse3624 = "/assets/fcf30dee2c13353872f07b1e13a3de14f4d2f85e.svg";
+// const imgEllipse3624 = "/assets/fcf30dee2c13353872f07b1e13a3de14f4d2f85e.svg";
 
 type ToastType = 'success' | 'error' | 'info';
 
@@ -19,7 +19,7 @@ export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [toasts, setToasts] = useState<Toast[]>([]);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  // const [scrollProgress, setScrollProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
     fullName: '',
@@ -32,29 +32,31 @@ export default function ContactForm() {
   });
 
   // Track scroll progress for decorative element animation
+  // Scroll progress effect (currently disabled)
   useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      
-      const container = containerRef.current;
-      const containerTop = container.offsetTop;
-      const containerHeight = container.offsetHeight;
-      const currentScroll = window.scrollY;
-      const windowHeight = window.innerHeight;
-      
-      // Use viewport center as reference point
-      const viewportCenter = currentScroll + windowHeight / 2;
-      
-      // Calculate progress through ContactForm section (0% at start, 100% at end)
-      let progress = (viewportCenter - containerTop) / containerHeight;
-      progress = Math.max(0, Math.min(1, progress));
-      
-      setScrollProgress(progress);
-    };
-
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    // This effect is temporarily disabled but kept for future use
+    // const handleScroll = () => {
+    //   if (!containerRef.current) return;
+    //
+    //   const container = containerRef.current;
+    //   const containerTop = container.offsetTop;
+    //   const containerHeight = container.offsetHeight;
+    //   const currentScroll = window.scrollY;
+    //   const windowHeight = window.innerHeight;
+    //
+    //   // Use viewport center as reference point
+    //   const viewportCenter = currentScroll + windowHeight / 2;
+    //
+    //   // Calculate progress through ContactForm section (0% at start, 100% at end)
+    //   let progress = (viewportCenter - containerTop) / containerHeight;
+    //   progress = Math.max(0, Math.min(1, progress));
+    //
+    //   setScrollProgress(progress);
+    // };
+    //
+    // handleScroll();
+    // window.addEventListener('scroll', handleScroll, { passive: true });
+    // return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleInputChange = (field: string, value: string) => {

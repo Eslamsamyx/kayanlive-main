@@ -277,17 +277,33 @@ export default function HeroSliderNew() {
 
   return (
     <>
+      {/* Dynamic styles for responsive design */}
+      <style jsx>{`
+        @media (min-width: 1024px) {
+          .hero-container {
+            height: ${textMetrics.desktopHeight}px !important;
+          }
+          .hero-title {
+            font-weight: bold !important;
+            font-size: 70px !important;
+            line-height: 1.3 !important;
+            ${isRTL ? 'right' : 'left'}: 42px !important;
+            bottom: 120px !important;
+            width: 875px !important;
+            max-height: ${textMetrics.desktopHeight - 240}px !important;
+            text-align: ${isRTL ? 'right' : 'left'} !important;
+          }
+        }
+      `}</style>
+
       {/* Hidden measuring container */}
       <div ref={measureRef} className="sr-only" />
       
       {/* Unified Responsive Hero Container */}
-      <div 
-        className="relative bg-[#2c2c2b] overflow-visible mx-4 mb-8 rounded-[25px] lg:rounded-[61px]"
-        style={{ 
-          height: `clamp(${textMetrics.mobileHeight}px, 85vh, ${textMetrics.mobileHeight + 200}px)`,
-          '@media (min-width: 1024px)': {
-            height: `${textMetrics.desktopHeight}px`
-          }
+      <div
+        className="hero-container relative bg-[#2c2c2b] overflow-visible mx-4 mb-8 rounded-[25px] lg:rounded-[61px]"
+        style={{
+          height: `clamp(${textMetrics.mobileHeight}px, 85vh, ${textMetrics.mobileHeight + 200}px)`
         }}
         onTouchStart={pauseSlider}
         onTouchEnd={resumeSlider}
@@ -356,10 +372,10 @@ export default function HeroSliderNew() {
           </div>
 
           {/* Responsive Text Content - Always bottom anchored */}
-          <div 
-            className="absolute capitalize text-white text-center lg:text-left translate-x-[-50%] lg:translate-x-0"
-            style={{ 
-              // Mobile
+          <div
+            className="hero-title absolute capitalize text-white text-center lg:text-left translate-x-[-50%] lg:translate-x-0"
+            style={{
+              // Mobile base styles
               fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', sans-serif",
               fontWeight: 'normal',
               fontSize: '30px',
@@ -368,18 +384,7 @@ export default function HeroSliderNew() {
               bottom: '100px',
               width: '281px',
               maxHeight: `${textMetrics.mobileHeight - 140}px`,
-              overflow: 'hidden',
-              // Desktop overrides
-              '@media (min-width: 1024px)': {
-                fontWeight: 'bold',
-                fontSize: '70px',
-                lineHeight: '1.3',
-                [isRTL ? 'right' : 'left']: '42px',
-                bottom: '120px',
-                width: '875px',
-                maxHeight: `${textMetrics.desktopHeight - 240}px`,
-                textAlign: isRTL ? 'right' : 'left'
-              }
+              overflow: 'hidden'
             }}
           >
             {t('hero.title')}

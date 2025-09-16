@@ -42,19 +42,15 @@ export default function AnimatedServiceContent({
       <motion.div
         className="relative w-full h-full"
         style={{
-          x: followX,
-          y: followY,
+          x: isHovered ? vibrateX : followX,
+          y: isHovered ? vibrateY : followY,
           width: '100%',
           height: '100%'
         }}
         whileHover={{
-          x: vibrateX,
-          y: vibrateY,
           scale: 1.02,
           transition: {
-            scale: { duration: 0.3 },
-            x: { duration: 0.05, repeat: Infinity, repeatType: "reverse" },
-            y: { duration: 0.05, repeat: Infinity, repeatType: "reverse" }
+            scale: { duration: 0.3 }
           }
         }}
       >

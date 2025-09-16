@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Suspense, ErrorBoundary } from 'react';
+import React, { Suspense } from 'react';
 import type { HighImpactExperienceProps } from './HighImpactExperience.types';
 import { 
   useHighImpactExperience, 

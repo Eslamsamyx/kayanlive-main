@@ -35,9 +35,9 @@ export default function WhereWeWorkRefactored() {
       ctaTitle="Planning an event outside the uae or saudi arabia?"
       ctaButtonText="Let's Build Together"
       backgroundImage="/assets/a4bd38b73259c4fd4f099d834871f17ed5486466.png"
-      gradientFrom="#b8a4ff"
-      gradientVia="#7afdd6"
-      gradientTo="#7afdd6"
+      gradientFrom="#74CFAA"
+      gradientVia="#A095E1"
+      gradientTo="#A095E1"
     />
   );
 }

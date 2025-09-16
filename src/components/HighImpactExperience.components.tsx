@@ -98,7 +98,7 @@ export const TextLines: React.FC<TextLinesProps> = ({
 export const ImageSection: React.FC<ImageSectionProps> = ({
   imageSrc,
   alt = '',
-  rtlConfig,
+  // rtlConfig,
   variant,
   className = '',
 }) => {
@@ -127,7 +127,7 @@ export const ImageSection: React.FC<ImageSectionProps> = ({
  */
 export const DecorativePattern: React.FC<DecorativePatternProps> = ({
   imageSrc,
-  rtlConfig,
+  // rtlConfig,
   variant,
   className = '',
 }) => {

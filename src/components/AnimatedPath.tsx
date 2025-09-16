@@ -4,7 +4,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { useLocale } from 'next-intl';
 
 interface AnimatedPathProps {
-  containerRef?: React.RefObject<HTMLElement>;
+  containerRef?: React.RefObject<HTMLElement | null>;
   className?: string;
 }
 

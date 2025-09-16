@@ -6,7 +6,7 @@ import { useMotionValue, useSpring, useTransform } from 'framer-motion';
 /**
  * Custom hook for tracking mouse position relative to an element
  */
-export function useMouseTracking(ref: RefObject<HTMLElement>) {
+export function useMouseTracking(ref: RefObject<HTMLElement | null>) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -73,7 +73,7 @@ export function useMouseTracking(ref: RefObject<HTMLElement>) {
 export function useVibration(isActive: boolean, intensity: number = 2) {
   const vibrateX = useMotionValue(0);
   const vibrateY = useMotionValue(0);
-  const intervalRef = useRef<NodeJS.Timeout>();
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (isActive) {

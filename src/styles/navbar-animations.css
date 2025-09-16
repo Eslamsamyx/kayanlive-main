@@ -1,4 +1,4 @@
-/* Navbar Animations */
+/* Optimized Navbar Animations */
 @keyframes slideIn {
   0% {
     opacity: 0;
@@ -10,13 +10,66 @@
   }
 }
 
-.animate-slideIn {
-  animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Focus ring improvements for better visibility */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-slideIn {
+  animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+/* Enhanced focus rings with smooth transitions */
 .focus-ring-enhanced {
   box-shadow: 0 0 0 3px rgba(122, 253, 214, 0.4);
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth hover transitions */
+.hover-lift {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Button press feedback */
+.press-feedback {
+  transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.press-feedback:active {
+  transform: scale(0.98);
 }
 
 /* High contrast focus indicators for accessibility */
@@ -27,16 +80,44 @@
   }
 }
 
+/* Performance optimizations */
+.gpu-accelerated {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .animate-slideIn {
-    animation: none;
+  .animate-slideIn,
+  .animate-fadeIn,
+  .animate-scaleIn {
+    animation: none !important;
   }
-  
+
+  .hover-lift:hover {
+    transform: none !important;
+  }
+
+  .press-feedback:active {
+    transform: none !important;
+  }
+
   * {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+}
+
+/* High performance mode for powerful devices */
+@media (min-resolution: 2dppx) and (min-width: 1024px) {
+  .animate-slideIn {
+    animation-duration: 0.25s;
+  }
+
+  .animate-fadeIn {
+    animation-duration: 0.15s;
   }
 }
 
@@ -45,11 +126,24 @@
   transform: scaleX(-1) rotate(180deg);
 }
 
-/* Ensure touch targets are at least 44px */
+/* Enhanced touch targets and feedback */
 @media (pointer: coarse) {
   .min-touch-target {
     min-height: 44px;
     min-width: 44px;
+  }
+
+  /* Enhanced touch feedback */
+  .touch-feedback {
+    -webkit-tap-highlight-color: rgba(122, 253, 214, 0.2);
+    tap-highlight-color: rgba(122, 253, 214, 0.2);
+  }
+
+  /* Larger touch targets on mobile */
+  .touch-friendly {
+    min-height: 48px;
+    min-width: 48px;
+    padding: 12px;
   }
 }
 
@@ -76,9 +170,41 @@
   background-color: rgba(156, 163, 175, 0.7);
 }
 
-/* Smooth scrolling behavior */
+/* Smooth scrolling behavior with performance optimization */
 .mobile-menu-scroll {
   scroll-behavior: smooth;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-smooth {
+  animation: spin 1s linear infinite;
+  will-change: transform;
+}
+
+/* Pulse animation for loading states */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  will-change: opacity;
 }
 
 /* Scroll indicator gradient */
@@ -102,4 +228,49 @@
 
 .mobile-menu-container.has-scroll::after {
   opacity: 1;
+}
+
+/* Micro-interaction enhancements */
+.nav-item-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-item-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(122, 253, 214, 0.1), transparent);
+  transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-item-hover:hover::before {
+  left: 100%;
+}
+
+/* Enhanced ripple effect */
+.ripple-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-effect::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(122, 253, 214, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+}
+
+.ripple-effect:active::after {
+  width: 300px;
+  height: 300px;
 }

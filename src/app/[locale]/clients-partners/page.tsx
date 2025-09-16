@@ -8,7 +8,7 @@ export default async function ClientsPartnersPage({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  void locale; // Required for Next.js App Router but not used directly  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   // locale is required for Next.js App Router but not used directly in this component
 
   return (

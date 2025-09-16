@@ -23,7 +23,7 @@ export const useRTL = (): UseRTLReturn => {
     return {
       isRTL,
       locale,
-      direction: isRTL ? 'rtl' : 'ltr' as const,
+      direction: (isRTL ? 'rtl' : 'ltr') as 'ltr' | 'rtl',
     };
   }, [locale]);
 

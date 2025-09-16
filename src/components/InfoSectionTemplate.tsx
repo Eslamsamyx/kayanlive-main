@@ -2,11 +2,11 @@
 
 import { useState, ReactNode } from 'react';
 import Image from 'next/image';
+import CTAButton from './CTAButton';
 
 // Common assets
 const imgPattern = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
 const imgCheckmark = "/assets/d57e8b023cc2954fe2c89c41bd7f2153074ba9c1.svg";
-const imgArrowCircle = "/assets/56835058c52a4359de96b664c4f5e9d586e4da1d.svg";
 
 interface ChecklistItem {
   text: string;
@@ -43,7 +43,6 @@ export default function InfoSectionTemplate({
   gradientTo = "#7afdd6",
   showTopSection = true
 }: InfoSectionProps) {
-  const [isHovered, setIsHovered] = useState(false);
 
   const renderChecklistText = (item: ChecklistItem) => {
     if (!item.highlights) {
@@ -209,33 +208,14 @@ export default function InfoSectionTemplate({
             <h3 className="text-white text-[50px] leading-[51px] capitalize">
               {ctaTitle}
             </h3>
-            
-            {/* CTA Button with Arrow */}
-            <div 
-              className="flex items-center gap-0"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
+
+            {/* CTA Button */}
+            <CTAButton
+              variant="white"
+              ariaLabel={ctaButtonText}
             >
-              <button className="bg-white rounded-[900px] px-[25px] py-[18px] flex items-center gap-3">
-                <span className="text-[#2c2c2b] text-[20px] capitalize">{ctaButtonText}</span>
-              </button>
-              <div 
-                className="bg-white rounded-full flex items-center justify-center transition-all duration-300"
-                style={{
-                  width: '65px',
-                  height: '65px',
-                  transform: isHovered ? 'translateX(10px)' : 'translateX(0)'
-                }}
-              >
-                <Image 
-                  src={imgArrowCircle} 
-                  alt="" 
-                  className="w-full h-full"
-                  fill
-                  style={{objectFit: 'cover'}}
-                />
-              </div>
-            </div>
+              {ctaButtonText}
+            </CTAButton>
           </div>
         </div>
       </div>

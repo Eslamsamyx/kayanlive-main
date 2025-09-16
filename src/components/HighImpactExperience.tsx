@@ -36,7 +36,7 @@ import type { HighImpactExperienceProps } from './HighImpactExperience.types';
  * Main HighImpactExperience component
  * Temporarily using legacy component directly to test positioning fix
  */
-const HighImpactExperience: React.FC<HighImpactExperienceProps> = (props) => {
+const HighImpactExperience: React.FC<HighImpactExperienceProps> = () => {
   console.log('🎯 Main HighImpactExperience component rendering');
   return <HighImpactExperienceLegacy />;
 };
