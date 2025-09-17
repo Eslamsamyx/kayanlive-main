@@ -248,7 +248,6 @@ export default function AboutServices() {
                 <CTAButton
                   variant="white"
                   ariaLabel={t('common.contactUs')}
-                  className="bg-white text-[#2c2c2b] border-none"
                 >
                   {t('common.contactUs')}
                 </CTAButton>
@@ -644,12 +643,9 @@ export default function AboutServices() {
                       className="text-[#666666] leading-relaxed max-w-2xl mx-auto"
                       style={{ fontSize: 'clamp(18px, 3vw, 24px)', lineHeight: 'clamp(26px, 4vw, 34px)' }}
                     >
-                      {t.rich('process.subtitle', {
+                      {t.rich('aboutServices.process.subtitle', {
                         strong: (chunks) => (
                           <strong className="text-[#74cfaa]">{chunks}</strong>
-                        ),
-                        strongSpeed: (chunks) => (
-                          <strong className="text-[#a095e1]">{chunks}</strong>
                         )
                       })}
                     </p>

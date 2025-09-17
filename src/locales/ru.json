@@ -72,7 +72,7 @@
     "process": {
       "badge": "Наш Процесс",
       "title": "Как Мы Работаем?",
-      "subtitle": "Наша система гарантирует <strong>ясность</strong>, <strongSpeed>скорость</strongSpeed> и <strong>отсутствие сюрпризов</strong>",
+      "subtitle": "Наша система гарантирует <strong>ясность</strong>, <strong>скорость</strong> и <strong>отсутствие сюрпризов</strong>",
       "steps": {
         "discovery": {
           "title": "Исследование и Брифинг",

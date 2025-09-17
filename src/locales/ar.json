@@ -72,7 +72,7 @@
     "process": {
       "badge": "عمليتنا",
       "title": "كيف نعمل؟",
-      "subtitle": "نظامنا يضمن <strong>الوضوح</strong>، <strongSpeed>السرعة</strongSpeed>، و<strong>عدم وجود مفاجآت</strong>",
+      "subtitle": "نظامنا يضمن <strong>الوضوح</strong>، <strong>السرعة</strong>، و<strong>عدم وجود مفاجآت</strong>",
       "steps": {
         "discovery": {
           "title": "الاستكشاف والإحاطة",

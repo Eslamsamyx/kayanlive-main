@@ -76,6 +76,7 @@ export default function CTAButton({
           px-6 py-4 sm:px-8 sm:py-5 md:px-10 md:py-6 lg:px-12 lg:py-6 xl:px-12 xl:py-6
           min-h-[52px] sm:min-h-[60px] md:min-h-[64px] lg:min-h-[64px] xl:min-h-[64px]
           ${styles.gradient}
+          transition-all duration-450 ease-[cubic-bezier(0.43,0.13,0.23,0.96)]
         `}>
           <span className={`
             ${styles.textColor} font-semibold select-none
