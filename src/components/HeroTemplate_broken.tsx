@@ -249,7 +249,7 @@ export default function HeroTemplate({
               paddingLeft: "clamp(20px, 5vw, 24px)",
               paddingRight: "clamp(20px, 5vw, 24px)",
               textTransform: 'capitalize',
-              opacity: contentOpacity
+              opacity: contentOpacity as unknown as number
             }}
           >
             {mobileSubtitleGradient.map((line, index) => (
@@ -274,7 +274,7 @@ export default function HeroTemplate({
               fontFamily: '"Poppins", sans-serif',
               paddingLeft: "clamp(20px, 5vw, 24px)",
               paddingRight: "clamp(20px, 5vw, 24px)",
-              opacity: contentOpacity
+              opacity: contentOpacity as unknown as number
             }}
           >
             {mobileBodyParagraphs.map((paragraph, index) => (
@@ -287,6 +287,7 @@ export default function HeroTemplate({
               )
             ))}
           </motion.div>
+          </div>
           <div></div>
         </div>
 
@@ -322,7 +323,7 @@ export default function HeroTemplate({
               lineHeight: "1.3em",
               fontFamily: '"Poppins", sans-serif',
               textTransform: 'capitalize',
-              opacity: contentOpacity
+              opacity: contentOpacity as unknown as number
             }}
           >
             <div style={{
@@ -346,7 +347,7 @@ export default function HeroTemplate({
               fontSize: "clamp(0.8vw, 1.5vw, 22px)",
               lineHeight: "1.27em",
               fontFamily: '"Poppins", sans-serif',
-              opacity: contentOpacity
+              opacity: contentOpacity as unknown as number
             }}
           >
             {desktopBodyParagraphs.map((paragraph, index) => (
@@ -374,7 +375,7 @@ export default function HeroTemplate({
             right: 'clamp(-15px, -3vw, 15px)',
             top: 'clamp(-70px, -8vw, -40px)',
             zIndex: 1,
-            opacity: contentOpacity
+            opacity: contentOpacity as unknown as number
           }}
           aria-hidden="true"
         />
@@ -391,7 +392,7 @@ export default function HeroTemplate({
             right: 'clamp(-25px, -6vw, 5px)',
             bottom: 'clamp(-15px, -2vw, 5px)',
             zIndex: 1,
-            opacity: contentOpacity
+            opacity: contentOpacity as unknown as number
           }}
           aria-hidden="true"
         />
@@ -410,7 +411,7 @@ export default function HeroTemplate({
             top: '-24.5%',
             transformOrigin: 'center',
             zIndex: 1,
-            opacity: contentOpacity
+            opacity: contentOpacity as unknown as number
           }}
           aria-hidden="true"
         />
@@ -428,7 +429,7 @@ export default function HeroTemplate({
             bottom: '-31.5%',
             transformOrigin: 'center',
             zIndex: 1,
-            opacity: contentOpacity
+            opacity: contentOpacity as unknown as number
           }}
           aria-hidden="true"
         />

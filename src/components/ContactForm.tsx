@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import CTAButton from './CTAButton';
+import { api } from '@/trpc/react';
 // import Image from 'next/image';
 
 const imgConcertBg1 = "/assets/cf27cb2a37e9e3bfd30c1ada4fe4988496b10bbb.png";
@@ -24,6 +25,9 @@ export default function ContactForm() {
   const [toasts, setToasts] = useState<Toast[]>([]);
   // const [scrollProgress, setScrollProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // tRPC mutation for creating leads
+  const createLeadMutation = api.lead.create.useMutation();
   const [formData, setFormData] = useState({
     fullName: '',
     organization: '',
@@ -97,19 +101,33 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       addToast(t('validation.formErrors'), 'error');
       return;
     }
-    
+
     setIsSubmitting(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log('Form submitted:', { ...formData, isUrgent });
+      // Prepare lead data
+      const leadData = {
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone || undefined,
+        organization: formData.organization || undefined,
+        eventType: formData.eventType || undefined,
+        budget: formData.budget || undefined,
+        goals: formData.goals || undefined,
+        isUrgent: isUrgent === 'yes',
+        source: 'contact_form',
+        // Capture browser info for tracking
+        userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : undefined,
+        referrer: typeof window !== 'undefined' ? document.referrer : undefined,
+      };
+
+      await createLeadMutation.mutateAsync(leadData);
       addToast(t('toasts.success'), 'success');
-      
+
       // Reset form
       setFormData({
         fullName: '',
@@ -122,7 +140,8 @@ export default function ContactForm() {
       });
       setIsUrgent(null);
       setErrors({});
-    } catch {
+    } catch (error) {
+      console.error('Failed to submit lead:', error);
       addToast(t('toasts.error'), 'error');
     } finally {
       setIsSubmitting(false);

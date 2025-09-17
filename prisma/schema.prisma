@@ -10,10 +10,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserRole {
+  ADMIN
+  MODERATOR
+  CONTENT_CREATOR
+}
+
 model User {
   id            String    @id @default(cuid())
   email         String    @unique
   name          String?
+  password      String?
+  role          UserRole  @default(CONTENT_CREATOR)
   emailVerified DateTime?
   image         String?
   accounts      Account[]
@@ -66,4 +74,43 @@ model Post {
   authorId  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  PROPOSAL_SENT
+  WON
+  LOST
+  NURTURING
+}
+
+model Lead {
+  id           String     @id @default(cuid())
+  fullName     String
+  email        String
+  phone        String?
+  organization String?
+  eventType    String?
+  budget       String?
+  goals        String?
+  isUrgent     Boolean    @default(false)
+  status       LeadStatus @default(NEW)
+  source       String     @default("contact_form")
+  notes        String?
+  assignedTo   String?
+
+  // Tracking fields
+  ipAddress    String?
+  userAgent    String?
+  referrer     String?
+  utm_source   String?
+  utm_medium   String?
+  utm_campaign String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("leads")
 }

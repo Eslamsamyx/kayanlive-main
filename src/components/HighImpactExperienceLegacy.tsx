@@ -65,7 +65,7 @@ export default function HighImpactExperienceLegacy() {
                   lineHeight: 'clamp(22px, 4.5vw, 26px)'
                 }}
               >
-                "{t('highImpact.testimonial')}"
+                &ldquo;{t('highImpact.testimonial')}&rdquo;
               </p>
             </blockquote>
             <cite
@@ -130,7 +130,7 @@ export default function HighImpactExperienceLegacy() {
                         lineHeight: 'clamp(26px, 2.8vw, 34px)'
                       }}
                     >
-                      "{t('highImpact.testimonial')}"
+                      &ldquo;{t('highImpact.testimonial')}&rdquo;
                     </p>
                   </blockquote>
                   <cite

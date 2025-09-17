@@ -54,12 +54,12 @@ export default function Button({
   `;
 
   // Clean arrow component - proper size and styling
-  const ArrowIcon = ({ isHoverArrow = false }) => (
+  const ArrowIcon = ({ isHoverArrow = false }: { isHoverArrow?: boolean }) => (
     <div
       className="w-5 h-5 lg:w-6 lg:h-6 flex items-center justify-center flex-shrink-0"
       style={{
         transform: isRTL ? 'scaleX(-1)' : 'none',
-        color: isHovered ? '#ffffff' : 'currentColor'
+        color: isHovered || isHoverArrow ? '#ffffff' : 'currentColor'
       }}
     >
       <svg

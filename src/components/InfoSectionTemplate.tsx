@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import Image from 'next/image';
 import CTAButton from './CTAButton';
 

@@ -248,11 +248,7 @@ export default function AboutServices() {
                 <CTAButton
                   variant="white"
                   ariaLabel={t('common.contactUs')}
-                  style={{
-                    backgroundColor: 'white',
-                    color: '#2c2c2b',
-                    border: 'none'
-                  }}
+                  className="bg-white text-[#2c2c2b] border-none"
                 >
                   {t('common.contactUs')}
                 </CTAButton>

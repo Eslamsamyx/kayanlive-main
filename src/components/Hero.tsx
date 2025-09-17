@@ -15,20 +15,20 @@ const imgKayanLogo = "/assets/823c27de600ccd2f92af3e073c8e10df3a192e5c.png";
 const imgKMobile = "/assets/873e726ea40f8085d26088ffc29bf8dfb68b10ee.png";
 const imgVectorMobile = "/assets/280033d008f397b92a0642ef0eb81b067b3be2fd.svg";
 
-// Mobile Slide 2 assets from Figma (node-id 22-982)
-const imgPattern0331 = "/assets/2e5da0ba94a7081a8e8355ba87266411fee96738.png";
-const imgVector449 = "/assets/b53ce5773ee34aec32d25ec4f653964e5daa91e6.svg";
-const imgVector450 = "/assets/e5d598dd977002555d271ede5cc7873782a80e66.svg";
-const imgVector451 = "/assets/f6ac75d6fe0a6a5d5012ab737d5a5fb0c39f4591.svg";
-const imgVector452 = "/assets/6968639e0eef5880ce6f2caed2594c9c3c396938.svg";
-const imgVector453 = "/assets/b6337776440823365c9d6d0693bb95cf16288fe4.svg";
-const imgVector454 = "/assets/3929c4e9fb7deebafe5202b5e1f3e0d3f29067c6.svg";
-const imgVector455 = "/assets/4b056204cf3f68ba704204632b097b1e0f14e21a.svg";
-const imgVector456 = "/assets/9ca75393b1fe472137c4e5a9e4b0739115dc6245.svg";
-const imgVector457 = "/assets/6338961563b8749b796fc02fc4ce2146f1b695c8.svg";
-const imgVector458 = "/assets/2f1c0518048d573eddb0525c46e5cf3478830322.svg";
-const imgVector459 = "/assets/0b8b87749ddbac7e694af683b0ade373c2c2ec6a.svg";
-const imgArrow1 = "/assets/d40495f3a82dbc1b73402bf2e9b45f90c56a4c70.svg";
+// Mobile Slide 2 assets from Figma (node-id 22-982) - commented out unused assets
+// const imgPattern0331 = "/assets/2e5da0ba94a7081a8e8355ba87266411fee96738.png";
+// const imgVector449 = "/assets/b53ce5773ee34aec32d25ec4f653964e5daa91e6.svg";
+// const imgVector450 = "/assets/e5d598dd977002555d271ede5cc7873782a80e66.svg";
+// const imgVector451 = "/assets/f6ac75d6fe0a6a5d5012ab737d5a5fb0c39f4591.svg";
+// const imgVector452 = "/assets/6968639e0eef5880ce6f2caed2594c9c3c396938.svg";
+// const imgVector453 = "/assets/b6337776440823365c9d6d0693bb95cf16288fe4.svg";
+// const imgVector454 = "/assets/3929c4e9fb7deebafe5202b5e1f3e0d3f29067c6.svg";
+// const imgVector455 = "/assets/4b056204cf3f68ba704204632b097b1e0f14e21a.svg";
+// const imgVector456 = "/assets/9ca75393b1fe472137c4e5a9e4b0739115dc6245.svg";
+// const imgVector457 = "/assets/6338961563b8749b796fc02fc4ce2146f1b695c8.svg";
+// const imgVector458 = "/assets/2f1c0518048d573eddb0525c46e5cf3478830322.svg";
+// const imgVector459 = "/assets/0b8b87749ddbac7e694af683b0ade373c2c2ec6a.svg";
+// const imgArrow1 = "/assets/d40495f3a82dbc1b73402bf2e9b45f90c56a4c70.svg";
 
 // Custom hook for measuring text dimensions and calculating adaptive heights
 function useAdaptiveTextHeight() {
