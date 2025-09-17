@@ -192,7 +192,7 @@ export default function WhereWeWork() {
           </div>
 
           {/* Desktop Pattern - Right Side - From Figma */}
-          <div className="absolute hidden md:flex bottom-[-223px] h-[757px] items-center justify-center right-[-105px] w-[749px] z-20">
+          <div className="absolute hidden md:flex bottom-[-223px] h-[757px] items-center justify-center right-[-50px] w-[400px] z-20 overflow-hidden">
             <div className="flex-none rotate-[90deg]">
               <div
                 className="bg-center bg-cover bg-no-repeat h-[749px] w-[757px]"

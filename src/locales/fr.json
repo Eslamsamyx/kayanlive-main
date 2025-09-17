@@ -9,65 +9,444 @@
     "clientsPartners": "Clients & Partenaires"
   },
   "hero": {
-    "title": "Bienvenue chez KayanLive, Experts Événementiels de Premier Plan du CCG",
+    "title": "Bienvenue chez KayanLive Gestion d'Événements de Premier Plan en Arabie Saoudite, aux EAU et à Travers le CCG",
+    "slide2Title": "Livrant Créativité, Innovation et Exécution le Tout Sous un Même Toit",
+    "slide2Subtitle": "Nous Vous Apportons une Stratégie d'Élite, une Exécution Rapide et une Maîtrise Culturelle - Sans Compromis.",
     "description": "Gestion d'Événements de Premier Plan en Arabie Saoudite, à Dubaï et dans tout le CCG—Offrant Créativité, Innovation et Exécution Sous un Même Toit. Quand d'Autres Hésitent, Paniquent ou Reculent, Nous Passons à l'Action. Nous Vous Apportons une Stratégie d'Élite, une Exécution Rapide et une Maîtrise Culturelle Sans Compromis.",
-    "cta": "Planifier une Consultation"
+    "cta": "Planifier une Consultation",
+    "stats": {
+      "projects": "Soutenu par 120+ Projets CCG",
+      "founded": "Depuis 2015"
+    }
   },
   "highImpact": {
-    "high": "Créations",
-    "impact": "Spectaculaires",
-    "experience": "Inoubliables"
+    "title": "Votre référence en gestion d'événements à Dubaï pour une livraison immersive, engageante et haute pression.",
+    "subtitle": "Quand le timing compte et que la précision n'est pas négociable, appelez KayanLive, une société leader en gestion d'événements à Dubaï.",
+    "testimonial": "KayanLive a transformé une crise de trois semaines en un stand record.",
+    "testimonialAuthor": "Directeur des Événements, FMCG Mondial"
   },
   "aboutServices": {
-    "description1": "KayanLive est une **société de gestion d'événements** à service complet avec des bureaux actifs dans le CCG, stratégiquement positionnée pour offrir des **expériences à fort impact**.",
-    "description2": "Nous créons des expériences technologiques qui engagent, informent et impressionnent—de l'**animation 2D/3D et hologrammes à la robotique, AR/VR et environnements interactifs**. Reconnus dans toutes les grandes villes, d'Abu Dhabi à Riyad, notre équipe livre tout en interne—rapidement, parfaitement et entièrement intégré.",
-    "description3": "Pendant que d'autres hésitent, nous exécutons—combinant créativité avant-gardiste avec expertise technique pour donner vie à votre vision rapidement et sans effort.",
-    "description4": "Nous ne sommes pas votre entreprise typique de planification d'événements ou d'expositions. Quand le plan change et que la pression monte, nous apportons l'**équipe**, le **système** et la **vitesse** pour que ça marche.",
-    "serviceTitle": "Événements en direct & Spectacles",
-    "serviceDescription": "Des cérémonies et performances publiques aux spectacles culturels, nous dirigeons et livrons la scénographie, le flux de foule, l'audiovisuel et la logistique complète de spectacles en direct—jusqu'à la dernière seconde du déroulement du spectacle.",
-    "idealFor": "Idéal pour la **gestion d'événements d'entreprise** et les commissions nationales.",
-    "cta": "Explorez nos capacités"
+    "title": "Que Faisons-Nous ?",
+    "description1": "KayanLive est une **société de gestion d'événements à Dubaï** à service complet avec des bureaux actifs à travers le **marché des événements de 85 milliards de dollars** du CCG (Mordor Intelligence, 2025), stratégiquement positionnée pour livrer des **expériences à fort impact**.",
+    "description2": "Nous créons des **expériences technologiques** qui engagent, informent et impressionnent, de l'**animation 2D/3D et hologrammes à la robotique, AR/VR et environnements interactifs**.",
+    "description3": "Reconnus dans toutes les grandes villes, d'**Abu Dhabi à Riyad**, notre équipe livre tout **en interne, rapidement, parfaitement et entièrement intégré**. Cela nous positionne parmi les **meilleures sociétés de gestion d'événements à Dubaï**.",
+    "description4": "Pendant que d'autres hésitent, nous exécutons, combinant **créativité avant-gardiste avec expertise technique** pour donner vie à votre vision **rapidement et sans effort**.",
+    "description5": "Nous ne sommes pas vos **entreprises de planification d'événements à Dubaï** typiques ou une **société d'expositions** standard. Quand les plans changent et que la pression monte, nous apportons l'**équipe**, le **système** et la **vitesse** pour que ça marche.",
+    "whyChoose": "Pourquoi Choisir KayanLive ?",
+    "servicesLabel": "Nos Services",
+    "pipelineTitle": "Conception, Construction et Livraison d'Événements Exceptionnels de Bout en Bout",
+    "services": {
+      "liveEvents": {
+        "title": "Événements en direct & Spectacles",
+        "description": "Des cérémonies et performances publiques aux spectacles culturels, nous dirigeons et livrons la scénographie, le flux de foule, l'audiovisuel et la logistique complète de spectacles en direct jusqu'à la dernière seconde du déroulement du spectacle.",
+        "idealFor": "Idéal pour la **gestion d'événements d'entreprise aux EAU** et les **commissions nationales**."
+      },
+      "conferences": {
+        "title": "Conférences & Sommets",
+        "description": "Nous gérons chaque couche de rassemblements de dirigeants, forums gouvernementaux et ateliers stratégiques, incluant la mise en scène, le protocole, la sécurité et la conception d'expérience.",
+        "idealFor": "Approuvés par les principaux **planificateurs d'événements à Dubaï** et **conseils multinationaux** recherchant contrôle et raffinement."
+      },
+      "exhibitions": {
+        "title": "Expositions & Expériences de Marque",
+        "description": "Nous concevons et construisons des pavillons, stands et zones complets qui combinent présence architecturale avec narration immersive.",
+        "idealFor": "Notre expertise nous place parmi les **sociétés d'exposition à Dubaï** les plus fiables et la **société d'exposition préférée à Dubaï** pour les expériences de marque à fort impact."
+      },
+      "immersiveAV": {
+        "title": "AV Immersif & Technologie",
+        "description": "Nos équipes de production et de contenu donnent vie aux espaces avec AR/VR, murs LED, projection mapping, signaux SMPTE codés temporellement, réseaux Dante redondants et outils d'engagement en temps réel entièrement intégrés dans la créativité.",
+        "idealFor": "Nous montrons la voie parmi les **meilleures sociétés de gestion d'événements à Dubaï** pour les activations intégrées technologiquement."
+      },
+      "eventRescue": {
+        "title": "Sauvetage d'Événements de Dernière Minute",
+        "description": "Les plans sont tombés à l'eau ? Le fournisseur vous a fait faux bond ? Nous intervenons, réalignons et exécutons, sans chaos ni ego. En 72 heures, nous avons reconstruit des activations pour des événements majeurs saoudiens et livré parfaitement.",
+        "idealFor": "Nos activations expérientielles délivrent **65% d'augmentation ROI & 70% de fidélité de marque plus élevée** (ProfileTree, 2025)."
+      }
+    },
+    "emergencyResponse": "Intervention d'Urgence",
+    "cards": {
+      "marketLeadership": "Leadership du Marché",
+      "techInnovation": "Innovation Technologique",
+      "regionalExcellence": "Excellence Régionale",
+      "swiftExecution": "Exécution Rapide"
+    },
+    "process": {
+      "badge": "Notre Processus",
+      "title": "Comment Nous Travaillons ?",
+      "subtitle": "Notre système garantit <strong>la clarté</strong>, <strongSpeed>la rapidité</strongSpeed> et <strong>zéro surprise</strong>",
+      "steps": {
+        "discovery": {
+          "title": "Découverte & Briefing",
+          "description": "Alignement sur les objectifs, le public et les résultats."
+        },
+        "design": {
+          "title": "Conception d'Expérience Créative",
+          "description": "Les équipes transversales cartographient chaque élément sensoriel et stratégique."
+        },
+        "planning": {
+          "title": "Planification Technique",
+          "description": "L'audiovisuel, la construction, le lieu et la logistique sont définis et programmés."
+        },
+        "production": {
+          "title": "Production & Exécution",
+          "description": "La fabrication, les médias, l'équipage et le matériel sont tous verrouillés, chargés et prêts pour le direct."
+        },
+        "showControl": {
+          "title": "Contrôle du Spectacle",
+          "description": "Nous gérons les répétitions, le timing, les opérations techniques et l'équipe sur site."
+        },
+        "postEvent": {
+          "title": "Analyse Post-Événement",
+          "description": "Les analyses, insights et évaluations de performance sont disponibles.",
+          "badge": "Optionnel"
+        }
+      }
+    },
+    "cta": "Explorez Nos Capacités"
   },
   "whyKayan": {
     "title": "Pourquoi",
-    "founderText": "KayanLive a été fondée par **Khalid Alhasan**, un leader régional en stratégie expérientielle et technologie événementielle. Après plus d'une décennie à diriger des activations de haut profil à travers une entreprise technologique leader EAU/Saoudienne, il a lancé KayanLive pour apporter une **livraison d'événements complète et transversale** aux clients qui ont besoin de plus qu'un simple fournisseur tech—ils ont besoin d'une équipe qui comprend ce qui est en jeu et sait comment livrer sous pression.",
-    "philosophy1": "\"Kayan\" en arabe signifie être, identité et existence—et c'est exactement ce que nous représentons. Nous croyons que chaque marque, chaque organisation et chaque idée a quelque chose de réel derrière elle—une essence qui mérite d'être vue, ressentie et mémorisée.",
-    "philosophy2": "C'est pourquoi notre équipe est construite pour travailler de la proposition au jour du spectacle comme une unité—sans transferts, sans friction et sans lacunes.",
-    "experience1": "Nous avons été la force silencieuse derrière les événements phares en Arabie saoudite, les activations de marque à délai rapide à Riyad, et les installations d'exposition à travers le CCG. Notre vitesse ne sacrifie pas la qualité. Elle la protège.",
-    "experience2": "Que vous lanciez un pavillon, ouvriez un événement culturel, ou répariez le désordre de quelqu'un d'autre, nous sommes le partenaire que vous appelez quand l'horloge tourne déjà."
+    "openingStatement": "Nous ne sommes pas plus rapides en coupant les coins. Nous sommes plus rapides parce que nous avons construit le système.",
+    "sectionTitle": "Construit par un Initié des Événements CCG",
+    "founderText": "KayanLive a été fondée par **Khalid Alhasan**, un leader régional en stratégie expérientielle et technologie événementielle. Après plus d'une décennie à diriger des activations de haut profil à travers une grande entreprise technologique EAU/Saoudienne, il a lancé KayanLive pour offrir plus qu'une **agence de gestion d'événements Dubaï** standard ; il a construit une entreprise en laquelle les clients ont confiance pour la créativité et l'exécution.",
+    "creativityExecution": "La plupart des entreprises de **planification d'événements Dubaï** vous font choisir entre créativité et exécution. Nous croyons que votre projet mérite les deux. C'est pourquoi nous avons construit un système livrant exactement cela, la narration créative combinée avec la logique de production en temps réel.",
+    "philosophy1": "\"Kayan\" en arabe signifie être, identité et existence, et c'est exactement ce que nous représentons. Chaque marque, organisation et idée a une essence qui mérite d'être vue, ressentie et mémorisée.",
+    "philosophy2": "Notre équipe travaille de la proposition au jour du spectacle comme une unité, sans transferts, sans friction et sans lacunes.",
+    "experience1": "Nous avons été la force silencieuse derrière les événements phares en Arabie saoudite, les activations de marque à délai rapide et les installations d'exposition à travers le CCG. Notre vitesse ne sacrifie jamais la qualité ; elle la protège.",
+    "experience2": "Que vous lanciez un pavillon, ouvriez un événement culturel ou répariez le désordre de quelqu'un d'autre, nous sommes le partenaire que vous appelez quand l'horloge tourne déjà."
   },
   "industries": {
-    "badge": "Avec qui nous travaillons",
+    "badge": "Avec Qui Nous Travaillons",
     "title": "Industries",
-    "government": "Organismes gouvernementaux & semi-gouvernementaux",
-    "enterprise": "Marques multinationales & d'entreprise",
-    "realEstate": "Développeurs Immobiliers & Automobiles",
-    "agencies": "Planificateurs d'Événements & Agences Marketing"
+    "government": "Organismes Gouvernementaux et Semi-Gouvernementaux",
+    "governmentDesc": "Nous avons soutenu des ministères, offices de tourisme et initiatives royales sur des projets majeurs de **gestion d'événements Arabie Saoudite** alignés avec **Vision 2030**, **Expo 2020** et les célébrations de la **Fête Nationale**. Nous anticipons les obstacles et gérons le stress avant qu'il vous atteigne.",
+    "enterprise": "Marques Multinationales et d'Entreprise",
+    "enterpriseDesc": "Des constructions de scène d'AGM aux lancements de produits sur nouveaux marchés, nous aidons les équipes d'entreprise à atteindre les KPI et impressionner les dirigeants. Nous sommes une **société d'événements fiable à Dubaï** qui sait ce que veut le siège et vous fait passer pour le héros.",
+    "realEstate": "Développeurs Immobiliers et Automobiles",
+    "realEstateDesc": "Nous transformons les showrooms et sites en activations de marque immersives. Que vous dévoiliez une tour à Dubaï ou lanciez un véhicule à Dammam, notre expertise de **société d'exposition à Dubaï** génère prospects et trafic piéton.",
+    "agencies": "Planificateurs d'Événements et Agences Marketing",
+    "agenciesDesc": "Quand vous avez besoin de fiabilité, de force et de zéro ego, nous nous présentons. Nous nous intégrons en marque blanche sans effort dans votre équipe, construisons votre vision et livrons avec raffinement, silencieusement, rapidement et de manière fiable."
   },
   "whereWeWork": {
     "badge": "Où Nous Travaillons",
+    "title": "Où Travaillons-Nous ?",
     "description": "Basée en Arabie Saoudite et à Dubaï, KayanLive livre des événements à fort impact, des activations publiques et lancements d'entreprise aux présentations dirigées par le gouvernement.",
-    "operateText": "Nous opérons à travers le CCG:",
-    "saudi": "**Riyadh, Jeddah, Dammam**, et les principales villes **Saoudiennes**",
-    "uae": "**Dubaï, Abu Dhabi, Sharjah,** et les **EAU** plus larges",
-    "partners": "Et à travers des réseaux partenaires au **Qatar, Oman, Bahreïn et Koweït**",
-    "question": "Planifiez-vous un événement en dehors des **EAU ou de l'Arabie Saoudite** ?",
+    "operateText": "Nous opérons à travers le CCG :",
+    "saudi": "**Riyadh, Jeddah, Dammam** et les principales villes **Saoudiennes**",
+    "uae": "**Dubaï, Abu Dhabi, Sharjah** et les **EAU** plus larges",
+    "partners": "Réseaux partenaires au **Qatar, Oman, Bahreïn et Koweït**",
+    "question": "Qu'il s'agisse de gestion d'événements à Riyad, de soutien à Muscat ou ailleurs, nous sommes parmi les principales sociétés de gestion d'événements des EAU prêtes à diriger.",
     "cta": "Construisons Ensemble"
   },
   "achievements": {
     "title": "Réalisations",
-    "fasterTurnaround": "3x Plus Rapide",
-    "pressCoverage": "85% d'Augmentation de Couverture Presse",
+    "turnaroundTime": "Délai de 72 Heures",
+    "pressCoverage": "3× Augmentation de Couverture Presse",
     "missedDeadlines": "0 Échéance Manquée",
-    "clientsServed": "500+ Clients Servis",
-    "projectsCompleted": "1,200+ Projets Terminés",
-    "yearsExpertise": "15+ Années d'Expertise",
-    "countriesReached": "50+ Pays Atteints",
-    "clientSatisfaction": "98% Satisfaction Client"
+    "clientsServed": "120+ Clients Servis",
+    "projectsCompleted": "400+ Projets Terminés (2015-2025)",
+    "yearsExpertise": "15+ Années d'Expertise"
   },
   "execution": {
-    "heading": "Là où d'autres peinent, nous exécutons avec précision",
-    "cta": "obtenir de l'aide aujourd'hui"
+    "heading": "Là où d'Autres Peinent, Nous Exécutons avec Précision",
+    "headlineV1": "Quand l'Exécution ne Peut Pas Échouer, Comptez sur KayanLive.",
+    "headlineV2": "Quand la Plupart des Équipes Craquent, Nous Faisons que Ça Arrive",
+    "headlineV3": "Là où d'Autres Peinent, Nous Exécutons avec Précision",
+    "description": "Votre brief vient de changer. Le lieu est confirmé, mais rien d'autre ne l'est. Tout le monde vous regarde, et vous cherchez quelqu'un qui peut réellement faire cela.",
+    "promise": "Nous avons fait un business de faire que ça arrive.",
+    "guarantee1": "Pas de seconde chance. Pas de surprises de dernière minute.",
+    "guarantee2": "KayanLive assure une exécution fluide du début à la fin.",
+    "cta": "Obtenez du Soutien Aujourd'hui",
+    "ctaTag": "Réservez un Appel Stratégique de 15 minutes"
+  },
+  "about": {
+    "page": {
+      "title": "Commencer avec Certitude",
+      "subtitle": "Délais rapides. Idées audacieuses. Aucune place pour l'erreur.",
+      "description": "Notre Unité Zone Rouge™ entre tôt, s'adapte rapidement et exécute avec clarté. Pour les initiatives qui exigent envergure, vitesse et substance, commencez avec l'entreprise construite pour cela.",
+      "buttonText": "Parlons Stratégie"
+    },
+    "hero": {
+      "title": "À Propos de Nous",
+      "subtitle1": "Stratégie Construite pour l'Urgence.",
+      "subtitle2": "Vision Construite pour l'Impact.",
+      "paragraph1": "Opérant dans un <marketStat>marché d'événements du CCG de 85 milliards de dollars projeté d'atteindre 132 milliards USD d'ici 2030</marketStat> <citation>(Mordor Intelligence, 2025)</citation> KayanLive transforme la pression en performance. En tant qu'entreprise de gestion d'événements de premier plan à Dubaï et CCG avec des opérations actives aux ÉAU et en Arabie Saoudite, nous créons des expériences rapides à déployer, précises en exécution et audacieuses en résultat. Quand le timing est serré et les attentes élevées, notre structure reste ferme, et votre vision avance avec clarté.",
+      "paragraph2": "Les événements livrés par KayanLive atteignent plus loin, se sentent plus nets et durent plus longtemps. Chaque projet est construit pour diriger, non suivre. Nous comprenons comment la livraison à hauts enjeux façonne les initiatives nationales en tant qu'experts en gestion d'événements à Dubaï. Les expériences de marque en direct génèrent jusqu'à <purchaseStat>96% d'intention d'achat post-événement</purchaseStat> <citation>(Corporate Event News, 2025)</citation>",
+      "skipToContent": "Passer au contenu principal"
+    },
+    "origin": {
+      "title1": "L'Origine de la Capacité",
+      "title2": "Construits pour Diriger. Prouvés pour Livrer.",
+      "paragraph1": "Après des années de direction d'activations de marque haut niveau et de vitrines immersives à travers le CCG, notre fondateur, <strong>Khalid Alhasan</strong>, a reconnu un schéma : la plupart des fournisseurs calent quand la vitesse est critique, et craquent quand la pression monte.",
+      "paragraph2": "KayanLive a été conçue pour changer l'équation de la <strong>gestion d'événements à Dubaï et CCG</strong>. Depuis 2015 nous avons livré <strong>120+ activations avec 0 échéances manquées</strong>.",
+      "paragraph3": "Ce qui a commencé comme une réponse aux pannes régionales opère maintenant comme un nom de confiance parmi les <strong>meilleures entreprises de gestion d'événements à Dubaï</strong> et la région. Reconnus à travers les Émirats et les régions CCG plus larges, nous avons gagné la confiance par la clarté et l'exécution.",
+      "paragraph4": "Chaque couche de <strong>planification de chemin critique PERT, réseaux Dante redondants, matrices de risque ISO 31000</strong> vit dans une structure unifiée",
+      "paragraph5": "Les idées bougent plus vite ici parce que les équipes s'alignent plus vite. Pas de lacunes. Pas de temps perdu. Chaque seconde est comptabilisée.",
+      "paragraph6": "Notre équipe de direction s'étend sur les disciplines et industries. Des directeurs créatifs et producteurs AV aux ingénieurs et spécialistes logistiques, chaque expert comprend à quoi ressemble le succès dans les environnements à hauts enjeux. Avec des années d'expérience cumulative et d'exécution régionale, nous guidons avec confiance et agissons avec certitude.",
+      "paragraph7": "Nous avons livré des cérémonies nationales, des lancements d'entreprise et des reprises d'urgence, chacune avec vitesse, structure et précision.",
+      "statisticalText": "Les activations expérientielles génèrent en moyenne <roiStat>65% d'augmentation ROI et 70% de fidélité de marque plus élevée</roiStat> <citation>(ProfileTree, 2025)</citation>.",
+      "paragraph8": "Pas de chaos. Pas de transferts. Pas de pannes.",
+      "paragraph9": "Cette approche a positionné KayanLive comme une <strong>entreprise de gestion d'événements de confiance à Dubaï</strong> et partenaire d'exécution pour cérémonies nationales, lancements de produits multinationaux, conférences à grande échelle et reprises de dernière minute. L'échelle s'adapte, mais le résultat reste le même : impact sans compromis.",
+      "skipToNext": "Passer à la section suivante"
+    },
+    "values": {
+      "title": "Valeurs Qui Activent les Résultats",
+      "cards": {
+        "purpose": {
+          "title": "Créativité Axée sur l'Objectif",
+          "description": "Chaque concept gagne sa place en servant un objectif"
+        },
+        "precision": {
+          "title": "Précision Sans Hésitation",
+          "description": "Les plans sont construits pour performer sous pression"
+        },
+        "innovation": {
+          "title": "Innovation de Niveau Suivant",
+          "description": "La technologie rencontre l'expérience au service de l'histoire"
+        },
+        "collaboration": {
+          "title": "Collaboration Fiable",
+          "description": "Nous agissons comme une vraie extension de votre équipe"
+        },
+        "speed": {
+          "title": "Vitesse Sans Sacrifice",
+          "description": "Efficacité alimentée par la structure"
+        },
+        "cultural": {
+          "title": "Intelligence Culturelle",
+          "description": "Exécution alignée avec le contexte local et l'audience"
+        },
+        "strategic": {
+          "title": "Échelle Stratégique",
+          "description": "Qu'il s'agisse d'un lancement ciblé ou d'une expo multi-salles, nous livrons avec la portée d'une entreprise d'exposition leader"
+        }
+      }
+    }
+  },
+  "services": {
+    "hero": {
+      "ariaLabel": "Section héros de nos services",
+      "title": "Nos Services",
+      "screenReaderTitle": "Services KayanLive",
+      "subtitleGradient": "Construits avec Précision. Testés sous Pression.",
+      "subtitleWhite": "Guidés par l'Expérience.",
+      "bodyParagraph1": "KayanLive offre des événements structurés et à fort impact aux Émirats Arabes Unis et en Arabie Saoudite, et à travers le GCC plus large, conçus avec une ambition créative et exécutés avec une certitude opérationnelle.",
+      "bodyParagraph2": "Nous opérons comme une entreprise d'événements KSA à service complet, opérant également aux EAU avec une portée régionale profonde. Chaque service répertorié ici représente une fusion transparente de vitesse, d'échelle et de stratégie."
+    },
+    "grid": {
+      "screenReaderTitle": "Nos Services",
+      "services": {
+        "2d3dContent": {
+          "title": "Développement de Contenu 2D, 3D",
+          "description": "De l'art conceptuel aux environnements immersifs entièrement réalisés, notre équipe créative produit de l'animation, de la modélisation et du contenu de visualisation qui donne vie aux idées avec une qualité cinématographique et une précision technique."
+        },
+        "videoEditing": {
+          "title": "Montage Vidéo et Intégration d'Images Réelles",
+          "description": "Nous mélangeons l'action en direct avec les éléments numériques, l'étalonnage des couleurs, les graphiques en mouvement et les flux de travail post-production qui livrent du contenu prêt pour la diffusion optimisé pour toute plateforme ou format d'affichage."
+        },
+        "conferences": {
+          "title": "Conférences et Forums",
+          "description": "Gestion complète de conférences incluant la coordination des intervenants, la production technique, la diffusion en direct, les outils d'engagement du public et la gestion du protocole pour les rassemblements de niveau direction et gouvernemental."
+        },
+        "hologramActivations": {
+          "title": "Activations d'Hologrammes",
+          "description": "Affichages holographiques de pointe et cartographie par projection qui créent des moments de marque mémorables, des lancements de produits et des expériences interactives qui captent l'attention et stimulent l'engagement."
+        },
+        "interactiveActivations": {
+          "title": "Activations Interactives",
+          "description": "Installations tactiles, systèmes de contrôle gestuel, expériences AR/VR et environnements gamifiés qui encouragent la participation et créent des connexions durables entre les marques et les audiences."
+        },
+        "corporateEvents": {
+          "title": "Événements d'Entreprise",
+          "description": "Rassemblements d'entreprise stratégiques, lancements de produits, team building, cérémonies de remise de prix et retraites exécutives conçus pour s'aligner avec les objectifs commerciaux et renforcer la culture d'entreprise."
+        },
+        "immersiveAV": {
+          "title": "Production AV Immersive",
+          "description": "Production audiovisuelle à grande échelle incluant des murs LED, des systèmes de projection, de l'audio spatial, de la conception d'éclairage et des systèmes de contrôle de spectacle qui transforment les espaces en environnements de narration dynamiques."
+        },
+        "techDriven": {
+          "title": "Activations Axées sur la Technologie",
+          "description": "Intégrations IoT, expériences alimentées par l'IA, robotique, visualisation de données en temps réel et technologies d'environnement intelligent qui repoussent les limites de ce qui est possible dans les événements en direct."
+        },
+        "liveEvents": {
+          "title": "Événements en Direct",
+          "description": "Concerts, festivals, cérémonies et événements publics à grande échelle avec gestion complète de production, contrôle des foules, coordination de sécurité et capacités de diffusion en direct."
+        }
+      }
+    },
+    "experienceCenters": {
+      "title": "Centres d'Expérience et Installations Permanentes",
+      "centers": {
+        "digitalExperience": {
+          "title": "Centres d'Expérience Numérique",
+          "description": "Salles d'exposition interactives et centres de visiteurs qui combinent les espaces physiques avec la narration numérique, avec des interfaces tactiles, des affichages immersifs et des expériences multimédia guidées qui éduquent et engagent les visiteurs tout en renforçant l'identité de marque."
+        },
+        "digitalMuseums": {
+          "title": "Musées Numériques",
+          "description": "Expériences de musée modernes qui mélangent les artefacts traditionnels avec la technologie interactive, avec des expositions améliorées par AR, des archives numériques, des visites virtuelles et des installations multimédia qui rendent l'histoire et la culture accessibles à des audiences diverses."
+        },
+        "expoPavilions": {
+          "title": "Pavillons d'Exposition",
+          "description": "Espaces d'exposition à grande échelle conçus pour les expositions internationales et les salons professionnels, incorporant des matériaux durables, des conceptions modulaires et des systèmes technologiques intégrés qui présentent des narratifs nationaux ou d'entreprise sur une scène mondiale."
+        },
+        "innovationCenters": {
+          "title": "Centres d'Innovation",
+          "description": "Espaces axés sur la technologie qui démontrent la recherche de pointe, le développement de produits et les concepts futurs à travers des démos interactives, des affichages de prototypes et des environnements collaboratifs conçus pour inspirer et éduquer les visiteurs sur les technologies émergentes."
+        },
+        "permanentInstallations": {
+          "title": "Installations Permanentes",
+          "description": "Installations créatives à long terme pour les espaces publics, les sièges sociaux d'entreprise et les lieux culturels qui combinent vision artistique et durabilité technique, créant des expériences emblématiques qui évoluent avec leurs communautés tout en maintenant l'excellence opérationnelle."
+        }
+      }
+    },
+    "callToAction": {
+      "title": "Pas Sûr par Où Commencer ?",
+      "subtitle": "Chaque projet commence par une seule conversation.",
+      "buttonText": "Parlez à Notre Équipe Stratégique"
+    }
+  },
+  "work": {
+    "hero": {
+      "ariaLabel": "Section héros de nos réalisations",
+      "title": "Nos Réalisations",
+      "subtitle1": "Processus Axé sur la Qualité.",
+      "subtitle2": "Résultats Axés sur l'Impact.",
+      "description": "Chez KayanLive, chaque projet commence avec un seul objectif : créer une expérience qui émeut les gens, aligne les parties prenantes et délivre une valeur mesurable. Nous concevons pour l'engagement émotionnel et construisons pour la fiabilité opérationnelle—sans sacrifier l'un ou l'autre.",
+      "impactStatement": "L'impact n'est pas un effet secondaire. C'est la norme.",
+      "processDescription": "Des activations haute visibilité dans les centres-villes aux forums exécutifs organisés sous contraintes de temps, notre entreprise d'exposition entre avec un alignement complet et livre à chaque point de contact. Quand d'autres fournisseurs s'arrêtent, nous passons à la vitesse supérieure. Quand les décisions sont retardées, nous absorbons la pression et maintenons la clarté. Et quand l'objectif change en cours de route, nous nous adaptons sans erreur. Reconnu comme un organisateur d'événements de premier plan dans le CCG, nous ne décorons pas—nous livrons.",
+      "skipToContent": "Aller au contenu principal"
+    },
+    "preview": {
+      "title": {
+        "line1": "Un Aperçu",
+        "line2": "de Ce Qui",
+        "line3": "Arrive"
+      },
+      "description": "Nos archives d'études de cas s'enrichissent, présentant des retours sur investissement rapides, des augmentations de temps de séjour de +12% et des augmentations de couverture médiatique de 3× aux Émirats arabes unis et en Arabie saoudite. Elles présenteront bientôt des moments phares des Émirats arabes unis et d'Arabie saoudite, couvrant les événements en direct, les activations technologiques immersives, les lancements du secteur public et les expériences de marque à grande échelle.",
+      "positioning": "Celles-ci mettront en valeur le travail qui nous positionne parmi les meilleures entreprises de gestion d'événements de Dubaï."
+    },
+    "statement": {
+      "description": "Chaque cas détaillera ce qui a été livré, comment cela a été structuré et pourquoi cela a réussi. Pour l'instant, notre équipe est disponible pour parcourir ces points saillants et partager des présentations visuelles détaillées sur demande.",
+      "promise": "Nous ne nous appuyons pas sur des affirmations vagues ou des slogans polis.",
+      "commitment": "Nous laissons les résultats parler"
+    },
+    "outcomes": {
+      "title": {
+        "measurable": "Résultats",
+        "outcomes": "Mesurables.",
+        "realEnvironments": "Environnements Réels"
+      },
+      "description": "Le succès d'un événement ne se définit pas par ce qui se passe sur scène ; il se définit par ce qui perdure après. Un engagement plus fort, une mémorisation plus forte, une couverture médiatique plus forte et une activation répétée sont tous des signaux que nous surveillons et vers lesquels nous construisons. Notre équipe intègre la cartographie thermique LiDAR, l'analyse de balises BLE, le flux d'expérience et le suivi du comportement sur site pour connecter la stratégie aux résultats. En tant qu'entreprise de gestion d'événements axée sur les résultats à Dubaï et dans le CCG, nous priorisons l'impact, les données et la valeur à long terme avec chaque projet.",
+      "philosophy": "Ce n'est pas de la décoration. C'est conçu pour le retour sur investissement, des moments réels construits pour des environnements réels.",
+      "alignment": "En alignant la vision créative avec la logique opérationnelle, notre travail produit de la clarté sous pression et des résultats qui s'étendent bien au-delà de l'événement lui-même.",
+      "mobileDescription": "Le succès d'un événement ne se définit pas par ce qui se passe sur scène ; il se définit par ce qui perdure après. Notre équipe intègre la cartographie thermique LiDAR, l'analyse de balises BLE, le flux d'expérience et le suivi du comportement sur site pour connecter la stratégie aux résultats.",
+      "mobilePhilosophy": "Ce n'est pas de la décoration. C'est conçu pour le retour sur investissement, des moments réels construits pour des environnements réels.",
+      "altTexts": {
+        "showcase": "Présentation d'événement"
+      }
+    },
+    "callToAction": {
+      "title": "Laissez-Nous Vous Guider",
+      "question": "Besoin de preuves d'exécution ? D'exemples de rapidité sous pression ? D'une analyse des résultats ?",
+      "callout": "Demandez un aperçu.",
+      "description": "Notre équipe de stratégie partagera des présentations de capacités, des constructions d'échantillons et des visites visuelles pertinentes à votre brief. Que vous évaluiez la gestion d'événements à Dubaï ou cherchiez une entreprise d'événements de confiance en Arabie saoudite, nous adapterons les exemples pour correspondre à vos objectifs.",
+      "promise": "Pas de devinettes. Pas de généralités. Vous verrez comment KayanLive structure pour les résultats, s'adapte sous contraintes et livre sans délai.",
+      "buttonText": "Parlez Avec Nos Producteurs",
+      "buttonAriaLabel": "Parlez Avec Nos Producteurs"
+    }
+  },
+  "clientsPartners": {
+    "hero": {
+      "title": "Clients et Partenaires",
+      "mobileCards": {
+        "deliveredThroughPartnership": "Livré par Partenariat",
+        "builtOnTrust": "Construit sur la Confiance"
+      }
+    },
+    "content": {
+      "description1": "Derrière chaque projet KayanLive réussi se trouve un partenariat construit sur l'alignement, la confiance et des standards d'excellence partagés. Nous ne fonctionnons pas comme un fournisseur. Nous nous intégrons comme un partenaire stratégique, capable de livrer sous pression et de s'adapter en temps réel. En tant que",
+      "eventManagementCompany": "société de gestion d'événements",
+      "description2": " à service complet opérant à travers le CCG—de l'Arabie Saoudite à Abu Dhabi, Dubaï et au-delà—nous soutenons les partenaires à travers chaque étape de livraison—de l'idée à l'impact.",
+      "description3": "Nos clients s'étendent des ministères gouvernementaux aux entreprises multinationales, aux commissions publiques, aux promoteurs immobiliers, aux marques automobiles, aux offices de tourisme et aux agences créatives—beaucoup font confiance à notre réputation en tant que société d'événements leader. Chacun entre avec une vision et un ensemble d'attentes. Notre travail est de répondre à ces attentes avec précision—et d'élever le résultat au-delà de ce qui était d'abord imaginé.",
+      "testimonial": "Le Ministère de la Culture (KSA), la Commission Royale pour Riyad, les Dirigeants de Vision 2030, et les organisateurs d'événements en Arabie Saoudite ont tous fait appel à nous quand cela comptait le plus."
+    },
+    "partners": {
+      "badge": "QUI NOUS SOUTENONS",
+      "title": "Nos Partenaires",
+      "cards": {
+        "government": "Organismes Gouvernementaux et Semi-Gouvernementaux",
+        "tourism": "Initiatives de Tourisme et de Destination",
+        "marketing": "Agences de Marketing et d'Expérience",
+        "enterprise": "Marques d'Entreprise"
+      }
+    },
+    "joinNetwork": {
+      "title": "Rejoignez Notre Réseau",
+      "subtitle": "Cherchez-vous à collaborer sur de futurs événements, activations ou initiatives à long terme ?",
+      "buttonText": "Explorer une Collaboration Stratégique"
+    }
+  },
+  "contact": {
+    "hero": {
+      "ariaLabel": "Section héro contact KayanLive",
+      "mobileTitle": "Contactez-Nous",
+      "mobileSubtitleGradient": ["Précision Construite.", "Testé Sous Pression."],
+      "mobileSubtitleWhite": "Guidé par l'Expérience.",
+      "mobileBodyParagraphs": [
+        "KayanLive livre des événements structurés et à fort impact aux Émirats Arabes Unis et en Arabie Saoudite, et à travers le CCG, conçus avec ambition créative et exécutés avec certitude opérationnelle.",
+        "",
+        "Nous opérons comme une société d'événements full-service en KSA, opérant aussi aux Émirats avec une portée régionale profonde. Chaque service listé ici représente une fusion transparente de vitesse, échelle et stratégie."
+      ],
+      "desktopTitle": "Contactez-Nous",
+      "desktopScreenReaderTitle": "Contacter KayanLive",
+      "desktopSubtitleGradient": "Vous cherchez la meilleure société de",
+      "desktopSubtitleWhite": "gestion d'événements?",
+      "desktopBodyParagraphs": [
+        "Certains nous contactent avec un brief détaillé et six mois de préparation. D'autres appellent quand le lieu est réservé et rien d'autre n'est prêt. Dans tous les cas, nous sommes prêts.",
+        "",
+        "En tant qu'agence événementielle leader, KayanLive répond avec structure, vitesse et étapes suivantes claires—peu importe où se trouve la ligne de départ."
+      ]
+    },
+    "form": {
+      "labels": {
+        "fullName": "Nom Complet",
+        "organization": "Organisation ou Affiliation",
+        "email": "Adresse Email",
+        "phone": "Numéro de Téléphone (Optionnel)",
+        "eventType": "Type d'Événement ou Activation",
+        "budget": "Fourchette Budgétaire (Si Applicable)",
+        "goals": "Objectifs ou Défis Spécifiques",
+        "isUrgent": "S'agit-il d'une Demande Urgente?"
+      },
+      "placeholders": {
+        "fullName": "Entrez votre nom complet",
+        "organization": "Entrez votre organisation",
+        "email": "Entrez votre adresse email",
+        "phone": "Entrez votre numéro de téléphone",
+        "eventType": "ex: Événement d'entreprise, Lancement de produit",
+        "budget": "ex: 500K€ - 10M€",
+        "goals": "Décrivez vos objectifs ou défis"
+      },
+      "validation": {
+        "fullNameRequired": "Le nom complet est requis",
+        "emailRequired": "L'email est requis",
+        "emailInvalid": "L'email n'est pas valide",
+        "formErrors": "Veuillez corriger les erreurs dans le formulaire."
+      },
+      "radioOptions": {
+        "yes": "Oui",
+        "no": "Non"
+      },
+      "submit": {
+        "button": "Envoyer",
+        "submitting": "Envoi en cours...",
+        "loadingStatus": "Envoi du formulaire, veuillez patienter..."
+      },
+      "toasts": {
+        "success": "Formulaire envoyé avec succès! Nous vous recontacterons bientôt.",
+        "error": "Erreur lors de l'envoi du formulaire. Veuillez réessayer.",
+        "closeNotification": "Fermer la notification"
+      }
+    }
   },
   "common": {
     "language": "Langue",

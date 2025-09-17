@@ -10,6 +10,7 @@ interface CTAButtonProps {
   disabled?: boolean;
   ariaLabel?: string;
   variant?: 'default' | 'white';
+  type?: 'button' | 'submit' | 'reset';
 }
 
 export default function CTAButton({
@@ -19,7 +20,8 @@ export default function CTAButton({
   className = '',
   disabled = false,
   ariaLabel,
-  variant = 'default'
+  variant = 'default',
+  type = 'button'
 }: CTAButtonProps) {
   const locale = useLocale();
 
@@ -64,7 +66,7 @@ export default function CTAButton({
                    group-hover:flex-row-reverse
                    ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
         aria-label={ariaLabel}
-        type="button"
+        type={type}
         onClick={onClick}
         disabled={disabled}
       >

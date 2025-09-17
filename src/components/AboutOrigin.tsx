@@ -1,10 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
 const imgPattern0212 = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
 
 export default function AboutOrigin() {
+  const t = useTranslations('about.origin');
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -18,6 +20,31 @@ export default function AboutOrigin() {
       style={{ minHeight: 'fit-content' }}
       aria-label="About KayanLive origin and capability section"
     >
+      <style>{`
+        /* Tooltip specific styles */
+        .group:hover .tooltip-content {
+          opacity: 1 !important;
+          transform: translateX(-50%) translateY(-4px) scale(1) !important;
+          animation: tooltipShow 0.3s ease forwards;
+        }
+
+        /* Ensure higher z-index for tooltips */
+        .tooltip-content {
+          z-index: 9999 !important;
+          position: absolute !important;
+        }
+
+        @keyframes tooltipShow {
+          from {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-8px) scale(0.85);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-4px) scale(1);
+          }
+        }
+      `}</style>
       {/* Loading state */}
       {!isLoaded && (
         <div className="absolute inset-0 animate-pulse bg-gray-200" />
@@ -84,7 +111,7 @@ export default function AboutOrigin() {
                     fontFamily: '"Poppins", sans-serif'
                   }}
                 >
-                  The Origin of Capability
+                  {t('title1')}
                 </h2>
               </header>
 
@@ -94,19 +121,11 @@ export default function AboutOrigin() {
                   fontFamily: '"Poppins", sans-serif'
                 }}
               >
-                <p className="mb-4">
-                  <span>After years of directing high-level brand activations and immersive showcases across the GCC, our founder, </span>
-                  <span className="text-[#2c2c2b]">Khalid Alhasan</span>
-                  <span>, recognized a pattern: most vendors stalled when speed was critical, and cracked when pressure mounted.</span>
-                </p>
-                <p className="mb-4">KayanLive was engineered to change the equation.</p>
-                <p className="mb-4">
-                  <span>What began as a response to regional breakdowns now operates as a trusted name among the </span>
-                  <span className="text-[#2c2c2b]">best event management companies</span>
-                  <span> in the region. Recognized across the Emirates and broader GCC regions, we&apos;ve earned trust through clarity and execution.</span>
-                </p>
-                <p className="mb-4">Every layer of planning, production, and performance exists in one unified structure.</p>
-                <p>Ideas move faster here because teams align faster. No gaps. No wasted time. Every second is accounted for.</p>
+                <p className="mb-4">{t.rich('paragraph1', { strong: (chunks) => <span className="text-[#2c2c2b]">{chunks}</span> })}</p>
+                <p className="mb-4">{t.rich('paragraph2', { strong: (chunks) => <span className="text-[#2c2c2b]">{chunks}</span> })}</p>
+                <p className="mb-4">{t.rich('paragraph3', { strong: (chunks) => <span className="text-[#2c2c2b]">{chunks}</span> })}</p>
+                <p className="mb-4">{t.rich('paragraph4', { strong: (chunks) => <span className="text-[#2c2c2b]">{chunks}</span> })}</p>
+                <p>{t('paragraph5')}</p>
               </div>
             </article>
 
@@ -124,7 +143,7 @@ export default function AboutOrigin() {
                     fontFamily: '"Poppins", sans-serif'
                   }}
                 >
-                  Built to Lead. Proven to Deliver.
+                  {t('title2')}
                 </h2>
               </header>
 
@@ -134,9 +153,36 @@ export default function AboutOrigin() {
                   fontFamily: '"Poppins", sans-serif'
                 }}
               >
-                <p className="mb-4">Our leadership team spans disciplines and industries. From creative directors and AV producers to engineers and logistics specialists, each expert understands what success looks like in high-stakes environments. With years of cumulative experience and region-wide execution, we guide with confidence and act with certainty.</p>
-                <p className="mb-4 text-[#2c2c2b]">No chaos. No handoffs. No breakdowns.</p>
-                <p>This approach has positioned KayanLive as a trusted execution partner for national ceremonies, multinational product launches, large-scale conferences, and last-call takeovers. The scale adapts, but the outcome remains the same: impact without compromise.</p>
+                <p className="mb-4">{t('paragraph6')}</p>
+                <p className="mb-4">{t('paragraph7')}</p>
+                <p className="mb-4">
+                  {t.rich('statisticalText', {
+                    roiStat: (chunks) => (
+                      <span className="relative inline-block group cursor-help transition-all duration-200 hover:scale-105"
+                        style={{
+                          background: 'linear-gradient(135deg, #74cfaa, #a095e1)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                          fontWeight: '600',
+                          padding: '2px 4px',
+                          borderRadius: '4px',
+                          marginLeft: '1px',
+                          marginRight: '1px',
+                          fontSize: '1.02em',
+                          filter: 'brightness(1.1)',
+                          position: 'relative'
+                        }}>
+                        {chunks}
+                      </span>
+                    ),
+                    citation: (chunks) => (
+                      <span className="text-xs text-gray-400">{chunks}</span>
+                    )
+                  })}
+                </p>
+                <p className="mb-4 text-[#2c2c2b]">{t('paragraph8')}</p>
+                <p>{t.rich('paragraph9', { strong: (chunks) => <span className="text-[#2c2c2b]">{chunks}</span> })}</p>
               </div>
             </article>
 
@@ -210,11 +256,11 @@ export default function AboutOrigin() {
                     fontFamily: '"Poppins", sans-serif'
                   }}
                 >
-                  The Origin of Capability
+                  {t('title1')}
                 </h2>
               </header>
               
-              <div 
+              <div
                 className="text-[#808184] capitalize"
                 style={{
                   fontSize: "clamp(14px, 1.45vw, 22px)",
@@ -222,21 +268,13 @@ export default function AboutOrigin() {
                   fontFamily: '"Poppins", sans-serif'
                 }}
               >
-                <p className="mb-0">
-                  <span>After years of directing high-level brand activations and immersive showcases across the GCC, our founder, </span>
-                  <span className="text-[#2c2c2b]">Khalid Alhasan</span>
-                  <span>, recognized a pattern: most vendors stalled when speed was critical, and cracked when pressure mounted.</span>
-                </p>
+                <p className="mb-0">{t.rich('paragraph1', { strong: (chunks) => <span className="text-[#2c2c2b]">{chunks}</span> })}</p>
                 <p className="mb-0">&nbsp;</p>
-                <p className="mb-0">KayanLive was engineered to change the equation.</p>
-                <p className="mb-0">
-                  <span>What began as a response to regional breakdowns now operates as a trusted name among the </span>
-                  <span className="text-[#2c2c2b]">best event management companies</span>
-                  <span> in the region. Recognized across the Emirates and broader GCC regions, we&apos;ve earned trust through clarity and execution.</span>
-                </p>
+                <p className="mb-0">{t.rich('paragraph2', { strong: (chunks) => <span className="text-[#2c2c2b]">{chunks}</span> })}</p>
+                <p className="mb-0">{t.rich('paragraph3', { strong: (chunks) => <span className="text-[#2c2c2b]">{chunks}</span> })}</p>
                 <p className="mb-0">&nbsp;</p>
-                <p className="mb-0">Every layer of planning, production, and performance exists in one unified structure.</p>
-                <p>Ideas move faster here because teams align faster. No gaps. No wasted time. Every second is accounted for.</p>
+                <p className="mb-0">{t.rich('paragraph4', { strong: (chunks) => <span className="text-[#2c2c2b]">{chunks}</span> })}</p>
+                <p>{t('paragraph5')}</p>
               </div>
             </article>
 
@@ -256,11 +294,11 @@ export default function AboutOrigin() {
                     fontFamily: '"Poppins", sans-serif'
                   }}
                 >
-                  Built to Lead. Proven to Deliver.
+                  {t('title2')}
                 </h2>
               </header>
               
-              <div 
+              <div
                 className="text-[#808184] capitalize"
                 style={{
                   fontSize: "clamp(14px, 1.45vw, 22px)",
@@ -268,11 +306,38 @@ export default function AboutOrigin() {
                   fontFamily: '"Poppins", sans-serif'
                 }}
               >
-                <p className="mb-0">Our leadership team spans disciplines and industries. From creative directors and AV producers to engineers and logistics specialists, each expert understands what success looks like in high-stakes environments. With years of cumulative experience and region-wide execution, we guide with confidence and act with certainty.</p>
+                <p className="mb-0">{t('paragraph6')}</p>
                 <p className="mb-0">&nbsp;</p>
-                <p className="mb-0 text-[#2c2c2b]">No chaos. No handoffs. No breakdowns.</p>
+                <p className="mb-0">{t('paragraph7')}</p>
+                <p className="mb-0">
+                  {t.rich('statisticalText', {
+                    roiStat: (chunks) => (
+                      <span className="relative inline-block group cursor-help transition-all duration-200 hover:scale-105"
+                        style={{
+                          background: 'linear-gradient(135deg, #74cfaa, #a095e1)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                          fontWeight: '600',
+                          padding: '2px 4px',
+                          borderRadius: '4px',
+                          marginLeft: '1px',
+                          marginRight: '1px',
+                          fontSize: '1.02em',
+                          filter: 'brightness(1.1)',
+                          position: 'relative'
+                        }}>
+                        {chunks}
+                      </span>
+                    ),
+                    citation: (chunks) => (
+                      <span className="text-xs text-gray-400">{chunks}</span>
+                    )
+                  })}
+                </p>
                 <p className="mb-0">&nbsp;</p>
-                <p>This approach has positioned KayanLive as a trusted execution partner for national ceremonies, multinational product launches, large-scale conferences, and last-call takeovers. The scale adapts, but the outcome remains the same: impact without compromise.</p>
+                <p className="mb-0 text-[#2c2c2b]">{t('paragraph8')}</p>
+                <p>{t.rich('paragraph9', { strong: (chunks) => <span className="text-[#2c2c2b]">{chunks}</span> })}</p>
               </div>
             </article>
 
@@ -285,7 +350,7 @@ export default function AboutOrigin() {
         href="#next-section" 
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-white text-black px-4 py-2 rounded z-50"
       >
-        Skip to next section
+        {t('skipToNext')}
       </a>
     </section>
   );

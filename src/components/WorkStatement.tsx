@@ -1,6 +1,9 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 export default function WorkStatement() {
+  const t = useTranslations('work.statement');
   return (
     <div className="bg-[#f0f1fa] w-full py-16 md:py-20 lg:py-24">
       <div 
@@ -11,11 +14,11 @@ export default function WorkStatement() {
         }}
       >
         <p className="mb-6" style={{ lineHeight: 'clamp(1.5rem, 2.8vw, 43px)' }}>
-          Each case will break down what was delivered, how it was structured, and why it succeeded. For now, our team is available to walk through these highlights and share detailed visual decks on request.
+          {t('description')}
         </p>
         <p className="mb-0" style={{ lineHeight: 'clamp(1.5rem, 2.8vw, 43px)' }}>
-          <span>We do not rely on vague claims or polished slogans. </span>
-          <span className="font-bold text-[#231f20]">We let results speak</span>
+          <span>{t('promise')} </span>
+          <span className="font-bold text-[#231f20]">{t('commitment')}</span>
         </p>
       </div>
     </div>

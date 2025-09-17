@@ -1,6 +1,7 @@
 import ClientsPartnersContent from '@/components/ClientsPartnersContent';
 import OurPartners from '@/components/OurPartners';
 import CallToActionBanner from '@/components/CallToActionBanner';
+import { getTranslations } from 'next-intl/server';
 
 export default async function ClientsPartnersPage({
   params
@@ -10,6 +11,8 @@ export default async function ClientsPartnersPage({
   const { locale } = await params;
   void locale; // Required for Next.js App Router but not used directly  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   // locale is required for Next.js App Router but not used directly in this component
+
+  const t = await getTranslations({ locale, namespace: 'clientsPartners' });
 
   return (
     <div>
@@ -62,7 +65,7 @@ export default async function ClientsPartnersPage({
                 textTransform: 'capitalize'
               }}
             >
-              Clients<br />& Partners
+{t('hero.title')}
             </h1>
             
             {/* Mobile Overlapping Cards Container */}
@@ -98,7 +101,7 @@ export default async function ClientsPartnersPage({
                       textTransform: 'capitalize'
                     }}
                   >
-                    Delivered<br />Through<br />Partnership
+{t('hero.mobileCards.deliveredThroughPartnership')}
                   </div>
                 </div>
               </div>
@@ -151,7 +154,7 @@ export default async function ClientsPartnersPage({
                       minWidth: 'min-content'
                     }}
                   >
-                    Built on<br />Trust
+{t('hero.mobileCards.builtOnTrust')}
                   </div>
                 </div>
               </div>
@@ -187,7 +190,7 @@ export default async function ClientsPartnersPage({
               lineHeight: '0.85'
             }}
           >
-            Clients &<br />Partners
+{t('hero.title')}
           </h1>
         </div>
         
@@ -233,7 +236,7 @@ export default async function ClientsPartnersPage({
                 minWidth: 'min-content'
               }}
             >
-              Built on<br />Trust
+{t('hero.mobileCards.builtOnTrust')}
             </div>
           </div>
         </div>
@@ -265,7 +268,7 @@ export default async function ClientsPartnersPage({
                 textTransform: 'capitalize'
               }}
             >
-              Delivered<br />Through<br />Partnership
+{t('hero.mobileCards.deliveredThroughPartnership')}
             </div>
           </div>
         </div>
@@ -313,9 +316,9 @@ export default async function ClientsPartnersPage({
       {/* Join Our Network Section */}
       <div className="-mx-4 mb-6 md:mb-12 lg:mb-16">
         <CallToActionBanner
-          title="Join Our Network"
-          subtitle="Looking to collaborate on future events, activations, or long-term initiatives?"
-          buttonText="Explore a Strategic Collaboration"
+          title={t('joinNetwork.title')}
+          subtitle={t('joinNetwork.subtitle')}
+          buttonText={t('joinNetwork.buttonText')}
         />
       </div>
     </div>

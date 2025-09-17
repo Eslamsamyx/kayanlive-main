@@ -2,20 +2,24 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import CTAButton from './CTAButton';
 
 // Assets from Figma
 const imgOutline1 = "/assets/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.png";
 const imgPattern0452 = "/assets/6cdd4333a240b46dead9df86c5a83772e81b76fc.png";
 const imgFreepikTheStyleIsCandidImagePhotographyWithNatural627961 = "/assets/0a0c21416d9d9b2c97aedc8aa51e7c6619486a15.png";
 const imgEllipse3626 = "/assets/34146dbe8aeb9c1892f700cd9059e41d476db4b0.svg";
-const imgFrame1618874015 = "/assets/ba2718e4fa15b12b3ad4fd4e91c67919d3e1c6f3.svg";
 
 // Mobile-specific assets
 const imgFrame1618874025 = "/assets/0a0c21416d9d9b2c97aedc8aa51e7c6619486a15.png";
-const imgFrame1618874015Mobile = "/assets/26d787dbe898c245016f8e4796e8af5507840604.svg";
 
-export default function WorkCallToAction() {
-  const [isHovered, setIsHovered] = useState(false);
+interface WorkCallToActionProps {
+  locale?: string;
+}
+
+export default function WorkCallToAction({ locale = 'en' }: WorkCallToActionProps) {
+  const t = useTranslations('work.callToAction');
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -38,7 +42,7 @@ export default function WorkCallToAction() {
   if (isMobile) {
     // Mobile Layout - Based on Figma Design
     return (
-      <div className="bg-[#2c2c2b] box-border flex flex-col gap-[31px] items-center justify-center px-[27px] py-16 relative w-full overflow-hidden">
+      <div className="bg-[#2c2c2b] box-border flex flex-col gap-[31px] items-center justify-center px-[27px] py-20 relative w-full overflow-hidden min-h-[700px]">
         {/* Decorative Pattern - Mobile - White - Bigger and partially outside */}
         <div 
           className="absolute bg-center bg-cover bg-no-repeat h-[280px] w-[180px]"
@@ -77,58 +81,32 @@ export default function WorkCallToAction() {
               WebkitTextFillColor: 'transparent'
             }}
           >
-            <p>Let&apos;s Walk You Through It</p>
+            <p>{t('title')}</p>
           </div>
           
           {/* Content Text */}
-          <div className="capitalize w-full" style={{
+          <div className="w-full" style={{
             fontFamily: '"Poppins", sans-serif',
             fontSize: '16px',
             lineHeight: '20px',
             color: '#c3c3c3'
           }}>
-            <p className="mb-0">Need proof of execution?</p>
-            <p className="mb-0">Examples of speed under pressure?</p>
-            <p className="mb-0">A breakdown of results?</p>
+            <p className="mb-0">{t('question')}</p>
+            <p className="mb-0 text-white font-bold">{t('callout')}</p>
             <p className="mb-0">&nbsp;</p>
-            <p className="mb-0 text-white font-bold">Ask for a preview.</p>
+            <p>{t('description')}</p>
             <p className="mb-0">&nbsp;</p>
-            <p>Our strategy team will share capability decks, sample builds, and visual walkthroughs relevant to your brief.</p>
+            <p>{t('promise')}</p>
           </div>
         </div>
         
-        {/* CTA Button with Animation */}
-        <div 
-          className="flex items-center justify-start"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+        {/* CTA Button */}
+        <CTAButton
+          href={`/${locale}/contact`}
+          ariaLabel={t('buttonAriaLabel')}
         >
-          <div 
-            className="box-border flex gap-2.5 h-11 items-center justify-center overflow-clip px-[18px] py-5 rounded-full transition-all duration-300"
-            style={{
-              background: 'linear-gradient(90deg, #7afdd6 0%, #a095e1 60%, #b8a4ff 90%)'
-            }}
-          >
-            <div 
-              className="capitalize text-[#2c2c2b] text-nowrap"
-              style={{
-                fontFamily: '"Poppins", sans-serif',
-                fontSize: '16px',
-                lineHeight: '28px'
-              }}
-            >
-              Speak With Our Producers
-            </div>
-          </div>
-          <div 
-            className="relative w-[45px] h-[45px] transition-all duration-300"
-            style={{
-              transform: isHovered ? 'translateX(10px)' : 'translateX(0)'
-            }}
-          >
-            <Image alt="" className="block max-w-none size-full" src={imgFrame1618874015Mobile} fill style={{objectFit: 'cover'}} />
-          </div>
-        </div>
+          {t('buttonText')}
+        </CTAButton>
       </div>
     );
   }
@@ -136,9 +114,9 @@ export default function WorkCallToAction() {
   // Desktop Layout - Original Design
 
   return (
-    <div 
+    <div
       className="bg-[#2c2c2b] relative w-full overflow-clip"
-      style={{ minHeight: 'clamp(500px, 57.5vw, 869px)' }}
+      style={{ minHeight: 'clamp(600px, 70vw, 1050px)' }}
     >
       {/* Background Decorative Elements */}
       <div 
@@ -184,10 +162,10 @@ export default function WorkCallToAction() {
           }}
         >
           {/* Left Image - Responsive */}
-          <div 
+          <div
             className="bg-white overflow-clip relative flex-shrink-0"
             style={{
-              height: 'clamp(280px, 33.9vw, 513px)',
+              minHeight: 'clamp(280px, 33.9vw, 513px)',
               width: 'clamp(320px, 43.5vw, 657px)',
               borderRadius: 'clamp(20px, 2.6vw, 40px)',
               maxWidth: '100%'
@@ -214,11 +192,11 @@ export default function WorkCallToAction() {
           </div>
 
           {/* Right Content Box - Responsive with Glass Morphism */}
-          <div 
+          <div
             className="bg-white/[0.03] backdrop-blur-md box-border flex flex-col items-start justify-start relative flex-shrink-0 overflow-hidden"
             style={{
               gap: 'clamp(25px, 2.9vw, 44px)',
-              height: 'clamp(280px, 33.9vw, 513px)',
+              minHeight: 'clamp(280px, 33.9vw, 513px)',
               width: 'clamp(320px, 43.5vw, 657px)',
               padding: 'clamp(25px, 3.3vw, 50px)',
               borderRadius: 'clamp(20px, 2.3vw, 35px)',
@@ -244,72 +222,35 @@ export default function WorkCallToAction() {
                 paddingBottom: 'clamp(8px, 1vw, 12px)'
               }}
             >
-              Let&apos;s Walk You Through It
+              {t('title')}
             </div>
 
             {/* Content Text - Responsive */}
-            <div 
-              className="capitalize font-medium not-italic relative text-[#c3c3c3]"
+            <div
+              className="font-medium not-italic relative text-[#c3c3c3]"
               style={{
                 fontSize: 'clamp(14px, 1.5vw, 22px)',
                 lineHeight: 'clamp(18px, 1.9vw, 28px)',
                 width: '100%'
               }}
             >
-              <p className="font-normal mb-0">
-                <span>Need proof of execution</span>
-                <span className="text-white">?</span>
-              </p>
-              <p className="font-normal mb-0">
-                <span>Examples of speed under pressure</span>
-                <span className="text-white">?</span>
-              </p>
-              <p className="font-normal mb-0">
-                <span>A breakdown of results</span>
-                <span className="text-white">?</span>
-              </p>
+              <p className="font-normal mb-0">{t('question')}</p>
+              <p className="font-bold mb-0 text-white">{t('callout')}</p>
               <p className="mb-0">&nbsp;</p>
-              <p className="font-bold mb-0 text-white">Ask for a preview.</p>
+              <p className="font-normal">{t('description')}</p>
               <p className="mb-0">&nbsp;</p>
-              <p className="font-normal">Our strategy team will share capability decks, sample builds, and visual walkthroughs relevant to your brief.</p>
+              <p className="font-normal">{t('promise')}</p>
             </div>
           </div>
         </div>
 
-        {/* CTA Button - Matching CallToActionHero Reference */}
-        <div 
-          className="flex items-center justify-center relative"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+        {/* CTA Button */}
+        <CTAButton
+          href={`/${locale}/contact`}
+          ariaLabel={t('buttonAriaLabel')}
         >
-          <div 
-            className="rounded-full flex items-center justify-center transition-all duration-300"
-            style={{ 
-              background: 'linear-gradient(90deg, #7afdd6 0%, #a095e1 60%, #b8a4ff 90%)',
-              height: 'clamp(50px, 4.3vw, 65px)',
-              padding: '0 clamp(20px, 1.7vw, 25px)'
-            }}
-          >
-            <div 
-              className="capitalize font-normal leading-[28px] not-italic text-[#231f20] text-nowrap"
-              style={{
-                fontSize: 'clamp(16px, 1.3vw, 20px)'
-              }}
-            >
-              Speak With Our Producers
-            </div>
-          </div>
-          <div 
-            className="relative transition-all duration-300"
-            style={{
-              width: 'clamp(50px, 4.3vw, 65px)',
-              height: 'clamp(50px, 4.3vw, 65px)',
-              transform: isHovered ? 'translateX(10px)' : 'translateX(0)'
-            }}
-          >
-            <Image alt="" className="block max-w-none size-full" src={imgFrame1618874015} fill style={{objectFit: 'cover'}} />
-          </div>
-        </div>
+          {t('buttonText')}
+        </CTAButton>
       </div>
     </div>
   );

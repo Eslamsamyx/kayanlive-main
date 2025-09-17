@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 
 // Images
 const images = {
@@ -11,65 +12,68 @@ const images = {
   placeholder: "/assets/c7e54c0605f6e122070c3da28c63679ca3742a85.png"
 };
 
-const valuesData = [
-  {
-    id: 'purpose',
-    title: 'Purpose Driven Creativity',
-    description: 'Every concept earns its place by serving a goal',
-    image: images.purpose,
-    position: { row: 1, col: 'left' }
-  },
-  {
-    id: 'precision',
-    title: 'Precision Without Hesitation',
-    description: 'Plans are built to perform under pressure',
-    image: images.precision,
-    position: { row: 2, col: 'right' }
-  },
-  {
-    id: 'innovation',
-    title: 'Next Level Innovation',
-    description: 'Technology meets experience in service of story',
-    image: images.innovation,
-    position: { row: 3, col: 'left' }
-  },
-  {
-    id: 'collaboration',
-    title: 'Trusted Collaboration',
-    description: 'We act as a true extension of your team',
-    image: images.collaboration,
-    position: { row: 4, col: 'right' }
-  },
-  {
-    id: 'speed',
-    title: 'Speed Without Sacrifice',
-    description: 'Efficiency powered by structure',
-    image: images.placeholder,
-    position: { row: 5, col: 'left' }
-  },
-  {
-    id: 'cultural',
-    title: 'Cultural Intelligence',
-    description: 'Execution aligned with local context and audience',
-    image: images.placeholder,
-    position: { row: 6, col: 'right' }
-  },
-  {
-    id: 'strategic',
-    title: 'Strategic Scale',
-    description: 'Whether a focused launch or multi-hall expo, we deliver with the reach of a leading exhibition company',
-    image: images.placeholder,
-    position: { row: 7, col: 'center' }
-  }
-];
 
 export default function AboutValues() {
+  const t = useTranslations('about.values');
   const [scrollProgress, setScrollProgress] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const [pathLength, setPathLength] = useState(0);
   const [calculatedHeight, setCalculatedHeight] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  // Dynamic values data using translations
+  const valuesData = [
+    {
+      id: 'purpose',
+      title: t('cards.purpose.title'),
+      description: t('cards.purpose.description'),
+      image: images.purpose,
+      position: { row: 1, col: 'left' }
+    },
+    {
+      id: 'precision',
+      title: t('cards.precision.title'),
+      description: t('cards.precision.description'),
+      image: images.precision,
+      position: { row: 2, col: 'right' }
+    },
+    {
+      id: 'innovation',
+      title: t('cards.innovation.title'),
+      description: t('cards.innovation.description'),
+      image: images.innovation,
+      position: { row: 3, col: 'left' }
+    },
+    {
+      id: 'collaboration',
+      title: t('cards.collaboration.title'),
+      description: t('cards.collaboration.description'),
+      image: images.collaboration,
+      position: { row: 4, col: 'right' }
+    },
+    {
+      id: 'speed',
+      title: t('cards.speed.title'),
+      description: t('cards.speed.description'),
+      image: images.placeholder,
+      position: { row: 5, col: 'left' }
+    },
+    {
+      id: 'cultural',
+      title: t('cards.cultural.title'),
+      description: t('cards.cultural.description'),
+      image: images.placeholder,
+      position: { row: 6, col: 'right' }
+    },
+    {
+      id: 'strategic',
+      title: t('cards.strategic.title'),
+      description: t('cards.strategic.description'),
+      image: images.placeholder,
+      position: { row: 7, col: 'center' }
+    }
+  ];
 
   // Track scroll progress based on Values section only
   useEffect(() => {
@@ -161,7 +165,7 @@ export default function AboutValues() {
               fontFamily: '"Poppins", sans-serif'
             }}
           >
-            Values That Activate Outcomes
+            {t('title')}
           </h2>
           
           {/* SVG Logo beside title */}

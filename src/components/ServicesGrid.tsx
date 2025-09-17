@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 
 // Assets from Figma
 const imgRectangle4242 = "/assets/e05fec393f295d237ade9dff2ad26793496382ba.png"; // 2D/3D Content
@@ -13,9 +14,11 @@ const imgRectangle4249 = "/assets/409f7073bcfac7c1d7eea78ab2e23cc10f6a16fb.png";
 const imgRectangle4250 = "/assets/cf27cb2a37e9e3bfd30c1ada4fe4988496b10bbb.png"; // Live Events
 
 export default function ServicesGrid() {
+  const t = useTranslations('services.grid');
+
   return (
     <section className="relative w-full" aria-labelledby="services-grid-title">
-      <h2 id="services-grid-title" className="sr-only">Our Services</h2>
+      <h2 id="services-grid-title" className="sr-only">{t('screenReaderTitle')}</h2>
       {/* Services Grid Container */}
       <div 
         className="box-border grid gap-4 md:gap-7 py-6 md:py-9"
@@ -55,9 +58,9 @@ export default function ServicesGrid() {
                 fontFamily: '"Poppins", sans-serif'
               }}
             >
-              2D, 3D Content Development
+              {t('services.2d3dContent.title')}
             </h3>
-            <p 
+            <p
               id="service-2d-3d-description"
               className="text-[#cfcfcf] font-medium"
               style={{
@@ -67,9 +70,7 @@ export default function ServicesGrid() {
                 fontFamily: '"Poppins", sans-serif'
               }}
             >
-              We create high-resolution 2D and 3D animation for event environments—from stylized motion graphics to cinematic renderings, character loops, and dynamic product sequences. Whether it&apos;s an explainer wall, architectural fly-through, or ambient content for LED tunnels, our in-house motion team delivers visuals that move people—literally and emotionally.
-              <br /><br />
-              Trusted by cultural commissions and enterprise brands for digital content that commands attention.
+              {t('services.2d3dContent.description')}
             </p>
           </div>
         </div>
@@ -104,10 +105,10 @@ export default function ServicesGrid() {
                 fontFamily: '"Poppins", sans-serif'
               }}
             >
-              Video Editing and Real Footage Integration
+              {t('services.videoEditing.title')}
             </h3>
             <div id="service-video-editing-description" className="sr-only">
-              Professional video editing services for seamless integration of real footage into event presentations
+              {t('services.videoEditing.description')}
             </div>
           </div>
         </div>
@@ -142,10 +143,10 @@ export default function ServicesGrid() {
                 fontFamily: '"Poppins", sans-serif'
               }}
             >
-              Conferences and Forums
+              {t('services.conferences.title')}
             </h3>
             <div id="service-conferences-description" className="sr-only">
-              Professional conference and forum management services for corporate and academic events
+              {t('services.conferences.description')}
             </div>
           </div>
         </div>
@@ -180,10 +181,10 @@ export default function ServicesGrid() {
                 fontFamily: '"Poppins", sans-serif'
               }}
             >
-              Hologram Activations
+              {t('services.hologramActivations.title')}
             </h3>
             <div id="service-hologram-description" className="sr-only">
-              Cutting-edge hologram technology for immersive event experiences and product presentations
+              {t('services.hologramActivations.description')}
             </div>
           </div>
         </div>
@@ -218,11 +219,10 @@ export default function ServicesGrid() {
                 fontFamily: '"Poppins", sans-serif'
               }}
             >
-              <span className="block">Interactive</span>
-              <span className="block">Activations</span>
+              {t('services.interactiveActivations.title')}
             </h3>
             <div id="service-interactive-description" className="sr-only">
-              Engaging interactive experiences and digital activations for memorable event participation
+              {t('services.interactiveActivations.description')}
             </div>
           </div>
         </div>
@@ -257,11 +257,10 @@ export default function ServicesGrid() {
                 fontFamily: '"Poppins", sans-serif'
               }}
             >
-              <span className="block">Live Events</span>
-              <span className="block">Entertainment Shows</span>
+              {t('services.liveEvents.title')}
             </h3>
             <div id="service-live-events-description" className="sr-only">
-              Professional live entertainment and show production for corporate and public events
+              {t('services.liveEvents.description')}
             </div>
           </div>
         </div>
@@ -296,10 +295,10 @@ export default function ServicesGrid() {
                 fontFamily: '"Poppins", sans-serif'
               }}
             >
-              Corporate Events
+              {t('services.corporateEvents.title')}
             </h3>
             <div id="service-corporate-description" className="sr-only">
-              Comprehensive corporate event management from planning to execution for businesses of all sizes
+              {t('services.corporateEvents.description')}
             </div>
           </div>
         </div>
@@ -334,10 +333,10 @@ export default function ServicesGrid() {
                 fontFamily: '"Poppins", sans-serif'
               }}
             >
-              Immersive AV Production
+              {t('services.immersiveAV.title')}
             </h3>
             <div id="service-av-production-description" className="sr-only">
-              State-of-the-art audiovisual production for immersive event experiences and presentations
+              {t('services.immersiveAV.description')}
             </div>
           </div>
         </div>
@@ -372,10 +371,10 @@ export default function ServicesGrid() {
                 fontFamily: '"Poppins", sans-serif'
               }}
             >
-              Tech Driven Activations
+              {t('services.techDriven.title')}
             </h3>
             <div id="service-tech-driven-description" className="sr-only">
-              Technology-focused event activations using latest digital innovations and interactive solutions
+              {t('services.techDriven.description')}
             </div>
           </div>
         </div>

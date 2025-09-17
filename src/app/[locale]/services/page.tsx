@@ -1,16 +1,13 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
 import ServicesHero from '@/components/ServicesHero';
 import ServicesGrid from '@/components/ServicesGrid';
 import ExperienceCenters from '@/components/ExperienceCenters';
 import CallToActionBanner from '@/components/CallToActionBanner';
 
-export default async function ServicesPage({
-  params
-}: {
-  params: Promise<{ locale: string }>
-}) {
-  const { locale } = await params;
-  void locale; // Required for Next.js App Router but not used directly  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // locale is required for Next.js App Router but not used directly in this component
+export default function ServicesPage() {
+  const t = useTranslations('services.callToAction');
 
   return (
     <div>
@@ -50,10 +47,10 @@ export default async function ServicesPage({
                     backgroundClip: 'text'
                   }}
                 >
-                  Not Sure Where{' '}
+                  {t('title').split(' ').slice(0, 3).join(' ')}{' '}
                 </span>
                 <span className="text-[#2c2c2b]">
-                  To Start?
+                  {t('title').split(' ').slice(3).join(' ')}
                 </span>
               </h1>
             </div>
@@ -63,8 +60,8 @@ export default async function ServicesPage({
         {/* Use CallToActionBanner for the actual CTA */}
         <CallToActionBanner
           title=""
-          subtitle="Every project begins with a single conversation."
-          buttonText="Speak With Our Strategy Team"
+          subtitle={t('subtitle')}
+          buttonText={t('buttonText')}
           topPadding="pt-0"
           bottomPadding="pb-12 md:pb-16"
         />

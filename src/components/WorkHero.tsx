@@ -1,10 +1,12 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 
 const imgOutline1 = "/assets/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.png";
 
 export default function WorkHero() {
+  const t = useTranslations('work.hero');
   const [isLoaded, setIsLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -44,7 +46,7 @@ export default function WorkHero() {
       ref={sectionRef}
       className="relative bg-[#2c2c2b] overflow-hidden rounded-[25px] md:rounded-[43px] lg:rounded-[61px] w-full"
       style={{ aspectRatio: '375/500' }}
-      aria-label="Our Work hero section"
+      aria-label={t('ariaLabel')}
     >
       <style>{`
         @keyframes fadeUp {
@@ -182,7 +184,7 @@ export default function WorkHero() {
               paddingRight: "clamp(16px, 4vw, 20px)"
             }}
           >
-            <h1>Our Work</h1>
+            <h1>{t('title')}</h1>
           </header>
 
           <div
@@ -204,9 +206,9 @@ export default function WorkHero() {
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
             }}>
-              Quality-Driven Process.
+              {t('subtitle1')}
             </div>
-            <div className="text-white">Results-Driven Outcomes.</div>
+            <div className="text-white">{t('subtitle2')}</div>
           </div>
 
           <div
@@ -221,15 +223,15 @@ export default function WorkHero() {
             }}
           >
             <p className="mb-0">
-              At KayanLive, every project begins with a single purpose: to create an experience that moves people, aligns stakeholders, and delivers measurable value. We design for emotional engagement and build for operational reliability—without sacrificing either.
+              {t('description')}
             </p>
             <p className="mb-0">&nbsp;</p>
             <p className="mb-0">
-              Impact is not a side effect. It is the standard.
+              {t('impactStatement')}
             </p>
             <p className="mb-0">&nbsp;</p>
             <p className="mb-0">
-              From high-visibility activations in city centers to executive forums staged under time constraints, our exhibition company enters with full alignment and delivers across every touchpoint. When other vendors pause, we shift into high gear. When decisions are delayed, we absorb pressure and maintain clarity. And when the goal changes midstream, we adjust without error. Trusted as a top event planner in the GCC, we don&apos;t decorate—we deliver.
+              {t('processDescription')}
             </p>
           </div>
           </div>
@@ -252,8 +254,8 @@ export default function WorkHero() {
               fontFamily: '"Poppins", sans-serif'
             }}
           >
-            <h1 className="sr-only">KayanLive Work</h1>
-            <span aria-hidden="true">Our Work</span>
+            <h1 className="sr-only">KayanLive {t('title')}</h1>
+            <span aria-hidden="true">{t('title')}</span>
           </header>
 
           <div
@@ -275,9 +277,9 @@ export default function WorkHero() {
               backgroundClip: 'text',
               display: 'block'
             }}>
-              Quality-Driven Process.
+              {t('subtitle1')}
             </div>
-            <div className="text-white">Results-Driven Outcomes.</div>
+            <div className="text-white">{t('subtitle2')}</div>
           </div>
 
           <div
@@ -292,15 +294,15 @@ export default function WorkHero() {
             }}
           >
             <p className="mb-0">
-              At KayanLive, every project begins with a single purpose: to create an experience that moves people, aligns stakeholders, and delivers measurable value. We design for emotional engagement and build for operational reliability—without sacrificing either.
+              {t('description')}
             </p>
             <p className="mb-0">&nbsp;</p>
             <p className="mb-0">
-              Impact is not a side effect. It is the standard.
+              {t('impactStatement')}
             </p>
             <p className="mb-0">&nbsp;</p>
             <p className="mb-0">
-              From high-visibility activations in city centers to executive forums staged under time constraints, our exhibition company enters with full alignment and delivers across every touchpoint. When other vendors pause, we shift into high gear. When decisions are delayed, we absorb pressure and maintain clarity. And when the goal changes midstream, we adjust without error. Trusted as a top event planner in the GCC, we don&apos;t decorate—we deliver.
+              {t('processDescription')}
             </p>
           </div>
         </div>
@@ -379,7 +381,7 @@ export default function WorkHero() {
         href="#main-content" 
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-white text-black px-4 py-2 rounded z-50"
       >
-        Skip to main content
+        {t('skipToContent')}
       </a>
     </section>
   );

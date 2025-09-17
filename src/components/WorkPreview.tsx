@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 // Assets from Figma
 const imgRectangle4236 = "/assets/1402feda00b479d56347dca419118793a7b45676.png";
@@ -11,6 +12,7 @@ const imgPattern0341 = "/assets/6ebbb286c787b4009100c9f8cd397942ae83de56.png";
 const imgPattern0212 = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
 
 export default function WorkPreview() {
+  const t = useTranslations('work.preview');
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -42,8 +44,8 @@ export default function WorkPreview() {
             letterSpacing: '-2px',
             marginBottom: '8px'
           }}>
-            <p className="mb-0">A Preview</p>
-            <p className="mb-0">of What&apos;s</p>
+            <p className="mb-0">{t('title.line1')}</p>
+            <p className="mb-0">{t('title.line2')}</p>
           </div>
           <div 
             className="bg-clip-text bg-gradient-to-l from-[#74cfaa] to-[#a095e1] text-center font-medium" 
@@ -55,7 +57,7 @@ export default function WorkPreview() {
               letterSpacing: '-2px'
             }}
           >
-            <p className="mb-0">Coming</p>
+            <p className="mb-0">{t('title.line3')}</p>
           </div>
         </div>
         
@@ -209,7 +211,8 @@ export default function WorkPreview() {
         left: '3.8%', // 57px / 1512px = 3.8%
         top: '9.4%', // 97px / 1031px = 9.4%
         width: '51.5%', // 778px / 1512px = 51.5%
-        gap: 'clamp(2rem, 3.8vw, 58px)' // 58px responsive
+        gap: 'clamp(2rem, 3.8vw, 58px)', // 58px responsive
+        zIndex: 10 // Above pattern overlays
       }}>
         {/* Title Section */}
         <div className="flex flex-col items-start justify-start w-full font-medium" style={{
@@ -219,8 +222,8 @@ export default function WorkPreview() {
         }}>
           {/* All title text in one container */}
           <div className="text-white w-full space-y-2">
-            <p className="mb-0" style={{ lineHeight: 'clamp(4.5rem, 8.5vw, 129px)' }}>A Preview</p>
-            <p className="mb-0" style={{ lineHeight: 'clamp(4.5rem, 8.5vw, 129px)' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of What&apos;s</p>
+            <p className="mb-0" style={{ lineHeight: 'clamp(4.5rem, 8.5vw, 129px)' }}>{t('title.line1')}</p>
+            <p className="mb-0" style={{ lineHeight: 'clamp(4.5rem, 8.5vw, 129px)' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{t('title.line2')}</p>
             <p 
               className="mb-0 bg-clip-text bg-gradient-to-r from-[#a095e1] to-[#74cfaa]" 
               style={{ 
@@ -228,7 +231,7 @@ export default function WorkPreview() {
                 lineHeight: 'clamp(5rem, 11.6vw, 175px)'
               }}
             >
-              Coming
+              {t('title.line3')}
             </p>
           </div>
         </div>
@@ -240,22 +243,15 @@ export default function WorkPreview() {
           width: 'clamp(300px, 43.5vw, 658px)' // 658px responsive
         }}>
           <p className="mb-0">
-            Our case study archive is growing and will soon feature flagship moments from across the UAE and Saudi Arabia, covering live events, immersive tech activations, public sector launches, and large-scale brand experiences.
+            {t('description')}
           </p>
           <p className="mb-0">&nbsp;</p>
           <p className="mb-0">
-            These will highlight the work that positions us among the top event management companies.
+            {t('positioning')}
           </p>
         </div>
       </div>
       
-      {/* Bottom Blur Effect - Responsive */}
-      <div className="absolute backdrop-blur-[51.5px] bg-[rgba(217,217,217,0.01)]" style={{
-        height: '21.4%', // 221px / 1031px = 21.4%
-        left: '0%',
-        top: '78.6%', // 810px / 1031px = 78.6%
-        width: '96.2%' // 1454px / 1512px = 96.2%
-      }} />
       
       {/* Pattern Overlay - Bottom Right - Responsive */}
       <div 
@@ -275,15 +271,17 @@ export default function WorkPreview() {
         height: '81.7%', // 842px / 1031px = 81.7%
         left: '-13.8%', // -209px / 1512px = -13.8%
         top: '73.9%', // 762px / 1031px = 73.9%
-        width: '55.1%' // 833px / 1512px = 55.1%
+        width: '55.1%', // 833px / 1512px = 55.1%
+        zIndex: 1, // Behind text content
+        opacity: 0.3 // Very transparent
       }}>
         <div className="rotate-[90deg] flex-none">
-          <div 
+          <div
             className="bg-center bg-cover bg-no-repeat"
-            style={{ 
+            style={{
               height: 'clamp(400px, 55.1vw, 833px)', // 833px responsive
               width: 'clamp(420px, 55.7vw, 842px)', // 842px responsive
-              backgroundImage: `url('${imgPattern0212}')` 
+              backgroundImage: `url('${imgPattern0212}')`
             }}
           />
         </div>

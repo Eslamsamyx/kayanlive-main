@@ -356,7 +356,7 @@ export default function Hero() {
                             size="md"
                             arrowIcon={true}
                           >
-                            Schedule a Consultation
+                            {t('hero.cta')}
                           </Button>
                         </div>
                       </div>
@@ -681,7 +681,7 @@ export default function Hero() {
                           size="lg"
                           arrowIcon={true}
                         >
-                          Schedule a Consultation
+                          {t('hero.cta')}
                         </Button>
                       </div>
                     </div>

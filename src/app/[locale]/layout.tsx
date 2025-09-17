@@ -38,16 +38,16 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
-      <body className={poppins.className} suppressHydrationWarning>
+      <body className={`${poppins.className} overflow-x-hidden`} suppressHydrationWarning>
         <NextIntlClientProvider messages={messages} locale={locale}>
           <TRPCReactProvider>
-            <div className="min-h-screen bg-white">
+            <div className="min-h-screen bg-white overflow-x-hidden">
               <div className="fixed top-0 left-0 right-0 z-50">
                 <div className="max-w-[1600px] mx-auto px-4 py-4">
                   <Navbar locale={locale} />
                 </div>
               </div>
-              <main className="pt-32">
+              <main className="pt-32 overflow-x-hidden">
                 <div className="max-w-[1600px] mx-auto px-4">
                   {children}
                 </div>

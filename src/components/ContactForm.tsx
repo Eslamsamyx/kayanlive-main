@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useTranslations } from 'next-intl';
+import CTAButton from './CTAButton';
 // import Image from 'next/image';
 
 const imgConcertBg1 = "/assets/cf27cb2a37e9e3bfd30c1ada4fe4988496b10bbb.png";
@@ -15,6 +17,7 @@ interface Toast {
 }
 
 export default function ContactForm() {
+  const t = useTranslations('contact.form');
   const [isUrgent, setIsUrgent] = useState<'yes' | 'no' | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -83,11 +86,11 @@ export default function ContactForm() {
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-    
-    if (!formData.fullName.trim()) newErrors.fullName = 'Full name is required';
-    if (!formData.email.trim()) newErrors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email is invalid';
-    
+
+    if (!formData.fullName.trim()) newErrors.fullName = t('validation.fullNameRequired');
+    if (!formData.email.trim()) newErrors.email = t('validation.emailRequired');
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = t('validation.emailInvalid');
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -96,7 +99,7 @@ export default function ContactForm() {
     e.preventDefault();
     
     if (!validateForm()) {
-      addToast('Please correct the errors in the form.', 'error');
+      addToast(t('validation.formErrors'), 'error');
       return;
     }
     
@@ -105,7 +108,7 @@ export default function ContactForm() {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
       console.log('Form submitted:', { ...formData, isUrgent });
-      addToast('Form submitted successfully! We\'ll get back to you soon.', 'success');
+      addToast(t('toasts.success'), 'success');
       
       // Reset form
       setFormData({
@@ -120,7 +123,7 @@ export default function ContactForm() {
       setIsUrgent(null);
       setErrors({});
     } catch {
-      addToast('Error submitting form. Please try again.', 'error');
+      addToast(t('toasts.error'), 'error');
     } finally {
       setIsSubmitting(false);
     }
@@ -143,7 +146,7 @@ export default function ContactForm() {
             {/* Full Name */}
             <div className="flex flex-col gap-3 w-full">
               <label htmlFor="fullName" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }}>
-                Full Name *
+                {t('labels.fullName')} *
               </label>
               <div className="relative">
                 <input
@@ -153,7 +156,7 @@ export default function ContactForm() {
                   onChange={(e) => handleInputChange('fullName', e.target.value)}
                   className={`w-full h-[52px] md:h-[60px] lg:h-[67px] rounded-[10px] px-4 text-black bg-[rgba(255,255,255,0.7)] placeholder-gray-600 border-2 transition-all focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white ${errors.fullName ? 'border-red-400' : 'border-transparent'}`}
                   style={{ fontFamily: '"Poppins", sans-serif' }}
-                  placeholder="Enter your full name"
+                  placeholder={t('placeholders.fullName')}
                   aria-describedby={errors.fullName ? "fullName-error" : undefined}
                 />
                 {errors.fullName && (
@@ -167,7 +170,7 @@ export default function ContactForm() {
             {/* Organization */}
             <div className="flex flex-col gap-3 w-full">
               <label htmlFor="organization" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }}>
-                Organization or Affiliation
+                {t('labels.organization')}
               </label>
               <input
                 id="organization"
@@ -176,14 +179,14 @@ export default function ContactForm() {
                 onChange={(e) => handleInputChange('organization', e.target.value)}
                 className="w-full h-[52px] md:h-[60px] lg:h-[67px] rounded-[10px] px-4 text-black bg-[rgba(255,255,255,0.7)] placeholder-gray-600 border-2 border-transparent transition-all focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white"
                 style={{ fontFamily: '"Poppins", sans-serif' }}
-                placeholder="Enter your organization"
+                placeholder={t('placeholders.organization')}
               />
             </div>
 
             {/* Email */}
             <div className="flex flex-col gap-3 w-full">
               <label htmlFor="email" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }}>
-                Email Address *
+                {t('labels.email')} *
               </label>
               <div className="relative">
                 <input
@@ -193,7 +196,7 @@ export default function ContactForm() {
                   onChange={(e) => handleInputChange('email', e.target.value)}
                   className={`w-full h-[52px] md:h-[60px] lg:h-[67px] rounded-[10px] px-4 text-black bg-[rgba(255,255,255,0.7)] placeholder-gray-600 border-2 transition-all focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white ${errors.email ? 'border-red-400' : 'border-transparent'}`}
                   style={{ fontFamily: '"Poppins", sans-serif' }}
-                  placeholder="Enter your email address"
+                  placeholder={t('placeholders.email')}
                   aria-describedby={errors.email ? "email-error" : undefined}
                 />
                 {errors.email && (
@@ -207,7 +210,7 @@ export default function ContactForm() {
             {/* Phone */}
             <div className="flex flex-col gap-3 w-full">
               <label htmlFor="phone" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }}>
-                Phone Number (Optional)
+                {t('labels.phone')}
               </label>
               <input
                 id="phone"
@@ -216,14 +219,14 @@ export default function ContactForm() {
                 onChange={(e) => handleInputChange('phone', e.target.value)}
                 className="w-full h-[52px] md:h-[60px] lg:h-[67px] rounded-[10px] px-4 text-black bg-[rgba(255,255,255,0.7)] placeholder-gray-600 border-2 border-transparent transition-all focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white"
                 style={{ fontFamily: '"Poppins", sans-serif' }}
-                placeholder="Enter your phone number"
+                placeholder={t('placeholders.phone')}
               />
             </div>
 
             {/* Event Type */}
             <div className="flex flex-col gap-3 w-full">
               <label htmlFor="eventType" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }}>
-                Type of Event or Activation
+                {t('labels.eventType')}
               </label>
               <input
                 id="eventType"
@@ -232,14 +235,14 @@ export default function ContactForm() {
                 onChange={(e) => handleInputChange('eventType', e.target.value)}
                 className="w-full h-[52px] md:h-[60px] lg:h-[67px] rounded-[10px] px-4 text-black bg-[rgba(255,255,255,0.7)] placeholder-gray-600 border-2 border-transparent transition-all focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white"
                 style={{ fontFamily: '"Poppins", sans-serif' }}
-                placeholder="e.g., Corporate event, Product launch"
+                placeholder={t('placeholders.eventType')}
               />
             </div>
 
             {/* Budget */}
             <div className="flex flex-col gap-3 w-full">
               <label htmlFor="budget" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }}>
-                Budget Range (If Applicable)
+                {t('labels.budget')}
               </label>
               <input
                 id="budget"
@@ -248,14 +251,14 @@ export default function ContactForm() {
                 onChange={(e) => handleInputChange('budget', e.target.value)}
                 className="w-full h-[52px] md:h-[60px] lg:h-[67px] rounded-[10px] px-4 text-black bg-[rgba(255,255,255,0.7)] placeholder-gray-600 border-2 border-transparent transition-all focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white"
                 style={{ fontFamily: '"Poppins", sans-serif' }}
-                placeholder="e.g., $500K - $10M"
+                placeholder={t('placeholders.budget')}
               />
             </div>
 
             {/* Goals */}
             <div className="flex flex-col gap-3 w-full">
               <label htmlFor="goals" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }}>
-                Any Specific Goals or Challenges
+                {t('labels.goals')}
               </label>
               <textarea
                 id="goals"
@@ -264,7 +267,7 @@ export default function ContactForm() {
                 rows={3}
                 className="w-full min-h-[52px] md:min-h-[60px] lg:min-h-[67px] max-h-[150px] rounded-[10px] px-4 py-3 text-black bg-[rgba(255,255,255,0.7)] placeholder-gray-600 border-2 border-transparent transition-all focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white resize-none overflow-y-auto"
                 style={{ fontFamily: '"Poppins", sans-serif' }}
-                placeholder="Describe your goals or challenges"
+                placeholder={t('placeholders.goals')}
               />
             </div>
 
@@ -272,7 +275,7 @@ export default function ContactForm() {
             <div className="flex flex-col gap-3 w-full">
               <fieldset>
                 <legend className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight mb-3" style={{ fontFamily: '"Poppins", sans-serif' }}>
-                  Is this an Urgent Request?
+                  {t('labels.isUrgent')}
                 </legend>
                 <div className="flex gap-6 items-center" role="radiogroup" aria-labelledby="urgent-request-legend">
                   <label className="flex items-center gap-3 cursor-pointer group focus-within:outline-none focus-within:ring-2 focus-within:ring-white focus-within:ring-offset-2 focus-within:ring-offset-[#2c2c2b] rounded-md">
@@ -303,7 +306,7 @@ export default function ContactForm() {
                       style={{ fontFamily: '"Poppins", sans-serif' }}
                       id="urgent-yes-description"
                     >
-                      Yes
+                      {t('radioOptions.yes')}
                     </span>
                   </label>
                   <label className="flex items-center gap-3 cursor-pointer group focus-within:outline-none focus-within:ring-2 focus-within:ring-white focus-within:ring-offset-2 focus-within:ring-offset-[#2c2c2b] rounded-md">
@@ -334,7 +337,7 @@ export default function ContactForm() {
                       style={{ fontFamily: '"Poppins", sans-serif' }}
                       id="urgent-no-description"
                     >
-                      No
+                      {t('radioOptions.no')}
                     </span>
                   </label>
                 </div>
@@ -343,66 +346,23 @@ export default function ContactForm() {
 
             {/* Submit Button */}
             <div className="lg:col-span-2 flex justify-center lg:justify-start pt-8 pb-4 px-4 lg:px-0">
-              <style>{`
-                @keyframes slideLeftRight {
-                  0%, 100% { transform: translateX(0); }
-                  25% { transform: translateX(-5px); }
-                  75% { transform: translateX(5px); }
-                }
-                .submit-cta-button:hover .arrow-circle {
-                  animation: slideLeftRight 1s ease-in-out infinite;
-                }
-              `}</style>
-              
-              <button 
+              {/* Loading indicator for screen readers */}
+              {isSubmitting && (
+                <div className="sr-only" id="submit-status" aria-live="polite" aria-atomic="true">
+                  {t('submit.loadingStatus')}
+                </div>
+              )}
+
+              <CTAButton
                 type="submit"
                 disabled={isSubmitting}
-                className="submit-cta-button flex items-center gap-2 group relative disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent rounded-full"
-                aria-describedby={isSubmitting ? "submit-status" : undefined}
+                ariaLabel={isSubmitting ? t('submit.loadingStatus') : t('submit.button')}
               >
-                {/* Loading indicator */}
                 {isSubmitting && (
-                  <div className="sr-only" id="submit-status" aria-live="polite" aria-atomic="true">
-                    Submitting form, please wait...
-                  </div>
+                  <div className="w-4 h-4 border-2 border-[#2c2c2b] border-t-transparent rounded-full animate-spin mr-2" role="presentation" aria-hidden="true" />
                 )}
-                
-                {/* Main button pill with gradient */}
-                <div 
-                  className={`rounded-full flex items-center justify-center pointer-events-none transition-all duration-200 ${
-                    isSubmitting ? 'opacity-90' : 'group-hover:shadow-lg'
-                  }`}
-                  style={{ 
-                    background: isSubmitting 
-                      ? 'linear-gradient(90deg, #7afdd6 0%, #a095e1 60%, #b8a4ff 90%)' 
-                      : 'linear-gradient(90deg, #7afdd6 0%, #a095e1 60%, #b8a4ff 90%)',
-                    height: 'clamp(48px, 5vw, 65px)',
-                    paddingLeft: 'clamp(24px, 3vw, 36px)',
-                    paddingRight: 'clamp(24px, 3vw, 36px)'
-                  }}
-                >
-                  <span className="text-[#2c2c2b] text-[20px] font-normal flex items-center gap-2" style={{ fontFamily: '"Poppins", sans-serif' }}>
-                    {isSubmitting && (
-                      <div className="w-4 h-4 border-2 border-[#2c2c2b] border-t-transparent rounded-full animate-spin" role="presentation" aria-hidden="true" />
-                    )}
-                    {isSubmitting ? 'Submitting...' : 'Submit'}
-                  </span>
-                </div>
-                
-                {/* Arrow circle - animated on hover */}
-                <div 
-                  className="arrow-circle rounded-full bg-[#b8a4ff] flex items-center justify-center pointer-events-none"
-                  style={{ 
-                    width: 'clamp(48px, 5vw, 65px)',
-                    height: 'clamp(48px, 5vw, 65px)',
-                    flexShrink: 0
-                  }}
-                >
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-              </button>
+                {isSubmitting ? t('submit.submitting') : t('submit.button')}
+              </CTAButton>
             </div>
           </div>
         </form>
@@ -450,7 +410,7 @@ export default function ContactForm() {
               <button
                 onClick={() => removeToast(toast.id)}
                 className="ml-2 text-white/80 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white/20 rounded-md p-1"
-                aria-label="Close notification"
+                aria-label={t('toasts.closeNotification')}
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                   <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />

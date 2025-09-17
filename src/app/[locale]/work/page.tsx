@@ -37,7 +37,7 @@ export default async function WorkPage({
       
       {/* Work Call to Action Section - Break out to full width */}
       <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
-        <WorkCallToAction />
+        <WorkCallToAction locale={locale} />
       </div>
     </div>
   );

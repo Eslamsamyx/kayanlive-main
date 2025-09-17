@@ -11,6 +11,7 @@ const imgFrame1618874015 = "/assets/154289bd0be3bf0eddab560357bd09aa27f634bc.svg
 interface CallToActionBannerProps {
   title: string;
   subtitle: string;
+  description?: string;
   buttonText: string;
   buttonHref?: string;
   topPadding?: string;
@@ -20,6 +21,7 @@ interface CallToActionBannerProps {
 export default function CallToActionBanner({
   title,
   subtitle,
+  description,
   buttonText,
   buttonHref,
   topPadding = "pt-24",
@@ -146,11 +148,18 @@ export default function CallToActionBanner({
           </div>
 
           {/* Content - Mobile: Centered, Desktop: Left-aligned */}
-          <div className="absolute left-1/2 -translate-x-1/2 md:left-[137px] md:translate-x-0 top-20 md:top-20 w-full max-w-[90%] md:max-w-[567px] md:w-[567px] flex flex-col gap-[30px] md:gap-[42px] items-center md:items-start justify-start z-10 px-4 md:px-0">
+          <div className="absolute left-1/2 -translate-x-1/2 md:left-[137px] md:translate-x-0 top-20 md:top-16 w-full max-w-[90%] md:max-w-[567px] md:w-[567px] flex flex-col gap-[20px] md:gap-[28px] items-center md:items-start justify-start z-10 px-4 md:px-0">
             <h3 className="text-white text-[30px] md:text-[50px] leading-[36px] md:leading-[60px] capitalize text-center md:text-left max-w-[290px] md:max-w-none md:w-auto" style={{ fontFamily: '"Poppins", sans-serif' }}>
               {subtitle}
             </h3>
-            
+
+            {/* Description Text */}
+            {description && (
+              <p className="text-white text-[16px] md:text-[20px] leading-[24px] md:leading-[28px] text-center md:text-left max-w-[320px] md:max-w-[520px] opacity-95" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                {description}
+              </p>
+            )}
+
             {/* CTA Button */}
             <CTAButton
               variant="white"

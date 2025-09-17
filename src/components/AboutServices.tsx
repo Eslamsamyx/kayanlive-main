@@ -1,9 +1,8 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { getMarkdownHTML } from '@/utils/markdownUtils';
-import AnimatedServiceCard from './AnimatedServiceCard';
 import AnimatedServiceContent from './AnimatedServiceContent';
 import CTAButton from './CTAButton';
 
@@ -96,7 +95,7 @@ export default function AboutServices() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry, index) => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const cardIndex = parseInt(entry.target.getAttribute('data-card-index') || '0');
             const direction = getAnimationDirection(cardIndex);
@@ -153,7 +152,7 @@ export default function AboutServices() {
                 </svg>
               </div>
               <div className="flex-1">
-                <h3 className="text-[#2c2c2b] font-semibold text-lg mb-3">Market Leadership</h3>
+                <h3 className="text-[#2c2c2b] font-semibold text-lg mb-3">{t('aboutServices.cards.marketLeadership')}</h3>
                 <p
                   className="text-[#666666] leading-relaxed"
                   style={{ fontSize: 'clamp(16px, 2vw, 18px)', lineHeight: 'clamp(22px, 2.8vw, 26px)' }}
@@ -172,7 +171,7 @@ export default function AboutServices() {
                 </svg>
               </div>
               <div className="flex-1">
-                <h3 className="text-[#2c2c2b] font-semibold text-lg mb-3">Tech Innovation</h3>
+                <h3 className="text-[#2c2c2b] font-semibold text-lg mb-3">{t('aboutServices.cards.techInnovation')}</h3>
                 <p
                   className="text-[#666666] leading-relaxed"
                   style={{ fontSize: 'clamp(16px, 2vw, 18px)', lineHeight: 'clamp(22px, 2.8vw, 26px)' }}
@@ -192,7 +191,7 @@ export default function AboutServices() {
                 </svg>
               </div>
               <div className="flex-1">
-                <h3 className="text-[#2c2c2b] font-semibold text-lg mb-3">Regional Excellence</h3>
+                <h3 className="text-[#2c2c2b] font-semibold text-lg mb-3">{t('aboutServices.cards.regionalExcellence')}</h3>
                 <p
                   className="text-[#666666] leading-relaxed"
                   style={{ fontSize: 'clamp(16px, 2vw, 18px)', lineHeight: 'clamp(22px, 2.8vw, 26px)' }}
@@ -211,7 +210,7 @@ export default function AboutServices() {
                 </svg>
               </div>
               <div className="flex-1">
-                <h3 className="text-[#2c2c2b] font-semibold text-lg mb-3">Swift Execution</h3>
+                <h3 className="text-[#2c2c2b] font-semibold text-lg mb-3">{t('aboutServices.cards.swiftExecution')}</h3>
                 <p
                   className="text-[#666666] leading-relaxed"
                   style={{ fontSize: 'clamp(16px, 2vw, 18px)', lineHeight: 'clamp(22px, 2.8vw, 26px)' }}
@@ -237,7 +236,7 @@ export default function AboutServices() {
                 lineHeight: 'clamp(26px, 3.5vw, 36px)'
               }}
             >
-              Why Choose KayanLive?
+              {t('aboutServices.whyChoose')}
             </h3>
             <p
               className="text-white/90 leading-relaxed mb-8"
@@ -281,7 +280,7 @@ export default function AboutServices() {
                     </svg>
                   </div>
                   <span className="text-[#74cfaa] font-semibold text-sm tracking-wider uppercase">
-                    Our Services
+                    {t('aboutServices.servicesLabel')}
                   </span>
                 </div>
 
@@ -293,7 +292,7 @@ export default function AboutServices() {
                       letterSpacing: 'clamp(-0.8px, -0.15vw, -1.5px)'
                     }}
                   >
-                    End-to-End{' '}
+                    {t('aboutServices.pipelineTitle').split(' ')[0]}{'-'}{t('aboutServices.pipelineTitle').split(' ')[1]}{' '}
                   </span>
                   <span
                     className="bg-gradient-to-r from-[#74cfaa] to-[#a095e1] bg-clip-text text-transparent"
@@ -305,7 +304,7 @@ export default function AboutServices() {
                       WebkitTextFillColor: 'transparent'
                     }}
                   >
-                    Exceptional
+                    {t('aboutServices.pipelineTitle').split(' ')[2]}
                   </span>
                   <br />
                   <span
@@ -315,7 +314,7 @@ export default function AboutServices() {
                       letterSpacing: 'clamp(-0.8px, -0.15vw, -1.5px)'
                     }}
                   >
-                    Event Design, Build, and Delivery
+                    {t('aboutServices.pipelineTitle').split(' ').slice(3).join(' ')}
                   </span>
                 </h3>
 
@@ -552,7 +551,7 @@ export default function AboutServices() {
                   </div>
 
                   <div className="inline-flex items-center px-3 py-1 bg-white/20 rounded-full text-xs font-semibold mb-4 backdrop-blur-sm">
-                    <span>⚡ Emergency Response</span>
+                    <span>⚡ {t('aboutServices.emergencyResponse')}</span>
                   </div>
 
                   <h4 className="text-white font-bold text-2xl mb-4 leading-tight">
@@ -605,7 +604,7 @@ export default function AboutServices() {
                         </svg>
                       </div>
                       <span className="text-[#74cfaa] font-bold text-base tracking-wider uppercase">
-                        Our Process
+                        {t('aboutServices.process.badge')}
                       </span>
                     </div>
                   </div>
@@ -623,7 +622,7 @@ export default function AboutServices() {
                           letterSpacing: 'clamp(-1px, -0.2vw, -2px)'
                         }}
                       >
-                        How We{' '}
+                        {t('aboutServices.process.title').split(' ')[0]} {t('aboutServices.process.title').split(' ')[1]}{' '}
                       </span>
                       <span
                         className="bg-gradient-to-r from-[#74cfaa] to-[#a095e1] bg-clip-text text-transparent"
@@ -635,7 +634,7 @@ export default function AboutServices() {
                           WebkitTextFillColor: 'transparent'
                         }}
                       >
-                        Work?
+                        {t('aboutServices.process.title').split(' ')[2]}
                       </span>
                     </h3>
                   </div>
@@ -649,7 +648,14 @@ export default function AboutServices() {
                       className="text-[#666666] leading-relaxed max-w-2xl mx-auto"
                       style={{ fontSize: 'clamp(18px, 3vw, 24px)', lineHeight: 'clamp(26px, 4vw, 34px)' }}
                     >
-                      Our system ensures <strong className="text-[#74cfaa]">clarity</strong>, <strong className="text-[#a095e1]">speed</strong>, and <strong className="text-[#74cfaa]">zero surprises</strong>
+                      {t.rich('process.subtitle', {
+                        strong: (chunks) => (
+                          <strong className="text-[#74cfaa]">{chunks}</strong>
+                        ),
+                        strongSpeed: (chunks) => (
+                          <strong className="text-[#a095e1]">{chunks}</strong>
+                        )
+                      })}
                     </p>
                   </div>
 
@@ -689,10 +695,10 @@ export default function AboutServices() {
                   </div>
 
                   <h4 className="text-[#2c2c2b] font-bold text-lg mb-2 group-hover:text-[#74cfaa] transition-colors duration-300">
-                    Discovery & Briefing
+                    {t('aboutServices.process.steps.discovery.title')}
                   </h4>
                   <p className="text-[#666666] text-sm leading-relaxed">
-                    Align on goals, audience, and outcomes.
+                    {t('aboutServices.process.steps.discovery.description')}
                   </p>
                 </div>
 
@@ -722,10 +728,10 @@ export default function AboutServices() {
                   </div>
 
                   <h4 className="text-[#2c2c2b] font-bold text-lg mb-2 group-hover:text-[#a095e1] transition-colors duration-300">
-                    Creative Experience Design
+                    {t('aboutServices.process.steps.design.title')}
                   </h4>
                   <p className="text-[#666666] text-sm leading-relaxed">
-                    Cross-functional teams map out every sensory and strategic element.
+                    {t('aboutServices.process.steps.design.description')}
                   </p>
                 </div>
 
@@ -756,10 +762,10 @@ export default function AboutServices() {
                   </div>
 
                   <h4 className="text-[#2c2c2b] font-bold text-lg mb-2 group-hover:text-[#74cfaa] transition-colors duration-300">
-                    Technical Planning
+                    {t('aboutServices.process.steps.planning.title')}
                   </h4>
                   <p className="text-[#666666] text-sm leading-relaxed">
-                    AV, build, venue, and logistics are scoped and scheduled.
+                    {t('aboutServices.process.steps.planning.description')}
                   </p>
                 </div>
 
@@ -789,10 +795,10 @@ export default function AboutServices() {
                   </div>
 
                   <h4 className="text-[#2c2c2b] font-bold text-lg mb-2 group-hover:text-[#a095e1] transition-colors duration-300">
-                    Production & Execution
+                    {t('aboutServices.process.steps.production.title')}
                   </h4>
                   <p className="text-[#666666] text-sm leading-relaxed">
-                    Fabrication, media, crew, and gear all locked, loaded, and live-ready.
+                    {t('aboutServices.process.steps.production.description')}
                   </p>
                 </div>
 
@@ -822,10 +828,10 @@ export default function AboutServices() {
                   </div>
 
                   <h4 className="text-[#2c2c2b] font-bold text-lg mb-2 group-hover:text-[#74cfaa] transition-colors duration-300">
-                    Show Control
+                    {t('aboutServices.process.steps.showControl.title')}
                   </h4>
                   <p className="text-[#666666] text-sm leading-relaxed">
-                    We manage rehearsals, timing, tech operations, and the on-site team.
+                    {t('aboutServices.process.steps.showControl.description')}
                   </p>
                 </div>
 
@@ -849,7 +855,7 @@ export default function AboutServices() {
 
                   {/* Optional Badge */}
                   <div className="absolute -top-2 -right-2 bg-[#74cfaa] text-white text-xs px-2 py-1 rounded-full font-semibold">
-                    Optional
+                    {t('aboutServices.process.steps.postEvent.badge')}
                   </div>
 
                   {/* Icon */}
@@ -860,10 +866,10 @@ export default function AboutServices() {
                   </div>
 
                   <h4 className="text-[#2c2c2b] font-bold text-lg mb-2 group-hover:text-[#a095e1] transition-colors duration-300">
-                    Post-Event Analysis
+                    {t('aboutServices.process.steps.postEvent.title')}
                   </h4>
                   <p className="text-[#666666] text-sm leading-relaxed">
-                    Analytics, insights, and performance reviews are available.
+                    {t('aboutServices.process.steps.postEvent.description')}
                   </p>
                 </div>
               </div>

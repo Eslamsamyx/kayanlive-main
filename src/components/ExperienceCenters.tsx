@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 // Assets from Figma
@@ -14,6 +15,7 @@ const imgGroup36137 = "/assets/998232e7f2b2bfc71ea2796c3386b0489faa3a1a.svg";
 const imgVector8Mobile = "/assets/1eb3acc2c8c88219785b7efeb93b6f426b4134dd.svg";
 
 export default function ExperienceCenters() {
+  const t = useTranslations('services.experienceCenters');
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -37,28 +39,28 @@ export default function ExperienceCenters() {
     // Mobile Layout - Based on Figma Design
     const cards = [
       {
-        title: "Digital Experience Centers",
-        description: "We design and build digital experience centers across the GCC—spaces where interaction meets innovation. These are permanent environments that blend immersive storytelling, interactive surfaces, and real-time content to inform, engage, and inspire.",
+        title: t('centers.digitalExperience.title'),
+        description: t('centers.digitalExperience.description'),
         isDark: true
       },
       {
-        title: "Digital Museums",
-        description: "KayanLive builds fully immersive digital museums, combining projection mapping, AR and VR exhibits, gesture-based controls, and responsive media. Our work brings history, culture, and innovation to life in ways that are engaging, educational, and emotionally resonant.",
+        title: t('centers.digitalMuseums.title'),
+        description: t('centers.digitalMuseums.description'),
         isDark: false
       },
       {
-        title: "Expo Pavilions",
-        description: "We design and deliver full-scale expo pavilions, ready for global exhibitions, tourism showcases, and national storytelling. Our pavilions fuse architecture, digital content, spatial choreography, and visitor analytics into seamless, high-impact environments.",
+        title: t('centers.expoPavilions.title'),
+        description: t('centers.expoPavilions.description'),
         isDark: false
       },
       {
-        title: "Innovation Centers", 
-        description: "Innovation deserves a stage. We build innovation centers that combine interactive demos, holographic displays, robotics, and smart content systems—all within flexible, modular environments. These hubs attract investors, impress officials, and showcase progress with style and clarity.",
+        title: t('centers.innovationCenters.title'),
+        description: t('centers.innovationCenters.description'),
         isDark: false
       },
       {
-        title: "Permanent Installations",
-        description: "From national storytelling zones to branded flagship experiences, we deliver permanent installations that fuse architecture, lighting, and digital content into one cohesive space. Built to last. Designed to evolve. As a leading event and exhibition company, we transform venues into interactive environments that live well beyond the launch date.",
+        title: t('centers.permanentInstallations.title'),
+        description: t('centers.permanentInstallations.description'),
         isDark: false
       }
     ];
@@ -87,14 +89,14 @@ export default function ExperienceCenters() {
                 backgroundClip: 'text'
               }}
             >
-              Experience Centers and
+              {t('title').split(' ').slice(0, 3).join(' ')}
             </span>
             <br />
             <span style={{
               color: '#2c2c2b',
               WebkitTextFillColor: '#2c2c2b'
             }}>
-              Permanent Installations
+              {t('title').split(' ').slice(3).join(' ')}
             </span>
           </h1>
         </div>
@@ -257,14 +259,14 @@ export default function ExperienceCenters() {
               backgroundClip: 'text'
             }}
           >
-            Experience Centers and
+            {t('title').split(' ').slice(0, 3).join(' ')}
           </span>
           <br />
           <span style={{
             color: '#2c2c2b',
             WebkitTextFillColor: '#2c2c2b'
           }}>
-            Permanent Installations
+            {t('title').split(' ').slice(3).join(' ')}
           </span>
         </h1>
       </div>
@@ -368,7 +370,7 @@ export default function ExperienceCenters() {
               }}
             >
               <p style={{ lineHeight: '36px' }}>
-                Digital Experience Centers
+                {t('centers.digitalExperience.title')}
               </p>
             </div>
           </div>
@@ -382,7 +384,7 @@ export default function ExperienceCenters() {
             }}
           >
             <p style={{ lineHeight: '24px' }}>
-              We design and build digital experience centers across the GCC—spaces where interaction meets innovation. These are permanent environments that blend immersive storytelling, interactive surfaces, and real-time content to inform, engage, and inspire.
+              {t('centers.digitalExperience.description')}
             </p>
           </div>
         </div>
@@ -445,7 +447,7 @@ export default function ExperienceCenters() {
                       }}
                     >
                       <p style={{ lineHeight: '36px' }}>
-                        Digital Museums
+                        {t('centers.digitalMuseums.title')}
                       </p>
                     </div>
                   </div>
@@ -466,10 +468,7 @@ export default function ExperienceCenters() {
                     }}
                   >
                     <p className="mb-0">
-                      KayanLive builds fully immersive digital museums, combining projection mapping, AR and VR exhibits, gesture-based controls, and responsive media.
-                    </p>
-                    <p className="mb-0">
-                      Our work brings history, culture, and innovation to life in ways that are engaging, educational, and emotionally resonant.
+                      {t('centers.digitalMuseums.description')}
                     </p>
                   </div>
                 </div>
@@ -536,7 +535,7 @@ export default function ExperienceCenters() {
                       }}
                     >
                       <p style={{ lineHeight: '36px' }}>
-                        Expo Pavilions
+                        {t('centers.expoPavilions.title')}
                       </p>
                     </div>
                   </div>
@@ -557,10 +556,7 @@ export default function ExperienceCenters() {
                     }}
                   >
                     <p className="mb-0">
-                      We design and deliver full-scale expo pavilions, ready for global exhibitions, tourism showcases, and national storytelling.
-                    </p>
-                    <p className="mb-0">
-                      Our pavilions fuse architecture, digital content, spatial choreography, and visitor analytics into seamless, high-impact environments.
+                      {t('centers.expoPavilions.description')}
                     </p>
                   </div>
                 </div>
@@ -627,7 +623,7 @@ export default function ExperienceCenters() {
                       }}
                     >
                       <p style={{ lineHeight: '36px' }}>
-                        Innovation Centers
+                        {t('centers.innovationCenters.title')}
                       </p>
                     </div>
                   </div>
@@ -648,10 +644,7 @@ export default function ExperienceCenters() {
                     }}
                   >
                     <p className="mb-0">
-                      Innovation deserves a stage. We build innovation centers that combine interactive demos, holographic displays, robotics, and smart content systems—all within flexible, modular environments.
-                    </p>
-                    <p className="mb-0">
-                      These hubs attract investors, impress officials, and showcase progress with style and clarity.
+                      {t('centers.innovationCenters.description')}
                     </p>
                   </div>
                 </div>
@@ -718,7 +711,7 @@ export default function ExperienceCenters() {
                       }}
                     >
                       <p style={{ lineHeight: '36px' }}>
-                        Permanent Installations
+                        {t('centers.permanentInstallations.title')}
                       </p>
                     </div>
                   </div>
@@ -739,14 +732,7 @@ export default function ExperienceCenters() {
                     }}
                   >
                     <p className="mb-0">
-                      From national storytelling zones to branded flagship experiences, we deliver permanent installations that fuse architecture, lighting, and digital content into one cohesive space.
-                    </p>
-                    <p className="mb-0">
-                      Built to last. Designed to evolve.
-                    </p>
-                    <p className="mb-0">&nbsp;</p>
-                    <p className="mb-0">
-                      As a leading event and exhibition company, we transform venues into interactive environments that live well beyond the launch date.
+                      {t('centers.permanentInstallations.description')}
                     </p>
                   </div>
                 </div>
