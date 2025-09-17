@@ -34,8 +34,8 @@ export default function AnimatedPath({ containerRef, className = '' }: AnimatedP
       let progress = (viewportCenter - elementTop) / elementHeight;
       progress = Math.max(0, Math.min(1, progress));
       
-      // Enhanced speed for dramatic effect
-      const enhancedProgress = Math.min(1, progress * 1.2);
+      // Enhanced speed for dramatic effect - increased multiplier for faster animation
+      const enhancedProgress = Math.min(1, progress * 2);
       setScrollProgress(enhancedProgress);
     };
 

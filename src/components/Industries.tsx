@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { parseMarkdown } from '@/utils/markdownUtils';
 import ClientsPartnersTemplate, { CardConfig, BackgroundElement } from './ClientsPartnersTemplate';
 
 const imgPattern = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
@@ -118,6 +119,7 @@ export default function Industries() {
       image: imgGovernment,
       layout: 'center',
       title: t('industries.government'),
+      description: parseMarkdown(t('industries.governmentDesc')),
       gradientOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.6) 0%, rgba(122, 253, 214, 0.5) 100%)',
       gradientHoverOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.6) 0%, rgba(122, 253, 214, 0.5) 100%)',
       hasBlurEffect: true,
@@ -128,6 +130,7 @@ export default function Industries() {
       image: imgMultinational,
       layout: 'center',
       title: t('industries.enterprise'),
+      description: parseMarkdown(t('industries.enterpriseDesc')),
       gradientOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.5) 0%, rgba(122, 253, 214, 0.4) 100%)',
       gradientHoverOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.5) 0%, rgba(122, 253, 214, 0.4) 100%)',
       hasBlurEffect: true,
@@ -138,6 +141,7 @@ export default function Industries() {
       image: imgRealEstate,
       layout: 'center',
       title: t('industries.realEstate'),
+      description: parseMarkdown(t('industries.realEstateDesc')),
       gradientOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.55) 0%, rgba(122, 253, 214, 0.45) 100%)',
       gradientHoverOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.55) 0%, rgba(122, 253, 214, 0.45) 100%)',
       hasBlurEffect: true,
@@ -148,6 +152,7 @@ export default function Industries() {
       image: imgEventPlanners,
       layout: 'center',
       title: t('industries.agencies'),
+      description: parseMarkdown(t('industries.agenciesDesc')),
       gradientOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.45) 0%, rgba(122, 253, 214, 0.5) 100%)',
       gradientHoverOverlay: 'linear-gradient(to right, rgba(147, 112, 219, 0.45) 0%, rgba(122, 253, 214, 0.5) 100%)',
       hasBlurEffect: true,

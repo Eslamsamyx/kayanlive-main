@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { useTranslations, useLocale } from 'next-intl';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import CTAButton from './CTAButton';
 
 // Assets from Figma
@@ -18,6 +18,23 @@ export default function CallToActionHero() {
   const t = useTranslations();
   const locale = useLocale();
   const componentRef = useRef<HTMLDivElement>(null);
+
+  // Headlines rotation state
+  const [currentHeadline, setCurrentHeadline] = useState(0);
+  const headlines = [
+    t('execution.headlineV1'),
+    t('execution.headlineV2'),
+    t('execution.headlineV3')
+  ];
+
+  // Auto-rotate headlines every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHeadline((prev) => (prev + 1) % headlines.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [headlines.length]);
 
   // Scroll-based animation setup
   const { scrollYProgress } = useScroll({
@@ -41,13 +58,13 @@ export default function CallToActionHero() {
   return (
     <div ref={componentRef} className="w-full">
       {/* Desktop Version */}
-      <div 
+      <div
         className="overflow-clip relative rounded-[82px] -mx-4 hidden lg:block"
-        style={{ height: '807px' }}
+        style={{ height: '1000px' }}
       >
       {/* Background Image */}
-      <div 
-        className="absolute bg-center bg-cover bg-no-repeat h-[807px] left-0 rounded-[48px] top-0 w-[1512px]"
+      <div
+        className="absolute bg-center bg-cover bg-no-repeat h-[1000px] left-0 rounded-[48px] top-0 w-[1512px]"
         style={{ backgroundImage: `url('${imgRectangle6}')` }}
       />
       
@@ -129,24 +146,67 @@ export default function CallToActionHero() {
       />
       
       {/* Main Content Box - Desktop Only */}
-      <div 
-        className="absolute bg-white/[0.03] backdrop-blur-md box-border content-stretch flex flex-col gap-[140px] items-start justify-start overflow-hidden px-[61px] py-[68px] rounded-[76px] translate-x-[-50%] translate-y-[-50%] w-[854px]"
-        style={{ 
-          top: "calc(50% - 0.5px)", 
+      <div
+        className="absolute bg-white/[0.03] backdrop-blur-md box-border content-stretch flex flex-col gap-[40px] items-start justify-start overflow-hidden px-[61px] py-[68px] rounded-[76px] translate-x-[-50%] translate-y-[-50%] w-[854px]"
+        style={{
+          top: "calc(50% - 0.5px)",
           [locale === 'ar' ? 'right' : 'left']: "calc(50% - 214px)"
         }}
       >
-        {/* Main Title */}
-        <div className="capitalize font-['Poppins',_sans-serif] leading-tight not-italic relative shrink-0 text-[80px] text-white w-[524px]">
-          <p className="leading-[85px]">
-            {t('execution.heading')}
+        {/* Main Title with Animated Headlines */}
+        <div className="capitalize font-['Poppins',_sans-serif] leading-tight not-italic relative shrink-0 text-[80px] text-white w-[732px] h-[380px] overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={currentHeadline}
+              className="leading-[90px] absolute inset-0"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -50 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+            >
+              {headlines[currentHeadline]}
+            </motion.p>
+          </AnimatePresence>
+        </div>
+
+        {/* Problem Description */}
+        <div className="flex flex-col gap-[24px] w-full max-w-[732px]">
+          <p className="text-white text-[20px] leading-[28px] font-['Poppins',_sans-serif]">
+            {t('execution.description')}
+          </p>
+
+          <p className="text-[#7afdd6] text-[22px] leading-[30px] font-['Poppins',_sans-serif] font-medium">
+            {t('execution.promise')}
           </p>
         </div>
-        
-        {/* CTA Button */}
-        <CTAButton ariaLabel={t('execution.cta')}>
-          {t('execution.cta')}
-        </CTAButton>
+
+        {/* Guarantees */}
+        <div className="flex flex-col gap-[16px] w-full max-w-[732px]">
+          <p className="text-white text-[18px] leading-[26px] font-['Poppins',_sans-serif]">
+            {t('execution.guarantee1')}
+          </p>
+          <p className="text-white text-[18px] leading-[26px] font-['Poppins',_sans-serif]">
+            {t('execution.guarantee2')}
+          </p>
+        </div>
+
+        {/* CTA Section */}
+        <div className="flex flex-col gap-[16px] items-start">
+          {/* CTA Tag */}
+          <div className="bg-[#7afdd6]/20 backdrop-blur-sm px-4 py-2 rounded-full">
+            <span className="text-[#7afdd6] text-[14px] font-['Poppins',_sans-serif] font-medium">
+              {t('execution.ctaTag')}
+            </span>
+          </div>
+
+          {/* CTA Button */}
+          <CTAButton
+            href={`/${locale}/contact`}
+            ariaLabel={t('execution.cta')}
+          >
+            {t('execution.cta')}
+          </CTAButton>
+        </div>
       </div>
       
       {/* Pattern Overlay - Top - White with Scroll-based Animation - Desktop Only */}
@@ -163,9 +223,9 @@ export default function CallToActionHero() {
       </div>
 
       {/* Tablet Version */}
-      <div 
+      <div
         className="overflow-clip relative rounded-[48px] -mx-4 hidden md:block lg:hidden"
-        style={{ height: '600px' }}
+        style={{ height: '750px' }}
       >
         <div 
           className="absolute bg-center bg-cover bg-no-repeat h-full left-0 rounded-[48px] top-0 w-full"
@@ -173,41 +233,130 @@ export default function CallToActionHero() {
         />
         <div className="absolute bg-[#2c2c2b] blur-[150px] filter h-[1000px] left-[-300px] top-[-200px] w-[700px]" />
         
-        <div 
-          className="absolute bg-white/[0.03] backdrop-blur-md box-border flex flex-col gap-[80px] items-center justify-center overflow-hidden px-[40px] py-[50px] rounded-[48px] translate-x-[-50%] translate-y-[-50%] w-[90%] max-w-[600px]"
-          style={{ 
-            top: "50%", 
-            left: "50%" 
+        <div
+          className="absolute bg-white/[0.03] backdrop-blur-md box-border flex flex-col gap-[32px] items-center justify-center overflow-hidden px-[40px] py-[50px] rounded-[48px] translate-x-[-50%] translate-y-[-50%] w-[90%] max-w-[600px]"
+          style={{
+            top: "50%",
+            left: "50%"
           }}
         >
-          <div className="capitalize font-['Poppins',_sans-serif] leading-tight not-italic relative shrink-0 text-[56px] text-center text-white">
-            <p className="leading-[65px]">
-              {t('execution.heading')}
+          <div className="capitalize font-['Poppins',_sans-serif] leading-tight not-italic relative shrink-0 text-[56px] text-center text-white h-[300px] overflow-hidden w-full">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={currentHeadline}
+                className="leading-[70px] absolute inset-0 flex items-center justify-center"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+              >
+                {headlines[currentHeadline]}
+              </motion.p>
+            </AnimatePresence>
+          </div>
+
+          {/* Problem Description - Tablet */}
+          <div className="flex flex-col gap-[20px] w-full text-center">
+            <p className="text-white text-[16px] leading-[24px] font-['Poppins',_sans-serif]">
+              {t('execution.description')}
+            </p>
+
+            <p className="text-[#7afdd6] text-[18px] leading-[26px] font-['Poppins',_sans-serif] font-medium">
+              {t('execution.promise')}
             </p>
           </div>
-          
-          <CTAButton ariaLabel={t('execution.cta')}>
-            {t('execution.cta')}
-          </CTAButton>
+
+          {/* Guarantees - Tablet */}
+          <div className="flex flex-col gap-[12px] w-full text-center">
+            <p className="text-white text-[14px] leading-[22px] font-['Poppins',_sans-serif]">
+              {t('execution.guarantee1')}
+            </p>
+            <p className="text-white text-[14px] leading-[22px] font-['Poppins',_sans-serif]">
+              {t('execution.guarantee2')}
+            </p>
+          </div>
+
+          {/* CTA Section - Tablet */}
+          <div className="flex flex-col gap-[12px] items-center">
+            {/* CTA Tag */}
+            <div className="bg-[#7afdd6]/20 backdrop-blur-sm px-3 py-1.5 rounded-full">
+              <span className="text-[#7afdd6] text-[12px] font-['Poppins',_sans-serif] font-medium">
+                {t('execution.ctaTag')}
+              </span>
+            </div>
+
+            {/* CTA Button */}
+            <CTAButton
+              href={`/${locale}/contact`}
+              ariaLabel={t('execution.cta')}
+            >
+              {t('execution.cta')}
+            </CTAButton>
+          </div>
         </div>
       </div>
 
       {/* Mobile Version - Matches Figma Design Exactly */}
-      <div className="md:hidden overflow-clip relative rounded-[24px] -mx-4" style={{ height: '500px' }}>
+      <div className="md:hidden overflow-clip relative rounded-[24px] -mx-4" style={{ height: '750px' }}>
         <div 
           className="absolute bg-center bg-cover bg-no-repeat h-full left-0 rounded-[24px] top-0 w-full"
           style={{ backgroundImage: `url('${imgRectangle6}')` }}
         />
         <div className="flex flex-col gap-[31px] items-center justify-center px-[27px] py-0 relative h-full">
-          <div className="bg-[rgba(255,255,255,0.03)] backdrop-blur-md box-border flex flex-col gap-[60px] items-start justify-center overflow-clip px-[32px] py-[40px] relative rounded-[20px] shrink-0 w-full">
-            <div className="capitalize font-['Poppins',_sans-serif] leading-tight not-italic relative shrink-0 text-left text-white w-full">
-              <p className="leading-[55px] text-[48px]">
-                {t('execution.heading')}
+          <div className="bg-[rgba(255,255,255,0.03)] backdrop-blur-md box-border flex flex-col gap-[24px] items-start justify-center overflow-clip px-[32px] py-[40px] relative rounded-[20px] shrink-0 w-full">
+            <div className="capitalize font-['Poppins',_sans-serif] leading-tight not-italic relative shrink-0 text-left text-white w-full h-[240px] overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={currentHeadline}
+                  className="leading-[60px] text-[48px] absolute inset-0"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -50 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                >
+                  {headlines[currentHeadline]}
+                </motion.p>
+              </AnimatePresence>
+            </div>
+
+            {/* Problem Description - Mobile */}
+            <div className="flex flex-col gap-[16px] w-full">
+              <p className="text-white text-[14px] leading-[20px] font-['Poppins',_sans-serif]">
+                {t('execution.description')}
+              </p>
+
+              <p className="text-[#7afdd6] text-[16px] leading-[22px] font-['Poppins',_sans-serif] font-medium">
+                {t('execution.promise')}
               </p>
             </div>
-            <CTAButton ariaLabel={t('execution.cta')}>
-              {t('execution.cta')}
-            </CTAButton>
+
+            {/* Guarantees - Mobile */}
+            <div className="flex flex-col gap-[8px] w-full">
+              <p className="text-white text-[12px] leading-[18px] font-['Poppins',_sans-serif]">
+                {t('execution.guarantee1')}
+              </p>
+              <p className="text-white text-[12px] leading-[18px] font-['Poppins',_sans-serif]">
+                {t('execution.guarantee2')}
+              </p>
+            </div>
+
+            {/* CTA Section - Mobile */}
+            <div className="flex flex-col gap-[12px] items-start w-full">
+              {/* CTA Tag */}
+              <div className="bg-[#7afdd6]/20 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                <span className="text-[#7afdd6] text-[11px] font-['Poppins',_sans-serif] font-medium">
+                  {t('execution.ctaTag')}
+                </span>
+              </div>
+
+              {/* CTA Button */}
+              <CTAButton
+                href={`/${locale}/contact`}
+                ariaLabel={t('execution.cta')}
+              >
+                {t('execution.cta')}
+              </CTAButton>
+            </div>
           </div>
         </div>
       </div>

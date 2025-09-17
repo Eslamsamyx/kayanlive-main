@@ -1,21 +1,27 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { getMarkdownHTML } from '@/utils/markdownUtils';
+import CTAButton from './CTAButton';
 
 const imgPattern = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
 const imgCheckmark = "/assets/d57e8b023cc2954fe2c89c41bd7f2153074ba9c1.svg";
-const imgArrowCircle = "/assets/56835058c52a4359de96b664c4f5e9d586e4da1d.svg";
 
 export default function WhereWeWork() {
   const t = useTranslations();
-  const [isHovered, setIsHovered] = useState(false);
+  const locale = useLocale();
 
   return (
     <div className="bg-white w-full py-12 md:py-24">
       <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20">
+        {/* Title Section */}
+        <div className="text-center mb-8 md:mb-12 lg:mb-16">
+          <h2 className="text-[#2c2c2b] font-bold text-4xl md:text-5xl lg:text-6xl" style={{ fontFamily: '"Poppins", sans-serif' }}>
+            {t('whereWeWork.title')}
+          </h2>
+        </div>
+
         {/* Desktop Version - Top Section - Where We Work */}
         <div className="hidden md:flex justify-between gap-7 items-end mb-6 md:mb-12 lg:mb-16">
           {/* Left Column */}
@@ -120,15 +126,15 @@ export default function WhereWeWork() {
         </section>
 
         {/* Bottom Section - CTA Banner - Responsive */}
-        <div 
+        <div
           className="relative overflow-hidden rounded-[25px] md:rounded-[48px]"
-          style={{ 
+          style={{
             height: '418px',
             background: 'linear-gradient(135deg, #a095e1 0%, #74cfaa 100%)'
           }}
         >
           {/* Pattern Overlay - Bottom Right - Hidden on mobile for cleaner look */}
-          <div 
+          <div
             className="absolute hidden md:block"
             style={{
               width: '749px',
@@ -137,17 +143,17 @@ export default function WhereWeWork() {
               bottom: '-223px'
             }}
           >
-            <div 
-              className="w-full h-full bg-center bg-cover opacity-20"
-              style={{ 
+            <div
+              className="w-full h-full bg-center bg-cover opacity-10"
+              style={{
                 backgroundImage: `url('${imgPattern}')`,
                 transform: 'rotate(90deg)'
               }}
             />
           </div>
-          
+
           {/* Diamond Shape - Left - Hidden on mobile */}
-          <div 
+          <div
             className="absolute hidden md:block"
             style={{
               width: '614px',
@@ -157,7 +163,7 @@ export default function WhereWeWork() {
               transform: 'translateY(-50%)'
             }}
           >
-            <div 
+            <div
               className="w-[434px] h-[434px] bg-white/20 absolute top-1/2 left-1/2"
               style={{
                 transform: 'translate(-50%, -50%) rotate(45deg)'
@@ -174,13 +180,13 @@ export default function WhereWeWork() {
 
           <div className="md:hidden absolute bottom-[-125.5px] flex h-[319px] items-center justify-center translate-x-[-50%] w-[315px]" style={{ left: "calc(50% + 3px)" }}>
             <div className="flex-none rotate-[90deg]">
-              <div 
-                className="bg-center bg-cover bg-no-repeat h-[315px] w-[319px]" 
-                style={{ 
+              <div
+                className="bg-center bg-cover bg-no-repeat h-[315px] w-[319px]"
+                style={{
                   backgroundImage: `url('${imgPattern}')`,
                   filter: 'brightness(0) invert(1)',
                   opacity: '1'
-                }} 
+                }}
               />
             </div>
           </div>
@@ -188,62 +194,39 @@ export default function WhereWeWork() {
           {/* Desktop Pattern - Right Side - From Figma */}
           <div className="absolute hidden md:flex bottom-[-223px] h-[757px] items-center justify-center right-[-105px] w-[749px] z-20">
             <div className="flex-none rotate-[90deg]">
-              <div 
-                className="bg-center bg-cover bg-no-repeat h-[749px] w-[757px]" 
-                style={{ 
+              <div
+                className="bg-center bg-cover bg-no-repeat h-[749px] w-[757px]"
+                style={{
                   backgroundImage: `url('${imgPattern}')`,
                   filter: 'brightness(0) invert(1)',
-                  opacity: '1'
-                }} 
+                  opacity: '0.3'
+                }}
               />
             </div>
           </div>
 
           {/* Content - Responsive */}
-          <div className="absolute left-4 top-12 md:left-[137px] md:top-20 w-[calc(100%-2rem)] md:w-[550px] flex flex-col gap-[30px] md:gap-[42px] z-10">
-            <h3 
-              className="text-white capitalize text-center md:text-left heading-overflow-safe"
+          <div className="absolute left-4 md:left-[137px] top-1/2 -translate-y-1/2 w-[calc(100%-2rem)] md:w-[700px] flex flex-col gap-[24px] md:gap-[32px] z-10">
+            <h3
+              className="text-white text-center md:text-left heading-overflow-safe"
               style={{
-                fontSize: 'clamp(1.875rem, 6vw, 3.125rem)',
-                lineHeight: 'clamp(1.2, 4vw, 1.3)',
-                maxWidth: '290px',
+                fontSize: 'clamp(1.25rem, 4vw, 2.25rem)',
+                lineHeight: 'clamp(1.3, 5vw, 1.4)',
+                maxWidth: '100%',
                 margin: '0 auto'
               }}
               dangerouslySetInnerHTML={getMarkdownHTML(t('whereWeWork.question'))}
             />
-            
-            {/* CTA Button with Arrow - Responsive */}
+
+            {/* CTA Button - Responsive */}
             <div className="flex justify-center md:justify-start">
-              <div 
-                className="flex items-center gap-0"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+              <CTAButton
+                variant="white"
+                href={`/${locale}/contact`}
+                ariaLabel={t('whereWeWork.cta')}
               >
-                <button className="bg-white rounded-[900px] px-[18px] md:px-[25px] py-[14px] md:py-[18px] flex items-center gap-3 button-overflow-safe">
-                  <span 
-                    className="text-[#2c2c2b] capitalize long-word-safe"
-                    style={{ fontSize: 'clamp(0.875rem, 3vw, 1.25rem)', lineHeight: '1.2', whiteSpace: 'normal' }}
-                  >
-                    {t('whereWeWork.cta')}
-                  </span>
-                </button>
-                <div 
-                  className="bg-white rounded-full flex items-center justify-center transition-all duration-300"
-                  style={{
-                    width: 'clamp(45px, 12vw, 65px)',
-                    height: 'clamp(45px, 12vw, 65px)',
-                    transform: isHovered ? 'translateX(10px)' : 'translateX(0)'
-                  }}
-                >
-                  <Image 
-                    src={imgArrowCircle} 
-                    alt="" 
-                    className="w-full h-full"
-                    fill
-                    style={{objectFit: 'cover'}}
-                  />
-                </div>
-              </div>
+                {t('whereWeWork.cta')}
+              </CTAButton>
             </div>
           </div>
         </div>

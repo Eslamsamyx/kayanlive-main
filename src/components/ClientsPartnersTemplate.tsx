@@ -477,27 +477,82 @@ export default function ClientsPartnersTemplate({
                   padding: '32px',
                   transition: 'all 300ms ease'
                 }}>
-                  <h3 className="heading-overflow-safe long-word-safe" style={{
-                    color: 'white',
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                    lineHeight: 1.1,
-                    fontSize: getClampValue('cardTitleSize'),
-                    fontFamily: '"Poppins", sans-serif',
-                    transform: isTouchDevice ? 'translateY(0)' : (hoveredCardId === card.id ? 'translateY(0)' : 'translateY(0)'),
-                    transition: 'transform 300ms ease'
+                  <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    textAlign: 'center'
                   }}>
-                    {/* Mobile title variation */}
-                    {card.mobileTitle && isMobile && (
-                      <span dangerouslySetInnerHTML={{ __html: card.mobileTitle }} />
-                    )}
-                    {/* Desktop title variation */}
-                    {card.desktopTitle && !isMobile && (
-                      <span dangerouslySetInnerHTML={{ __html: card.desktopTitle }} />
-                    )}
-                    {/* Regular title */}
-                    {!card.mobileTitle && !card.desktopTitle && card.title}
-                  </h3>
+                    <h3 className="heading-overflow-safe long-word-safe" style={{
+                      color: 'white',
+                      fontWeight: 'bold',
+                      textAlign: 'center',
+                      lineHeight: 1.1,
+                      fontSize: getClampValue('cardTitleSize'),
+                      fontFamily: '"Poppins", sans-serif',
+                      marginBottom: '0',
+                      transition: 'all 300ms ease'
+                    }}>
+                      {/* Mobile title variation */}
+                      {card.mobileTitle && isMobile && (
+                        <span dangerouslySetInnerHTML={{ __html: card.mobileTitle }} />
+                      )}
+                      {/* Desktop title variation */}
+                      {card.desktopTitle && !isMobile && (
+                        <span dangerouslySetInnerHTML={{ __html: card.desktopTitle }} />
+                      )}
+                      {/* Regular title */}
+                      {!card.mobileTitle && !card.desktopTitle && card.title}
+                    </h3>
+
+                    {/* Description for center layout - show on hover below title */}
+                    <div style={{
+                      opacity: isTouchDevice ? 1 : (hoveredCardId === card.id ? 1 : 0),
+                      transform: isTouchDevice ? 'translateY(0)' : (hoveredCardId === card.id ? 'translateY(0)' : 'translateY(10px)'),
+                      transition: 'all 300ms ease',
+                      marginTop: '12px',
+                      textAlign: 'center',
+                      maxHeight: isTouchDevice ? 'auto' : (hoveredCardId === card.id ? '150px' : '0'),
+                      overflow: 'hidden'
+                    }}>
+                      {/* Mobile description */}
+                      {card.mobileDescription && isMobile && (
+                        <p style={{
+                          color: 'rgba(255, 255, 255, 0.9)',
+                          fontSize: '14px',
+                          lineHeight: '18px',
+                          fontFamily: '"Poppins", sans-serif',
+                          maxWidth: '280px',
+                          margin: '0 auto'
+                        }} dangerouslySetInnerHTML={{ __html: card.mobileDescription }}>
+                        </p>
+                      )}
+                      {/* Desktop description */}
+                      {card.desktopDescription && !isMobile && (
+                        <p style={{
+                          color: 'rgba(255, 255, 255, 0.9)',
+                          fontSize: '15px',
+                          lineHeight: '20px',
+                          fontFamily: '"Poppins", sans-serif',
+                          maxWidth: '320px',
+                          margin: '0 auto'
+                        }} dangerouslySetInnerHTML={{ __html: card.desktopDescription }}>
+                        </p>
+                      )}
+                      {/* Regular description */}
+                      {card.description && !card.mobileDescription && !card.desktopDescription && (
+                        <p style={{
+                          color: 'rgba(255, 255, 255, 0.9)',
+                          fontSize: getResponsiveValue('14px', '15px'),
+                          lineHeight: getResponsiveValue('18px', '20px'),
+                          fontFamily: '"Poppins", sans-serif',
+                          maxWidth: getResponsiveValue('280px', '320px'),
+                          margin: '0 auto'
+                        }} dangerouslySetInnerHTML={{ __html: card.description }}>
+                        </p>
+                      )}
+                    </div>
+                  </div>
                 </div>
               )}
             </div>

@@ -143,7 +143,7 @@ export default function Achievements() {
             }}
           >
             <div className="flex items-center justify-center px-8">
-              <h3 className="text-[#7afdd6] text-[40px] leading-[45px]" style={{ fontFamily: '"Poppins", sans-serif' }}>{t('achievements.fasterTurnaround')}</h3>
+              <h3 className="text-[#7afdd6] text-[40px] leading-[45px]" style={{ fontFamily: '"Poppins", sans-serif' }}>{t('achievements.turnaroundTime')}</h3>
             </div>
             <div 
               className="flex items-center justify-center px-8 relative"
@@ -164,35 +164,17 @@ export default function Achievements() {
             <div className="flex items-center px-[60px]">
               <p className="text-white text-[25px] leading-[50px]" style={{ fontFamily: '"Poppins", sans-serif' }}>{t('achievements.clientsServed')}</p>
             </div>
-            <div 
+            <div
               className="flex items-center px-[60px]"
               style={{ background: 'rgba(122, 253, 214, 0.05)' }}
             >
-              <p className="text-white text-[25px] leading-[50px]">{t('achievements.projectsCompleted')}</p>
+              <p className="text-white text-[22px] leading-[28px]" style={{ fontFamily: '"Poppins", sans-serif' }}>{t('achievements.projectsCompleted')}</p>
             </div>
             <div className="flex items-center px-[60px]">
               <p className="text-white text-[25px] leading-[50px]">{t('achievements.yearsExpertise')}</p>
             </div>
           </div>
 
-          {/* Divider Line */}
-          <div className="w-full h-[1px] bg-[#7afdd6] opacity-30" />
-
-          {/* Data Row 2 */}
-          <div className="grid grid-cols-3" style={{ height: '126px' }}>
-            <div className="flex items-center px-[60px]">
-              <p className="text-white text-[25px] leading-[50px]">{t('achievements.countriesReached')}</p>
-            </div>
-            <div 
-              className="flex items-center px-[60px]"
-              style={{ background: 'rgba(122, 253, 214, 0.05)' }}
-            >
-              <p className="text-white text-[25px] leading-[50px]">{t('achievements.clientSatisfaction')}</p>
-            </div>
-            <div className="flex items-center px-[60px]">
-              <p className="text-white text-[25px] leading-[50px]">{t('achievements.yearsExpertise')}</p>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -219,7 +201,7 @@ export default function Achievements() {
             <div className="bg-[rgba(122,253,214,0.21)] box-border flex flex-col gap-2.5 items-start justify-start overflow-clip px-[11px] py-3.5 relative w-full rounded-t-[24px]">
               <div className="flex font-normal items-center justify-between leading-[1.12] not-italic relative text-[#7afdd6] text-[14px] w-full" style={{ fontFamily: '"Poppins", sans-serif' }}>
                 <div className="relative flex-1 text-center">
-                  {t('achievements.fasterTurnaround')}
+                  {t('achievements.turnaroundTime')}
                 </div>
                 <div className="relative flex-1 text-center">
                   {t('achievements.pressCoverage')}
@@ -237,7 +219,7 @@ export default function Achievements() {
                   <div className="relative flex-1 text-center">
                     {t('achievements.clientsServed')}
                   </div>
-                  <div className="relative flex-1 text-center">
+                  <div className="relative flex-1 text-center text-[13px] leading-[15px]">
                     {t('achievements.projectsCompleted')}
                   </div>
                   <div className="relative flex-1 text-center">
@@ -247,20 +229,6 @@ export default function Achievements() {
               </div>
             </div>
 
-            {/* Data Row 2 */}
-            <div className="bg-[rgba(122,253,214,0.03)] box-border flex flex-col gap-2.5 items-start justify-start overflow-clip px-[11px] py-3.5 relative w-full">
-              <div className="flex font-normal items-center justify-between leading-[1.12] not-italic relative text-[14px] text-white w-full">
-                <div className="relative flex-1 text-center">
-                  {t('achievements.countriesReached')}
-                </div>
-                <div className="relative flex-1 text-center">
-                  {t('achievements.clientSatisfaction')}
-                </div>
-                <div className="relative flex-1 text-center">
-                  {t('achievements.yearsExpertise')}
-                </div>
-              </div>
-            </div>
           </div>
           
           {/* Border overlay */}

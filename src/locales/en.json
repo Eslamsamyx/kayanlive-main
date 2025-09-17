@@ -9,65 +9,113 @@
     "clientsPartners": "Clients & Partners"
   },
   "hero": {
-    "title": "Welcome to KayanLive, GCC's Top Event Experts",
+    "title": "Welcome to KayanLive Premier Event Management in Saudi Arabia, UAE, and Across the GCC",
+    "slide2Title": "Delivering Creativity, Innovation, and Execution All Under One Roof",
+    "slide2Subtitle": "Bringing You Elite Strategy, Fast Execution, And Cultural Fluency - Without Compromise.",
     "description": "Premier Event Management in Saudi Arabia, Dubai, and Across the GCC—Delivering Creativity, Innovation, and Execution All Under One Roof. When Others Stall, Panic, or Back Down, We Get to Work. Bringing You Elite Strategy, Fast Execution, And Cultural Fluency Without Compromise.",
-    "cta": "Schedule consultation"
+    "cta": "Schedule consultation",
+    "stats": {
+      "projects": "Supported By 120+ GCC Projects",
+      "founded": "Since 2015"
+    }
   },
   "highImpact": {
-    "high": "High",
-    "impact": "Impact",
-    "experience": "Experience"
+    "title": "Your go-to event management in Dubai for immersive, engaging, high-pressure event delivery.",
+    "subtitle": "When timing matters and precision is non-negotiable, call KayanLive, a leading event management company in Dubai.",
+    "testimonial": "KayanLive turned a three week crisis into a record-breaking booth.",
+    "testimonialAuthor": "Head of Events, Global FMCG"
   },
   "aboutServices": {
-    "description1": "KayanLive is a full-service **event management company** with active offices in the GCC region, strategically positioned to deliver **high-impact experiences**.",
-    "description2": "We create tech-forward experiences that engage, inform, and dazzle—from **2D/3D animation and holograms to robotics, AR/VR, and interactive environments**. Recognized across all major cities from Abu Dhabi to Riyadh, our team delivers everything in-house—fast, flawless, and fully integrated.",
-    "description3": "While others hesitate, we execute—combining cutting-edge creativity with technical expertise to bring your vision to life, fast and seamlessly.",
-    "description4": "We're not your typical event planner or exhibit company. When plans shift and pressures mount, we bring the **team**, the **system**, and the **speed** to make it happen.",
-    "serviceTitle": "Live Events & Shows",
-    "serviceDescription": "From ceremonies and public performances to cultural spectacles, we direct and deliver stage craft, crowd flow, AV, and full-scale live production logistics—down to every last second of showtime run-of-show.",
-    "idealFor": "Ideal for **corporate event management** and national committees.",
+    "title": "What We Do?",
+    "description1": "KayanLive is a full-service **event management company in Dubai** with active offices across the GCC's **$85 B events market** (Mordor Intelligence, 2025), strategically positioned to deliver **high-impact experiences**.",
+    "description2": "We create **tech-driven experiences** that engage, inform, and impress, from **2D/3D animation and holograms to robotics, AR/VR, and interactive environments**.",
+    "description3": "Trusted across all major cities, from **Abu Dhabi to Riyadh**, our team delivers everything **in-house, fast, flawless, and fully integrated**. This positions us among the **top event management companies in Dubai**.",
+    "description4": "While others hesitate, we execute, combining **forward-thinking creativity with technical expertise** to bring your vision to life **swiftly and seamlessly**.",
+    "description5": "We're not your typical **event planning companies in Dubai** or a standard **exhibitions company**. When plans shift and the pressure is on, we bring the **team**, the **system**, and the **speed** to make it work.",
+    "pipelineTitle": "End-to-End Exceptional Event Design, Build, and Delivery",
+    "services": {
+      "liveEvents": {
+        "title": "Live Events & Shows",
+        "description": "From ceremonies and public performances to cultural spectacles, we direct and deliver stagecraft, crowd flow, AV, and full-scale live show logistics down to every last second of the run-of-show.",
+        "idealFor": "Ideal for **corporate event management in UAE** and **national commissions**."
+      },
+      "conferences": {
+        "title": "Conferences & Summits",
+        "description": "We manage every layer of C-suite gatherings, government forums, and strategic workshops, including staging, protocol, security, and experience design.",
+        "idealFor": "Trusted by leading **event planners in Dubai** and **multinational boards** seeking control and polish."
+      },
+      "exhibitions": {
+        "title": "Exhibitions & Brand Experiences",
+        "description": "We design and build complete pavilions, booths, and zones that combine architectural presence with immersive storytelling.",
+        "idealFor": "Our expertise places us among the most reliable **exhibition companies in Dubai** and the preferred **exhibition company in Dubai** for high-impact brand experiences."
+      },
+      "immersiveAV": {
+        "title": "Immersive AV & Tech",
+        "description": "Our production and content teams bring spaces to life with AR/VR, LED walls, projection mapping, time-coded SMPTE cues, redundant Dante networks, and real-time engagement tools fully integrated into the creative.",
+        "idealFor": "We lead the way among the **top event management companies in Dubai** for tech-integrated activations."
+      },
+      "eventRescue": {
+        "title": "Last-Call Event Rescue",
+        "description": "Plans fell apart? Vendor ghosted you? We step in, realign, and execute, without chaos or ego. Within 72 hours, we've rebuilt activations for major Saudi events and delivered flawlessly.",
+        "idealFor": "Our experiential activations deliver a **65% ROI boost & 70% higher brand loyalty** (ProfileTree, 2025)."
+      }
+    },
     "cta": "Explore Our Capabilities"
   },
   "whyKayan": {
     "title": "Why",
-    "founderText": "KayanLive was founded by **Khalid Alhasan**, a regional leader in experience strategy and event technology. After over a decade leading high-profile activations through a leading UAE/Saudi tech firm, he launched KayanLive to bring **full-scale, cross-functional event delivery** to clients who need more than a tech vendor—they need a team that understands what's at stake and knows how to deliver under pressure.",
-    "philosophy1": "\"Kayan\" in Arabic means existence, identity, and being—and that's exactly what we stand for. We believe every brand, every organization, and every idea has something real behind it—an essence that deserves to be seen, felt, and remembered.",
-    "philosophy2": "That's why our team is built to work from proposal to showday as one unit—no handoffs, no friction, and no gaps.",
-    "experience1": "We've been the quiet force behind Saudi Arabia's landmark events, Riyadh's rapid brand activations, and exhibit installations across the GCC. Our speed doesn't sacrifice quality. It protects it.",
-    "experience2": "Whether you're launching a pavilion, opening a cultural event, or fixing someone else's mess, we're the partner you call when the clock is already ticking."
+    "openingStatement": "We're not faster by cutting corners. We're faster because we built the system.",
+    "sectionTitle": "Built by a GCC Event Insider",
+    "founderText": "KayanLive was founded by **Khalid Alhasan**, a regional leader in experiential strategy and event tech. After over a decade leading high-profile activations through a major UAE/Saudi tech company, he launched KayanLive to offer more than a standard **event management agency Dubai**; he built a company that clients trust for both creativity and execution.",
+    "creativityExecution": "Most **event planning Dubai** companies make you choose between creativity and execution. We believe your project deserves both. That's why we built a system delivering exactly that, creative storytelling combined with real-time production logic.",
+    "philosophy1": "\"Kayan\" in Arabic means being, identity, and existence, and that's exactly what we're about. Every brand, organization, and idea has an essence that deserves to be seen, felt, and remembered.",
+    "philosophy2": "Our team works from pitch to show day as one unit, with no handoffs, no friction, and no gaps.",
+    "experience1": "We've been the silent force behind headline events in Saudi Arabia, rapid-turnaround brand activations, and exhibition setups across the GCC. Our speed never sacrifices quality; it protects it.",
+    "experience2": "Whether launching a pavilion, opening a cultural event, or fixing someone else's mess, we're the partner you call when the clock is ticking."
   },
   "industries": {
     "badge": "Who We Work With",
     "title": "Industries",
     "government": "Government and Semi-Government Bodies",
+    "governmentDesc": "We've supported ministries, tourism boards, and royal initiatives on major **event management Saudi Arabia** projects aligned with **Vision 2030**, **Expo 2020**, and **National Day** celebrations. We anticipate obstacles and handle stress before it reaches you.",
     "enterprise": "Multinational and Enterprise Brands",
+    "enterpriseDesc": "From AGM stage builds to new market product launches, we help enterprise teams hit KPIs and impress C-suite executives. We're a reliable **event company in Dubai** that knows what HQ wants and makes you look like the hero.",
     "realEstate": "Real Estate and Automotive Developers",
-    "agencies": "Event Planners and Marketing Agencies"
+    "realEstateDesc": "We transform showrooms and sites into immersive brand activations. Whether unveiling a tower in Dubai or launching a vehicle in Dammam, our **exhibition company in Dubai** expertise drives leads and foot traffic.",
+    "agencies": "Event Planners and Marketing Agencies",
+    "agenciesDesc": "When you need reliability, muscle, and zero ego, we show up. We white-label seamlessly into your team, build your vision, and deliver with polish, quietly, quickly, and dependably."
   },
   "whereWeWork": {
     "badge": "Where We Work",
-    "description": "Headquartered in Saudi Arabia and Dubai, KayanLive delivers high-impact events from public activations and corporate launches to government-led showcases.",
+    "title": "Where We Work?",
+    "description": "Headquartered in Saudi Arabia and Dubai, KayanLive delivers high-impact events, from public activations and corporate launches to government-led showcases.",
     "operateText": "We operate across the GCC:",
-    "saudi": "**Riyadh, Jeddah, Dammam** and major **Saudi** cities",
-    "uae": "**Dubai, Abu Dhabi, Sharjah** and wider **UAE**",
-    "partners": "And through partner networks in **Qatar, Oman, Bahrain, and Kuwait**",
-    "question": "Planning an event outside the **UAE or Saudi Arabia**?",
+    "saudi": "**Riyadh, Jeddah, Dammam**, and key **Saudi** cities",
+    "uae": "**Dubai, Abu Dhabi, Sharjah**, and the wider **UAE**",
+    "partners": "Partner networks in **Qatar, Oman, Bahrain, and Kuwait**",
+    "question": "Whether it's event management in Riyadh, support in Muscat, or elsewhere, we're among the leading UAE event management companies ready to lead.",
     "cta": "Let's Build Together"
   },
   "achievements": {
     "title": "Achievements",
-    "fasterTurnaround": "3x Faster",
-    "pressCoverage": "85% Press Coverage Lift",
+    "turnaroundTime": "72 Hour Turnaround",
+    "pressCoverage": "3× Increased Press Coverage",
     "missedDeadlines": "0 Missed Deadlines",
-    "clientsServed": "500+ Clients Served",
-    "projectsCompleted": "1,200+ Projects Completed",
-    "yearsExpertise": "15+ Years of Expertise",
-    "countriesReached": "50+ Countries Reached",
-    "clientSatisfaction": "98% Client Satisfaction"
+    "clientsServed": "120+ Clients Served",
+    "projectsCompleted": "400+ Projects Completed (2015-2025)",
+    "yearsExpertise": "15+ Years of Expertise"
   },
   "execution": {
     "heading": "Where Others Struggle, We Execute with Precision",
-    "cta": "Get Support Today"
+    "headlineV1": "When Execution Can't Fail, Count on KayanLive.",
+    "headlineV2": "When Most Teams Crack, We Make it Happen",
+    "headlineV3": "Where Others Struggle, We Execute with Precision",
+    "description": "Your brief just changed. The venue's confirmed, but nothing else is. Everyone's looking to you, and you're looking for someone who can actually do this.",
+    "promise": "We've made a business out of making it happen.",
+    "guarantee1": "No second chances. No last-minute surprises.",
+    "guarantee2": "KayanLive ensures smooth execution from start to finish.",
+    "cta": "Get Support Today",
+    "ctaTag": "Book a 15-minute Strategy Call"
   },
   "common": {
     "language": "Language",

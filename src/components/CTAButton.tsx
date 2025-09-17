@@ -27,11 +27,11 @@ export default function CTAButton({
   const variantStyles = {
     default: {
       gradient: 'bg-gradient-to-r from-[#74CFAA] to-[#A095E1]',
-      textColor: 'text-[#2c2c2b]',
+      textColor: 'text-[#4a4a49]',
       hoverTextColor: 'group-hover:text-[#f3f3f3]',
       circleColor: 'bg-[#A095E1]',
       hoverCircleColor: 'group-hover:bg-[#74CFAA]',
-      arrowColor: 'fill-[#2c2c2b]',
+      arrowColor: 'fill-[#4a4a49]',
       hoverArrowColor: 'group-hover:fill-[#f3f3f3]'
     },
     white: {

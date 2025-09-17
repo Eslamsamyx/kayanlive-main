@@ -32,13 +32,13 @@ export default function WhyKayanLive() {
       />
       
       {/* Right/Left Pattern - Bottom (rotated 180 degrees with black filter) - Hidden on mobile and tablet */}
-      <div 
+      <div
         className="absolute z-0 hidden lg:block"
-        style={{ 
+        style={{
           width: '370px',
           height: '572px',
-          [locale === 'ar' ? 'left' : 'right']: '84px',
-          top: '899px',
+          [locale === 'ar' ? 'left' : 'right']: '0px',
+          bottom: '0px',
           zIndex: 1
         }}
       >
@@ -57,7 +57,7 @@ export default function WhyKayanLive() {
       <AnimatedPath containerRef={sectionRef} />
 
       {/* Desktop Content Container */}
-      <div className="hidden lg:block max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20 relative z-10" style={{ paddingTop: '85px', paddingBottom: '100px' }}>
+      <div className="hidden lg:block max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20 relative z-10" style={{ paddingTop: '85px', paddingBottom: '0px' }}>
         {/* Why heading - Original position */}
         <h2 
           className="text-[#2c2c2b] font-medium capitalize"
@@ -74,35 +74,71 @@ export default function WhyKayanLive() {
         </h2>
 
         {/* KayanLive Logo */}
-        <div 
+        <div
           className="bg-center bg-contain bg-no-repeat"
-          style={{ 
+          style={{
             backgroundImage: `url('${kayanLogo}')`,
             width: '865px',
             height: '289px',
             marginLeft: 'auto',
             marginRight: '0',
-            marginBottom: '12px'
+            marginBottom: '80px'
           }}
         />
 
-        {/* Founder Text - Right aligned */}
-        <div style={{ 
+        {/* Opening Statement */}
+        <div style={{
           width: '884px',
           marginLeft: 'auto',
           marginRight: '0',
-          marginBottom: '259px'
+          marginBottom: '40px'
+        }}>
+          <h3 className="text-[#2c2c2b] font-semibold text-[36px] leading-[44px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}>
+            {t('whyKayan.openingStatement')}
+          </h3>
+        </div>
+
+        {/* Section Title */}
+        <div style={{
+          width: '884px',
+          marginLeft: 'auto',
+          marginRight: '0',
+          marginBottom: '20px'
+        }}>
+          <h4 className="text-[#74cfaa] font-bold text-[28px] leading-[36px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}>
+            {t('whyKayan.sectionTitle')}
+          </h4>
+        </div>
+
+        {/* Founder Text - Right aligned */}
+        <div style={{
+          width: '884px',
+          marginLeft: 'auto',
+          marginRight: '0',
+          marginBottom: '40px'
         }}>
           <p className="text-[#888888] text-[24px] leading-[32px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}
             dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.founderText'))}
           />
         </div>
 
+        {/* Creativity vs Execution Text */}
+        <div style={{
+          width: '884px',
+          marginLeft: 'auto',
+          marginRight: '0',
+          marginBottom: '259px'
+        }}>
+          <p className="text-[#888888] text-[24px] leading-[32px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}
+            dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.creativityExecution'))}
+          />
+        </div>
+
         {/* First Text Block - Full width */}
-        <div style={{ 
+        <div style={{
           width: '100%',
           maxWidth: '995px',
-          marginBottom: '66px'
+          marginBottom: '24px'
         }}>
           <p className="text-[#888888] text-[24px] leading-[32px] text-left mb-6" style={{ fontFamily: '"Poppins", sans-serif' }}
             dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.philosophy1'))}
@@ -114,10 +150,10 @@ export default function WhyKayanLive() {
         </div>
 
         {/* Second Text Block - Full width */}
-        <div style={{ 
+        <div style={{
           width: '100%',
           maxWidth: '995px',
-          margin: '0 auto'
+          marginBottom: '60px'
         }}>
             <p className="text-[#888888] text-[24px] leading-[32px] text-left mb-6" style={{ fontFamily: '"Poppins", sans-serif' }}
               dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.experience1'))}
@@ -147,9 +183,9 @@ export default function WhyKayanLive() {
         
         {/* KayanLive Logo - Mobile version with larger size */}
         <div className="flex justify-center w-full max-w-sm">
-          <Image 
+          <Image
             src={kayanLogo}
-            alt="KayanLive Logo" 
+            alt="KayanLive Logo"
             className="w-full h-auto max-w-[320px] object-contain"
             priority
             width={320}
@@ -157,13 +193,41 @@ export default function WhyKayanLive() {
             style={{ aspectRatio: '267/89' }}
           />
         </div>
-        
+
+        {/* Opening Statement - Mobile */}
+        <div className="text-center w-full max-w-lg">
+          <h2
+            className="text-[#2c2c2b] font-semibold leading-tight"
+            style={{
+              fontSize: 'clamp(1.25rem, 5vw, 1.75rem)',
+              lineHeight: 'clamp(1.5, 6vw, 2.25)',
+              fontFamily: '"Poppins", sans-serif'
+            }}
+          >
+            {t('whyKayan.openingStatement')}
+          </h2>
+        </div>
+
         {/* Content Section with proper semantic structure */}
         <article className="w-full max-w-lg space-y-6 text-center">
+          {/* Section Title - Mobile */}
+          <div className="text-center">
+            <h3
+              className="text-[#74cfaa] font-bold leading-tight mb-4"
+              style={{
+                fontSize: 'clamp(1.125rem, 4vw, 1.5rem)',
+                lineHeight: 'clamp(1.4, 5vw, 1.8)',
+                fontFamily: '"Poppins", sans-serif'
+              }}
+            >
+              {t('whyKayan.sectionTitle')}
+            </h3>
+          </div>
+
           {/* Founder introduction */}
           <section>
-            <h2 className="sr-only">Company Foundation</h2>
-            <p 
+            <h4 className="sr-only">Company Foundation</h4>
+            <p
               className="text-[#555555] leading-relaxed"
               style={{
                 fontSize: 'clamp(0.875rem, 3vw, 1rem)',
@@ -173,6 +237,22 @@ export default function WhyKayanLive() {
                 fontFamily: '"Poppins", sans-serif'
               }}
               dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.founderText'))}
+            />
+          </section>
+
+          {/* Creativity vs Execution */}
+          <section>
+            <h4 className="sr-only">Creativity and Execution</h4>
+            <p
+              className="text-[#555555] leading-relaxed"
+              style={{
+                fontSize: 'clamp(0.875rem, 3vw, 1rem)',
+                lineHeight: 'clamp(1.4, 4vw, 1.6)',
+                maxWidth: '45ch',
+                margin: '0 auto',
+                fontFamily: '"Poppins", sans-serif'
+              }}
+              dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.creativityExecution'))}
             />
           </section>
           

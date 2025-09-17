@@ -4,7 +4,7 @@ import HighImpactExperience from '@/components/HighImpactExperience';
 import AboutServices from '@/components/AboutServices';
 import WhyKayanLive from '@/components/WhyKayanLive';
 import Industries from '@/components/Industries';
-import CallToActionBanner from '@/components/CallToActionBanner';
+import WhereWeWork from '@/components/WhereWeWork';
 import Achievements from '@/components/Achievements';
 import ConcertCrowd from '@/components/ConcertCrowd';
 import CallToActionHero from '@/components/CallToActionHero';
@@ -23,14 +23,14 @@ export default async function HomePage({
       <div>
         <Hero />
       </div>
-      
+
+      {/* High Impact Experience section */}
+      <HighImpactExperience />
+
       {/* Logo carousel - full viewport width */}
       <div className="-mx-4">
         <LogoCarousel />
       </div>
-      
-      {/* High Impact Experience section */}
-      <HighImpactExperience />
       
       {/* About & Services section */}
       <div className="-mx-4">
@@ -49,11 +49,7 @@ export default async function HomePage({
       
       {/* Where We Work section */}
       <div className="-mx-4">
-        <CallToActionBanner
-          title="Where We Work"
-          subtitle="Planning an event outside the UAE or Saudi Arabia?"
-          buttonText="Let's Build Together"
-        />
+        <WhereWeWork />
       </div>
       
       {/* Achievements section */}

@@ -222,10 +222,10 @@ export default function Navbar({ locale }: NavbarProps) {
           className="relative flex items-center justify-start focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:ring-opacity-50 rounded-lg p-1 transition-all duration-200 flex-shrink-0 hover-lift gpu-accelerated"
           aria-label="Go to homepage"
         >
-          <div className="relative w-16 sm:w-24 md:w-32 h-6 sm:h-8 md:h-10 flex-shrink-0">
+          <div className="relative w-20 sm:w-24 md:w-32 lg:w-36 h-8 sm:h-9 md:h-10 lg:h-12 flex-shrink-0">
             {imageLoadError ? (
               <div className="w-full h-full flex items-center justify-center bg-[#7afdd6]/10 rounded-lg">
-                <span className="text-[#7afdd6] font-bold text-xs sm:text-sm md:text-base">KAYAN</span>
+                <span className="text-[#7afdd6] font-bold text-sm sm:text-base md:text-lg lg:text-xl">KAYAN</span>
               </div>
             ) : (
               <Image
