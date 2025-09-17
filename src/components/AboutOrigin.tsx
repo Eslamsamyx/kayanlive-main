@@ -13,8 +13,9 @@ export default function AboutOrigin() {
   }, []);
 
   return (
-    <section 
-      className="relative bg-[#f0f1fa] overflow-hidden w-full"
+    <section
+      className="relative bg-[#f0f1fa] overflow-hidden w-full z-10 isolate"
+      style={{ minHeight: 'fit-content' }}
       aria-label="About KayanLive origin and capability section"
     >
       {/* Loading state */}
@@ -23,7 +24,7 @@ export default function AboutOrigin() {
       )}
       
       {/* Mobile Layout */}
-      <div className={`block lg:hidden min-h-screen py-8 md:py-16 transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`block lg:hidden py-8 md:py-16 pb-16 md:pb-24 transition-opacity duration-500 relative ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         
         {/* Mobile Background Pattern 1 */}
         <div 
@@ -66,13 +67,13 @@ export default function AboutOrigin() {
         </div>
 
         {/* Mobile Content */}
-        <div className="relative px-4 md:px-8 py-8 md:py-12">
-          <div className="flex flex-col gap-6 md:gap-8 max-w-4xl mx-auto">
-            
+        <div className="relative px-4 md:px-8 py-8 md:py-12 w-full">
+          <div className="flex flex-col gap-8 md:gap-10 max-w-4xl mx-auto">
+
             {/* Mobile Card 1 */}
-            <article className="bg-white/80 backdrop-blur-sm border border-[#74cfaa] rounded-[35px] p-6 md:p-8 relative z-10">
+            <article className="bg-white/80 backdrop-blur-sm border border-[#74cfaa] rounded-[35px] p-6 md:p-8 relative z-10 w-full flex-shrink-0">
               <header className="mb-8">
-                <h2 
+                <h2
                   className="font-bold capitalize text-2xl md:text-3xl leading-tight"
                   style={{
                     background: 'linear-gradient(to right, #a095e1, #74cfaa)',
@@ -86,8 +87,8 @@ export default function AboutOrigin() {
                   The Origin of Capability
                 </h2>
               </header>
-              
-              <div 
+
+              <div
                 className="text-[#808184] capitalize text-base leading-relaxed"
                 style={{
                   fontFamily: '"Poppins", sans-serif'
@@ -110,9 +111,9 @@ export default function AboutOrigin() {
             </article>
 
             {/* Mobile Card 2 */}
-            <article className="bg-white/80 backdrop-blur-sm border border-[#74cfaa] rounded-[35px] p-6 md:p-8 relative z-10">
+            <article className="bg-white/80 backdrop-blur-sm border border-[#74cfaa] rounded-[35px] p-6 md:p-8 relative z-20 w-full flex-shrink-0 mb-8 md:mb-12">
               <header className="mb-8">
-                <h2 
+                <h2
                   className="font-bold capitalize text-2xl md:text-3xl leading-tight"
                   style={{
                     background: 'linear-gradient(to right, #a095e1, #74cfaa)',
@@ -126,8 +127,8 @@ export default function AboutOrigin() {
                   Built to Lead. Proven to Deliver.
                 </h2>
               </header>
-              
-              <div 
+
+              <div
                 className="text-[#808184] capitalize text-base leading-relaxed"
                 style={{
                   fontFamily: '"Poppins", sans-serif'
@@ -138,6 +139,9 @@ export default function AboutOrigin() {
                 <p>This approach has positioned KayanLive as a trusted execution partner for national ceremonies, multinational product launches, large-scale conferences, and last-call takeovers. The scale adapts, but the outcome remains the same: impact without compromise.</p>
               </div>
             </article>
+
+            {/* Clearfix to ensure proper containment */}
+            <div className="clear-both"></div>
 
           </div>
         </div>
@@ -196,7 +200,7 @@ export default function AboutOrigin() {
                 <h2 
                   className="font-bold capitalize"
                   style={{
-                    fontSize: "clamp(2.2vw, 2.8vw, 42px)",
+                    fontSize: "clamp(24px, 2.8vw, 42px)",
                     lineHeight: "1.36em",
                     background: 'linear-gradient(to right, #a095e1, #74cfaa)',
                     WebkitBackgroundClip: 'text',
@@ -213,7 +217,7 @@ export default function AboutOrigin() {
               <div 
                 className="text-[#808184] capitalize"
                 style={{
-                  fontSize: "clamp(1.0vw, 1.45vw, 22px)",
+                  fontSize: "clamp(14px, 1.45vw, 22px)",
                   lineHeight: "1.27em",
                   fontFamily: '"Poppins", sans-serif'
                 }}
@@ -242,7 +246,7 @@ export default function AboutOrigin() {
                 <h2 
                   className="font-bold capitalize"
                   style={{
-                    fontSize: "clamp(2.2vw, 2.8vw, 42px)",
+                    fontSize: "clamp(24px, 2.8vw, 42px)",
                     lineHeight: "1.04em",
                     background: 'linear-gradient(to right, #a095e1, #74cfaa)',
                     WebkitBackgroundClip: 'text',
@@ -259,7 +263,7 @@ export default function AboutOrigin() {
               <div 
                 className="text-[#808184] capitalize"
                 style={{
-                  fontSize: "clamp(1.0vw, 1.45vw, 22px)",
+                  fontSize: "clamp(14px, 1.45vw, 22px)",
                   lineHeight: "1.27em",
                   fontFamily: '"Poppins", sans-serif'
                 }}

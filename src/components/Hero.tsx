@@ -150,6 +150,26 @@ export default function Hero() {
     setTimeout(() => setIsPaused(false), 10000);
   }, []);
 
+  // Add basic keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+        setIsPaused(true);
+        setTimeout(() => setIsPaused(false), 10000);
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        setCurrentSlide((prev) => (prev + 1) % totalSlides);
+        setIsPaused(true);
+        setTimeout(() => setIsPaused(false), 10000);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [totalSlides]);
+
   return (
     <>
       {/* Hidden measuring container */}
@@ -205,7 +225,8 @@ export default function Hero() {
               bottom: '80px',
               width: '281px',
               maxHeight: `${textMetrics.mobileHeight - 140}px`,
-              overflow: 'hidden'
+              overflow: 'hidden',
+              wordWrap: 'break-word'
             }}
           >
             {t('hero.title')}
@@ -542,7 +563,7 @@ export default function Hero() {
                 transform: locale === 'ar' ? 'scaleX(-1)' : 'none'
               }}
             >
-              <Image alt="" className="block max-w-none size-full" src={imgArrow1} fill style={{ objectFit: 'contain' }} />
+              <Image alt="Arrow icon" className="block max-w-none size-full" src={imgArrow1} fill style={{ objectFit: 'contain' }} />
             </div>
           </div>
 
@@ -657,7 +678,8 @@ export default function Hero() {
               width: '875px',
               maxHeight: `${textMetrics.desktopHeight - 240}px`,
               overflow: 'hidden',
-              textAlign: locale === 'ar' ? 'right' : 'left'
+              textAlign: locale === 'ar' ? 'right' : 'left',
+              wordWrap: 'break-word'
             }}
           >
             {t('hero.title')}

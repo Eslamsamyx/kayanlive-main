@@ -40,11 +40,11 @@ export default function AboutServices() {
           {/* Live Events Card with Image */}
           <AnimatedServiceCard delay={0}>
             <div
-              className="bg-[#7afdd6] rounded-[40px] overflow-hidden relative min-h-[300px] lg:h-[491px]"
+              className="bg-[#7afdd6] rounded-[40px] overflow-hidden relative min-h-[300px] lg:min-h-[491px]"
             >
-            <AnimatedServiceContent isImage={true} className="absolute inset-0">
+            <AnimatedServiceContent isImage={true} className="absolute inset-0 min-h-[300px]">
               <div
-                className="w-full h-full bg-center bg-cover bg-no-repeat"
+                className="w-full h-full bg-center bg-cover bg-no-repeat min-h-[300px]"
                 style={{ backgroundImage: `url('${imgEventPhoto}')` }}
               />
             </AnimatedServiceContent>
@@ -86,14 +86,14 @@ export default function AboutServices() {
           {/* Live Events & Shows Text Card */}
           <AnimatedServiceCard delay={0.1}>
             <div
-              className="bg-white rounded-[35px] border border-[#74cfaa] px-6 sm:px-8 lg:px-12 py-8 sm:py-12 lg:py-16 flex flex-col justify-between min-h-[300px] lg:h-[491px]"
+              className="bg-white rounded-[35px] border border-[#74cfaa] px-4 sm:px-6 lg:px-12 py-6 sm:py-10 lg:py-16 flex flex-col justify-between min-h-[300px] lg:min-h-[491px]"
             >
             <div>
               <h3
-                className="font-normal bg-gradient-to-r from-[#a095e1] to-[#74cfaa] bg-clip-text mb-6 sm:mb-8 heading-overflow-safe"
+                className="font-normal bg-gradient-to-r from-[#a095e1] to-[#74cfaa] bg-clip-text mb-4 sm:mb-6 lg:mb-8 heading-overflow-safe"
                 style={{
-                  fontSize: 'clamp(32px, 8vw, 80px)',
-                  lineHeight: 'clamp(36px, 8.5vw, 85px)',
+                  fontSize: 'clamp(28px, 6vw, 80px)',
+                  lineHeight: 'clamp(32px, 7vw, 85px)',
                   letterSpacing: 'clamp(-0.8px, -0.2vw, -1.6px)',
                   WebkitTextFillColor: 'transparent',
                   WebkitBackgroundClip: 'text',
@@ -108,12 +108,12 @@ export default function AboutServices() {
 
               </h3>
 
-              <div className="text-[#888888]" style={{ fontSize: 'clamp(16px, 3vw, 22px)', lineHeight: 'clamp(22px, 4vw, 28px)' }}>
-                <p className="mb-6"
+              <div className="text-[#888888] overflow-hidden flex-grow" style={{ fontSize: 'clamp(16px, 2.5vw, 22px)', lineHeight: 'clamp(22px, 3.5vw, 28px)', wordWrap: 'break-word', overflowWrap: 'break-word', hyphens: 'auto' }}>
+                <p className="mb-4 sm:mb-6 break-words"
                   dangerouslySetInnerHTML={getMarkdownHTML(t('aboutServices.serviceDescription'))}
                 />
 
-                <p className="mt-6"
+                <p className="mt-4 sm:mt-6 break-words"
                   dangerouslySetInnerHTML={getMarkdownHTML(t('aboutServices.idealFor'))}
                 />
               </div>

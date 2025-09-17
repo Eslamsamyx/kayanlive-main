@@ -209,14 +209,15 @@ export default function HeroTemplate({
           <div
             className={`text-center ${isVisible ? 'animate-fade-up-2' : 'opacity-0'}`}
             style={{
-              width: "clamp(280px, 75vw, 420px)",
-              fontSize: "clamp(22px, 3.8vw, 32px)",
-              lineHeight: "clamp(24px, 4vw, 34px)",
+              width: "clamp(300px, 85vw, 420px)",
+              fontSize: "clamp(20px, 3.5vw, 32px)",
+              lineHeight: "clamp(22px, 3.8vw, 34px)",
               fontFamily: '"Poppins", sans-serif',
               marginBottom: "clamp(25px, 5vw, 35px)",
-              paddingLeft: "clamp(20px, 5vw, 24px)",
-              paddingRight: "clamp(20px, 5vw, 24px)",
-              textTransform: 'capitalize'
+              paddingLeft: "clamp(16px, 4vw, 24px)",
+              paddingRight: "clamp(16px, 4vw, 24px)",
+              textTransform: 'capitalize',
+              overflow: 'visible'
             }}
           >
             {mobileSubtitleGradient.map((line, index) => (
@@ -224,12 +225,15 @@ export default function HeroTemplate({
                 background: 'linear-gradient(to right, #a095e1, #74cfaa)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
+                backgroundClip: 'text',
+                wordWrap: 'break-word',
+                overflowWrap: 'break-word',
+                hyphens: 'auto'
               }}>
                 {line}
               </div>
             ))}
-            <div className="text-white">{mobileSubtitleWhite}</div>
+            <div className="text-white" style={{ marginTop: "clamp(10px, 3vw, 20px)" }}>{mobileSubtitleWhite}</div>
           </div>
 
           <div
