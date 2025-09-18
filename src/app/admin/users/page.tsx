@@ -35,7 +35,7 @@ export default function UsersPage() {
     sortOrder,
   });
 
-  const { data: userDetails } = api.user.getById.useQuery(
+  const { data: userDetails, refetch: refetchUserDetails } = api.user.getById.useQuery(
     { id: selectedUser! },
     { enabled: !!selectedUser }
   );
@@ -45,12 +45,12 @@ export default function UsersPage() {
   const utils = api.useUtils();
 
   const updateUserMutation = api.user.update.useMutation({
-    onSuccess: () => {
+    onSuccess: async () => {
       // Invalidate and refetch user list
       refetch();
-      // Invalidate and refetch user details
+      // Immediately refetch user details to ensure fresh data
       if (selectedUser) {
-        utils.user.getById.invalidate({ id: selectedUser });
+        await refetchUserDetails();
       }
       // Invalidate analytics
       utils.user.getAnalytics.invalidate();
@@ -58,12 +58,12 @@ export default function UsersPage() {
   });
 
   const toggleStatusMutation = api.user.toggleStatus.useMutation({
-    onSuccess: () => {
+    onSuccess: async () => {
       // Invalidate and refetch user list
       refetch();
-      // Invalidate and refetch user details
+      // Immediately refetch user details to ensure fresh data
       if (selectedUser) {
-        utils.user.getById.invalidate({ id: selectedUser });
+        await refetchUserDetails();
       }
       // Invalidate analytics
       utils.user.getAnalytics.invalidate();
@@ -517,14 +517,19 @@ function UserDetails({ user, onUserUpdate, currentUserRole }: {
 
   // Update editValues when user data changes (after successful updates)
   useEffect(() => {
-    setEditValues({
+    const newValues = {
       name: user.name || '',
       email: user.email,
       role: user.role,
       isActive: user.isActive,
       emailVerified: !!user.emailVerified
-    });
-  }, [user.name, user.email, user.role, user.isActive, user.emailVerified]);
+    };
+
+    // Only update if we're not currently editing to prevent overwriting user input
+    if (!editingField) {
+      setEditValues(newValues);
+    }
+  }, [user.name, user.email, user.role, user.isActive, user.emailVerified, editingField]);
 
   const handleSave = (field: string) => {
     const updateData: Partial<ExtendedUser> = {};
@@ -662,7 +667,7 @@ function UserDetails({ user, onUserUpdate, currentUserRole }: {
         {/* Status Field */}
         <EditableField
           label="Status"
-          value={user.isActive ? 'Active' : 'Inactive'}
+          value={editValues.isActive ? 'Active' : 'Inactive'}
           isEditing={editingField === 'isActive'}
           canEdit={canEditStatus}
           onEdit={() => setEditingField('isActive')}
@@ -699,7 +704,7 @@ function UserDetails({ user, onUserUpdate, currentUserRole }: {
         {/* Email Verified Field */}
         <EditableField
           label="Email Verified"
-          value={user.emailVerified ? 'Yes' : 'No'}
+          value={editValues.emailVerified ? 'Yes' : 'No'}
           isEditing={editingField === 'emailVerified'}
           canEdit={canEditEmailVerified}
           onEdit={() => setEditingField('emailVerified')}

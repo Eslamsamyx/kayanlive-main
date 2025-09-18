@@ -467,11 +467,11 @@
         "title": "Contact Information",
         "address": {
           "label": "Headquarters",
-          "value": "Riyadh, Kingdom of Saudi Arabia\nDubai, United Arab Emirates"
+          "value": "Dubai, United Arab Emirates"
         },
         "email": {
           "label": "Email",
-          "value": "hello@kayanlive.com"
+          "value": "info@kayanlive.com"
         },
         "phone": {
           "label": "Phone",
