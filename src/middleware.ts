@@ -94,11 +94,9 @@ export const config = {
     // - /api (API routes)
     // - /_next (Next.js internals)
     // - /_vercel (Vercel internals)
-    // - / (root redirect)
     // - Static files (images, etc.)
-    '/((?!api|_next|_vercel|.*\\..*).*)',
-    // Always run for API routes except auth
-    '/api/((?!auth).)*',
+    // - favicon.ico specifically
+    '/((?!api|_next|_vercel|favicon\\.ico|.*\\..*|static).*)',
     // Admin routes
     '/admin/:path*'
   ]

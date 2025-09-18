@@ -1,4 +1,4 @@
-import WorkHero from '@/components/WorkHero';
+import WorkHeroNew from '@/components/WorkHeroNew';
 import WorkPreview from '@/components/WorkPreview';
 import WorkStatement from '@/components/WorkStatement';
 import WorkOutcomes from '@/components/WorkOutcomes';
@@ -17,7 +17,7 @@ export default async function WorkPage({
     <div>
       {/* Hero Section - Figma Design */}
       <div className="mx-4 md:mx-8 lg:mx-0 mb-6 md:mb-12 lg:mb-16">
-        <WorkHero />
+        <WorkHeroNew />
       </div>
       
       {/* Work Preview Section - Coming Soon */}

@@ -72,7 +72,7 @@
     "process": {
       "badge": "Our Process",
       "title": "How We Work?",
-      "subtitle": "Our system ensures <strong>clarity</strong>, <strong>speed</strong>, and <strong>zero surprises</strong>",
+      "subtitle": "Our system ensures clarity, speed, and zero surprises",
       "steps": {
         "discovery": {
           "title": "Discovery & Briefing",
@@ -166,11 +166,14 @@
       "buttonText": "Let's Talk Strategy"
     },
     "hero": {
+      "ariaLabel": "About KayanLive hero section",
       "title": "About Us",
       "subtitle1": "Strategy Built for Urgency.",
       "subtitle2": "Vision Built for Impact.",
       "paragraph1": "Operating in a <marketStat>$85 B GCC event market projected to hit USD 132 B by 2030</marketStat> <citation>(Mordor Intelligence, 2025)</citation> KayanLive transforms pressure into performance. As a purpose-led top event management company in Dubai and GCC with active operations across the UAE and Saudi Arabia, we create experiences that are fast to deploy, precise in execution, and bold in outcome. When timing is tight and expectations are high, our structure remains firm, and your vision moves forward with clarity.",
       "paragraph2": "Events delivered through KayanLive reach farther, feel sharper, and last longer. Each project is built to lead, not follow. We understand how high-stakes delivery shapes national initiatives as experts in event management in Dubai. Live brand experiences drive up to <purchaseStat>96% post-event purchase intent</purchaseStat> <citation>(Corporate Event News, 2025)</citation>",
+      "paragraph1Clean": "Operating in a $85 B GCC event market projected to hit USD 132 B by 2030 (Mordor Intelligence, 2025) KayanLive transforms pressure into performance. As a purpose-led top event management company in Dubai and GCC with active operations across the UAE and Saudi Arabia, we create experiences that are fast to deploy, precise in execution, and bold in outcome. When timing is tight and expectations are high, our structure remains firm, and your vision moves forward with clarity.",
+      "paragraph2Clean": "Events delivered through KayanLive reach farther, feel sharper, and last longer. Each project is built to lead, not follow. We understand how high-stakes delivery shapes national initiatives as experts in event management in Dubai. Live brand experiences drive up to 96% post-event purchase intent (Corporate Event News, 2025)",
       "skipToContent": "Skip to main content"
     },
     "origin": {
@@ -183,7 +186,7 @@
       "paragraph5": "Ideas move faster here because teams align faster. No gaps. No wasted time. Every second is accounted for.",
       "paragraph6": "Our leadership team spans disciplines and industries. From creative directors and AV producers to engineers and logistics specialists, each expert understands what success looks like in high-stakes environments. With years of cumulative experience and region-wide execution, we guide with confidence and act with certainty.",
       "paragraph7": "We've delivered national ceremonies, corporate launches, and emergency takeovers, each with speed, structure, and precision.",
-      "statisticalText": "Experiential activations yield an average <roiStat>65% ROI boost and 70% higher brand loyalty</roiStat> <citation>(ProfileTree, 2025)</citation>.",
+      "statisticalText": "Experiential activations yield an average <roiStat>65% ROI boost and 70% higher brand loyalty</roiStat><citation> (ProfileTree, 2025)</citation>.",
       "paragraph8": "No chaos. No handoffs. No breakdowns.",
       "paragraph9": "This approach has positioned KayanLive as a trusted <strong>event management company in Dubai</strong> and execution partner for national ceremonies, multinational product launches, large-scale conferences, and last-call takeovers. The scale adapts, but the outcome remains the same: impact without compromise.",
       "skipToNext": "Skip to next section"
@@ -446,6 +449,65 @@
         "error": "Error submitting form. Please try again.",
         "closeNotification": "Close notification"
       }
+    }
+  },
+  "footer": {
+    "ariaLabel": "KayanLive website footer",
+    "brand": {
+      "logoAria": "Return to KayanLive homepage",
+      "description": "Premier event management company delivering creativity, innovation, and execution across the GCC. When others stall, we execute with precision and cultural fluency."
+    },
+    "cta": {
+      "title": "Ready to Create Something Extraordinary?",
+      "subtitle": "Let's discuss your vision and bring it to life with precision and speed.",
+      "button": "Start Your Project"
+    },
+    "sections": {
+      "contact": {
+        "title": "Contact Information",
+        "address": {
+          "label": "Headquarters",
+          "value": "Riyadh, Kingdom of Saudi Arabia\nDubai, United Arab Emirates"
+        },
+        "email": {
+          "label": "Email",
+          "value": "hello@kayanlive.com"
+        },
+        "phone": {
+          "label": "Phone",
+          "value": "+971556800818"
+        }
+      },
+      "services": {
+        "title": "Our Services",
+        "liveEvents": "Live Events & Shows",
+        "conferences": "Conferences & Summits",
+        "exhibitions": "Exhibitions & Brand Experiences",
+        "immersiveAV": "Immersive AV & Tech",
+        "eventRescue": "Last-Call Event Rescue"
+      },
+      "quickLinks": {
+        "title": "Quick Links"
+      },
+      "legal": {
+        "title": "Legal",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service",
+        "cookies": "Cookie Policy",
+        "accessibility": "Accessibility Statement"
+      }
+    },
+    "social": {
+      "linkedinAria": "Follow KayanLive on LinkedIn",
+      "twitterAria": "Follow KayanLive on Twitter",
+      "instagramAria": "Follow KayanLive on Instagram",
+      "facebookAria": "Follow KayanLive on Facebook"
+    },
+    "language": {
+      "title": "Language & Region"
+    },
+    "copyright": {
+      "text": "all rights reserved"
     }
   },
   "common": {

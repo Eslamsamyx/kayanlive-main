@@ -643,11 +643,7 @@ export default function AboutServices() {
                       className="text-[#666666] leading-relaxed max-w-2xl mx-auto"
                       style={{ fontSize: 'clamp(18px, 3vw, 24px)', lineHeight: 'clamp(26px, 4vw, 34px)' }}
                     >
-                      {t.rich('aboutServices.process.subtitle', {
-                        strong: (chunks) => (
-                          <strong className="text-[#74cfaa]">{chunks}</strong>
-                        )
-                      })}
+                      {t('aboutServices.process.subtitle')}
                     </p>
                   </div>
 

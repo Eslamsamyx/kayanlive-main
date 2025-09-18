@@ -1,7 +1,29 @@
 import { z } from 'zod';
 import { createTRPCRouter, publicProcedure } from '@/server/api/trpc';
-import { UserRole } from '@prisma/client';
+import { UserRole, AuditAction, type PrismaClient, type Prisma } from '@prisma/client';
 import bcryptjs from 'bcryptjs';
+
+// Helper function to create audit log
+const createAuditLog = async (
+  prisma: PrismaClient,
+  userId: string,
+  action: AuditAction,
+  performedBy: string,
+  details?: Prisma.InputJsonValue,
+  ipAddress?: string,
+  userAgent?: string
+) => {
+  return prisma.auditLog.create({
+    data: {
+      userId,
+      action,
+      performedBy,
+      details,
+      ipAddress,
+      userAgent,
+    },
+  });
+};
 
 const createUserSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -13,8 +35,26 @@ const createUserSchema = z.object({
 const updateUserSchema = z.object({
   id: z.string(),
   name: z.string().optional(),
+  email: z.string().email().optional(),
   role: z.nativeEnum(UserRole).optional(),
-  emailVerified: z.date().optional(),
+  emailVerified: z.date().nullable().optional(),
+  isActive: z.boolean().optional(),
+});
+
+const bulkUpdateSchema = z.object({
+  userIds: z.array(z.string()),
+  role: z.nativeEnum(UserRole).optional(),
+  isActive: z.boolean().optional(),
+});
+
+const advancedSearchSchema = z.object({
+  search: z.string().optional(),
+  role: z.nativeEnum(UserRole).optional(),
+  isActive: z.boolean().optional(),
+  page: z.number().default(1),
+  limit: z.number().default(10),
+  sortBy: z.enum(['createdAt', 'updatedAt', 'lastLogin', 'name', 'email']).default('createdAt'),
+  sortOrder: z.enum(['asc', 'desc']).default('desc'),
 });
 
 const changePasswordSchema = z.object({
@@ -58,31 +98,38 @@ export const userRouter = createTRPCRouter({
     }),
 
   getAll: publicProcedure
-    .input(
-      z.object({
-        role: z.nativeEnum(UserRole).optional(),
-        page: z.number().default(1),
-        limit: z.number().default(10),
-      })
-    )
+    .input(advancedSearchSchema)
     .query(async ({ ctx, input }) => {
-      const { role, page, limit } = input;
+      const { search, role, isActive, page, limit, sortBy, sortOrder } = input;
       const skip = (page - 1) * limit;
 
-      const where = role ? { role } : {};
+      // Build where clause for advanced filtering
+      const where: Record<string, unknown> = {};
+
+      if (role) where.role = role;
+      if (isActive !== undefined) where.isActive = isActive;
+
+      if (search) {
+        where.OR = [
+          { email: { contains: search, mode: 'insensitive' } },
+          { name: { contains: search, mode: 'insensitive' } },
+        ];
+      }
 
       const [users, total] = await Promise.all([
         ctx.prisma.user.findMany({
           where,
           skip,
           take: limit,
-          orderBy: { createdAt: 'desc' },
+          orderBy: { [sortBy]: sortOrder },
           select: {
             id: true,
             email: true,
             name: true,
             role: true,
             emailVerified: true,
+            isActive: true,
+            lastLogin: true,
             createdAt: true,
             updatedAt: true,
           },
@@ -117,10 +164,32 @@ export const userRouter = createTRPCRouter({
     }),
 
   update: publicProcedure
-    .input(updateUserSchema)
+    .input(updateUserSchema.extend({
+      performedBy: z.string(),
+      ipAddress: z.string().optional(),
+      userAgent: z.string().optional(),
+    }))
     .mutation(async ({ ctx, input }) => {
-      const { id, ...updateData } = input;
-      return ctx.prisma.user.update({
+      const { id, performedBy, ipAddress, userAgent, ...updateData } = input;
+
+      // Check email uniqueness if email is being updated
+      if (updateData.email) {
+        const existingUser = await ctx.prisma.user.findUnique({
+          where: { email: updateData.email },
+        });
+
+        if (existingUser && existingUser.id !== id) {
+          throw new Error('A user with this email already exists');
+        }
+      }
+
+      // Get original user data for audit
+      const originalUser = await ctx.prisma.user.findUnique({
+        where: { id },
+        select: { role: true, isActive: true, name: true, email: true },
+      });
+
+      const updatedUser = await ctx.prisma.user.update({
         where: { id },
         data: updateData,
         select: {
@@ -129,10 +198,24 @@ export const userRouter = createTRPCRouter({
           name: true,
           role: true,
           emailVerified: true,
+          isActive: true,
           createdAt: true,
           updatedAt: true,
         },
       });
+
+      // Create audit log
+      await createAuditLog(
+        ctx.prisma,
+        id,
+        'USER_UPDATED' as AuditAction,
+        performedBy,
+        { originalUser, updateData },
+        ipAddress,
+        userAgent
+      );
+
+      return updatedUser;
     }),
 
   changePassword: publicProcedure
@@ -212,6 +295,181 @@ export const userRouter = createTRPCRouter({
         email: user.email,
         name: user.name,
         role: user.role,
+      };
+    }),
+
+  toggleStatus: publicProcedure
+    .input(z.object({
+      id: z.string(),
+      performedBy: z.string(),
+      ipAddress: z.string().optional(),
+      userAgent: z.string().optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const { id, performedBy, ipAddress, userAgent } = input;
+
+      const user = await ctx.prisma.user.findUnique({
+        where: { id },
+        select: { isActive: true, email: true },
+      });
+
+      if (!user) {
+        throw new Error('User not found');
+      }
+
+      const newStatus = !user.isActive;
+      const action = newStatus ? 'USER_ACTIVATED' : 'USER_DEACTIVATED';
+
+      const updatedUser = await ctx.prisma.user.update({
+        where: { id },
+        data: { isActive: newStatus },
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          role: true,
+          isActive: true,
+        },
+      });
+
+      // Create audit log
+      await createAuditLog(
+        ctx.prisma,
+        id,
+        action as AuditAction,
+        performedBy,
+        { previousStatus: user.isActive, newStatus },
+        ipAddress,
+        userAgent
+      );
+
+      return updatedUser;
+    }),
+
+  bulkUpdate: publicProcedure
+    .input(bulkUpdateSchema.extend({
+      performedBy: z.string(),
+      ipAddress: z.string().optional(),
+      userAgent: z.string().optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const { userIds, performedBy, ipAddress, userAgent, ...updateData } = input;
+
+      const result = await ctx.prisma.user.updateMany({
+        where: { id: { in: userIds } },
+        data: updateData,
+      });
+
+      // Create audit log for bulk operation
+      await createAuditLog(
+        ctx.prisma,
+        'BULK_OPERATION',
+        'BULK_UPDATE' as AuditAction,
+        performedBy,
+        { userIds, updateData, affectedCount: result.count },
+        ipAddress,
+        userAgent
+      );
+
+      return result;
+    }),
+
+  getAuditLog: publicProcedure
+    .input(z.object({
+      userId: z.string().optional(),
+      page: z.number().default(1),
+      limit: z.number().default(20),
+    }))
+    .query(async ({ ctx, input }) => {
+      const { userId, page, limit } = input;
+      const skip = (page - 1) * limit;
+
+      const where = userId ? { userId } : {};
+
+      const [logs, total] = await Promise.all([
+        ctx.prisma.auditLog.findMany({
+          where,
+          skip,
+          take: limit,
+          orderBy: { createdAt: 'desc' },
+          include: {
+            user: {
+              select: { email: true, name: true },
+            },
+            performer: {
+              select: { email: true, name: true },
+            },
+          },
+        }),
+        ctx.prisma.auditLog.count({ where }),
+      ]);
+
+      return {
+        logs,
+        total,
+        pages: Math.ceil(total / limit),
+        currentPage: page,
+      };
+    }),
+
+  updateLastLogin: publicProcedure
+    .input(z.object({ userId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      return ctx.prisma.user.update({
+        where: { id: input.userId },
+        data: { lastLogin: new Date() },
+        select: { id: true, lastLogin: true },
+      });
+    }),
+
+  getAnalytics: publicProcedure
+    .input(z.object({
+      startDate: z.date().optional(),
+      endDate: z.date().optional(),
+    }))
+    .query(async ({ ctx, input }) => {
+      const { startDate, endDate } = input;
+
+      // Base where clause for date filtering
+      const dateFilter = startDate && endDate ? {
+        createdAt: {
+          gte: startDate,
+          lte: endDate,
+        },
+      } : {};
+
+      const [
+        totalUsers,
+        activeUsers,
+        recentRegistrations,
+        roleDistribution,
+        loginStats
+      ] = await Promise.all([
+        ctx.prisma.user.count(),
+        ctx.prisma.user.count({ where: { isActive: true } }),
+        ctx.prisma.user.count({ where: dateFilter }),
+        Promise.all([
+          ctx.prisma.user.count({ where: { role: 'ADMIN' } }),
+          ctx.prisma.user.count({ where: { role: 'MODERATOR' } }),
+          ctx.prisma.user.count({ where: { role: 'CONTENT_CREATOR' } }),
+        ]),
+        ctx.prisma.user.count({ where: { lastLogin: { not: null } } }),
+      ]);
+
+      return {
+        totalUsers,
+        activeUsers,
+        inactiveUsers: totalUsers - activeUsers,
+        recentRegistrations,
+        roleDistribution: {
+          admins: roleDistribution[0],
+          moderators: roleDistribution[1],
+          contentCreators: roleDistribution[2],
+        },
+        loginStats: {
+          usersWithLogin: loginStats,
+          usersNeverLoggedIn: totalUsers - loginStats,
+        },
       };
     }),
 

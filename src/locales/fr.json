@@ -72,7 +72,7 @@
     "process": {
       "badge": "Notre Processus",
       "title": "Comment Nous Travaillons ?",
-      "subtitle": "Notre système garantit <strong>la clarté</strong>, <strong>la rapidité</strong> et <strong>zéro surprise</strong>",
+      "subtitle": "Notre système garantit la clarté, la rapidité et zéro surprise",
       "steps": {
         "discovery": {
           "title": "Découverte & Briefing",
@@ -446,6 +446,65 @@
         "error": "Erreur lors de l'envoi du formulaire. Veuillez réessayer.",
         "closeNotification": "Fermer la notification"
       }
+    }
+  },
+  "footer": {
+    "ariaLabel": "Pied de page du site web KayanLive",
+    "brand": {
+      "logoAria": "Retour à l'accueil de KayanLive",
+      "description": "Entreprise de gestion d'événements de premier plan offrant créativité, innovation et exécution à travers le CCG. Quand les autres s'arrêtent, nous exécutons avec précision et maîtrise culturelle."
+    },
+    "cta": {
+      "title": "Prêt à Créer Quelque Chose d'Extraordinaire ?",
+      "subtitle": "Discutons de votre vision et donnons-lui vie avec précision et rapidité.",
+      "button": "Démarrer Votre Projet"
+    },
+    "sections": {
+      "contact": {
+        "title": "Informations de Contact",
+        "address": {
+          "label": "Siège Social",
+          "value": "Riyad, Royaume d'Arabie Saoudite\nDubaï, Émirats Arabes Unis"
+        },
+        "email": {
+          "label": "Email",
+          "value": "hello@kayanlive.com"
+        },
+        "phone": {
+          "label": "Téléphone",
+          "value": "+971556800818"
+        }
+      },
+      "services": {
+        "title": "Nos Services",
+        "liveEvents": "Événements et Spectacles en Direct",
+        "conferences": "Conférences et Sommets",
+        "exhibitions": "Expositions et Expériences de Marque",
+        "immersiveAV": "Technologies Audiovisuelles Immersives",
+        "eventRescue": "Sauvetage d'Événements de Dernière Minute"
+      },
+      "quickLinks": {
+        "title": "Liens Rapides"
+      },
+      "legal": {
+        "title": "Légal",
+        "privacy": "Politique de Confidentialité",
+        "terms": "Conditions de Service",
+        "cookies": "Politique des Cookies",
+        "accessibility": "Déclaration d'Accessibilité"
+      }
+    },
+    "social": {
+      "linkedinAria": "Suivre KayanLive sur LinkedIn",
+      "twitterAria": "Suivre KayanLive sur Twitter",
+      "instagramAria": "Suivre KayanLive sur Instagram",
+      "facebookAria": "Suivre KayanLive sur Facebook"
+    },
+    "language": {
+      "title": "Langue et Région"
+    },
+    "copyright": {
+      "text": "tous droits réservés"
     }
   },
   "common": {

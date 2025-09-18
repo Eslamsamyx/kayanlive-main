@@ -24,9 +24,13 @@ model User {
   role          UserRole  @default(CONTENT_CREATOR)
   emailVerified DateTime?
   image         String?
+  isActive      Boolean   @default(true)
+  lastLogin     DateTime?
   accounts      Account[]
   sessions      Session[]
   posts         Post[]
+  auditLogs     AuditLog[]
+  performedAudits AuditLog[] @relation("PerformedBy")
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }
@@ -113,4 +117,32 @@ model Lead {
   updatedAt DateTime @updatedAt
 
   @@map("leads")
+}
+
+enum AuditAction {
+  USER_CREATED
+  USER_UPDATED
+  USER_DELETED
+  USER_ACTIVATED
+  USER_DEACTIVATED
+  ROLE_CHANGED
+  PASSWORD_CHANGED
+  LOGIN_ATTEMPT
+  BULK_UPDATE
+}
+
+model AuditLog {
+  id          String      @id @default(cuid())
+  userId      String
+  action      AuditAction
+  details     Json?
+  performedBy String
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime    @default(now())
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  performer   User        @relation("PerformedBy", fields: [performedBy], references: [id])
+
+  @@map("audit_logs")
 }

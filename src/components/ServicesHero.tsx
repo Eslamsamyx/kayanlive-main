@@ -14,7 +14,6 @@ export default function ServicesHero() {
       mobileSubtitleWhite={t('subtitleWhite')}
       mobileBodyParagraphs={[
         t('bodyParagraph1'),
-        "",
         t('bodyParagraph2')
       ]}
       desktopTitle={t('title')}
@@ -23,7 +22,6 @@ export default function ServicesHero() {
       desktopSubtitleWhite={t('subtitleWhite')}
       desktopBodyParagraphs={[
         t('bodyParagraph1'),
-        "",
         t('bodyParagraph2')
       ]}
     />

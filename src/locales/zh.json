@@ -72,7 +72,7 @@
     "process": {
       "badge": "我们的流程",
       "title": "我们如何工作？",
-      "subtitle": "我们的系统确保<strong>清晰度</strong>、<strong>速度</strong>和<strong>零意外</strong>",
+      "subtitle": "我们的系统确保清晰度、速度和零意外",
       "steps": {
         "discovery": {
           "title": "发现与简报",
@@ -446,6 +446,65 @@
         "error": "提交表单时出错。请重试。",
         "closeNotification": "关闭通知"
       }
+    }
+  },
+  "footer": {
+    "ariaLabel": "KayanLive网站页脚",
+    "brand": {
+      "logoAria": "返回KayanLive主页",
+      "description": "领先的活动管理公司，在海湾合作委员会地区提供创意、创新和执行服务。当其他人停滞不前时，我们以精确和文化流畅性执行。"
+    },
+    "cta": {
+      "title": "准备创造非凡的事物？",
+      "subtitle": "让我们讨论您的愿景，并以精确和速度将其变为现实。",
+      "button": "开始您的项目"
+    },
+    "sections": {
+      "contact": {
+        "title": "联系信息",
+        "address": {
+          "label": "总部",
+          "value": "沙特阿拉伯王国利雅得\n阿拉伯联合酋长国迪拜"
+        },
+        "email": {
+          "label": "电子邮件",
+          "value": "hello@kayanlive.com"
+        },
+        "phone": {
+          "label": "电话",
+          "value": "+971556800818"
+        }
+      },
+      "services": {
+        "title": "我们的服务",
+        "liveEvents": "现场活动和表演",
+        "conferences": "会议和峰会",
+        "exhibitions": "展览和品牌体验",
+        "immersiveAV": "沉浸式音视频技术",
+        "eventRescue": "最后时刻活动救援"
+      },
+      "quickLinks": {
+        "title": "快速链接"
+      },
+      "legal": {
+        "title": "法律信息",
+        "privacy": "隐私政策",
+        "terms": "服务条款",
+        "cookies": "Cookie政策",
+        "accessibility": "无障碍声明"
+      }
+    },
+    "social": {
+      "linkedinAria": "在LinkedIn上关注KayanLive",
+      "twitterAria": "在Twitter上关注KayanLive",
+      "instagramAria": "在Instagram上关注KayanLive",
+      "facebookAria": "在Facebook上关注KayanLive"
+    },
+    "language": {
+      "title": "语言与地区"
+    },
+    "copyright": {
+      "text": "版权所有"
     }
   },
   "common": {

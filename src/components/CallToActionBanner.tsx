@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useMemo } from 'react';
 import CTAButton from './CTAButton';
 
 // Assets from the Figma pattern
@@ -15,7 +16,7 @@ interface CallToActionBannerProps {
   bottomPadding?: string;
 }
 
-export default function CallToActionBanner({
+export default React.memo(function CallToActionBanner({
   title,
   subtitle,
   description,
@@ -25,28 +26,34 @@ export default function CallToActionBanner({
   bottomPadding = "pb-24"
 }: CallToActionBannerProps) {
 
+  const gradientStyle = useMemo(() => ({
+    background: 'linear-gradient(135deg, #a095e1 0%, #74cfaa 100%)'
+  }), []);
+
+  const fontStyle = useMemo(() => ({
+    fontFamily: '"Poppins", sans-serif'
+  }), []);
+
   return (
     <div className={`bg-white w-full ${topPadding} ${bottomPadding}`}>
       <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20">
         
         {/* Title Section - Positioned above the banner */}
         <div className="text-center mb-6 md:mb-12 lg:mb-16">
-          <h1 
-            className="font-bold text-[90px] leading-[85px] capitalize tracking-[-2.7px] text-[#515151]"
-            style={{
-              fontFamily: '"Poppins", sans-serif'
-            }}
+          <h2
+            className="font-bold text-[clamp(3rem,8vw,5.625rem)] leading-[1.1] capitalize tracking-[-2.7px] text-[#515151] motion-reduce:transform-none"
+            style={fontStyle}
           >
             {title}
-          </h1>
+          </h2>
         </div>
 
         {/* CTA Banner - Desktop: Original structure, Mobile: Tall Figma design */}
         <div
-          className="relative overflow-hidden rounded-[25px] md:rounded-[48px] h-[500px] md:h-[450px]"
-          style={{ 
-            background: 'linear-gradient(135deg, #a095e1 0%, #74cfaa 100%)'
-          }}
+          className="relative overflow-hidden rounded-[25px] md:rounded-[48px] min-h-[500px] md:min-h-[450px] flex items-center py-8 md:py-16"
+          style={gradientStyle}
+          role="banner"
+          aria-labelledby="cta-title"
         >
           {/* Mobile Decorative Elements - Small screens only */}
           {/* Top Diamond - Mobile only - Large diamond extending above */}
@@ -144,14 +151,19 @@ export default function CallToActionBanner({
           </div>
 
           {/* Content - Mobile: Centered, Desktop: Left-aligned */}
-          <div className="absolute left-1/2 -translate-x-1/2 md:left-[137px] md:translate-x-0 top-20 md:top-16 w-full max-w-[90%] md:max-w-[567px] md:w-[567px] flex flex-col gap-[20px] md:gap-[28px] items-center md:items-start justify-start z-10 px-4 md:px-0">
-            <h3 className="text-white text-[30px] md:text-[50px] leading-[36px] md:leading-[60px] capitalize text-center md:text-left max-w-[290px] md:max-w-none md:w-auto" style={{ fontFamily: '"Poppins", sans-serif' }}>
+          <div className="relative z-10 w-full flex justify-center md:justify-start">
+            <div className="w-full max-w-[90%] md:max-w-[567px] md:ml-[137px] flex flex-col gap-[20px] md:gap-[28px] items-center md:items-start px-4 md:px-0">
+            <h3
+              id="cta-title"
+              className="text-white text-[clamp(1.875rem,4vw,3.125rem)] leading-[1.2] capitalize text-center md:text-left max-w-[290px] md:max-w-none md:w-auto motion-reduce:transform-none"
+              style={fontStyle}
+            >
               {subtitle}
             </h3>
 
             {/* Description Text */}
             {description && (
-              <p className="text-white text-[16px] md:text-[20px] leading-[24px] md:leading-[28px] text-center md:text-left max-w-[320px] md:max-w-[520px] opacity-95" style={{ fontFamily: '"Poppins", sans-serif' }}>
+              <p className="text-white text-[clamp(1rem,2vw,1.25rem)] leading-[1.4] text-center md:text-left max-w-[320px] md:max-w-[520px] opacity-95" style={fontStyle}>
                 {description}
               </p>
             )}
@@ -164,9 +176,10 @@ export default function CallToActionBanner({
             >
               {buttonText}
             </CTAButton>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+});

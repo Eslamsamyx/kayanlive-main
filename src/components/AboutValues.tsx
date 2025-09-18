@@ -75,61 +75,102 @@ export default function AboutValues() {
     }
   ];
 
-  // Track scroll progress based on Values section only
+  // Track scroll progress based on Values section only with throttling
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      if (!sectionRef.current) return;
-      
-      const section = sectionRef.current;
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;  
-      const currentScroll = window.scrollY;
-      const windowHeight = window.innerHeight;
-      
-      // Use viewport center as reference point
-      const viewportCenter = currentScroll + windowHeight / 2;
-      
-      // Calculate progress through Values section only (0% at start, 100% at end)
-      let progress = (viewportCenter - sectionTop) / sectionHeight;
-      progress = Math.max(0, Math.min(1, progress));
-      
-      // Enhanced curve speed - path moves faster through curves to maintain leading
-      const leadingProgress = Math.min(1, progress * 1.3);
-      setScrollProgress(leadingProgress);
+      if (!ticking && sectionRef.current) {
+        requestAnimationFrame(() => {
+          try {
+            const section = sectionRef.current;
+            if (!section) return;
+
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const currentScroll = window.scrollY;
+            const windowHeight = window.innerHeight;
+
+            // Use viewport center as reference point
+            const viewportCenter = currentScroll + windowHeight / 2;
+
+            // Calculate progress through Values section only (0% at start, 100% at end)
+            let progress = (viewportCenter - sectionTop) / sectionHeight;
+            progress = Math.max(0, Math.min(1, progress));
+
+            // Enhanced curve speed - path moves faster through curves to maintain leading
+            const leadingProgress = Math.min(1, progress * 1.3);
+            setScrollProgress(leadingProgress);
+          } catch (error) {
+            console.warn('Error in scroll handler:', error);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (ticking) {
+        ticking = false;
+      }
+    };
   }, []);
 
-  // Set up path length for animation
+  // Set up path length for animation with error handling
   useEffect(() => {
-    if (pathRef.current) {
-      const length = pathRef.current.getTotalLength();
-      setPathLength(length);
+    try {
+      if (pathRef.current && typeof pathRef.current.getTotalLength === 'function') {
+        const length = pathRef.current.getTotalLength();
+        if (length && isFinite(length) && length > 0) {
+          setPathLength(length);
+        } else {
+          console.warn('Invalid path length calculated');
+        }
+      }
+    } catch (error) {
+      console.warn('Error calculating SVG path length:', error);
     }
   }, []);
 
-  // Calculate dynamic height based on actual content
+  // Calculate dynamic height based on actual content with error handling
   useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+    let resizeTimer: NodeJS.Timeout | null = null;
+
     const calculateHeight = () => {
-      if (contentRef.current) {
-        const contentHeight = contentRef.current.scrollHeight;
-        // Add buffer for the pattern at bottom + spacing
-        const totalHeight = contentHeight + 250; // 250px buffer for pattern + spacing
-        setCalculatedHeight(totalHeight);
+      try {
+        if (contentRef.current) {
+          const contentHeight = contentRef.current.scrollHeight;
+          if (contentHeight && isFinite(contentHeight) && contentHeight > 0) {
+            // Add buffer for the pattern at bottom + spacing
+            const totalHeight = contentHeight + 250; // 250px buffer for pattern + spacing
+            setCalculatedHeight(totalHeight);
+          }
+        }
+      } catch (error) {
+        console.warn('Error calculating height:', error);
       }
     };
 
+    // Throttled resize handler
+    const handleResize = () => {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(calculateHeight, 150);
+    };
+
     // Delay calculation to ensure content is rendered
-    const timer = setTimeout(calculateHeight, 100);
-    
+    timer = setTimeout(calculateHeight, 100);
+
     // Recalculate on window resize
-    window.addEventListener('resize', calculateHeight);
+    window.addEventListener('resize', handleResize);
     return () => {
-      clearTimeout(timer);
-      window.removeEventListener('resize', calculateHeight);
+      if (timer) clearTimeout(timer);
+      if (resizeTimer) clearTimeout(resizeTimer);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -234,18 +275,13 @@ export default function AboutValues() {
               ? 'justify-end' 
               : 'justify-center';
             
-            // Viewport-based trigger points for instant appearance
-            const viewportTriggerPoints = [
-              0.15, // Card 1: exactly when entering viewport
-              0.29, // Card 2: second card enters viewport
-              0.43, // Card 3: third card enters viewport  
-              0.57, // Card 4: fourth card enters viewport
-              0.71, // Card 5: fifth card enters viewport
-              0.85, // Card 6: sixth card enters viewport
-              0.99  // Card 7: seventh card enters viewport
-            ];
-            
-            const shouldShow = scrollProgress >= viewportTriggerPoints[index];
+            // Dynamic viewport-based trigger points for responsive appearance
+            const totalCards = valuesData.length;
+            const cardSpacing = 0.8 / totalCards; // Spread cards across 80% of scroll progress
+            const startOffset = 0.1; // Start showing cards after 10% scroll
+            const triggerPoint = startOffset + (index * cardSpacing);
+
+            const shouldShow = scrollProgress >= triggerPoint;
             
             return (
               <div 
