@@ -37,6 +37,22 @@ export interface ClientsPartnersTemplateProps {
   interactionType: 'gradient' | 'ellipses' | 'none';
   backgroundElements: BackgroundElement[];
   containerClass?: string;
+  // Optional custom title styling
+  customTitleStyle?: {
+    desktop?: {
+      fontSize?: string;
+      lineHeight?: string;
+      letterSpacing?: string;
+    };
+    mobile?: {
+      fontSize?: string;
+      lineHeight?: string;
+      letterSpacing?: string;
+    };
+    fontWeight?: string;
+    textTransform?: string;
+    gradient?: string;
+  };
 }
 
 export default function ClientsPartnersTemplate({
@@ -46,7 +62,8 @@ export default function ClientsPartnersTemplate({
   cards,
   interactionType = 'none',
   backgroundElements = [],
-  containerClass = ''
+  containerClass = '',
+  customTitleStyle
 }: ClientsPartnersTemplateProps) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
@@ -302,19 +319,33 @@ export default function ClientsPartnersTemplate({
         </div>
 
         {/* Main Title */}
-        <h1 
+        <h1
           className="heading-overflow-safe"
           style={{
-            fontWeight: 'bold',
+            fontWeight: customTitleStyle?.fontWeight || 'bold',
             marginBottom: isMobile ? '32px' : '64px',
-            fontSize: getClampValue('titleFontSize'),
-            lineHeight: getClampValue('titleLineHeight'),
-            background: 'linear-gradient(135deg, #a095e1 0%, #74cfaa 100%)',
+            fontSize: customTitleStyle
+              ? (isMobile
+                  ? customTitleStyle.mobile?.fontSize || '50px'
+                  : customTitleStyle.desktop?.fontSize || '200px')
+              : getClampValue('titleFontSize'),
+            lineHeight: customTitleStyle
+              ? (isMobile
+                  ? customTitleStyle.mobile?.lineHeight || '137px'
+                  : customTitleStyle.desktop?.lineHeight || '200px')
+              : getClampValue('titleLineHeight'),
+            background: customTitleStyle?.gradient || 'linear-gradient(135deg, #a095e1 0%, #74cfaa 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
             fontFamily: '"Poppins", sans-serif',
-            letterSpacing: '-0.7px'
+            letterSpacing: customTitleStyle
+              ? (isMobile
+                  ? customTitleStyle.mobile?.letterSpacing || '-0.5px'
+                  : customTitleStyle.desktop?.letterSpacing || '-2px')
+              : '-0.7px',
+            textTransform: (customTitleStyle?.textTransform || 'none') as 'none' | 'capitalize' | 'uppercase' | 'lowercase',
+            textAlign: 'center' as const
           }}
         >
           {title}

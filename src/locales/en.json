@@ -6,7 +6,8 @@
     "contact": "Contact",
     "aboutUs": "About Us",
     "ourWork": "Our Work",
-    "clientsPartners": "Clients & Partners"
+    "clientsPartners": "Clients & Partners",
+    "articles": "Articles"
   },
   "hero": {
     "title": "Welcome to KayanLive Premier Event Management in Saudi Arabia, UAE, and Across the GCC",
@@ -508,6 +509,69 @@
     },
     "copyright": {
       "text": "all rights reserved"
+    }
+  },
+  "articles": {
+    "page": {
+      "title": "Articles & Insights",
+      "subtitle": "Discover the latest insights and expertise from KayanLive",
+      "description": "Stay informed with our latest articles covering event management, industry trends, case studies, and expert insights across the GCC region."
+    },
+    "listing": {
+      "allArticles": "All Articles",
+      "featuredArticles": "Featured Articles",
+      "recentArticles": "Recent Articles",
+      "searchPlaceholder": "Search articles...",
+      "noResults": "No articles found",
+      "noResultsDescription": "Try adjusting your search terms or browse our categories",
+      "loadMore": "Load More Articles",
+      "readingTime": "min read",
+      "publishedOn": "Published on",
+      "by": "by",
+      "inCategory": "in",
+      "tagged": "Tagged:",
+      "relatedArticles": "Related Articles"
+    },
+    "filters": {
+      "allCategories": "All Categories",
+      "allTypes": "All Types",
+      "sortBy": "Sort by",
+      "latest": "Latest",
+      "oldest": "Oldest",
+      "mostViewed": "Most Viewed",
+      "featured": "Featured"
+    },
+    "types": {
+      "blogPost": "Blog Post",
+      "news": "News",
+      "caseStudy": "Case Study",
+      "servicePage": "Service Page",
+      "landingPage": "Landing Page",
+      "announcement": "Announcement"
+    },
+    "single": {
+      "shareArticle": "Share this article",
+      "copyLink": "Copy Link",
+      "linkCopied": "Link copied to clipboard!",
+      "previousArticle": "Previous Article",
+      "nextArticle": "Next Article",
+      "backToArticles": "Back to Articles",
+      "tableOfContents": "Table of Contents",
+      "lastUpdated": "Last updated",
+      "estimatedReading": "Estimated reading time"
+    },
+    "categories": {
+      "viewAll": "View All Categories",
+      "articlesInCategory": "articles in this category"
+    },
+    "tags": {
+      "viewAll": "View All Tags",
+      "articlesWithTag": "articles with this tag"
+    },
+    "seo": {
+      "title": "Articles & Insights | KayanLive Event Management",
+      "description": "Explore expert insights, case studies, and industry trends from KayanLive, the leading event management company in Dubai and across the GCC region.",
+      "keywords": "event management, Dubai events, GCC events, case studies, industry insights, event planning"
     }
   },
   "common": {

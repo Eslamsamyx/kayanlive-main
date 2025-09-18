@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createTRPCRouter, publicProcedure } from '@/server/api/trpc';
+import { createTRPCRouter, publicProcedure, protectedProcedure, adminProcedure, moderatorProcedure, canManageUser } from '@/server/api/trpc';
 import { UserRole, AuditAction, type PrismaClient, type Prisma } from '@prisma/client';
 import bcryptjs from 'bcryptjs';
 
@@ -64,7 +64,7 @@ const changePasswordSchema = z.object({
 });
 
 export const userRouter = createTRPCRouter({
-  create: publicProcedure
+  create: adminProcedure
     .input(createUserSchema)
     .mutation(async ({ ctx, input }) => {
       const { password, ...userData } = input;
@@ -81,7 +81,7 @@ export const userRouter = createTRPCRouter({
       // Hash password
       const hashedPassword = await bcryptjs.hash(password, 12);
 
-      return ctx.prisma.user.create({
+      const createdUser = await ctx.prisma.user.create({
         data: {
           ...userData,
           password: hashedPassword,
@@ -95,9 +95,20 @@ export const userRouter = createTRPCRouter({
           updatedAt: true,
         },
       });
+
+      // Create audit log
+      await createAuditLog(
+        ctx.prisma,
+        ctx.session.user.id,
+        'USER_CREATED' as AuditAction,
+        ctx.session.user.id,
+        { createdUserId: createdUser.id, userEmail: createdUser.email, role: createdUser.role }
+      );
+
+      return createdUser;
     }),
 
-  getAll: publicProcedure
+  getAll: moderatorProcedure
     .input(advancedSearchSchema)
     .query(async ({ ctx, input }) => {
       const { search, role, isActive, page, limit, sortBy, sortOrder } = input;
@@ -145,7 +156,7 @@ export const userRouter = createTRPCRouter({
       };
     }),
 
-  getById: publicProcedure
+  getById: moderatorProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
       return ctx.prisma.user.findUnique({
@@ -163,14 +174,30 @@ export const userRouter = createTRPCRouter({
       });
     }),
 
-  update: publicProcedure
+  update: moderatorProcedure
     .input(updateUserSchema.extend({
-      performedBy: z.string(),
       ipAddress: z.string().optional(),
       userAgent: z.string().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      const { id, performedBy, ipAddress, userAgent, ...updateData } = input;
+      const { id, ipAddress, userAgent, ...updateData } = input;
+      const performedBy = ctx.session.user.id;
+      const currentUserRole = ctx.session.user.role;
+
+      // Get target user to check permissions
+      const targetUser = await ctx.prisma.user.findUnique({
+        where: { id },
+        select: { role: true, email: true, name: true },
+      });
+
+      if (!targetUser) {
+        throw new Error('User not found');
+      }
+
+      // Check if current user can manage target user
+      if (!canManageUser(currentUserRole, targetUser.role)) {
+        throw new Error('Insufficient permissions to manage this user');
+      }
 
       // Check email uniqueness if email is being updated
       if (updateData.email) {
@@ -207,10 +234,10 @@ export const userRouter = createTRPCRouter({
       // Create audit log
       await createAuditLog(
         ctx.prisma,
-        id,
+        performedBy,
         'USER_UPDATED' as AuditAction,
         performedBy,
-        { originalUser, updateData },
+        { updatedUserId: id, originalUser, updateData },
         ipAddress,
         userAgent
       );
@@ -218,7 +245,7 @@ export const userRouter = createTRPCRouter({
       return updatedUser;
     }),
 
-  changePassword: publicProcedure
+  changePassword: adminProcedure
     .input(changePasswordSchema)
     .mutation(async ({ ctx, input }) => {
       const { id, currentPassword, newPassword } = input;
@@ -254,12 +281,32 @@ export const userRouter = createTRPCRouter({
       });
     }),
 
-  delete: publicProcedure
+  delete: adminProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      return ctx.prisma.user.delete({
+      const targetUser = await ctx.prisma.user.findUnique({
+        where: { id: input.id },
+        select: { email: true, name: true, role: true },
+      });
+
+      if (!targetUser) {
+        throw new Error('User not found');
+      }
+
+      const deletedUser = await ctx.prisma.user.delete({
         where: { id: input.id },
       });
+
+      // Create audit log
+      await createAuditLog(
+        ctx.prisma,
+        ctx.session.user.id,
+        'USER_DELETED' as AuditAction,
+        ctx.session.user.id,
+        { deletedUserId: input.id, deletedUserEmail: targetUser.email, deletedUserRole: targetUser.role }
+      );
+
+      return deletedUser;
     }),
 
   authenticate: publicProcedure
@@ -298,23 +345,29 @@ export const userRouter = createTRPCRouter({
       };
     }),
 
-  toggleStatus: publicProcedure
+  toggleStatus: moderatorProcedure
     .input(z.object({
       id: z.string(),
-      performedBy: z.string(),
       ipAddress: z.string().optional(),
       userAgent: z.string().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      const { id, performedBy, ipAddress, userAgent } = input;
+      const { id, ipAddress, userAgent } = input;
+      const performedBy = ctx.session.user.id;
+      const currentUserRole = ctx.session.user.role;
 
       const user = await ctx.prisma.user.findUnique({
         where: { id },
-        select: { isActive: true, email: true },
+        select: { isActive: true, email: true, role: true },
       });
 
       if (!user) {
         throw new Error('User not found');
+      }
+
+      // Check if current user can manage target user
+      if (!canManageUser(currentUserRole, user.role)) {
+        throw new Error('Insufficient permissions to manage this user');
       }
 
       const newStatus = !user.isActive;
@@ -335,10 +388,10 @@ export const userRouter = createTRPCRouter({
       // Create audit log
       await createAuditLog(
         ctx.prisma,
-        id,
+        performedBy,
         action as AuditAction,
         performedBy,
-        { previousStatus: user.isActive, newStatus },
+        { targetUserId: id, previousStatus: user.isActive, newStatus },
         ipAddress,
         userAgent
       );
@@ -346,14 +399,28 @@ export const userRouter = createTRPCRouter({
       return updatedUser;
     }),
 
-  bulkUpdate: publicProcedure
+  bulkUpdate: moderatorProcedure
     .input(bulkUpdateSchema.extend({
-      performedBy: z.string(),
       ipAddress: z.string().optional(),
       userAgent: z.string().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      const { userIds, performedBy, ipAddress, userAgent, ...updateData } = input;
+      const { userIds, ipAddress, userAgent, ...updateData } = input;
+      const performedBy = ctx.session.user.id;
+      const currentUserRole = ctx.session.user.role;
+
+      // For moderators, check they can't bulk update admin users
+      if (currentUserRole === 'MODERATOR') {
+        const adminUsers = await ctx.prisma.user.count({
+          where: {
+            id: { in: userIds },
+            role: 'ADMIN'
+          }
+        });
+        if (adminUsers > 0) {
+          throw new Error('Moderators cannot bulk update admin users');
+        }
+      }
 
       const result = await ctx.prisma.user.updateMany({
         where: { id: { in: userIds } },
@@ -363,7 +430,7 @@ export const userRouter = createTRPCRouter({
       // Create audit log for bulk operation
       await createAuditLog(
         ctx.prisma,
-        'BULK_OPERATION',
+        performedBy,
         'BULK_UPDATE' as AuditAction,
         performedBy,
         { userIds, updateData, affectedCount: result.count },
@@ -374,7 +441,7 @@ export const userRouter = createTRPCRouter({
       return result;
     }),
 
-  getAuditLog: publicProcedure
+  getAuditLog: moderatorProcedure
     .input(z.object({
       userId: z.string().optional(),
       page: z.number().default(1),
@@ -412,9 +479,13 @@ export const userRouter = createTRPCRouter({
       };
     }),
 
-  updateLastLogin: publicProcedure
+  updateLastLogin: protectedProcedure
     .input(z.object({ userId: z.string() }))
     .mutation(async ({ ctx, input }) => {
+      // Users can only update their own last login
+      if (ctx.session.user.id !== input.userId) {
+        throw new Error('Can only update your own login time');
+      }
       return ctx.prisma.user.update({
         where: { id: input.userId },
         data: { lastLogin: new Date() },
@@ -422,7 +493,7 @@ export const userRouter = createTRPCRouter({
       });
     }),
 
-  getAnalytics: publicProcedure
+  getAnalytics: moderatorProcedure
     .input(z.object({
       startDate: z.date().optional(),
       endDate: z.date().optional(),
@@ -473,7 +544,7 @@ export const userRouter = createTRPCRouter({
       };
     }),
 
-  getStats: publicProcedure.query(async ({ ctx }) => {
+  getStats: moderatorProcedure.query(async ({ ctx }) => {
     const [total, admins, moderators, contentCreators] = await Promise.all([
       ctx.prisma.user.count(),
       ctx.prisma.user.count({ where: { role: 'ADMIN' } }),

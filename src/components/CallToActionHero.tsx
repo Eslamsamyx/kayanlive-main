@@ -154,11 +154,16 @@ export default function CallToActionHero() {
         }}
       >
         {/* Main Title with Animated Headlines */}
-        <div className="capitalize font-['Poppins',_sans-serif] leading-tight not-italic relative shrink-0 text-[80px] text-white w-[732px] h-[380px] overflow-hidden">
+        <div className="capitalize font-['Poppins',_sans-serif] leading-tight not-italic relative shrink-0 text-white w-[732px] overflow-hidden"
+             style={{
+               fontSize: 'clamp(48px, 6vw, 64px)',
+               minHeight: 'clamp(240px, 25vw, 320px)'
+             }}>
           <AnimatePresence mode="wait">
             <motion.p
               key={currentHeadline}
-              className="leading-[90px] absolute inset-0"
+              className="absolute inset-0 flex items-center"
+              style={{ lineHeight: 'clamp(52px, 7vw, 72px)' }}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -50 }}
@@ -240,11 +245,16 @@ export default function CallToActionHero() {
             left: "50%"
           }}
         >
-          <div className="capitalize font-['Poppins',_sans-serif] leading-tight not-italic relative shrink-0 text-[56px] text-center text-white h-[300px] overflow-hidden w-full">
+          <div className="capitalize font-['Poppins',_sans-serif] leading-tight not-italic relative shrink-0 text-center text-white overflow-hidden w-full"
+               style={{
+                 fontSize: 'clamp(36px, 5vw, 48px)',
+                 minHeight: 'clamp(200px, 20vw, 260px)'
+               }}>
             <AnimatePresence mode="wait">
               <motion.p
                 key={currentHeadline}
-                className="leading-[70px] absolute inset-0 flex items-center justify-center"
+                className="absolute inset-0 flex items-center justify-center"
+                style={{ lineHeight: 'clamp(40px, 6vw, 54px)' }}
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -50 }}
@@ -304,11 +314,16 @@ export default function CallToActionHero() {
         />
         <div className="flex flex-col gap-[31px] items-center justify-center px-[27px] py-0 relative h-full">
           <div className="bg-[rgba(255,255,255,0.03)] backdrop-blur-md box-border flex flex-col gap-[24px] items-start justify-center overflow-clip px-[32px] py-[40px] relative rounded-[20px] shrink-0 w-full">
-            <div className="capitalize font-['Poppins',_sans-serif] leading-tight not-italic relative shrink-0 text-left text-white w-full h-[240px] overflow-hidden">
+            <div className="capitalize font-['Poppins',_sans-serif] leading-tight not-italic relative shrink-0 text-left text-white w-full overflow-hidden"
+                 style={{
+                   fontSize: 'clamp(28px, 8vw, 42px)',
+                   minHeight: 'clamp(160px, 30vw, 220px)'
+                 }}>
               <AnimatePresence mode="wait">
                 <motion.p
                   key={currentHeadline}
-                  className="leading-[60px] text-[48px] absolute inset-0"
+                  className="absolute inset-0 flex items-center"
+                  style={{ lineHeight: 'clamp(32px, 9vw, 48px)' }}
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -50 }}

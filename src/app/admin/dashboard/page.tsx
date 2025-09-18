@@ -3,6 +3,7 @@
 import { useSession } from 'next-auth/react';
 import { api } from '@/trpc/react';
 import { Users, TrendingUp, Trophy, UserPlus } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function AdminDashboard() {
   const { data: session } = useSession();
@@ -10,17 +11,39 @@ export default function AdminDashboard() {
   const { data: userStats } = api.user.getStats.useQuery();
 
   return (
-    <div>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-[#2c2c2b]" style={{ fontFamily: '"Poppins", sans-serif' }}>
-          Dashboard
+    <div className="space-y-8">
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-center"
+      >
+        <h1
+          className="text-4xl md:text-6xl font-normal mb-4 capitalize"
+          style={{
+            background: 'linear-gradient(90deg, #b8a4ff 0%, #7afdd6 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            fontFamily: '"Poppins", sans-serif',
+            lineHeight: '1.1'
+          }}
+        >
+          Admin Dashboard
         </h1>
-        <p className="text-[#888888] mt-2" style={{ fontFamily: '"Poppins", sans-serif' }}>
+        <p className="text-[#888888] text-lg">
           Welcome back, {session?.user?.name || session?.user?.email}
         </p>
-      </div>
+      </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      {/* Analytics Cards */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+      >
         <StatCard
           title="Total Leads"
           value={leadStats?.total || 0}
@@ -45,12 +68,17 @@ export default function AdminDashboard() {
           icon={<Users size={24} strokeWidth={2} />}
           gradient="from-[#A095E1] to-[#7afdd6]"
         />
-      </div>
+      </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+      >
         <LeadStatusBreakdown leadStats={leadStats} />
         <UserRoleBreakdown userStats={userStats} />
-      </div>
+      </motion.div>
     </div>
   );
 }
@@ -62,7 +90,15 @@ function StatCard({ title, value, icon, gradient }: {
   gradient: string;
 }) {
   return (
-    <div className="bg-white rounded-[25px] shadow-lg p-6 border border-gray-100">
+    <div
+      className="rounded-[25px] p-6"
+      style={{
+        background: 'rgba(255, 255, 255, 0.01)',
+        backdropFilter: 'blur(50.5px)',
+        WebkitBackdropFilter: 'blur(50.5px)',
+        border: '1px solid rgba(122, 253, 214, 0.2)'
+      }}
+    >
       <div className="flex items-center justify-between">
         <div className={`bg-gradient-to-r ${gradient} text-[#2c2c2b] p-3 rounded-[15px]`}>
           {icon}
@@ -71,7 +107,7 @@ function StatCard({ title, value, icon, gradient }: {
           <p className="text-sm font-medium text-[#888888]" style={{ fontFamily: '"Poppins", sans-serif' }}>
             {title}
           </p>
-          <p className="text-2xl font-bold text-[#2c2c2b]" style={{ fontFamily: '"Poppins", sans-serif' }}>
+          <p className="text-2xl font-bold text-white" style={{ fontFamily: '"Poppins", sans-serif' }}>
             {value.toLocaleString()}
           </p>
         </div>
@@ -93,23 +129,37 @@ function LeadStatusBreakdown({ leadStats }: { leadStats: LeadStats | undefined }
   if (!leadStats) return null;
 
   const statuses = [
-    { name: 'New', value: leadStats.new, color: 'bg-blue-100 text-blue-800' },
-    { name: 'Contacted', value: leadStats.contacted, color: 'bg-yellow-100 text-yellow-800' },
-    { name: 'Qualified', value: leadStats.qualified, color: 'bg-purple-100 text-purple-800' },
-    { name: 'Won', value: leadStats.won, color: 'bg-green-100 text-green-800' },
-    { name: 'Lost', value: leadStats.lost, color: 'bg-red-100 text-red-800' },
+    { name: 'New', value: leadStats.new, color: 'bg-blue-500/20 text-blue-400 border-blue-500/20' },
+    { name: 'Contacted', value: leadStats.contacted, color: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/20' },
+    { name: 'Qualified', value: leadStats.qualified, color: 'bg-purple-500/20 text-purple-400 border-purple-500/20' },
+    { name: 'Won', value: leadStats.won, color: 'bg-green-500/20 text-green-400 border-green-500/20' },
+    { name: 'Lost', value: leadStats.lost, color: 'bg-red-500/20 text-red-400 border-red-500/20' },
   ];
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <h3 className="text-lg font-medium text-gray-900 mb-4">Lead Status Breakdown</h3>
+    <div
+      className="rounded-[25px] p-6"
+      style={{
+        background: 'rgba(255, 255, 255, 0.01)',
+        backdropFilter: 'blur(50.5px)',
+        WebkitBackdropFilter: 'blur(50.5px)',
+        border: '2px solid rgba(122, 253, 214, 0.3)'
+      }}
+    >
+      <h3 className="text-lg font-medium text-[#7afdd6] mb-4" style={{ fontFamily: '"Poppins", sans-serif' }}>
+        Lead Status Breakdown
+      </h3>
       <div className="space-y-3">
         {statuses.map((status) => (
           <div key={status.name} className="flex items-center justify-between">
-            <span className="text-sm font-medium text-gray-900">{status.name}</span>
-            <div className="flex items-center">
-              <span className="text-sm text-gray-600 mr-2">{status.value}</span>
-              <span className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${status.color}`}>
+            <span className="text-sm font-medium text-white" style={{ fontFamily: '"Poppins", sans-serif' }}>
+              {status.name}
+            </span>
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-[#888888]" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                {status.value}
+              </span>
+              <span className={`inline-block px-3 py-1 text-xs font-medium rounded-full border ${status.color}`}>
                 {leadStats.total > 0 ? Math.round((status.value / leadStats.total) * 100) : 0}%
               </span>
             </div>
@@ -131,21 +181,35 @@ function UserRoleBreakdown({ userStats }: { userStats: UserStats | undefined }) 
   if (!userStats) return null;
 
   const roles = [
-    { name: 'Admins', value: userStats.admins, color: 'bg-red-100 text-red-800' },
-    { name: 'Moderators', value: userStats.moderators, color: 'bg-blue-100 text-blue-800' },
-    { name: 'Content Creators', value: userStats.contentCreators, color: 'bg-green-100 text-green-800' },
+    { name: 'Admins', value: userStats.admins, color: 'bg-red-500/20 text-red-400 border-red-500/20' },
+    { name: 'Moderators', value: userStats.moderators, color: 'bg-blue-500/20 text-blue-400 border-blue-500/20' },
+    { name: 'Content Creators', value: userStats.contentCreators, color: 'bg-green-500/20 text-green-400 border-green-500/20' },
   ];
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <h3 className="text-lg font-medium text-gray-900 mb-4">User Role Breakdown</h3>
+    <div
+      className="rounded-[25px] p-6"
+      style={{
+        background: 'rgba(255, 255, 255, 0.01)',
+        backdropFilter: 'blur(50.5px)',
+        WebkitBackdropFilter: 'blur(50.5px)',
+        border: '2px solid rgba(122, 253, 214, 0.3)'
+      }}
+    >
+      <h3 className="text-lg font-medium text-[#7afdd6] mb-4" style={{ fontFamily: '"Poppins", sans-serif' }}>
+        User Role Breakdown
+      </h3>
       <div className="space-y-3">
         {roles.map((role) => (
           <div key={role.name} className="flex items-center justify-between">
-            <span className="text-sm font-medium text-gray-900">{role.name}</span>
-            <div className="flex items-center">
-              <span className="text-sm text-gray-600 mr-2">{role.value}</span>
-              <span className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${role.color}`}>
+            <span className="text-sm font-medium text-white" style={{ fontFamily: '"Poppins", sans-serif' }}>
+              {role.name}
+            </span>
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-[#888888]" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                {role.value}
+              </span>
+              <span className={`inline-block px-3 py-1 text-xs font-medium rounded-full border ${role.color}`}>
                 {userStats.total > 0 ? Math.round((role.value / userStats.total) * 100) : 0}%
               </span>
             </div>

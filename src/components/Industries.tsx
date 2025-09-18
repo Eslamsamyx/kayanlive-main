@@ -169,6 +169,21 @@ export default function Industries() {
       interactionType="gradient"
       backgroundElements={backgroundElements}
       containerClass="py-12 md:py-16 lg:py-20"
+      customTitleStyle={{
+        desktop: {
+          fontSize: '200px',
+          lineHeight: '200px',
+          letterSpacing: '-2px'
+        },
+        mobile: {
+          fontSize: '50px',
+          lineHeight: '137px',
+          letterSpacing: '-0.5px'
+        },
+        fontWeight: 'normal',
+        textTransform: 'capitalize',
+        gradient: 'linear-gradient(90deg, #b8a4ff 0%, #7afdd6 100%)'
+      }}
     />
   );
 }
