@@ -166,6 +166,7 @@
       "buttonText": "让我们谈论策略"
     },
     "hero": {
+      "ariaLabel": "关于KayanLive英雄部分",
       "title": "关于我们",
       "subtitle1": "为紧急情况而建的策略。",
       "subtitle2": "为影响而建的愿景。",

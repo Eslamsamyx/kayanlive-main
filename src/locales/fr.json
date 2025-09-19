@@ -166,6 +166,7 @@
       "buttonText": "Parlons Stratégie"
     },
     "hero": {
+      "ariaLabel": "Section héros à propos de KayanLive",
       "title": "À Propos de Nous",
       "subtitle1": "Stratégie Construite pour l'Urgence.",
       "subtitle2": "Vision Construite pour l'Impact.",
