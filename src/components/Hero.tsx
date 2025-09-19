@@ -221,7 +221,7 @@ export default function Hero() {
         }
 
         .hero-slide-indicator-inner {
-          backdrop-filter: blur(7.5px);
+          background: rgba(255, 255, 255, 0.1);
           transition: all 0.3s ease;
         }
 
@@ -230,13 +230,16 @@ export default function Hero() {
         }
 
         .hero-backdrop-blur {
-          backdrop-filter: blur(11.5px);
-          will-change: transform;
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          will-change: auto;
+          transform: translateZ(0);
         }
 
         .hero-decorative-blur {
-          backdrop-filter: blur(7.5px);
-          will-change: transform;
+          /* Use background instead of backdrop-filter for better performance */
+          background: rgba(255, 255, 255, 0.08);
+          will-change: auto;
         }
 
         .hero-mobile-content {
@@ -248,9 +251,13 @@ export default function Hero() {
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .hero-backdrop-blur,
-          .hero-decorative-blur {
+          .hero-backdrop-blur {
             backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            background-color: rgba(255, 255, 255, 0.1);
+          }
+
+          .hero-decorative-blur {
             background-color: rgba(255, 255, 255, 0.1);
           }
 

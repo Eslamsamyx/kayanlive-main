@@ -3,6 +3,7 @@
 import React, { useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
 import Button from './Button';
@@ -48,8 +49,15 @@ interface FooterSection {
 export default React.memo(function Footer({ className = '' }: FooterProps) {
   const t = useTranslations();
   const locale = useLocale();
+  const pathname = usePathname();
   const isRTL = locale === 'ar';
 
+  // Get the current path without the locale prefix
+  const currentPath = useMemo(() => {
+    // Remove the locale prefix from the pathname
+    const pathWithoutLocale = pathname.replace(`/${locale}`, '') || '/';
+    return pathWithoutLocale;
+  }, [pathname, locale]);
 
   const fontStyle = useMemo(() => ({
     fontFamily: '"Poppins", sans-serif'
@@ -129,59 +137,13 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
       aria-label={t('footer.ariaLabel')}
       dir={isRTL ? 'rtl' : 'ltr'}
     >
-      {/* Decorative Elements */}
-      {/* Top decorative diamonds */}
-      <div className="absolute top-8 left-8 hidden lg:block" aria-hidden="true">
-        <div className="flex gap-6">
-          {[...Array(2)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="flex items-center justify-center"
-              style={{ width: '60px', height: '60px' }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
-            >
-              <div style={{ transform: 'rotate(45deg)' }}>
-                <div
-                  className="backdrop-blur-sm"
-                  style={{
-                    width: '42px',
-                    height: '42px',
-                    backgroundColor: 'rgba(255,255,255,0.1)',
-                    backdropFilter: 'blur(7.5px)'
-                  }}
-                />
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* Background pattern - Geometric shapes pattern */}
-      <div
-        className="absolute bottom-0 right-0 overflow-hidden opacity-5"
-        style={{
-          width: 'clamp(300px, 40vw, 600px)',
-          height: 'clamp(300px, 40vw, 600px)',
-          transform: 'translate(30%, 30%)'
-        }}
-        aria-hidden="true"
+      {/* Main Content Container - Single animation container like admin dashboard */}
+      <motion.div
+        className="relative z-10 max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20 py-12 md:py-16 lg:py-20"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
       >
-        <svg viewBox="0 0 200 200" className="w-full h-full">
-          <defs>
-            <pattern id="geometricPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-              <circle cx="20" cy="20" r="8" fill="#7afdd6" opacity="0.3"/>
-              <rect x="10" y="10" width="20" height="20" fill="none" stroke="#b8a4ff" strokeWidth="1" opacity="0.2"/>
-              <polygon points="20,5 35,30 5,30" fill="#7afdd6" opacity="0.15"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#geometricPattern)"/>
-        </svg>
-      </div>
-
-      {/* Main Content Container */}
-      <div className="relative z-10 max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20 py-12 md:py-16 lg:py-20">
 
         {/* Main Footer Content - Logo/Social Left, Menus Right */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 mb-12 lg:mb-16">
@@ -189,12 +151,7 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
           {/* Left Column - Brand Section */}
           <div className="flex flex-col items-center lg:items-start lg:flex-shrink-0 lg:w-80">
             {/* Logo */}
-            <motion.div
-              className="relative mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
+            <div className="relative mb-6">
               <Link
                 href={`/${locale}`}
                 className="block focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:ring-opacity-50 rounded-lg"
@@ -211,47 +168,34 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
                   />
                 </div>
               </Link>
-            </motion.div>
+            </div>
 
             {/* Brand Description */}
-            <motion.div
-              className="text-center lg:text-left mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
+            <div className="text-center lg:text-left mb-6">
               <p
                 className="text-[#b2b2b2] text-sm md:text-base leading-relaxed"
                 style={fontStyle}
               >
                 {t('footer.brand.description')}
               </p>
-            </motion.div>
+            </div>
 
             {/* Social Media Links */}
-            <motion.div
-              className="flex gap-4 mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
+            <div className="flex gap-4 mb-8">
               {socialLinks.map((social) => {
                 const brandColor = socialIconBrandColors[social.icon as keyof typeof socialIconBrandColors];
                 return (
-                  <motion.a
+                  <a
                     key={social.name}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:ring-opacity-50"
+                    className="group relative w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-lg transition-all duration-300 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:ring-opacity-50"
                     style={{
                       backgroundColor: brandColor,
                       opacity: 0.9
                     }}
                     aria-label={social.ariaLabel}
-                    whileHover={{ scale: 1.1, opacity: 1 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ duration: 0.2 }}
                   >
                     {social.icon === 'linkedin' && (
                       <svg className="w-5 h-5 md:w-6 md:h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -273,21 +217,17 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
                         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                       </svg>
                     )}
-                  </motion.a>
+                  </a>
                 );
               })}
-            </motion.div>
+            </div>
           </div>
 
           {/* Right Columns - Navigation Sections */}
           <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
 
             {/* Contact Information */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
+            <div>
               <h3
                 className="text-white text-lg font-semibold mb-4"
                 style={fontStyle}
@@ -328,16 +268,11 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
                   </a>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Dynamic Navigation Sections */}
-            {footerSections.map((section, sectionIndex) => (
-              <motion.div
-                key={section.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 + sectionIndex * 0.1 }}
-              >
+            {footerSections.map((section) => (
+              <div key={section.title}>
                 <h3
                   className="text-white text-lg font-semibold mb-4"
                   style={fontStyle}
@@ -369,48 +304,14 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
                     ))}
                   </ul>
                 </nav>
-              </motion.div>
+              </div>
             ))}
 
           </div>
         </div>
 
-        {/* CTA Section */}
-        <motion.div
-          className="text-center mb-12 lg:mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
-        >
-          <h2
-            className="text-white text-2xl md:text-3xl lg:text-4xl font-bold mb-4"
-            style={fontStyle}
-          >
-            {t('footer.cta.title')}
-          </h2>
-          <p
-            className="text-[#b2b2b2] text-base md:text-lg mb-6 max-w-2xl mx-auto"
-            style={fontStyle}
-          >
-            {t('footer.cta.subtitle')}
-          </p>
-          <Button
-            href={`/${locale}/contact`}
-            variant="default"
-            size="lg"
-            arrowIcon={true}
-          >
-            {t('footer.cta.button')}
-          </Button>
-        </motion.div>
-
         {/* Language Selector */}
-        <motion.div
-          className="mb-8 lg:mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-        >
+        <div className="mb-8 lg:mb-12">
           <h3
             className="text-white text-lg font-semibold mb-4 text-center lg:text-left"
             style={fontStyle}
@@ -421,7 +322,7 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
             {languages.map((language) => (
               <Link
                 key={language.code}
-                href={`/${language.code}${locale === 'en' ? '' : '/' + locale}`}
+                href={`/${language.code}${currentPath === '/' ? '' : currentPath}`}
                 className={`
                   flex items-center gap-2 px-3 py-2 rounded-lg border transition-all duration-200
                   focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:ring-opacity-50
@@ -441,15 +342,10 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
               </Link>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Bottom Section - Copyright */}
-        <motion.div
-          className="border-t border-[#444444] pt-8"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.9 }}
-        >
+        <div className="border-t border-[#444444] pt-8">
           <div className="text-center">
             <p
               className="text-[#888888] text-sm"
@@ -462,18 +358,8 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
               <span className="text-white font-semibold">KayanLive.com</span>
             </p>
           </div>
-        </motion.div>
-      </div>
-
-      <style jsx>{`
-        @media (prefers-reduced-motion: reduce) {
-          * {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-          }
-        }
-      `}</style>
+        </div>
+      </motion.div>
     </footer>
   );
 });

@@ -6,7 +6,6 @@ import WhyKayanLive from '@/components/WhyKayanLive';
 import Industries from '@/components/Industries';
 import WhereWeWork from '@/components/WhereWeWork';
 import Achievements from '@/components/Achievements';
-import ConcertCrowd from '@/components/ConcertCrowd';
 import CallToActionHero from '@/components/CallToActionHero';
 
 export default async function HomePage({
@@ -53,15 +52,10 @@ export default async function HomePage({
       </div>
       
       {/* Achievements section */}
-      <div className="-mx-4">
+      <div className="-mx-4 mb-12 md:mb-20 lg:mb-32">
         <Achievements />
       </div>
-      
-      {/* Concert Crowd section */}
-      <div className="-mx-4">
-        <ConcertCrowd />
-      </div>
-      
+
       {/* Call to Action Hero Section */}
       <div className="mb-6 md:mb-12 lg:mb-16">
         <CallToActionHero />

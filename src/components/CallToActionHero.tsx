@@ -1,9 +1,8 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useTranslations, useLocale } from 'next-intl';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import CTAButton from './CTAButton';
 
 // Assets from Figma
@@ -14,10 +13,10 @@ const imgVector449 = "/assets/f7382026e38c26d5af789578200259cf00d646d5.svg";
 const imgVector450 = "/assets/2e7d38a51401314bc36af86961b4180f9a81bc96.svg";
 const imgVector451 = "/assets/27f7bc8b7057872a6c373109cb92fc81093df0cd.svg";
 const imgVector452 = "/assets/b435e1176051bfb6d5144bfe3e7069007ac2258c.svg";
+
 export default function CallToActionHero() {
   const t = useTranslations();
   const locale = useLocale();
-  const componentRef = useRef<HTMLDivElement>(null);
 
   // Headlines rotation state
   const [currentHeadline, setCurrentHeadline] = useState(0);
@@ -36,27 +35,8 @@ export default function CallToActionHero() {
     return () => clearInterval(interval);
   }, [headlines.length]);
 
-  // Scroll-based animation setup
-  const { scrollYProgress } = useScroll({
-    target: componentRef,
-    offset: ["start end", "end start"]
-  });
-
-  // Transform decorative element from top of component to final position
-  const decorativeY = useTransform(
-    scrollYProgress,
-    [0, 0.5, 1],
-    [-700, -17, 50] // Starts way above (-700px), reaches final position (-17px), continues down (50px)
-  );
-
-  const decorativeOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.8, 1],
-    [0, 1, 1, 0.8] // Fades in when entering viewport, stays visible, slight fade at end
-  );
-
   return (
-    <div ref={componentRef} className="w-full">
+    <div className="w-full animate-fadeIn">
       {/* Desktop Version */}
       <div
         className="overflow-clip relative rounded-[82px] -mx-4 hidden lg:block"
@@ -67,20 +47,20 @@ export default function CallToActionHero() {
         className="absolute bg-center bg-cover bg-no-repeat h-[1000px] left-0 rounded-[48px] top-0 w-[1512px]"
         style={{ backgroundImage: `url('${imgRectangle6}')` }}
       />
-      
+
       {/* Blur Effect */}
-      <div 
+      <div
         className="absolute bg-[#2c2c2b] blur-[200px] filter h-[1500px] top-[-284px] w-[983px]"
         style={{ [locale === 'ar' ? 'right' : 'left']: '-412px' }}
       />
-      
+
       {/* Decorative Vector Elements - Desktop Only */}
-      <div 
+      <div
         className="absolute top-[-350.91px]"
         style={{ [locale === 'ar' ? 'right' : 'left']: '322.69px' }}
       >
         {/* Vector 1 - Largest */}
-        <div 
+        <div
           className="absolute flex h-[900.283px] items-center justify-center top-[-350.91px] w-[599.173px]"
           style={{ [locale === 'ar' ? 'right' : 'left']: '322.99px' }}
         >
@@ -92,9 +72,9 @@ export default function CallToActionHero() {
             </div>
           </div>
         </div>
-        
+
         {/* Vector 2 */}
-        <div 
+        <div
           className="absolute flex h-[667.772px] items-center justify-center top-[-258.55px] w-[444.839px]"
           style={{ [locale === 'ar' ? 'right' : 'left']: '417.86px' }}
         >
@@ -106,9 +86,9 @@ export default function CallToActionHero() {
             </div>
           </div>
         </div>
-        
+
         {/* Vector 3 */}
-        <div 
+        <div
           className="absolute flex h-[517.199px] items-center justify-center top-[-239.9px] w-[344.423px]"
           style={{ [locale === 'ar' ? 'right' : 'left']: '496.94px' }}
         >
@@ -120,9 +100,9 @@ export default function CallToActionHero() {
             </div>
           </div>
         </div>
-        
+
         {/* Vector 4 - Smallest */}
-        <div 
+        <div
           className="absolute flex h-[343.256px] items-center justify-center top-[-228.1px] w-[228.553px]"
           style={{ [locale === 'ar' ? 'right' : 'left']: '612.71px' }}
         >
@@ -135,16 +115,16 @@ export default function CallToActionHero() {
           </div>
         </div>
       </div>
-      
+
       {/* Pattern Overlay - Bottom - Desktop Only */}
-      <div 
+      <div
         className="absolute bg-center bg-cover bg-no-repeat bottom-[-447px] h-[853px] w-[862px]"
-        style={{ 
+        style={{
           backgroundImage: `url('${imgPattern0212}')`,
           [locale === 'ar' ? 'left' : 'right']: '1049px'
         }}
       />
-      
+
       {/* Main Content Box - Desktop Only */}
       <div
         className="absolute bg-white/[0.03] backdrop-blur-md box-border content-stretch flex flex-col gap-[40px] items-start justify-start overflow-hidden px-[61px] py-[68px] rounded-[76px] translate-x-[-50%] translate-y-[-50%] w-[854px]"
@@ -159,19 +139,17 @@ export default function CallToActionHero() {
                fontSize: 'clamp(48px, 6vw, 64px)',
                minHeight: 'clamp(240px, 25vw, 320px)'
              }}>
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={currentHeadline}
-              className="absolute inset-0 flex items-center"
+          {headlines.map((headline, index) => (
+            <p
+              key={index}
+              className={`absolute inset-0 flex items-center transition-opacity duration-500 ease-in-out ${
+                currentHeadline === index ? 'opacity-100' : 'opacity-0'
+              }`}
               style={{ lineHeight: 'clamp(52px, 7vw, 72px)' }}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -50 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
             >
-              {headlines[currentHeadline]}
-            </motion.p>
-          </AnimatePresence>
+              {headline}
+            </p>
+          ))}
         </div>
 
         {/* Problem Description */}
@@ -213,15 +191,13 @@ export default function CallToActionHero() {
           </CTAButton>
         </div>
       </div>
-      
-      {/* Pattern Overlay - Top - White with Scroll-based Animation - Desktop Only */}
-      <motion.div 
-        className="absolute bg-center bg-cover bg-no-repeat h-[666px] w-[437px]"
-        style={{ 
+
+      {/* Pattern Overlay - Top - White - Desktop Only */}
+      <div
+        className="absolute bg-center bg-cover bg-no-repeat h-[666px] w-[437px] top-[-17px]"
+        style={{
           backgroundImage: `url('${imgPattern0452}')`,
           filter: 'brightness(0) invert(1)',
-          y: decorativeY,
-          opacity: decorativeOpacity,
           [locale === 'ar' ? 'right' : 'left']: '1108px'
         }}
       />
@@ -232,12 +208,12 @@ export default function CallToActionHero() {
         className="overflow-clip relative rounded-[48px] -mx-4 hidden md:block lg:hidden"
         style={{ height: '750px' }}
       >
-        <div 
+        <div
           className="absolute bg-center bg-cover bg-no-repeat h-full left-0 rounded-[48px] top-0 w-full"
           style={{ backgroundImage: `url('${imgRectangle6}')` }}
         />
         <div className="absolute bg-[#2c2c2b] blur-[150px] filter h-[1000px] left-[-300px] top-[-200px] w-[700px]" />
-        
+
         <div
           className="absolute bg-white/[0.03] backdrop-blur-md box-border flex flex-col gap-[32px] items-center justify-center overflow-hidden px-[40px] py-[50px] rounded-[48px] translate-x-[-50%] translate-y-[-50%] w-[90%] max-w-[600px]"
           style={{
@@ -250,19 +226,17 @@ export default function CallToActionHero() {
                  fontSize: 'clamp(36px, 5vw, 48px)',
                  minHeight: 'clamp(200px, 20vw, 260px)'
                }}>
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={currentHeadline}
-                className="absolute inset-0 flex items-center justify-center"
+            {headlines.map((headline, index) => (
+              <p
+                key={index}
+                className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ease-in-out ${
+                  currentHeadline === index ? 'opacity-100' : 'opacity-0'
+                }`}
                 style={{ lineHeight: 'clamp(40px, 6vw, 54px)' }}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -50 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
               >
-                {headlines[currentHeadline]}
-              </motion.p>
-            </AnimatePresence>
+                {headline}
+              </p>
+            ))}
           </div>
 
           {/* Problem Description - Tablet */}
@@ -308,7 +282,7 @@ export default function CallToActionHero() {
 
       {/* Mobile Version - Matches Figma Design Exactly */}
       <div className="md:hidden overflow-clip relative rounded-[24px] -mx-4" style={{ height: '750px' }}>
-        <div 
+        <div
           className="absolute bg-center bg-cover bg-no-repeat h-full left-0 rounded-[24px] top-0 w-full"
           style={{ backgroundImage: `url('${imgRectangle6}')` }}
         />
@@ -319,19 +293,17 @@ export default function CallToActionHero() {
                    fontSize: 'clamp(28px, 8vw, 42px)',
                    minHeight: 'clamp(160px, 30vw, 220px)'
                  }}>
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={currentHeadline}
-                  className="absolute inset-0 flex items-center"
+              {headlines.map((headline, index) => (
+                <p
+                  key={index}
+                  className={`absolute inset-0 flex items-center transition-opacity duration-500 ease-in-out ${
+                    currentHeadline === index ? 'opacity-100' : 'opacity-0'
+                  }`}
                   style={{ lineHeight: 'clamp(32px, 9vw, 48px)' }}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -50 }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
                 >
-                  {headlines[currentHeadline]}
-                </motion.p>
-              </AnimatePresence>
+                  {headline}
+                </p>
+              ))}
             </div>
 
             {/* Problem Description - Mobile */}
@@ -375,6 +347,23 @@ export default function CallToActionHero() {
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.6s ease-out forwards;
+        }
+      `}</style>
     </div>
   );
 }
