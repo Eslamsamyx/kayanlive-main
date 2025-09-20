@@ -7,17 +7,21 @@ import { useTextMetrics } from './useTextMetrics';
 import { HeroSlideData, HeroCarouselProps } from './types';
 import styles from './Hero.module.css';
 
-// Asset constants
+// Asset constants - Using optimized images
 const SLIDE_DATA: HeroSlideData[] = [
   {
     id: 0,
     type: 'main',
-    backgroundImage: "/assets/01f5d49d03c8455dc99b2ad32446b6657b1949e0.png"
+    backgroundImage: "/optimized/hero-main/01f5d49d03c8455dc99b2ad32446b6657b1949e0-hero-main-desktop.webp",
+    mobileBackgroundImage: "/optimized/hero-main/01f5d49d03c8455dc99b2ad32446b6657b1949e0-hero-main-mobile.webp",
+    tabletBackgroundImage: "/optimized/hero-main/01f5d49d03c8455dc99b2ad32446b6657b1949e0-hero-main-tablet.webp"
   },
   {
     id: 1,
     type: 'about',
-    backgroundImage: "/assets/b0d9ec6faacc00d7ed8b82f3f45ecaa371425181.png",
+    backgroundImage: "/optimized/hero-slide/1402feda00b479d56347dca419118793a7b45676-hero-slide-desktop.webp",
+    mobileBackgroundImage: "/optimized/hero-slide/1402feda00b479d56347dca419118793a7b45676-hero-slide-mobile.webp",
+    tabletBackgroundImage: "/optimized/hero-slide/1402feda00b479d56347dca419118793a7b45676-hero-slide-tablet.webp",
     backgroundPosition: '47.69% 0%',
     backgroundSize: '373.72% 100%'
   }

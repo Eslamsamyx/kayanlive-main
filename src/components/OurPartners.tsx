@@ -3,12 +3,12 @@
 import { useTranslations } from 'next-intl';
 import ClientsPartnersTemplate, { CardConfig, BackgroundElement } from './ClientsPartnersTemplate';
 
-const imgRectangle4 = "/assets/174d9ed83a90c0514d54b7cbb68f8656ca74592c.png";
-const imgRectangle5 = "/assets/0bb8e976afa37efb2547ff983a789a24c46bc909.png";
-const imgRectangle6 = "/assets/0599bc8efb3df6cbf4d2b5cc07e1932dc0d2a400.png";
-const imgRectangle7 = "/assets/d079f823333ca8bce293bcab9a39cb1aea4b5439.png";
-const imgPattern0212 = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
-const imgPattern0453 = "/assets/6cdd4333a240b46dead9df86c5a83772e81b76fc.png";
+const imgRectangle4 = "/optimized/about-hero/174d9ed83a90c0514d54b7cbb68f8656ca74592c-about-hero-desktop.webp";
+const imgRectangle5 = "/optimized/article-featured/0bb8e976afa37efb2547ff983a789a24c46bc909-article-featured-desktop.webp";
+const imgRectangle6 = "/optimized/service-detail/0599bc8efb3df6cbf4d2b5cc07e1932dc0d2a400-service-detail-desktop.webp";
+const imgRectangle7 = "/optimized/gallery-thumbnail/d079f823333ca8bce293bcab9a39cb1aea4b5439-gallery-thumbnail-desktop.webp";
+const imgPattern0212 = "/optimized/cta-background/ef25fd14e49122ddd6cbc03c8a92caff93500eb7-cta-background-desktop.webp";
+const imgPattern0453 = "/optimized/gallery-thumbnail/6cdd4333a240b46dead9df86c5a83772e81b76fc-gallery-thumbnail-desktop.webp";
 
 
 const backgroundElements: BackgroundElement[] = [

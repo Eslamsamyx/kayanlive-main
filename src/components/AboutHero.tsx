@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import type { ReactNode } from 'react';
 
 // Constants
-const DECORATIVE_IMAGE_PATH = "/assets/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.png";
+const DECORATIVE_IMAGE_PATH = "/optimized/about-hero/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329-about-hero-desktop.webp";
 const ANIMATION_TIMING = {
   LOAD_DELAY: 100,
   INTERSECTION_THRESHOLD: 0.1,

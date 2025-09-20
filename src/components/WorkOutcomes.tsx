@@ -5,8 +5,8 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 // Assets from Figma
-const imgRectangle4241 = "/assets/b74a7a7d29dd66a6cd62e4edfe0512fa5a3b97ad.png";
-const imgRectangle4240 = "/assets/776958ae56ed264aecd4c182054c75bc576a1d2f.png";
+const imgRectangle4241 = "/optimized/gallery-thumbnail/b74a7a7d29dd66a6cd62e4edfe0512fa5a3b97ad-gallery-thumbnail-desktop.webp";
+const imgRectangle4240 = "/optimized/gallery-thumbnail/776958ae56ed264aecd4c182054c75bc576a1d2f-gallery-thumbnail-desktop.webp";
 const imgEllipse3625 = "/assets/60821832f15b930b8fe851aa226b08c11f1ef46b.svg";
 const imgMdiTwitter = "/assets/def48b10f3af85b72c9c1340300144e654a156e1.svg";
 const imgLogosFacebook = "/assets/69e31bfddbf7233cc0877c3ef5b4edc8be21a2aa.svg";
@@ -14,8 +14,8 @@ const imgIcomoonFreeLinkedin2 = "/assets/29c078eff0cb9c150c3699b142068664db1face
 const imgSkillIconsInstagram = "/assets/83fa7d33c676fd60c6236412ca0aa58eee80b908.svg";
 
 // Mobile Assets - using the same images from Figma mobile design
-const imgRectangle4246 = "/assets/5fe3ba66a055c9a5b01ea404941b7097da5ffdb0.png";
-const imgRectangle4247 = "/assets/c57c28aa85c3935c2914aa9ff408c9f8c8f2fe68.png";
+const imgRectangle4246 = "/optimized/gallery-thumbnail/5fe3ba66a055c9a5b01ea404941b7097da5ffdb0-gallery-thumbnail-desktop.webp";
+const imgRectangle4247 = "/optimized/gallery-thumbnail/c57c28aa85c3935c2914aa9ff408c9f8c8f2fe68-gallery-thumbnail-desktop.webp";
 
 export default function WorkOutcomes() {
   const t = useTranslations('work.outcomes');
@@ -227,7 +227,7 @@ export default function WorkOutcomes() {
           <div className="relative z-10 flex items-center justify-center min-h-[70vh] px-8 py-16">
             <div className="max-w-lg text-center">
               <div
-                className="font-medium text-[#808184] leading-relaxed"
+                className="font-medium text-[#5A5A5A] leading-relaxed"
                 style={{
                   fontFamily: '"Poppins", sans-serif',
                   fontSize: 'clamp(1.125rem, 1.5vw, 1.5rem)',

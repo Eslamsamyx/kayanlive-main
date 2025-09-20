@@ -6,13 +6,13 @@ import { useTranslations } from 'next-intl';
 import CTAButton from './CTAButton';
 
 // Assets from Figma
-const imgOutline1 = "/assets/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.png";
-const imgPattern0452 = "/assets/6cdd4333a240b46dead9df86c5a83772e81b76fc.png";
-const imgFreepikTheStyleIsCandidImagePhotographyWithNatural627961 = "/assets/0a0c21416d9d9b2c97aedc8aa51e7c6619486a15.png";
+const imgOutline1 = "/optimized/about-hero/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329-about-hero-desktop.webp";
+const imgPattern0452 = "/optimized/gallery-thumbnail/6cdd4333a240b46dead9df86c5a83772e81b76fc-gallery-thumbnail-desktop.webp";
+const imgFreepikTheStyleIsCandidImagePhotographyWithNatural627961 = "/optimized/service-card/0a0c21416d9d9b2c97aedc8aa51e7c6619486a15-service-card-desktop.webp";
 const imgEllipse3626 = "/assets/34146dbe8aeb9c1892f700cd9059e41d476db4b0.svg";
 
 // Mobile-specific assets
-const imgFrame1618874025 = "/assets/0a0c21416d9d9b2c97aedc8aa51e7c6619486a15.png";
+const imgFrame1618874025 = "/optimized/service-card/0a0c21416d9d9b2c97aedc8aa51e7c6619486a15-service-card-mobile.webp";
 
 interface WorkCallToActionProps {
   locale?: string;

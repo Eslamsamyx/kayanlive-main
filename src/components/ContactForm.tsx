@@ -6,7 +6,7 @@ import CTAButton from './CTAButton';
 import { api } from '@/trpc/react';
 // import Image from 'next/image';
 
-const imgConcertBg1 = "/assets/cf27cb2a37e9e3bfd30c1ada4fe4988496b10bbb.png";
+const imgConcertBg1 = "/optimized/service-card/cf27cb2a37e9e3bfd30c1ada4fe4988496b10bbb-service-card-desktop.webp";
 // const imgEllipse3624 = "/assets/fcf30dee2c13353872f07b1e13a3de14f4d2f85e.svg";
 
 type ToastType = 'success' | 'error' | 'info';

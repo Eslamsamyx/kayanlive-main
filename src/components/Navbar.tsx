@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import '../styles/navbar-animations.css';
 import Button from './Button';
 
-const imgKayanLogoOpenFile31 = "/assets/823c27de600ccd2f92af3e073c8e10df3a192e5c.png";
+const imgKayanLogoOpenFile31 = "/optimized/footer-logo/823c27de600ccd2f92af3e073c8e10df3a192e5c-footer-logo-desktop.webp";
 const imgArrow1 = "/assets/35f8e962d2ce4403cee4cf1b70df11920a8fa4b6.svg";
 
 interface NavbarProps {
@@ -290,7 +290,7 @@ export default function Navbar({ locale }: NavbarProps) {
               aria-expanded={isLanguageDropdownOpen}
               aria-haspopup="menu"
               aria-controls="language-dropdown-menu"
-              aria-label={`Current language: ${currentLanguage.nativeName}. Click to change language`}
+              aria-label={currentLanguage.nativeName}
               disabled={isLanguageChanging}
             >
               <span className="text-lg" role="img" aria-label={currentLanguage.name}>

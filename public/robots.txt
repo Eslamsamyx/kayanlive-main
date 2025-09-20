@@ -1,0 +1,75 @@
+# robots.txt for KayanLive - Multilingual Event Management Platform
+# Domain: https://kayanlive.com
+# Last Updated: 2024-09-20
+
+# Allow all search engines to crawl the entire site
+User-agent: *
+Allow: /
+
+# Specifically allow major search engines for better multilingual indexing
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Disallow admin and API routes for security
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+
+# Disallow private or sensitive areas
+Disallow: /login
+Disallow: /dashboard
+Disallow: /profile
+
+# Allow all locale-specific content (en, ar, fr, ru, zh)
+Allow: /en/
+Allow: /ar/
+Allow: /fr/
+Allow: /ru/
+Allow: /zh/
+
+# Allow public assets and images
+Allow: /assets/
+Allow: /optimized/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.webp
+Allow: /*.ico
+
+# Crawl delay to be respectful to server resources
+# 1 second delay for all crawlers
+Crawl-delay: 1
+
+# Sitemap locations
+# Main sitemap (to be created)
+Sitemap: https://kayanlive.com/sitemap.xml
+
+# Locale-specific sitemaps (recommended for multilingual sites)
+Sitemap: https://kayanlive.com/sitemap-en.xml
+Sitemap: https://kayanlive.com/sitemap-ar.xml
+Sitemap: https://kayanlive.com/sitemap-fr.xml
+Sitemap: https://kayanlive.com/sitemap-ru.xml
+Sitemap: https://kayanlive.com/sitemap-zh.xml
+
+# Alternative: Single sitemap with hreflang annotations
+# Sitemap: https://kayanlive.com/sitemap-index.xml

@@ -2,16 +2,16 @@
 
 import { useTranslations } from 'next-intl';
 
-// Assets from Figma
-const imgRectangle4242 = "/assets/e05fec393f295d237ade9dff2ad26793496382ba.png"; // 2D/3D Content
-const imgRectangle4243 = "/assets/8980a40c08a52f165b1c17b24158f20160d003cc.png"; // Video Editing
-const imgRectangle4244 = "/assets/273cea28658e9744d1cd2fbc64a5ba1ac7deeff8.png"; // Conferences
-const imgRectangle4245 = "/assets/44d602b7f7ce040ad9592bf1e21de743a7ce86d1.png"; // Hologram
-const imgRectangle4246 = "/assets/a255a0faf04e8dcc9b85bbbb16bca93169de897f.png"; // Interactive
-const imgRectangle4247 = "/assets/123269087423c903b101b9352bd92acdab49d86a.png"; // Corporate Events
-const imgRectangle4248 = "/assets/d4096bba6c0158e37ce51f8a24f9565b007aaa92.png"; // Immersive AV
-const imgRectangle4249 = "/assets/409f7073bcfac7c1d7eea78ab2e23cc10f6a16fb.png"; // Tech Driven
-const imgRectangle4250 = "/assets/cf27cb2a37e9e3bfd30c1ada4fe4988496b10bbb.png"; // Live Events
+// Assets - Using optimized versions where available
+const imgRectangle4242 = "/optimized/service-card/e05fec393f295d237ade9dff2ad26793496382ba-service-card-desktop.webp"; // 2D/3D Content
+const imgRectangle4243 = "/optimized/service-card/8980a40c08a52f165b1c17b24158f20160d003cc-service-card-desktop.webp"; // Video Editing
+const imgRectangle4244 = "/optimized/article-content/273cea28658e9744d1cd2fbc64a5ba1ac7deeff8-article-content-desktop.webp"; // Conferences
+const imgRectangle4245 = "/optimized/service-card/44d602b7f7ce040ad9592bf1e21de743a7ce86d1-service-card-desktop.webp"; // Hologram
+const imgRectangle4246 = "/optimized/service-card/a255a0faf04e8dcc9b85bbbb16bca93169de897f-service-card-desktop.webp"; // Interactive
+const imgRectangle4247 = "/optimized/about-team/123269087423c903b101b9352bd92acdab49d86a-about-team-desktop.webp"; // Corporate Events
+const imgRectangle4248 = "/optimized/service-card/d4096bba6c0158e37ce51f8a24f9565b007aaa92-service-card-desktop.webp"; // Immersive AV
+const imgRectangle4249 = "/optimized/service-card/409f7073bcfac7c1d7eea78ab2e23cc10f6a16fb-service-card-desktop.webp"; // Tech Driven
+const imgRectangle4250 = "/optimized/service-card/cf27cb2a37e9e3bfd30c1ada4fe4988496b10bbb-service-card-desktop.webp"; // Live Events
 
 export default function ServicesGrid() {
   const t = useTranslations('services.grid');

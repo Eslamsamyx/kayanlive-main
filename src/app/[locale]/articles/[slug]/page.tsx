@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { api } from '@/trpc/react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useParams, notFound } from 'next/navigation';
 import {
   Calendar,
@@ -73,7 +74,6 @@ export default function ArticlePage() {
     .slice(0, 3);
 
   // Article navigation - can be implemented later
-  const navigation = null;
 
   // View tracking is handled by getBySlug endpoint automatically
 
@@ -92,7 +92,6 @@ export default function ArticlePage() {
   const handleShare = (platform: string) => {
     const url = encodeURIComponent(window.location.href);
     const title = encodeURIComponent(article?.title || '');
-    const description = encodeURIComponent(article?.excerpt || '');
 
     let shareUrl = '';
     switch (platform) {
@@ -397,10 +396,13 @@ export default function ArticlePage() {
               className="mb-12"
             >
               <div className="relative overflow-hidden rounded-[25px]">
-                <img
+                <Image
                   src={article.featuredImage}
                   alt={article.featuredImageAlt || article.title}
+                  width={800}
+                  height={400}
                   className="w-full h-auto"
+                  priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
               </div>
@@ -474,9 +476,11 @@ export default function ArticlePage() {
                   >
                     {relatedArticle.featuredImage && (
                       <div className="relative h-32 mb-4 overflow-hidden rounded-[15px]">
-                        <img
+                        <Image
                           src={relatedArticle.featuredImage}
                           alt={relatedArticle.title}
+                          width={200}
+                          height={128}
                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                         />
                       </div>

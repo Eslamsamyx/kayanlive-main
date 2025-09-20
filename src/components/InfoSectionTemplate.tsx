@@ -5,7 +5,7 @@ import Image from 'next/image';
 import CTAButton from './CTAButton';
 
 // Common assets
-const imgPattern = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
+const imgPattern = "/optimized/cta-background/ef25fd14e49122ddd6cbc03c8a92caff93500eb7-cta-background-desktop.webp";
 const imgCheckmark = "/assets/d57e8b023cc2954fe2c89c41bd7f2153074ba9c1.svg";
 
 interface ChecklistItem {
@@ -37,7 +37,7 @@ export default function InfoSectionTemplate({
   checklistItems,
   ctaTitle,
   ctaButtonText,
-  backgroundImage = "/assets/a4bd38b73259c4fd4f099d834871f17ed5486466.png",
+  backgroundImage = "/optimized/gallery-thumbnail/a4bd38b73259c4fd4f099d834871f17ed5486466-gallery-thumbnail-desktop.webp",
   gradientFrom = "#b8a4ff",
   gradientVia = "#7afdd6", 
   gradientTo = "#7afdd6",
@@ -95,18 +95,18 @@ export default function InfoSectionTemplate({
                 className="inline-flex items-center justify-center rounded-[900px] border border-[#7afdd6] bg-[rgba(122,253,214,0.26)]"
                 style={{ width: '225px', height: '62px' }}
               >
-                <span className="text-[#42967d] text-[20px] uppercase">{badgeText}</span>
+                <span className="text-[#1a4b43] text-[20px] uppercase">{badgeText}</span>
               </div>
               
               {/* Description */}
-              <p className="text-[#808184] text-[24px] leading-[32px] capitalize">
+              <p className="text-[#5A5A5A] text-[24px] leading-[32px] capitalize">
                 {leftDescription}
               </p>
             </div>
 
             {/* Right Column - Checklist */}
             <div className="flex flex-col gap-6 flex-1 max-w-[697px]">
-              <p className="text-[#808184] text-[24px] leading-[32px] capitalize">
+              <p className="text-[#5A5A5A] text-[24px] leading-[32px] capitalize">
                 {rightDescription}
               </p>
               

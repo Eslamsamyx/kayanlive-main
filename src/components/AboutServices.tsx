@@ -60,8 +60,8 @@ const animationStyles = `
   }
 `;
 
-const imgEventPhoto = "/assets/29064c5a0d86395e45b642fe4e6daf670490f723.png";
-const imgKayanLogo = "/assets/823c27de600ccd2f92af3e073c8e10df3a192e5c.png";
+const imgEventPhoto = "/optimized/hero-slide/29064c5a0d86395e45b642fe4e6daf670490f723-hero-slide-desktop.webp";
+const imgKayanLogo = "/optimized/footer-logo/823c27de600ccd2f92af3e073c8e10df3a192e5c-footer-logo-desktop.webp";
 
 export default function AboutServices() {
   const t = useTranslations();
@@ -330,7 +330,7 @@ export default function AboutServices() {
 
             {/* Featured Visual Showcase Card - First Position */}
             <div className="pipeline-card" data-card-index="0">
-              <a href={`/${locale}/contact`} className="block h-full cursor-pointer">
+              <a href={`/${locale}/contact`} className="block h-full cursor-pointer" aria-label="Contact us for event management services">
                 <div className="group relative bg-gradient-to-br from-[#7afdd6] to-[#74cfaa] rounded-3xl overflow-hidden h-full md:col-span-2 lg:col-span-1 min-h-[400px] shadow-xl hover:shadow-2xl transition-shadow duration-500">
                   <AnimatedServiceContent isImage={true} className="absolute inset-0">
                     <div
@@ -842,7 +842,7 @@ export default function AboutServices() {
                   </div>
 
                   {/* Optional Badge */}
-                  <div className="absolute -top-2 -right-2 bg-[#74cfaa] text-white text-xs px-2 py-1 rounded-full font-semibold">
+                  <div className="absolute -top-2 -right-2 bg-[#74cfaa] text-black text-xs px-2 py-1 rounded-full font-semibold">
                     {t('aboutServices.process.steps.postEvent.badge')}
                   </div>
 

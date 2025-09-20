@@ -2,11 +2,11 @@
 
 import { useState, useEffect, useRef } from 'react';
 
-const imgRectangle4235 = "/assets/79b8becbbe666db19c2c2dfdebe436eebf271e2e.png";
-const imgRectangle4236 = "/assets/fe74de8467bf5ef42975b489173519217b1b04d0.png";
-const imgRectangle4237 = "/assets/4bf06f33663f81bd327984084be746509f0caffd.png";
-const imgRectangle4238 = "/assets/3bfce9db290033eb81342a31f55d19a490e552d3.png";
-const imgRectangle4239 = "/assets/c7e54c0605f6e122070c3da28c63679ca3742a85.png";
+const imgRectangle4235 = "/optimized/industry-showcase/79b8becbbe666db19c2c2dfdebe436eebf271e2e-industry-showcase-desktop.webp";
+const imgRectangle4236 = "/optimized/industry-showcase/fe74de8467bf5ef42975b489173519217b1b04d0-industry-showcase-desktop.webp";
+const imgRectangle4237 = "/optimized/industry-showcase/4bf06f33663f81bd327984084be746509f0caffd-industry-showcase-desktop.webp";
+const imgRectangle4238 = "/optimized/industry-showcase/3bfce9db290033eb81342a31f55d19a490e552d3-industry-showcase-desktop.webp";
+const imgRectangle4239 = "/optimized/gallery-thumbnail/c7e54c0605f6e122070c3da28c63679ca3742a85-gallery-thumbnail-desktop.webp";
 
 const valuesData = [
   {

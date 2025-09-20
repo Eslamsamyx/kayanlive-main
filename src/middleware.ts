@@ -78,6 +78,11 @@ const authMiddleware = withAuth(
 export default function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
+  // Force redirect from root to /en
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL('/en', request.url));
+  }
+
   // Apply auth middleware for admin routes
   if (pathname.includes('/admin')) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -95,8 +100,8 @@ export const config = {
     // - /_next (Next.js internals)
     // - /_vercel (Vercel internals)
     // - Static files (images, etc.)
-    // - favicon.ico specifically
-    '/((?!api|_next|_vercel|favicon\\.ico|.*\\..*|static).*)',
+    // - favicon.ico and robots.txt specifically
+    '/((?!api|_next|_vercel|favicon\\.ico|robots\\.txt|.*\\..*|static).*)',
     // Admin routes
     '/admin/:path*'
   ]

@@ -5,12 +5,14 @@ import Image from 'next/image';
 import { useTranslations, useLocale } from 'next-intl';
 import Button from './Button';
 
-// Assets
-const imgScreenshot1 = "/assets/01f5d49d03c8455dc99b2ad32446b6657b1949e0.png";
-const imgScreenshot3 = "/assets/b0d9ec6faacc00d7ed8b82f3f45ecaa371425181.png";
+// Assets - Using optimized versions with responsive variants
+const imgScreenshot1Desktop = "/optimized/hero-main/01f5d49d03c8455dc99b2ad32446b6657b1949e0-hero-main-desktop.webp";
+const imgScreenshot1Mobile = "/optimized/hero-main/01f5d49d03c8455dc99b2ad32446b6657b1949e0-hero-main-mobile.webp";
+const imgScreenshot1Tablet = "/optimized/hero-main/01f5d49d03c8455dc99b2ad32446b6657b1949e0-hero-main-tablet.webp";
+const imgScreenshot3 = "/optimized/hero-slide/b0d9ec6faacc00d7ed8b82f3f45ecaa371425181-hero-slide-desktop.webp";
 const imgFrame1 = "/assets/bac2af3eca424e14c720bab9f5fabec434faaa31.svg";
-const imgKayanLogo = "/assets/823c27de600ccd2f92af3e073c8e10df3a192e5c.png";
-const imgKMobile = "/assets/873e726ea40f8085d26088ffc29bf8dfb68b10ee.png";
+const imgKayanLogo = "/optimized/footer-logo/823c27de600ccd2f92af3e073c8e10df3a192e5c-footer-logo-desktop.webp";
+const imgKMobile = "/optimized/client-logo/873e726ea40f8085d26088ffc29bf8dfb68b10ee-client-logo-desktop.webp";
 const imgVectorMobile = "/assets/280033d008f397b92a0642ef0eb81b067b3be2fd.svg";
 
 // Constants
@@ -87,8 +89,15 @@ export default function Hero() {
   const locale = useLocale();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  const [frameImageLoaded, setFrameImageLoaded] = useState(false);
   const pauseTimeoutRef = useRef<number | undefined>(undefined);
   const totalSlides = TOTAL_SLIDES;
+
+  // Client-side hydration check for performance
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Memoized style calculations
   const containerStyles = useMemo(() => ({
@@ -103,13 +112,13 @@ export default function Hero() {
   }), []);
 
   useEffect(() => {
-    if (!isPaused) {
+    if (!isPaused && isClient) {
       const interval = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % totalSlides);
       }, SLIDE_INTERVAL);
       return () => clearInterval(interval);
     }
-  }, [isPaused, totalSlides]);
+  }, [isPaused, totalSlides, isClient]);
 
   const goToSlide = useCallback((index: number) => {
     setCurrentSlide(index);
@@ -131,8 +140,10 @@ export default function Hero() {
     totalSlides
   }), [currentSlide, goToSlide, totalSlides]);
 
-  // Keyboard navigation
+  // Keyboard navigation - only add listeners after client hydration
   useEffect(() => {
+    if (!isClient) return;
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'ArrowLeft') {
         event.preventDefault();
@@ -157,7 +168,7 @@ export default function Hero() {
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [totalSlides]);
+  }, [totalSlides, isClient]);
 
   // Cleanup timeout on unmount
   useEffect(() => {
@@ -250,6 +261,43 @@ export default function Hero() {
           will-change: transform;
         }
 
+        /* CRITICAL FIX: Reserve space for decorative frame to prevent CLS */
+        .hero-frame-container {
+          /* Fixed dimensions prevent layout shift */
+          width: 1445.84px;
+          height: 290.092px;
+          position: absolute;
+          top: clamp(727px, calc(727px + (var(--hero-desktop-height) - 955px) * 0.6), 900px);
+          left: calc(50% - 0.08px);
+          transform: translateX(-50%);
+          /* Ensure space is reserved even before image loads */
+          background: transparent;
+          contain: layout;
+        }
+
+        .hero-frame-inner {
+          position: absolute;
+          bottom: -32.03%;
+          top: -39.99%;
+          /* Prevent layout shifts by maintaining aspect ratio */
+          width: 100%;
+          height: 100%;
+        }
+
+        /* CRITICAL FIX: Font loading optimization */
+        .hero-text-stable {
+          /* Reserve font space to prevent CLS */
+          font-size: clamp(36px, 4vw, 50px);
+          line-height: 1.3;
+          /* Use fallback that matches final font metrics */
+          font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+          font-display: swap;
+          /* Stabilize text rendering */
+          text-rendering: optimizeSpeed;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
         @media (prefers-reduced-motion: reduce) {
           .hero-backdrop-blur {
             backdrop-filter: none;
@@ -281,6 +329,11 @@ export default function Hero() {
           .hero-decorative-blur {
             backdrop-filter: blur(3px);
           }
+
+          .hero-text-stable {
+            font-size: clamp(18px, 4.5vw, 22px);
+            line-height: clamp(20px, 5vw, 24px);
+          }
         }
       `}</style>
 
@@ -303,17 +356,27 @@ export default function Hero() {
           role="tabpanel"
           aria-labelledby="slide-0-label"
           aria-hidden={currentSlide !== 0}
+          {...(currentSlide !== 0 && { inert: true })}
         >
-          {/* Mobile Background Image */}
-          <div
-            className="absolute inset-0 bg-center bg-cover bg-no-repeat"
+          {/* CRITICAL FIX: Mobile Background Image - Maximum LCP optimization */}
+          <Image
+            src={imgScreenshot1Mobile}
+            alt="KayanLive Hero Background"
+            fill
+            priority
+            quality={50}
+            sizes="(max-width: 768px) 100vw, 768px"
+            className="object-cover object-center"
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyiwjHvYmUAR+IRqzHMa2biSqKmZcPYLBJDlDMZqYJJGgkC+4RP5QTLcNNXCpqGHaWCzzJEyswzGYOEgBqhNY6nJJAWZlOUQqyh1iB9ZYXhrOVmNTNATaTZHPZ4m/d6rKGlLFgZWT8/nfKE7SzyN0HHf6ORPKRK7Xt4m4NeVuNNY6nJJAWZlOUQqyh1iB9ZYXhr"
+            fetchPriority="high"
             style={{
-              backgroundImage: `url('${imgScreenshot1}')`
+              aspectRatio: '16/9',
+              objectFit: 'cover'
             }}
-            aria-hidden="true"
           />
 
-          {/* Mobile/Tablet Centered Logo - Responsive */}
+          {/* Mobile/Tablet Centered Logo - Background Image (smaller, non-critical) */}
           <div
             className="absolute hero-backdrop-blur bg-center bg-cover bg-no-repeat opacity-[0.43] translate-x-[-50%] translate-y-[-50%]"
             style={{
@@ -326,7 +389,7 @@ export default function Hero() {
             aria-hidden="true"
           />
 
-          {/* Mobile Vector Decoration */}
+          {/* Mobile Vector Decoration - Lazy loaded */}
           <div
             className="absolute"
             style={{ left: '0px', bottom: '150px', width: '321px', height: '138px' }}
@@ -338,22 +401,20 @@ export default function Hero() {
                 className="block max-w-none size-full"
                 src={imgVectorMobile}
                 fill
+                loading="lazy"
                 style={{ objectFit: 'contain' }}
                 role="img"
                 onError={() => console.warn('Failed to load vector mobile image')}
-                priority
               />
             </div>
           </div>
 
-          {/* Mobile Text Content */}
+          {/* Mobile Text Content - CRITICAL FIX: Stable text metrics */}
           <div
-            className="hero-mobile-content absolute capitalize text-white text-center translate-x-[-50%]"
+            className="hero-mobile-content hero-text-stable absolute capitalize text-white text-center translate-x-[-50%]"
             style={{
-              fontFamily: "'FONTSPRING DEMO - Visby CF Demi Bold', sans-serif",
+              fontFamily: "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
               fontWeight: 'normal',
-              fontSize: 'clamp(18px, 4.5vw, 22px)',
-              lineHeight: 'clamp(20px, 5vw, 24px)',
               left: '50%',
               bottom: '120px',
               width: 'clamp(260px, 70vw, 281px)',
@@ -386,7 +447,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Mobile Slide 2 - About Text */}
+        {/* Mobile Slide 2 - About Text - Lazy Load */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ${
             currentSlide === 1 ? 'opacity-100' : 'opacity-0 pointer-events-none'
@@ -394,17 +455,24 @@ export default function Hero() {
           role="tabpanel"
           aria-labelledby="slide-1-label"
           aria-hidden={currentSlide !== 1}
+          {...(currentSlide !== 1 && { inert: true })}
         >
-          {/* Mobile Background - Cropped to mobile dimensions */}
-          <div
-            className="absolute inset-0 bg-no-repeat"
-            style={{
-              backgroundImage: `url('${imgScreenshot3}')`,
-              backgroundPosition: '47.69% 0%',
-              backgroundSize: '373.72% 100%'
-            }}
-            aria-hidden="true"
-          />
+          {/* PERFORMANCE: Only load slide 2 background when needed */}
+          {(currentSlide === 1 || isClient) && (
+            <Image
+              src={imgScreenshot3}
+              alt="KayanLive About Background"
+              fill
+              loading="lazy"
+              quality={60}
+              sizes="(max-width: 768px) 100vw, 400px"
+              className="object-cover"
+              style={{
+                objectPosition: '47.69% 0%',
+                transform: 'scale(3.7372)'
+              }}
+            />
+          )}
 
           {/* Mobile Central Diamond with Text */}
           <div
@@ -437,13 +505,11 @@ export default function Hero() {
                 >
                   <div style={{ transform: 'rotate(45deg)' }}>
                     <div
-                      className="text-white text-center capitalize relative px-4 flex flex-col items-center justify-center"
+                      className="text-white text-center capitalize relative px-4 flex flex-col items-center justify-center hero-text-stable"
                       style={{
                         width: 'clamp(320px, 50vw, 300px)',
                         height: 'clamp(220px, 35vw, 240px)',
-                        fontFamily: "'FONTSPRING DEMO - Visby CF Medium', 'Satoshi', sans-serif",
-                        fontSize: 'clamp(14px, 3vw, 16px)',
-                        lineHeight: 'clamp(18px, 3.5vw, 22px)',
+                        fontFamily: "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
                         fontWeight: 'normal'
                       }}
                     >
@@ -472,7 +538,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Mobile Logo Watermark */}
+          {/* Mobile Logo Watermark - Background (non-critical) */}
           <div
             className="absolute bg-center bg-cover bg-no-repeat opacity-[0.57] translate-x-[-50%] translate-y-[-50%]"
             style={{
@@ -514,22 +580,27 @@ export default function Hero() {
           role="tabpanel"
           aria-labelledby="slide-0-label"
           aria-hidden={currentSlide !== 0}
+          {...(currentSlide !== 0 && { inert: true })}
         >
-          {/* Background Image */}
-          <div
-            className="absolute bg-center bg-cover bg-no-repeat"
+          {/* CRITICAL FIX: Desktop Background Image - Maximum LCP optimization */}
+          <Image
+            src={imgScreenshot1Desktop}
+            alt="KayanLive Hero Background"
+            fill
+            priority
+            quality={50}
+            sizes="(min-width: 1600px) 1600px, (min-width: 1024px) 100vw, 1600px"
+            className="object-cover object-center"
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyiwjHvYmUAR+IRqzHMa2biSqKmZcPYLBJDlDMZqYJJGgkC+4RP5QTLcNNXCpqGHaWCzzJEyswzGYOEgBqhNY6nJJAWZlOUQqyh1iB9ZYXhrOVmNTNATaTZHPZ4m/d6rKGlLFgZWT8/nfKE7SzyN0HHf6ORPKRK7Xt4m4NeVuNNY6nJJAWZlOUQqyh1iB9ZYXhr"
+            fetchPriority="high"
             style={{
-              width: 'calc(var(--hero-desktop-height) * 1.737)',
-              height: 'var(--hero-desktop-height)',
-              top: '0px',
-              left: 'calc(50% - 0.5px)',
-              transform: 'translateX(-50%)',
-              backgroundImage: `url('${imgScreenshot1}')`
+              aspectRatio: '16/9',
+              objectFit: 'cover'
             }}
-            aria-hidden="true"
           />
 
-          {/* Desktop Centered Decorative Logo */}
+          {/* Desktop Centered Decorative Logo - Background (non-critical) */}
           <div
             className="absolute hero-backdrop-blur bg-center bg-cover bg-no-repeat opacity-[0.43] translate-x-[-50%] translate-y-[-50%]"
             style={{
@@ -542,50 +613,44 @@ export default function Hero() {
             aria-hidden="true"
           />
 
-          {/* Decorative Frame */}
-          <div
-            className="absolute"
-            style={{
-              width: '1445.84px',
-              height: '290.092px',
-              top: 'clamp(727px, calc(727px + (var(--hero-desktop-height) - 955px) * 0.6), 900px)',
-              left: 'calc(50% - 0.08px)',
-              transform: 'translateX(-50%)'
-            }}
-            aria-hidden="true"
-          >
-            <div className="absolute" style={{
-              bottom: '-32.03%',
+          {/* CRITICAL FIX: Decorative Frame - Fixed container to prevent CLS */}
+          <div className="hero-frame-container" aria-hidden="true">
+            <div className="hero-frame-inner" style={{
               [locale === 'ar' ? 'right' : 'left']: '-10.58%',
               [locale === 'ar' ? 'left' : 'right']: '0',
-              top: '-39.99%',
               transform: locale === 'ar' ? 'scaleX(-1)' : 'none'
             }}>
               <Image
                 alt="Decorative frame border"
-                className="block w-full h-full max-w-none"
+                className="block max-w-none"
                 src={imgFrame1}
-                fill
-                style={{objectFit: 'contain'}}
-                role="img"
-                onError={() => console.warn('Failed to load frame image')}
+                width={1445}
+                height={290}
                 priority
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain'
+                }}
+                role="img"
+                onLoad={() => setFrameImageLoaded(true)}
+                onError={() => console.warn('Failed to load frame image')}
+                placeholder="empty"
               />
             </div>
           </div>
 
-          {/* Text Content */}
+          {/* Text Content - CRITICAL FIX: Stable text metrics */}
           <div
-            className="hero-desktop-content absolute capitalize text-white"
+            className="hero-desktop-content hero-text-stable absolute capitalize text-white"
             style={{
               fontWeight: 'bold',
-              fontSize: 'clamp(36px, 4vw, 50px)',
-              lineHeight: '1.3',
               [locale === 'ar' ? 'right' : 'left']: '42px',
               bottom: '120px',
               width: 'clamp(600px, 60vw, 875px)',
               textAlign: locale === 'ar' ? 'right' : 'left',
-              wordWrap: 'break-word'
+              wordWrap: 'break-word',
+              fontFamily: "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif"
             }}
           >
             {t('hero.title')}
@@ -623,7 +688,7 @@ export default function Hero() {
           />
         </div>
 
-        {/* Desktop Slide 2 - About Text */}
+        {/* Desktop Slide 2 - About Text - Lazy Load */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ${
             currentSlide === 1 ? 'opacity-100' : 'opacity-0 pointer-events-none'
@@ -631,22 +696,22 @@ export default function Hero() {
           role="tabpanel"
           aria-labelledby="slide-1-label"
           aria-hidden={currentSlide !== 1}
+          {...(currentSlide !== 1 && { inert: true })}
         >
-          {/* Background Image */}
-          <div
-            className="absolute bg-center bg-cover bg-no-repeat"
-            style={{
-              width: 'calc(var(--hero-desktop-height) * 1.522)',
-              height: 'var(--hero-desktop-height)',
-              top: '0px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              backgroundImage: `url('${imgScreenshot3}')`
-            }}
-            aria-hidden="true"
-          />
+          {/* PERFORMANCE: Desktop Slide 2 Background - Lazy loaded */}
+          {(currentSlide === 1 || isClient) && (
+            <Image
+              src={imgScreenshot3}
+              alt="KayanLive About Background"
+              fill
+              loading="lazy"
+              quality={60}
+              sizes="(min-width: 1024px) 100vw, 1200px"
+              className="object-cover object-center"
+            />
+          )}
 
-          {/* Logo Watermark */}
+          {/* Logo Watermark - Background (non-critical) */}
           <div
             className="absolute bg-center bg-cover bg-no-repeat opacity-[0.57]"
             style={{
@@ -727,13 +792,14 @@ export default function Hero() {
                 >
                   <div style={{ transform: 'rotate(45deg)' }}>
                     <div
-                      className="text-white text-center capitalize px-8"
+                      className="text-white text-center capitalize px-8 hero-text-stable"
                       style={{
                         maxWidth: '627px',
                         fontSize: 'clamp(20px, 2.5vw, 28px)',
                         lineHeight: 'clamp(28px, 3.5vw, 38px)',
                         fontWeight: '500',
-                        minHeight: 'fit-content'
+                        minHeight: 'fit-content',
+                        fontFamily: "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif"
                       }}
                     >
                       <p className="mb-6 text-3xl font-bold">

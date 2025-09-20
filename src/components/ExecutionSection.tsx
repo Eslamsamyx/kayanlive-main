@@ -3,9 +3,9 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-const imgRectangle6 = "/assets/29064c5a0d86395e45b642fe4e6daf670490f723.png";
-const imgPattern0212 = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
-const imgPattern0452 = "/assets/6cdd4333a240b46dead9df86c5a83772e81b76fc.png";
+const imgRectangle6 = "/optimized/hero-slide/29064c5a0d86395e45b642fe4e6daf670490f723-hero-slide-desktop.webp";
+const imgPattern0212 = "/optimized/cta-background/ef25fd14e49122ddd6cbc03c8a92caff93500eb7-cta-background-desktop.webp";
+const imgPattern0452 = "/optimized/gallery-thumbnail/6cdd4333a240b46dead9df86c5a83772e81b76fc-gallery-thumbnail-desktop.webp";
 const imgVector449 = "/assets/f7382026e38c26d5af789578200259cf00d646d5.svg";
 const imgVector450 = "/assets/2e7d38a51401314bc36af86961b4180f9a81bc96.svg";
 const imgVector451 = "/assets/27f7bc8b7057872a6c373109cb92fc81093df0cd.svg";

@@ -582,5 +582,12 @@
     "learnMore": "Learn More",
     "getStarted": "Get Started",
     "contactUs": "Contact Us"
+  },
+  "seo": {
+    "home": {
+      "title": "KayanLive - Premier Event Management in Saudi Arabia, UAE & GCC",
+      "description": "Leading event management company in Dubai and across the GCC. Delivering creativity, innovation, and execution for live events, exhibitions, conferences, and immersive experiences. When others stall, we execute with precision and cultural fluency.",
+      "keywords": "event management Dubai, event planning UAE, KayanLive, GCC events, Saudi Arabia events, live events, exhibitions, conferences, event company"
+    }
   }
 }

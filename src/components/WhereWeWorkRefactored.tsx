@@ -34,7 +34,7 @@ export default function WhereWeWorkRefactored() {
       checklistItems={checklistItems}
       ctaTitle="Planning an event outside the uae or saudi arabia?"
       ctaButtonText="Let's Build Together"
-      backgroundImage="/assets/a4bd38b73259c4fd4f099d834871f17ed5486466.png"
+      backgroundImage="/optimized/gallery-thumbnail/a4bd38b73259c4fd4f099d834871f17ed5486466-gallery-thumbnail-desktop.webp"
       gradientFrom="#74CFAA"
       gradientVia="#A095E1"
       gradientTo="#A095E1"

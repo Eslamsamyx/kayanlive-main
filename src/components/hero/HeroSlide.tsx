@@ -11,11 +11,11 @@ import styles from './Hero.module.css';
 
 // Asset constants
 const ASSETS = {
-  SCREENSHOT_1: "/assets/01f5d49d03c8455dc99b2ad32446b6657b1949e0.png",
-  SCREENSHOT_3: "/assets/b0d9ec6faacc00d7ed8b82f3f45ecaa371425181.png",
+  SCREENSHOT_1: "/optimized/hero-main/01f5d49d03c8455dc99b2ad32446b6657b1949e0-hero-main-desktop.webp",
+  SCREENSHOT_3: "/optimized/hero-slide/b0d9ec6faacc00d7ed8b82f3f45ecaa371425181-hero-slide-desktop.webp",
   FRAME_1: "/assets/bac2af3eca424e14c720bab9f5fabec434faaa31.svg",
-  KAYAN_LOGO: "/assets/823c27de600ccd2f92af3e073c8e10df3a192e5c.png",
-  K_MOBILE: "/assets/873e726ea40f8085d26088ffc29bf8dfb68b10ee.png",
+  KAYAN_LOGO: "/optimized/footer-logo/823c27de600ccd2f92af3e073c8e10df3a192e5c-footer-logo-desktop.webp",
+  K_MOBILE: "/optimized/client-logo/873e726ea40f8085d26088ffc29bf8dfb68b10ee-client-logo-mobile.webp",
   VECTOR_MOBILE: "/assets/280033d008f397b92a0642ef0eb81b067b3be2fd.svg"
 } as const;
 
@@ -35,8 +35,10 @@ const HeroSlide = memo<HeroSlideProps>(({
   // Background image dimensions based on variant and text metrics
   const getBackgroundStyle = () => {
     if (isMobile) {
+      // Use mobile-optimized image if available
+      const backgroundImage = slide.mobileBackgroundImage || slide.backgroundImage;
       return {
-        backgroundImage: `url('${slide.backgroundImage}')`,
+        backgroundImage: `url('${backgroundImage}')`,
         backgroundPosition: slide.backgroundPosition || 'center',
         backgroundSize: slide.backgroundSize || 'cover'
       };

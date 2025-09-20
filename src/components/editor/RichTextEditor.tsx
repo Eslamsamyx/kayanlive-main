@@ -13,6 +13,7 @@ import Color from '@tiptap/extension-color';
 import { TextStyle } from '@tiptap/extension-text-style';
 import Highlight from '@tiptap/extension-highlight';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
+import Placeholder from '@tiptap/extension-placeholder';
 import { common, createLowlight } from 'lowlight';
 
 const lowlight = createLowlight(common);
@@ -47,12 +48,14 @@ interface RichTextEditorProps {
   content: string;
   onChange: (content: string) => void;
   className?: string;
+  placeholder?: string;
 }
 
 export default function RichTextEditor({
   content,
   onChange,
-  className = ""
+  className = "",
+  placeholder
 }: RichTextEditorProps) {
   const [linkUrl, setLinkUrl] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -115,6 +118,9 @@ export default function RichTextEditor({
         HTMLAttributes: {
           class: 'bg-gray-900/50 text-white p-4 rounded-lg my-4 overflow-x-auto',
         },
+      }),
+      Placeholder.configure({
+        placeholder: placeholder || 'Start writing...',
       }),
     ],
     content,

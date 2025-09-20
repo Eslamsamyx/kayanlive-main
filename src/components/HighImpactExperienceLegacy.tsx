@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 
-const imgKayanLogo = "/assets/823c27de600ccd2f92af3e073c8e10df3a192e5c.png";
+const imgKayanLogo = "/optimized/footer-logo/823c27de600ccd2f92af3e073c8e10df3a192e5c-footer-logo-desktop.webp";
 
 export default function HighImpactExperienceLegacy() {
   const t = useTranslations();
@@ -69,7 +69,7 @@ export default function HighImpactExperienceLegacy() {
               </p>
             </blockquote>
             <cite
-              className="text-[#74cfaa] font-semibold not-italic"
+              className="text-[#0A5D5A] font-semibold not-italic"
               style={{ fontSize: 'clamp(14px, 3vw, 16px)' }}
             >
               — {t('highImpact.testimonialAuthor')}
@@ -134,7 +134,7 @@ export default function HighImpactExperienceLegacy() {
                     </p>
                   </blockquote>
                   <cite
-                    className="text-[#74cfaa] font-semibold not-italic"
+                    className="text-[#0A5D5A] font-semibold not-italic"
                     style={{ fontSize: 'clamp(16px, 1.6vw, 20px)' }}
                   >
                     — {t('highImpact.testimonialAuthor')}

@@ -2,14 +2,15 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
+import LocationAwareImage from './LocationAwareImage';
 
 // Images
 const images = {
-  purpose: "/assets/79b8becbbe666db19c2c2dfdebe436eebf271e2e.png",
-  precision: "/assets/fe74de8467bf5ef42975b489173519217b1b04d0.png", 
-  innovation: "/assets/4bf06f33663f81bd327984084be746509f0caffd.png",
-  collaboration: "/assets/3bfce9db290033eb81342a31f55d19a490e552d3.png",
-  placeholder: "/assets/c7e54c0605f6e122070c3da28c63679ca3742a85.png"
+  purpose: "/optimized/about-hero/6f6ce5ee6422e315524d4c876dbb7b8a3e609a69-about-hero-desktop.webp",
+  precision: "/optimized/industry-showcase/fe74de8467bf5ef42975b489173519217b1b04d0-industry-showcase-desktop.webp",
+  innovation: "/optimized/industry-showcase/4bf06f33663f81bd327984084be746509f0caffd-industry-showcase-desktop.webp",
+  collaboration: "/optimized/industry-showcase/3bfce9db290033eb81342a31f55d19a490e552d3-industry-showcase-desktop.webp",
+  placeholder: "/optimized/gallery-thumbnail/c7e54c0605f6e122070c3da28c63679ca3742a85-gallery-thumbnail-desktop.webp"
 };
 
 
@@ -210,14 +211,20 @@ export default function AboutValues() {
           </h2>
           
           {/* SVG Logo beside title */}
-          <div 
-            className="absolute w-[302px] h-[469px] opacity-50 bg-center bg-cover bg-no-repeat"
+          <div
+            className="absolute w-[302px] h-[469px] opacity-50"
             style={{
               top: '-208px',
-              right: '0px',
-              backgroundImage: `url('/assets/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.png')`
+              right: '0px'
             }}
-          />
+          >
+            <LocationAwareImage
+              src="/optimized/about-hero/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329-about-hero-desktop.webp"
+              location="about-hero"
+              alt="Company logo"
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
 
         {/* Simple SVG Background Path */}
@@ -295,13 +302,14 @@ export default function AboutValues() {
               >
                 <div className="w-full max-w-sm md:max-w-md lg:max-w-lg">
                   {/* Card Image */}
-                  <div 
-                    className="aspect-[4/3] rounded-3xl bg-cover bg-center mb-4"
-                    style={{ 
-                      backgroundImage: `url(${value.image})`,
-                      backgroundColor: '#2a2d32'
-                    }}
-                  />
+                  <div className="aspect-[4/3] rounded-3xl mb-4 overflow-hidden bg-[#2a2d32]">
+                    <LocationAwareImage
+                      src={value.image}
+                      location={value.id === 'purpose' ? 'industry-showcase' : 'about-hero'}
+                      alt={value.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                   
                   {/* Card Content */}
                   <div className="px-2">
@@ -332,14 +340,19 @@ export default function AboutValues() {
           {Array.from({ length: 15 }, (_, i) => (
             <div
               key={i}
-              className="bg-center bg-cover bg-no-repeat flex-shrink-0"
-              style={{ 
+              className="flex-shrink-0 opacity-60"
+              style={{
                 width: '180px',
-                height: '180px',
-                backgroundImage: `url('/assets/7854b2fa3456db2dfe1f88a71484d2ef952fd4d6.png')`,
-                opacity: 0.6
+                height: '180px'
               }}
-            />
+            >
+              <LocationAwareImage
+                src="/optimized/about-hero/7854b2fa3456db2dfe1f88a71484d2ef952fd4d6-about-hero-desktop.webp"
+                location="about-hero"
+                alt="Pattern element"
+                className="w-full h-full object-cover"
+              />
+            </div>
           ))}
         </div>
       </div>

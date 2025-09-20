@@ -4,12 +4,12 @@ import { useTranslations } from 'next-intl';
 import { parseMarkdown } from '@/utils/markdownUtils';
 import ClientsPartnersTemplate, { CardConfig, BackgroundElement } from './ClientsPartnersTemplate';
 
-const imgPattern = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
-const imgGovernment = "/assets/cb192ab808312901ac705768d1f69f35ae3c9f61.png";
-const imgMultinational = "/assets/79b8becbbe666db19c2c2dfdebe436eebf271e2e.png";
-const imgRealEstate = "/assets/97b98a652c6210a2b4e884e84040708ab75a45fc.png";
-const imgEventPlanners = "/assets/123269087423c903b101b9352bd92acdab49d86a.png";
-const imgPattern0453 = "/assets/6cdd4333a240b46dead9df86c5a83772e81b76fc.png";
+const imgPattern = "/optimized/cta-background/ef25fd14e49122ddd6cbc03c8a92caff93500eb7-cta-background-desktop.webp";
+const imgGovernment = "/optimized/industry-showcase/cb192ab808312901ac705768d1f69f35ae3c9f61-industry-showcase-desktop.webp";
+const imgMultinational = "/optimized/industry-showcase/79b8becbbe666db19c2c2dfdebe436eebf271e2e-industry-showcase-desktop.webp";
+const imgRealEstate = "/optimized/service-card/97b98a652c6210a2b4e884e84040708ab75a45fc-service-card-desktop.webp";
+const imgEventPlanners = "/optimized/about-team/123269087423c903b101b9352bd92acdab49d86a-about-team-desktop.webp";
+const imgPattern0453 = "/optimized/gallery-thumbnail/6cdd4333a240b46dead9df86c5a83772e81b76fc-gallery-thumbnail-desktop.webp";
 
 
 const backgroundElements: BackgroundElement[] = [

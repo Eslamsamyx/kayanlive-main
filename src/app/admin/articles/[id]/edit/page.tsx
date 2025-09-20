@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
 import { api } from '@/trpc/react';
@@ -18,10 +19,7 @@ import {
   Calendar,
   Globe,
   Tag,
-  Image as ImageIcon,
   Settings,
-  AlertTriangle,
-  Check,
   Clock,
   Star,
   Pin,
@@ -142,7 +140,7 @@ export default function EditArticlePage() {
 
   // Fetch categories and tags for dropdown
   const { data: categories } = api.article.getCategories.useQuery();
-  const { data: existingTags } = api.article.getTags.useQuery();
+  api.article.getTags.useQuery(); // Prefetch tags for potential future use
 
   const updateArticleMutation = api.article.update.useMutation({
     onSuccess: (updatedArticle) => {
@@ -1270,9 +1268,11 @@ function ArticlePreview({
       {/* Article Header */}
       <div className="mb-8">
         {featuredImage && (
-          <img
+          <Image
             src={featuredImage}
             alt={featuredImageAlt}
+            width={800}
+            height={256}
             className="w-full h-64 object-cover rounded-lg mb-6"
           />
         )}

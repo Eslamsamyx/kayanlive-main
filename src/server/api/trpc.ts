@@ -1,5 +1,4 @@
 import { initTRPC, TRPCError } from '@trpc/server';
-import { type NextRequest } from 'next/server';
 import superjson from 'superjson';
 import { ZodError } from 'zod';
 import { getServerSession } from 'next-auth/next';
@@ -12,9 +11,6 @@ interface CreateContextOptions {
   session: Session | null;
 }
 
-interface CreateTRPCContextOptions {
-  req: NextRequest;
-}
 
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
@@ -23,7 +19,7 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
   };
 };
 
-export const createTRPCContext = async (_opts: CreateTRPCContextOptions) => {
+export const createTRPCContext = async () => {
   // Get the session from the server using the getServerSession wrapper function
   // For App Router, we don't need to pass req/res to getServerSession
   const session = await getServerSession(authOptions);

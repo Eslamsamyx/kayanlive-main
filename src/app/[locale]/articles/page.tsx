@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { api } from '@/trpc/react';
 import { ArticleType } from '@prisma/client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import {
   Search,
@@ -92,9 +93,11 @@ function ArticleCard({ article, locale, t }: ArticleCardProps) {
       {/* Featured Image */}
       {article.featuredImage && (
         <div className="relative h-48 overflow-hidden rounded-t-[25px]">
-          <img
+          <Image
             src={article.featuredImage}
             alt={article.featuredImageAlt || article.title}
+            width={400}
+            height={192}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -223,7 +226,6 @@ export default function ArticlesPage() {
   const params = useParams();
   const locale = (params?.locale as 'en' | 'ar' | 'fr' | 'zh' | 'ru') || 'en';
   const t = useTranslations('articles');
-  const tNav = useTranslations('navigation');
 
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');

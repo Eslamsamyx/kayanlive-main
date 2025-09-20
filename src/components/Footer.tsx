@@ -238,7 +238,7 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
                   <p className="text-[#b2b2b2] text-sm font-medium mb-1">
                     {t('footer.sections.contact.address.label')}
                   </p>
-                  <p className="text-[#888888] text-sm leading-relaxed">
+                  <p className="text-[#B8B8B8] text-sm leading-relaxed">
                     {t('footer.sections.contact.address.value')}
                   </p>
                 </div>
@@ -287,14 +287,14 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
                             href={link.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[#888888] text-sm hover:text-[#7afdd6] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:ring-opacity-50 rounded inline-block"
+                            className="text-[#B8B8B8] text-sm hover:text-[#7afdd6] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:ring-opacity-50 rounded inline-block"
                           >
                             {link.name}
                           </a>
                         ) : (
                           <Link
                             href={link.href}
-                            className="text-[#888888] text-sm hover:text-[#7afdd6] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:ring-opacity-50 rounded inline-block"
+                            className="text-[#B8B8B8] text-sm hover:text-[#7afdd6] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:ring-opacity-50 rounded inline-block"
                           >
                             {link.name}
                           </Link>
@@ -327,7 +327,7 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
                   focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:ring-opacity-50
                   ${language.code === locale
                     ? 'bg-[#7afdd6]/10 border-[#7afdd6] text-[#7afdd6]'
-                    : 'border-[#444444] text-[#888888] hover:border-[#7afdd6]/50 hover:text-[#7afdd6]'
+                    : 'border-[#444444] text-[#B8B8B8] hover:border-[#7afdd6]/50 hover:text-[#7afdd6]'
                   }
                 `}
                 aria-current={language.code === locale ? 'page' : undefined}
@@ -347,7 +347,7 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
         <div className="border-t border-[#444444] pt-8">
           <div className="text-center">
             <p
-              className="text-[#888888] text-sm"
+              className="text-[#B8B8B8] text-sm"
               style={fontStyle}
             >
               <span className="text-white font-semibold">{currentYear}</span>

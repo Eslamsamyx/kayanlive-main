@@ -6,8 +6,8 @@ import { useRef } from 'react';
 import { getMarkdownHTML } from '@/utils/markdownUtils';
 import AnimatedPath from './AnimatedPath';
 
-const imgPattern = "/assets/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.png";
-const kayanLogo = "/assets/a01d943cb7ebcf5598b83131f56810cf97a4e883.png";
+const imgPattern = "/optimized/about-hero/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329-about-hero-desktop.webp";
+const kayanLogo = "/optimized/client-logo/a01d943cb7ebcf5598b83131f56810cf97a4e883-client-logo-desktop.webp";
 
 export default function WhyKayanLive() {
   const t = useTranslations();

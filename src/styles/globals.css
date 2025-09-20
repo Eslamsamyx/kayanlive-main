@@ -4,6 +4,7 @@
 :root {
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
+  --font-poppins: 'Poppins', 'Poppins-Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
 }
 
 .dark {
@@ -11,9 +12,49 @@
   --foreground: 210 40% 98%;
 }
 
+/* CRITICAL FIX: Font loading optimization for zero CLS */
+@font-face {
+  font-family: 'Poppins-Fallback';
+  src: local('system-ui'), local('-apple-system'), local('BlinkMacSystemFont'), local('Segoe UI'), local('Arial');
+  font-weight: 400 600;
+  font-display: swap;
+  size-adjust: 100%;
+  ascent-override: 105%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+
+/* CRITICAL FIX: Stable font metrics during loading */
+.font-stable {
+  font-family: var(--font-poppins);
+  font-display: swap;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* CRITICAL FIX: Prevent layout shifts with reserved space */
+.container-stable {
+  contain: layout style;
+  transform: translateZ(0); /* Create compositing layer */
+}
+
+/* CRITICAL FIX: Image loading stabilization */
+img, picture, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  font-style: italic;
+  background-repeat: no-repeat;
+  background-size: cover;
+  shape-margin: 0.75rem;
+}
+
 /* Smooth scrolling for the entire document */
 html {
   scroll-behavior: smooth;
+  /* CRITICAL FIX: Optimize scroll performance */
+  scroll-padding-top: 2rem;
 }
 
 /* Optional: Add smooth scrolling with custom timing */
@@ -33,10 +74,109 @@ html {
   html {
     scroll-behavior: auto;
   }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
+  /* CRITICAL FIX: Stabilize body layout */
+  font-family: var(--font-poppins);
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent horizontal scroll and maintain layout stability */
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
 }
 
+/* CRITICAL FIX: Optimize Next.js Image component for LCP */
+[data-nimg] {
+  /* Ensure images don't cause layout shifts */
+  max-width: 100%;
+  height: auto;
+  transition: opacity 0.3s ease;
+}
+
+/* Loading states for images */
+[data-nimg="loading"] {
+  color: transparent;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* CRITICAL FIX: Performance optimizations for animations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.no-gpu-accel {
+  will-change: auto;
+  transform: none;
+}
+
+/* CRITICAL FIX: Focus management and accessibility */
+:focus-visible {
+  outline: 2px solid #7afdd6;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Hide focus ring for mouse users */
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+
+/* CRITICAL FIX: Layout stability for dynamic content */
+.layout-stable {
+  contain: layout;
+  min-height: 0;
+}
+
+/* Optimize touch targets for mobile */
+@media (max-width: 768px) {
+  button, a, input, select, textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* CRITICAL FIX: Reduce paint complexity */
+.simple-paint {
+  will-change: auto;
+  transform: none;
+  filter: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Performance mode for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .gpu-accelerated {
+    will-change: auto;
+    transform: none;
+  }
+
+  .hero-backdrop-blur,
+  .hero-decorative-blur {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+}

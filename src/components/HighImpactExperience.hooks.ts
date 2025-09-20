@@ -101,7 +101,7 @@ export const useTextContent = (): HighImpactTextContent => {
  */
 export const useImageAssets = (): ImageAssets => {
   return useMemo(() => ({
-    background: "/assets/29064c5a0d86395e45b642fe4e6daf670490f723.png",
+    background: "/optimized/cta-background/6f6ce5ee6422e315524d4c876dbb7b8a3e609a69-cta-background-desktop.webp",
     concertMobile: "/assets/3f0c70e340a28d47867891894e77a32ca1a022f1.png",
     concertDesktop: "/assets/3f0c70e340a28d47867891894e77a32ca1a022f1.png",
     patternMobile: "/assets/6ebbb286c787b4009100c9f8cd397942ae83de56.png",

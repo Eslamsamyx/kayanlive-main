@@ -5,7 +5,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { getMarkdownHTML } from '@/utils/markdownUtils';
 import CTAButton from './CTAButton';
 
-const imgPattern = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
+const imgPattern = "/optimized/cta-background/ef25fd14e49122ddd6cbc03c8a92caff93500eb7-cta-background-desktop.webp";
 const imgCheckmark = "/assets/d57e8b023cc2954fe2c89c41bd7f2153074ba9c1.svg";
 
 export default function WhereWeWork() {
@@ -31,18 +31,18 @@ export default function WhereWeWork() {
               className="inline-flex items-center justify-center rounded-[900px] border border-[#7afdd6] bg-[rgba(122,253,214,0.26)]"
               style={{ width: '225px', height: '62px' }}
             >
-              <span className="text-[#42967d] text-[20px] uppercase">{t('whereWeWork.badge')}</span>
+              <span className="text-[#1a4b43] text-[20px] uppercase">{t('whereWeWork.badge')}</span>
             </div>
             
             {/* Description */}
-            <p className="text-[#808184] text-[24px] leading-[32px] capitalize">
+            <p className="text-[#5A5A5A] text-[24px] leading-[32px] capitalize">
               {t('whereWeWork.description')}
             </p>
           </div>
 
           {/* Right Column - Locations */}
           <div className="flex flex-col gap-6 flex-1 max-w-[697px]">
-            <p className="text-[#808184] text-[24px] leading-[32px] capitalize">
+            <p className="text-[#5A5A5A] text-[24px] leading-[32px] capitalize">
               {t('whereWeWork.operateText')}
             </p>
             
@@ -77,7 +77,7 @@ export default function WhereWeWork() {
           {/* Badge - Mobile version */}
           <div className="bg-[rgba(122,253,214,0.26)] h-[50px] rounded-[900px] relative w-auto">
             <div className="box-border flex gap-2.5 h-[50px] items-center justify-center overflow-clip px-[27px] py-6 relative">
-              <div className="text-[#42967d] text-[14px] text-center text-nowrap uppercase leading-[28px]">
+              <div className="text-[#1a4b43] text-[14px] text-center text-nowrap uppercase leading-[28px]">
                 {t('whereWeWork.badge')}
               </div>
             </div>
@@ -85,12 +85,12 @@ export default function WhereWeWork() {
           </div>
           
           {/* Description - Mobile version */}
-          <div className="text-[#808184] text-[16px] leading-[20px] w-full capitalize">
+          <div className="text-[#5A5A5A] text-[16px] leading-[20px] w-full capitalize">
             {t('whereWeWork.description')}
           </div>
 
           {/* GCC Section Header - As next item in single column */}
-          <div className="text-[#808184] text-[20px] leading-[20px] capitalize w-full">
+          <div className="text-[#5A5A5A] text-[20px] leading-[20px] capitalize w-full">
             {t('whereWeWork.operateText')}
           </div>
           
@@ -207,7 +207,7 @@ export default function WhereWeWork() {
 
           {/* Content - Responsive */}
           <div className="absolute left-4 md:left-[137px] top-1/2 -translate-y-1/2 w-[calc(100%-2rem)] md:w-[700px] flex flex-col gap-[24px] md:gap-[32px] z-10">
-            <h3
+            <h2
               className="text-white text-center md:text-left heading-overflow-safe"
               style={{
                 fontSize: 'clamp(1.25rem, 4vw, 2.25rem)',

@@ -5,8 +5,8 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 // Assets from Figma
-const imgPattern0453 = "/assets/6cdd4333a240b46dead9df86c5a83772e81b76fc.png";
-const imgKansi1 = "/assets/bdd0b482d2a4b06725b67356c9cb8f5f989799c7.png";
+const imgPattern0453 = "/optimized/gallery-thumbnail/6cdd4333a240b46dead9df86c5a83772e81b76fc-gallery-thumbnail-desktop.webp";
+const imgKansi1 = "/optimized/gallery-thumbnail/bdd0b482d2a4b06725b67356c9cb8f5f989799c7-gallery-thumbnail-desktop.webp";
 const imgVector8 = "/assets/47dd71beee42449fc1b6e4720f3ab2a5045e6f9b.svg";
 const imgGroup36136 = "/assets/380f31701fab090e70ff718bcec4f0d9f13c7c16.svg";
 const imgGroup36137 = "/assets/998232e7f2b2bfc71ea2796c3386b0489faa3a1a.svg";

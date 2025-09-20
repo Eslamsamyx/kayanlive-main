@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 // Assets from the existing pattern
-const imgPattern = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
+const imgPattern = "/optimized/cta-background/ef25fd14e49122ddd6cbc03c8a92caff93500eb7-cta-background-desktop.webp";
 const imgFrame1618874015 = "/assets/154289bd0be3bf0eddab560357bd09aa27f634bc.svg";
 
 export default function NotSureWhereToStart() {

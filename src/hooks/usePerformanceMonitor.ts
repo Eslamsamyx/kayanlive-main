@@ -89,47 +89,6 @@ export function usePerformanceMonitor(options: UsePerformanceMonitorOptions = {}
 
   const reportIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Initialize performance monitoring
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const cleanup: (() => void)[] = [];
-
-    // Core Web Vitals monitoring
-    if (trackCoreWebVitals) {
-      cleanup.push(initCoreWebVitalsTracking());
-    }
-
-    // Image performance monitoring
-    if (trackImages) {
-      cleanup.push(initImageTracking());
-    }
-
-    // Network monitoring
-    if (trackNetwork) {
-      cleanup.push(initNetworkTracking());
-    }
-
-    // Cache monitoring
-    if (trackCache) {
-      cleanup.push(initCacheTracking());
-    }
-
-    // Periodic reporting
-    if (reportInterval > 0) {
-      reportIntervalRef.current = setInterval(() => {
-        reportMetrics();
-      }, reportInterval);
-    }
-
-    return () => {
-      cleanup.forEach(fn => fn());
-      if (reportIntervalRef.current) {
-        clearInterval(reportIntervalRef.current);
-      }
-    };
-  }, [trackImages, trackCoreWebVitals, trackNetwork, trackCache, reportInterval, initCoreWebVitalsTracking, initImageTracking, initNetworkTracking, initCacheTracking, reportMetrics]);
-
   // Initialize Core Web Vitals tracking
   const initCoreWebVitalsTracking = useCallback(() => {
     try {
@@ -204,6 +163,32 @@ export function usePerformanceMonitor(options: UsePerformanceMonitorOptions = {}
     }
   }, []);
 
+  // Report metrics to analytics or monitoring service
+  const reportMetrics = useCallback(() => {
+    if (typeof window === 'undefined') return;
+
+    // Log to console in development
+    if (process.env.NODE_ENV === 'development') {
+      console.table({
+        'LCP (ms)': metrics.lcp?.toFixed(2),
+        'FID (ms)': metrics.fid?.toFixed(2),
+        'CLS': metrics.cls?.toFixed(4),
+        'FCP (ms)': metrics.fcp?.toFixed(2),
+        'TTFB (ms)': metrics.ttfb?.toFixed(2),
+        'INP (ms)': metrics.inp?.toFixed(2),
+        'Images Loaded': metrics.imagesLoaded,
+        'Images Failed': metrics.imagesFailed,
+        'Avg Image Size (KB)': (metrics.averageImageSize / 1024).toFixed(2),
+        'Cache Efficiency (%)': metrics.cacheEfficiency.toFixed(2),
+        'Connection': metrics.connectionType,
+        'Save Data': metrics.saveData ? 'ON' : 'OFF'
+      });
+    }
+
+    // Send to analytics (implement your analytics service here)
+    // Example: analytics.track('image_performance', metrics);
+  }, [metrics]);
+
   // Initialize image performance tracking
   const initImageTracking = useCallback(() => {
 
@@ -235,7 +220,7 @@ export function usePerformanceMonitor(options: UsePerformanceMonitorOptions = {}
     resourceObserver.observe({ type: 'resource', buffered: true });
 
     // Image load error tracking
-    const handleImageError = (_event: Event) => {
+    const handleImageError = () => {
       setMetrics(prev => ({ ...prev, imagesFailed: prev.imagesFailed + 1 }));
     };
 
@@ -308,31 +293,46 @@ export function usePerformanceMonitor(options: UsePerformanceMonitorOptions = {}
     return () => {};
   }, []);
 
-  // Report metrics to analytics or monitoring service
-  const reportMetrics = useCallback(() => {
+  // Initialize performance monitoring
+  useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // Log to console in development
-    if (process.env.NODE_ENV === 'development') {
-      console.table({
-        'LCP (ms)': metrics.lcp?.toFixed(2),
-        'FID (ms)': metrics.fid?.toFixed(2),
-        'CLS': metrics.cls?.toFixed(4),
-        'FCP (ms)': metrics.fcp?.toFixed(2),
-        'TTFB (ms)': metrics.ttfb?.toFixed(2),
-        'INP (ms)': metrics.inp?.toFixed(2),
-        'Images Loaded': metrics.imagesLoaded,
-        'Images Failed': metrics.imagesFailed,
-        'Avg Image Size (KB)': (metrics.averageImageSize / 1024).toFixed(2),
-        'Cache Efficiency (%)': metrics.cacheEfficiency.toFixed(2),
-        'Connection': metrics.connectionType,
-        'Save Data': metrics.saveData ? 'ON' : 'OFF'
-      });
+    const cleanup: (() => void)[] = [];
+
+    // Core Web Vitals monitoring
+    if (trackCoreWebVitals) {
+      cleanup.push(initCoreWebVitalsTracking());
     }
 
-    // Send to analytics (implement your analytics service here)
-    // Example: analytics.track('image_performance', metrics);
-  }, [metrics]);
+    // Image performance monitoring
+    if (trackImages) {
+      cleanup.push(initImageTracking());
+    }
+
+    // Network monitoring
+    if (trackNetwork) {
+      cleanup.push(initNetworkTracking());
+    }
+
+    // Cache monitoring
+    if (trackCache) {
+      cleanup.push(initCacheTracking());
+    }
+
+    // Periodic reporting
+    if (reportInterval > 0) {
+      reportIntervalRef.current = setInterval(() => {
+        reportMetrics();
+      }, reportInterval);
+    }
+
+    return () => {
+      cleanup.forEach(fn => fn());
+      if (reportIntervalRef.current) {
+        clearInterval(reportIntervalRef.current);
+      }
+    };
+  }, [trackImages, trackCoreWebVitals, trackNetwork, trackCache, reportInterval, initCoreWebVitalsTracking, initImageTracking, initNetworkTracking, initCacheTracking, reportMetrics]);
 
   // Get performance score based on Core Web Vitals
   const getPerformanceScore = useCallback((): number => {
@@ -403,7 +403,7 @@ export function usePerformanceMonitor(options: UsePerformanceMonitorOptions = {}
 /**
  * Hook for monitoring specific image loading performance
  */
-export function useImageLoadMonitor(_imageUrl: string) {
+export function useImageLoadMonitor() {
   const [loadTime, setLoadTime] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);

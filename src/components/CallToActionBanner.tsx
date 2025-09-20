@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import CTAButton from './CTAButton';
 
 // Assets from the Figma pattern
-const imgPattern = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
+const imgPattern = "/optimized/cta-background/ef25fd14e49122ddd6cbc03c8a92caff93500eb7-cta-background-desktop.webp";
 
 interface CallToActionBannerProps {
   title: string;

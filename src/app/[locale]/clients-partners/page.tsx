@@ -22,7 +22,7 @@ export default async function ClientsPartnersPage({
         <div 
           className="absolute opacity-50"
           style={{
-            backgroundImage: 'url("/assets/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.png")',
+            backgroundImage: 'url("/optimized/about-hero/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329-about-hero-desktop.webp")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -37,7 +37,7 @@ export default async function ClientsPartnersPage({
         <div 
           className="absolute opacity-50"
           style={{
-            backgroundImage: 'url("/assets/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.png")',
+            backgroundImage: 'url("/optimized/about-hero/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329-about-hero-desktop.webp")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -137,7 +137,7 @@ export default async function ClientsPartnersPage({
                         top: 'calc(50% + 1.5px)',
                         left: 'calc(50% - 0.5px)',
                         transform: 'translate(-50%, -50%)',
-                        backgroundImage: 'url("/assets/6f6ce5ee6422e315524d4c876dbb7b8a3e609a69.png")'
+                        backgroundImage: 'url("/optimized/cta-background/6f6ce5ee6422e315524d4c876dbb7b8a3e609a69-cta-background-desktop.webp")'
                       }}
                     />
                   </div>
@@ -169,7 +169,7 @@ export default async function ClientsPartnersPage({
         <div 
           className="absolute inset-0 opacity-10"
           style={{
-            backgroundImage: 'url("http://localhost:3000/assets/7b15ebb5-2b87-4f31-a6fd-cd98c5a8c2e3.png")',
+            backgroundImage: 'url("/optimized/cta-background/6f6ce5ee6422e315524d4c876dbb7b8a3e609a69-cta-background-desktop.webp")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
@@ -219,7 +219,7 @@ export default async function ClientsPartnersPage({
                   top: 'calc(50% + 5px)',
                   left: 'calc(50% + 0.5px)',
                   transform: 'translate(-50%, -50%)',
-                  backgroundImage: `url('/assets/6f6ce5ee6422e315524d4c876dbb7b8a3e609a69.png')`
+                  backgroundImage: `url('/optimized/cta-background/6f6ce5ee6422e315524d4c876dbb7b8a3e609a69-cta-background-desktop.webp')`
                 }}
               />
             </div>
@@ -281,7 +281,7 @@ export default async function ClientsPartnersPage({
             top: '-168px',
             width: '240px',
             height: '372px',
-            backgroundImage: 'url("/assets/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.png")',
+            backgroundImage: 'url("/optimized/about-hero/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329-about-hero-desktop.webp")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
@@ -295,7 +295,7 @@ export default async function ClientsPartnersPage({
             top: '499px',
             width: '316px',
             height: '491px',
-            backgroundImage: 'url("/assets/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.png")',
+            backgroundImage: 'url("/optimized/about-hero/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329-about-hero-desktop.webp")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'

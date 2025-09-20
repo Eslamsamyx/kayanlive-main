@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { api } from '@/trpc/react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useParams, notFound } from 'next/navigation';
 import {
   Search,
@@ -89,9 +90,11 @@ function ArticleCard({ article, locale, t }: ArticleCardProps) {
       {/* Featured Image */}
       {article.featuredImage && (
         <div className="relative h-48 overflow-hidden rounded-t-[25px]">
-          <img
+          <Image
             src={article.featuredImage}
             alt={article.featuredImageAlt || article.title}
+            width={400}
+            height={192}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />

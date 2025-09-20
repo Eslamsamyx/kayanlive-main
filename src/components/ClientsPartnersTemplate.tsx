@@ -457,7 +457,7 @@ export default function ClientsPartnersTemplate({
                   left: isMobile ? '24px' : '32px',
                   right: isMobile ? '24px' : '32px'
                 }}>
-                  <h3 className="heading-overflow-safe long-word-safe" style={{
+                  <h2 className="heading-overflow-safe long-word-safe" style={{
                     color: 'white',
                     fontWeight: 'bold',
                     marginBottom: isMobile ? '8px' : '12px',
@@ -466,7 +466,7 @@ export default function ClientsPartnersTemplate({
                     fontFamily: '"Poppins", sans-serif'
                   }}>
                     {card.title}
-                  </h3>
+                  </h2>
                   {/* Mobile description */}
                   {card.mobileDescription && isMobile && (
                     <p style={{
@@ -514,7 +514,7 @@ export default function ClientsPartnersTemplate({
                     alignItems: 'center',
                     textAlign: 'center'
                   }}>
-                    <h3 className="heading-overflow-safe long-word-safe" style={{
+                    <h2 className="heading-overflow-safe long-word-safe" style={{
                       color: 'white',
                       fontWeight: 'bold',
                       textAlign: 'center',
@@ -534,7 +534,7 @@ export default function ClientsPartnersTemplate({
                       )}
                       {/* Regular title */}
                       {!card.mobileTitle && !card.desktopTitle && card.title}
-                    </h3>
+                    </h2>
 
                     {/* Description for center layout - show on hover below title */}
                     <div style={{

@@ -2,6 +2,8 @@ export interface HeroSlideData {
   id: number;
   type: 'main' | 'about';
   backgroundImage: string;
+  mobileBackgroundImage?: string;
+  tabletBackgroundImage?: string;
   backgroundPosition?: string;
   backgroundSize?: string;
 }

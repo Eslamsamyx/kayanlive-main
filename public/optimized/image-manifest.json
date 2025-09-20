@@ -1,0 +1,166 @@
+{
+  "public/assets/6f6ce5ee6422e315524d4c876dbb7b8a3e609a69.png": {
+    "cta-background": {
+      "mobile": {
+        "path": "public/optimized/cta-background/6f6ce5ee6422e315524d4c876dbb7b8a3e609a69-cta-background-mobile.webp",
+        "width": 420,
+        "height": 300,
+        "size": 2614,
+        "quality": 75
+      },
+      "tablet": {
+        "path": "public/optimized/cta-background/6f6ce5ee6422e315524d4c876dbb7b8a3e609a69-cta-background-tablet.webp",
+        "width": 768,
+        "height": 400,
+        "size": 3814,
+        "quality": 75
+      },
+      "desktop": {
+        "path": "public/optimized/cta-background/6f6ce5ee6422e315524d4c876dbb7b8a3e609a69-cta-background-desktop.webp",
+        "width": 1920,
+        "height": 600,
+        "size": 4114,
+        "quality": 75
+      }
+    },
+    "about-hero": {
+      "mobile": {
+        "path": "public/optimized/about-hero/6f6ce5ee6422e315524d4c876dbb7b8a3e609a69-about-hero-mobile.webp",
+        "width": 420,
+        "height": 420,
+        "size": 3656,
+        "quality": 85
+      },
+      "desktop": {
+        "path": "public/optimized/about-hero/6f6ce5ee6422e315524d4c876dbb7b8a3e609a69-about-hero-desktop.webp",
+        "width": 1200,
+        "height": 600,
+        "size": 5976,
+        "quality": 85
+      }
+    }
+  },
+  "public/assets/97b98a652c6210a2b4e884e84040708ab75a45fc.png": {
+    "gallery-thumbnail": {
+      "mobile": {
+        "path": "public/optimized/gallery-thumbnail/97b98a652c6210a2b4e884e84040708ab75a45fc-gallery-thumbnail-mobile.webp",
+        "width": 320,
+        "height": 320,
+        "size": 24558,
+        "quality": 85
+      },
+      "tablet": {
+        "path": "public/optimized/gallery-thumbnail/97b98a652c6210a2b4e884e84040708ab75a45fc-gallery-thumbnail-tablet.webp",
+        "width": 350,
+        "height": 350,
+        "size": 28590,
+        "quality": 85
+      },
+      "desktop": {
+        "path": "public/optimized/gallery-thumbnail/97b98a652c6210a2b4e884e84040708ab75a45fc-gallery-thumbnail-desktop.webp",
+        "width": 400,
+        "height": 400,
+        "size": 36278,
+        "quality": 85
+      }
+    },
+    "service-card": {
+      "mobile": {
+        "path": "public/optimized/service-card/97b98a652c6210a2b4e884e84040708ab75a45fc-service-card-mobile.webp",
+        "width": 320,
+        "height": 200,
+        "size": 14792,
+        "quality": 85
+      },
+      "desktop": {
+        "path": "public/optimized/service-card/97b98a652c6210a2b4e884e84040708ab75a45fc-service-card-desktop.webp",
+        "width": 400,
+        "height": 250,
+        "size": 21556,
+        "quality": 85
+      }
+    }
+  },
+  "public/assets/a4bd38b73259c4fd4f099d834871f17ed5486466.png": {
+    "gallery-thumbnail": {
+      "mobile": {
+        "path": "public/optimized/gallery-thumbnail/a4bd38b73259c4fd4f099d834871f17ed5486466-gallery-thumbnail-mobile.webp",
+        "width": 320,
+        "height": 320,
+        "size": 11754,
+        "quality": 85
+      },
+      "tablet": {
+        "path": "public/optimized/gallery-thumbnail/a4bd38b73259c4fd4f099d834871f17ed5486466-gallery-thumbnail-tablet.webp",
+        "width": 350,
+        "height": 350,
+        "size": 13424,
+        "quality": 85
+      },
+      "desktop": {
+        "path": "public/optimized/gallery-thumbnail/a4bd38b73259c4fd4f099d834871f17ed5486466-gallery-thumbnail-desktop.webp",
+        "width": 400,
+        "height": 400,
+        "size": 16014,
+        "quality": 85
+      }
+    },
+    "service-card": {
+      "mobile": {
+        "path": "public/optimized/service-card/a4bd38b73259c4fd4f099d834871f17ed5486466-service-card-mobile.webp",
+        "width": 320,
+        "height": 200,
+        "size": 7346,
+        "quality": 85
+      },
+      "desktop": {
+        "path": "public/optimized/service-card/a4bd38b73259c4fd4f099d834871f17ed5486466-service-card-desktop.webp",
+        "width": 400,
+        "height": 250,
+        "size": 9936,
+        "quality": 85
+      }
+    }
+  },
+  "public/assets/bdd0b482d2a4b06725b67356c9cb8f5f989799c7.png": {
+    "gallery-thumbnail": {
+      "mobile": {
+        "path": "public/optimized/gallery-thumbnail/bdd0b482d2a4b06725b67356c9cb8f5f989799c7-gallery-thumbnail-mobile.webp",
+        "width": 320,
+        "height": 320,
+        "size": 4098,
+        "quality": 85
+      },
+      "tablet": {
+        "path": "public/optimized/gallery-thumbnail/bdd0b482d2a4b06725b67356c9cb8f5f989799c7-gallery-thumbnail-tablet.webp",
+        "width": 350,
+        "height": 350,
+        "size": 5056,
+        "quality": 85
+      },
+      "desktop": {
+        "path": "public/optimized/gallery-thumbnail/bdd0b482d2a4b06725b67356c9cb8f5f989799c7-gallery-thumbnail-desktop.webp",
+        "width": 400,
+        "height": 400,
+        "size": 5838,
+        "quality": 85
+      }
+    },
+    "service-card": {
+      "mobile": {
+        "path": "public/optimized/service-card/bdd0b482d2a4b06725b67356c9cb8f5f989799c7-service-card-mobile.webp",
+        "width": 320,
+        "height": 200,
+        "size": 2630,
+        "quality": 85
+      },
+      "desktop": {
+        "path": "public/optimized/service-card/bdd0b482d2a4b06725b67356c9cb8f5f989799c7-service-card-desktop.webp",
+        "width": 400,
+        "height": 250,
+        "size": 3920,
+        "quality": 85
+      }
+    }
+  }
+}
