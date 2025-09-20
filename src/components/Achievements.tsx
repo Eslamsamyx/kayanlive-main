@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-const imgMaskGroup = "/assets/638442c54db92ce49b3ad8194a062a52ba973004.png";
+const imgMaskGroup = "/optimized/achievement-icon/638442c54db92ce49b3ad8194a062a52ba973004-achievement-icon-desktop.webp";
 const imgEllipse1 = "/assets/575a92ae113574b10651d37ad7654adf9fb7bd85.svg";
 const imgEllipse2 = "/assets/dcc83c6de9d9f4b919b448af6ce767c528855540.svg";
 

@@ -23,7 +23,7 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
   };
 };
 
-export const createTRPCContext = async (opts: CreateTRPCContextOptions) => {
+export const createTRPCContext = async (_opts: CreateTRPCContextOptions) => {
   // Get the session from the server using the getServerSession wrapper function
   // For App Router, we don't need to pass req/res to getServerSession
   const session = await getServerSession(authOptions);

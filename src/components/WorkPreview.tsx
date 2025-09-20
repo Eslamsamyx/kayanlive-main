@@ -5,11 +5,11 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 // Assets from Figma
-const imgRectangle4236 = "/assets/1402feda00b479d56347dca419118793a7b45676.png";
-const imgRectangle4237 = "/assets/5482ea96fa4b448d8ca09a0a3ec25b2abda42297.png";
-const imgRectangle4238 = "/assets/d0bf46ddca5a9b03461723c0c034ab2dc5fc309e.png";
-const imgPattern0341 = "/assets/6ebbb286c787b4009100c9f8cd397942ae83de56.png";
-const imgPattern0212 = "/assets/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.png";
+const imgRectangle4236 = "/optimized/gallery-thumbnail/97b98a652c6210a2b4e884e84040708ab75a45fc-gallery-thumbnail-desktop.webp";
+const imgRectangle4237 = "/optimized/gallery-thumbnail/a4bd38b73259c4fd4f099d834871f17ed5486466-gallery-thumbnail-desktop.webp";
+const imgRectangle4238 = "/optimized/gallery-thumbnail/bdd0b482d2a4b06725b67356c9cb8f5f989799c7-gallery-thumbnail-desktop.webp";
+const imgPattern0341 = "/optimized/gallery-thumbnail/6ebbb286c787b4009100c9f8cd397942ae83de56-gallery-thumbnail-desktop.webp";
+const imgPattern0212 = "/optimized/cta-background/ef25fd14e49122ddd6cbc03c8a92caff93500eb7-cta-background-desktop.webp";
 
 export default function WorkPreview() {
   const t = useTranslations('work.preview');

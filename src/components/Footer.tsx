@@ -6,10 +6,9 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
-import Button from './Button';
 
-// Assets - Using established pattern from existing components
-const imgKayanLogo = "/assets/823c27de600ccd2f92af3e073c8e10df3a192e5c.png";
+// Assets - Using optimized WebP version
+const imgKayanLogo = "/optimized/footer-logo/823c27de600ccd2f92af3e073c8e10df3a192e5c-footer-logo-desktop.webp";
 
 // Social media brand colors and X icon
 const socialIconBrandColors = {

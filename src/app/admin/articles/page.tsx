@@ -8,7 +8,6 @@ import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 import {
   Search,
-  Filter,
   Eye,
   Edit3,
   Calendar,
@@ -16,7 +15,6 @@ import {
   FileText,
   Clock,
   Plus,
-  MoreVertical,
   Trash2,
   X,
   Check,
@@ -25,11 +23,9 @@ import {
   Star,
   Pin,
   Archive,
-  Send,
   RefreshCw,
   Languages,
   User,
-  Tag,
   BarChart3
 } from 'lucide-react';
 import Dropdown, { DropdownOption } from '@/components/ui/Dropdown';
@@ -147,7 +143,6 @@ export default function ArticlesPage() {
   const [viewMode, setViewMode] = useState<ViewMode>('articles');
   const [selectedArticles, setSelectedArticles] = useState<string[]>([]);
   const [toasts, setToasts] = useState<Toast[]>([]);
-  const [showCreateModal, setShowCreateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showBulkModal, setShowBulkModal] = useState(false);
   const [bulkAction, setBulkAction] = useState<BulkAction>('changeStatus');
@@ -177,7 +172,7 @@ export default function ArticlesPage() {
     sortOrder,
   });
 
-  const { data: articleDetails, refetch: refetchArticleDetails } = api.article.getById.useQuery(
+  const { refetch: refetchArticleDetails } = api.article.getById.useQuery(
     { id: selectedArticle! },
     { enabled: !!selectedArticle }
   );
@@ -187,9 +182,9 @@ export default function ArticlesPage() {
     { enabled: viewMode === 'analytics' }
   );
 
-  const utils = api.useUtils();
+  api.useUtils();
 
-  const updateArticleMutation = api.article.update.useMutation({
+  api.article.update.useMutation({
     onSuccess: async () => {
       refetch();
       if (selectedArticle) {
@@ -386,16 +381,6 @@ export default function ArticlesPage() {
     return false;
   };
 
-  const canChangeStatus = (article: ExtendedArticle, newStatus: ArticleStatus) => {
-    if (userRole === 'ADMIN') return true;
-    if (userRole === 'MODERATOR') {
-      return ['PENDING_REVIEW', 'APPROVED', 'REJECTED', 'PUBLISHED', 'ARCHIVED'].includes(newStatus);
-    }
-    if (userRole === 'CONTENT_CREATOR' && article.author.id === session?.user?.id) {
-      return article.status === 'DRAFT' && newStatus === 'PENDING_REVIEW';
-    }
-    return false;
-  };
 
   const canDeleteArticle = (article: ExtendedArticle) => {
     if (userRole === 'ADMIN') return true;

@@ -6,13 +6,13 @@ import { useTranslations, useLocale } from 'next-intl';
 import { useHeroSlider, useAdaptiveTextHeight } from '@/hooks/useHeroSlider';
 
 // Assets
-const imgScreenshot1 = "/assets/01f5d49d03c8455dc99b2ad32446b6657b1949e0.png";
-const imgScreenshot3 = "/assets/b0d9ec6faacc00d7ed8b82f3f45ecaa371425181.png";
+const imgScreenshot1 = "/optimized/hero-main/01f5d49d03c8455dc99b2ad32446b6657b1949e0-hero-main-desktop.webp";
+const imgScreenshot3 = "/optimized/hero-slide/b0d9ec6faacc00d7ed8b82f3f45ecaa371425181-hero-slide-desktop.webp";
 const imgFrame1 = "/assets/bac2af3eca424e14c720bab9f5fabec434faaa31.svg";
-const imgKayanLogo = "/assets/823c27de600ccd2f92af3e073c8e10df3a192e5c.png";
-const imgKMobile = "/assets/873e726ea40f8085d26088ffc29bf8dfb68b10ee.png";
+const imgKayanLogo = "/optimized/footer-logo/823c27de600ccd2f92af3e073c8e10df3a192e5c-footer-logo-desktop.webp";
+const imgKMobile = "/optimized/client-logo/873e726ea40f8085d26088ffc29bf8dfb68b10ee-client-logo-mobile.webp";
 const imgVectorMobile = "/assets/280033d008f397b92a0642ef0eb81b067b3be2fd.svg";
-const imgPattern0331 = "/assets/2e5da0ba94a7081a8e8355ba87266411fee96738.png";
+const imgPattern0331 = "/optimized/service-card/2e5da0ba94a7081a8e8355ba87266411fee96738-service-card-desktop.webp";
 const imgArrow1 = "/assets/d40495f3a82dbc1b73402bf2e9b45f90c56a4c70.svg";
 
 // Mobile lighting effect vectors

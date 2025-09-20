@@ -46,14 +46,12 @@ import { useState, useCallback } from 'react';
 interface RichTextEditorProps {
   content: string;
   onChange: (content: string) => void;
-  placeholder?: string;
   className?: string;
 }
 
 export default function RichTextEditor({
   content,
   onChange,
-  placeholder = "Start writing your article...",
   className = ""
 }: RichTextEditorProps) {
   const [linkUrl, setLinkUrl] = useState('');
