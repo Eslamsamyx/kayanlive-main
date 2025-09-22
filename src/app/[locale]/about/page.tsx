@@ -12,7 +12,7 @@ export default function AboutUsPage() {
   return (
     <div>
       {/* Hero Section - Figma Design */}
-      <div className="mx-4 md:mx-8 lg:mx-0">
+      <div className="mb-6 md:mb-12 lg:mb-16">
         <AboutHeroNew />
       </div>
 
@@ -21,8 +21,10 @@ export default function AboutUsPage() {
         <AboutOrigin />
       </div>
 
-      {/* Values Section - Figma Design */}
-      <AboutValues />
+      {/* Values Section - Figma Design - Full Width */}
+      <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+        <AboutValues />
+      </div>
 
       {/* How We Work Section */}
       <div className="-mx-4">

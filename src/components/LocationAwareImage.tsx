@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { IMAGE_LOCATIONS } from '@/lib/image-locations';
 
 interface ViewportDimensions {
@@ -33,9 +32,8 @@ interface LocationAwareImageProps {
 export default function LocationAwareImage({
   src,
   location,
-  alt,
+  alt = '',
   className = '',
-  priority = false,
   onLoad,
   fallback,
 }: LocationAwareImageProps) {
@@ -132,13 +130,11 @@ export default function LocationAwareImage({
       />
 
       {/* Fallback img element */}
-      <Image
+      <img
         src={hasError && fallback ? fallback : getOptimizedPath(currentViewport)}
-        alt={alt || ''}
+        alt={alt}
         width={dimensions.width}
         height={dimensions.height}
-        priority={priority}
-        quality={dimensions.quality}
         onLoad={handleLoad}
         onError={handleError}
         className={`

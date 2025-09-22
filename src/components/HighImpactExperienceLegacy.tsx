@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 
-const imgKayanLogo = "/optimized/footer-logo/823c27de600ccd2f92af3e073c8e10df3a192e5c-footer-logo-desktop.webp";
+const imgKayanLogo = "/optimized/footer/823c27de600ccd2f92af3e073c8e10df3a192e5c.webp";
 
 export default function HighImpactExperienceLegacy() {
   const t = useTranslations();
@@ -26,7 +26,7 @@ export default function HighImpactExperienceLegacy() {
                   alt="KayanLive Logo"
                   fill
                   className="object-contain"
-                  style={{ filter: 'brightness(0.2)' }} // Dark version of logo
+                  style={{ filter: 'brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)' }} // #333333 color
                 />
               </div>
             </div>
@@ -89,7 +89,7 @@ export default function HighImpactExperienceLegacy() {
                   alt="KayanLive Logo"
                   fill
                   className="object-contain"
-                  style={{ filter: 'brightness(0.2)' }} // Dark version of logo
+                  style={{ filter: 'brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)' }} // #333333 color
                 />
               </div>
             </div>

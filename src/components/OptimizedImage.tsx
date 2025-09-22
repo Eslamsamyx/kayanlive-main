@@ -64,7 +64,7 @@ export default function OptimizedImage({
   width,
   height,
   objectFit = 'cover',
-  quality = 85,
+  quality = 90,
   placeholder = 'blur',
   blurDataURL,
   loading = 'lazy',

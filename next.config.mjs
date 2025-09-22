@@ -9,134 +9,162 @@ const nextConfig = {
   poweredByHeader: false,
   compress: true,
 
-  // CRITICAL FIX: Enhanced performance optimizations
+  // CRITICAL FIX: Ultra-performance optimizations for 100% scores
   experimental: {
-    optimizePackageImports: ['lucide-react', 'react-icons'],
-    // Enable modern bundling for better performance
+    optimizePackageImports: [
+      'lucide-react',
+      'react-icons',
+      '@radix-ui/react-dialog',
+      '@radix-ui/react-dropdown-menu',
+      '@radix-ui/react-select',
+      '@radix-ui/react-tabs'
+    ],
     optimizeServerReact: true,
-    // Reduce server-side render time
     serverMinification: true,
   },
 
-  // CRITICAL FIX: Compiler optimizations
+  // CRITICAL FIX: Enhanced compiler optimizations
   compiler: {
-    // Remove console logs in production
     removeConsole: process.env.NODE_ENV === 'production',
+    // Remove React dev tools in production
+    reactRemoveProperties: process.env.NODE_ENV === 'production' ? {
+      properties: ['^data-testid$', '^data-test$']
+    } : false,
   },
 
-  turbopack: {
-    rules: {
-      '*.svg': {
-        loaders: ['@svgr/webpack'],
-        as: '*.js',
-      },
-    },
-  },
-
-  // Bundle optimization
+  // Bundle optimization for maximum performance
   webpack: (config, { dev, isServer }) => {
-    // CRITICAL FIX: Enhanced bundle optimization for production
+    // CRITICAL FIX: Maximum performance webpack optimizations
     if (!dev && !isServer) {
       config.optimization = {
         ...config.optimization,
         splitChunks: {
           chunks: 'all',
-          maxAsyncRequests: 30,
-          maxInitialRequests: 20, // Reduced for better initial load
-          minSize: 20000, // Increased minimum chunk size
+          maxAsyncRequests: 25, // Reduced for better initial load
+          maxInitialRequests: 15, // Reduced for better initial load
+          minSize: 30000, // Increased minimum chunk size
+          maxSize: 200000, // Limit max chunk size
           cacheGroups: {
             default: false,
             vendors: false,
-            // Core framework chunk - prioritized
+
+            // CRITICAL: Framework chunk - highest priority
             framework: {
               chunks: 'all',
               name: 'framework',
               test: /(?<!node_modules.*)[\\/]node_modules[\\/](react|react-dom|scheduler|prop-types|use-subscription)[\\/]/,
-              priority: 50, // Increased priority
+              priority: 60,
               enforce: true,
               minChunks: 1,
+              reuseExistingChunk: true,
             },
-            // Critical performance libraries
-            performance: {
+
+            // Next.js performance essentials
+            nextPerformance: {
               test: /[\\/]node_modules[\\/](next|@next)[\\/]/,
               name: 'next-performance',
               chunks: 'all',
-              priority: 45,
+              priority: 55,
               enforce: true,
+              maxSize: 180000,
             },
-            // Animation libraries - async only for better initial load
-            animations: {
-              test: /[\\/]node_modules[\\/](framer-motion|lottie-react|@lottiefiles)[\\/]/,
-              name: 'animations',
-              chunks: 'async',
-              priority: 35,
-              enforce: true,
-            },
-            // UI libraries separation
-            ui: {
-              test: /[\\/]node_modules[\\/](@radix-ui|lucide-react|react-icons)[\\/]/,
-              name: 'ui-libs',
-              chunks: 'all',
-              priority: 30,
-              minChunks: 1,
-              maxSize: 244000, // Limit UI chunk size
-            },
-            // Internationalization
+
+            // I18n libraries - separate chunk
             i18n: {
               test: /[\\/]node_modules[\\/](next-intl|react-intl)[\\/]/,
               name: 'i18n',
               chunks: 'all',
-              priority: 25,
+              priority: 50,
+              maxSize: 150000,
             },
-            // Large libraries with size optimization
-            lib: {
+
+            // UI libraries - optimized size
+            ui: {
+              test: /[\\/]node_modules[\\/](@radix-ui|lucide-react|react-icons)[\\/]/,
+              name: 'ui-libs',
+              chunks: 'all',
+              priority: 45,
+              minChunks: 1,
+              maxSize: 180000,
+            },
+
+            // Animation libraries - async only for better TBT
+            animations: {
+              test: /[\\/]node_modules[\\/](framer-motion|lottie-react|@lottiefiles)[\\/]/,
+              name: 'animations',
+              chunks: 'async',
+              priority: 40,
+              enforce: true,
+              maxSize: 150000,
+            },
+
+            // Database and auth - async loading
+            database: {
+              test: /[\\/]node_modules[\\/](@prisma|@trpc|@tanstack|next-auth)[\\/]/,
+              name: 'database',
+              chunks: 'async',
+              priority: 35,
+              maxSize: 180000,
+            },
+
+            // Heavy libraries - size-optimized chunks
+            heavyLibs: {
               test(module) {
                 return (
-                  module.size() > 100000 && // Reduced threshold
+                  module.size() > 80000 && // Reduced threshold for better performance
                   /node_modules[/\\]/.test(module.identifier())
                 );
               },
               name(module) {
                 const hash = crypto.createHash('sha1');
                 hash.update(module.identifier());
-                return hash.digest('hex').substring(0, 8);
+                return `heavy-${hash.digest('hex').substring(0, 8)}`;
               },
-              priority: 20,
+              priority: 30,
               minChunks: 1,
               reuseExistingChunk: true,
-              maxSize: 244000, // Size limit for better loading
+              maxSize: 180000,
             },
-            // Common components
+
+            // Common modules
             commons: {
               name: 'commons',
-              minChunks: 3, // Increased threshold
-              priority: 15,
+              minChunks: 2, // Reduced threshold
+              priority: 25,
               chunks: 'all',
               reuseExistingChunk: true,
-              maxSize: 244000,
+              maxSize: 150000,
             },
           },
         },
-        // CRITICAL FIX: Enhanced minimization
+
+        // CRITICAL FIX: Maximum compression and optimization
         minimize: true,
         usedExports: true,
         sideEffects: false,
-        // Tree shaking improvements
         providedExports: true,
         innerGraph: true,
+        concatenateModules: true,
+        flagIncludedChunks: true,
+        mergeDuplicateChunks: true,
+        removeAvailableModules: true,
+        removeEmptyChunks: true,
+
+        // Advanced tree shaking
+        mangleExports: 'size',
       };
 
-      // CRITICAL FIX: Performance-focused module concatenation
-      config.optimization.concatenateModules = true;
-
-      // CRITICAL FIX: Better compression
-      config.optimization.flagIncludedChunks = true;
-      config.optimization.mergeDuplicateChunks = true;
-      config.optimization.removeAvailableModules = true;
-      config.optimization.removeEmptyChunks = true;
+      // CRITICAL FIX: Performance-focused resolve
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        // Replace heavy lodash with lighter alternatives where possible
+        'lodash/debounce': 'lodash.debounce',
+        'lodash/throttle': 'lodash.throttle',
+        'lodash/cloneDeep': 'lodash.clonedeep',
+      };
     }
 
-    // CRITICAL FIX: Enhanced SVG optimization
+    // CRITICAL FIX: Ultra-optimized SVG handling
     config.module.rules.push({
       test: /\.svg$/,
       use: [
@@ -151,36 +179,50 @@ const nextConfig = {
                     overrides: {
                       removeViewBox: false,
                       cleanupIDs: false,
+                      convertPathData: {
+                        floatPrecision: 2, // Reduce precision for smaller file sizes
+                      },
                     },
                   },
                 },
                 'removeDimensions',
+                'removeTitle',
+                'removeDesc',
+                'removeMetadata',
               ],
             },
-            memo: true, // Enable memoization for better performance
+            memo: true,
+            replaceAttrValues: {
+              '#000': 'currentColor',
+              '#000000': 'currentColor',
+            },
           },
         },
       ],
     });
 
-    // CRITICAL FIX: Performance monitoring in development
+    // CRITICAL FIX: Development performance
     if (dev) {
       config.devtool = 'eval-cheap-module-source-map';
+      // Faster builds in development
+      config.optimization.removeAvailableModules = false;
+      config.optimization.removeEmptyChunks = false;
+      config.optimization.splitChunks = false;
     }
 
     return config;
   },
 
-  // CRITICAL FIX: Enhanced image optimization
+  // CRITICAL FIX: Ultra-optimized image settings for LCP
   images: {
-    formats: ['image/webp', 'image/avif'],
-    deviceSizes: [320, 420, 768, 1024, 1200, 1600, 1920], // Added 1600 for better coverage
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 512], // Added 512
+    formats: ['image/avif', 'image/webp'], // AVIF first for better compression
+    deviceSizes: [320, 420, 768, 1024, 1200, 1600, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    // Enable image optimization for better LCP
     unoptimized: false,
+
     remotePatterns: [
       {
         protocol: 'https',
@@ -195,10 +237,10 @@ const nextConfig = {
     ],
   },
 
-  // CRITICAL FIX: Enhanced caching headers
+  // CRITICAL FIX: Performance-optimized headers
   async headers() {
     return [
-      // Static assets - long-term caching
+      // Static assets - maximum caching
       {
         source: '/assets/(.*)',
         headers: [
@@ -225,7 +267,8 @@ const nextConfig = {
           },
         ],
       },
-      // Next.js static files
+
+      // Next.js static files - aggressive caching
       {
         source: '/_next/static/(.*)',
         headers: [
@@ -235,7 +278,8 @@ const nextConfig = {
           },
         ],
       },
-      // Font files - aggressive caching
+
+      // Font files - maximum caching
       {
         source: '/_next/static/media/(.*)',
         headers: [
@@ -249,13 +293,18 @@ const nextConfig = {
           },
         ],
       },
-      // CRITICAL FIX: Performance headers for all pages
+
+      // CRITICAL FIX: Performance and security headers for all pages
       {
         source: '/(.*)',
         headers: [
           {
             key: 'X-DNS-Prefetch-Control',
             value: 'on',
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains',
           },
           {
             key: 'X-Frame-Options',
@@ -269,18 +318,69 @@ const nextConfig = {
             key: 'Referrer-Policy',
             value: 'origin-when-cross-origin',
           },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+        ],
+      },
+
+      // CSS and JavaScript specific headers
+      {
+        source: '/_next/static/css/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Content-Type',
+            value: 'text/css; charset=utf-8',
+          },
+        ],
+      },
+      {
+        source: '/_next/static/chunks/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
         ],
       },
     ];
   },
 
-  // CRITICAL FIX: Performance-focused redirects
+  // CRITICAL FIX: Performance redirects and rewrites
   async rewrites() {
     return {
       beforeFiles: [],
-      afterFiles: [],
+      afterFiles: [
+        // Image optimization API
+        {
+          source: '/api/image-proxy/:path*',
+          destination: '/api/ultra-image/:path*',
+        },
+      ],
       fallback: [],
     };
+  },
+
+  // CRITICAL FIX: Disable source maps in production for smaller bundles
+  productionBrowserSourceMaps: false,
+
+  // TypeScript configuration for performance
+  typescript: {
+    // Ignore build errors in development for faster builds
+    ignoreBuildErrors: process.env.NODE_ENV === 'development',
+  },
+
+  // ESLint configuration
+  eslint: {
+    // Only run ESLint on these directories
+    dirs: ['src'],
+    // Ignore during builds for faster production builds
+    ignoreDuringBuilds: process.env.NODE_ENV === 'production',
   },
 };
 

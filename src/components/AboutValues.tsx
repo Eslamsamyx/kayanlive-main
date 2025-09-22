@@ -2,16 +2,89 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
-import LocationAwareImage from './LocationAwareImage';
 
-// Images
+// Images - Optimized WebP versions
 const images = {
-  purpose: "/optimized/about-hero/6f6ce5ee6422e315524d4c876dbb7b8a3e609a69-about-hero-desktop.webp",
-  precision: "/optimized/industry-showcase/fe74de8467bf5ef42975b489173519217b1b04d0-industry-showcase-desktop.webp",
-  innovation: "/optimized/industry-showcase/4bf06f33663f81bd327984084be746509f0caffd-industry-showcase-desktop.webp",
-  collaboration: "/optimized/industry-showcase/3bfce9db290033eb81342a31f55d19a490e552d3-industry-showcase-desktop.webp",
-  placeholder: "/optimized/gallery-thumbnail/c7e54c0605f6e122070c3da28c63679ca3742a85-gallery-thumbnail-desktop.webp"
+  purpose: "/optimized/aboutvalues/186fa19b930d929977d57fb7f34e5087a46a93cf-purpose.webp",
+  precision: "/optimized/aboutvalues/2618b670e3e8c66f745394f1723db8b2ef607736-precision.webp",
+  innovation: "/optimized/aboutvalues/d1bc9c6954c4d0731970c6d331f309be8b111274-innovation.webp",
+  collaboration: "/optimized/aboutvalues/90b45b1b1535aad0449f46a75aa465f248b51c13-collaboration.webp",
+  placeholder: "/optimized/aboutvalues/1f2bf7072b0e4da07cc9892cd3df94f476ca5be4-placeholder.webp"
 };
+
+// Value Card Component with Intersection Observer
+interface Value {
+  title: string;
+  description: string;
+  image: string;
+}
+
+function ValueCard({ value, alignment }: { value: Value, alignment: string }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          // Once visible, stay visible
+          if (cardRef.current) {
+            observer.unobserve(cardRef.current);
+          }
+        }
+      },
+      {
+        threshold: 0.1, // Trigger when 10% of the card is visible
+        rootMargin: '0px 0px -50px 0px' // Slight offset from bottom
+      }
+    );
+
+    const currentCard = cardRef.current;
+    if (currentCard) {
+      observer.observe(currentCard);
+    }
+
+    return () => {
+      if (currentCard) {
+        observer.unobserve(currentCard);
+      }
+    };
+  }, []);
+
+  return (
+    <div
+      ref={cardRef}
+      className={`flex ${alignment}`}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: `translateY(${isVisible ? 0 : 40}px)`,
+        transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
+      }}
+    >
+      <div className="w-full max-w-sm md:max-w-md lg:max-w-lg">
+        {/* Card Image */}
+        <div
+          className="aspect-[4/3] rounded-3xl bg-cover bg-center mb-4"
+          style={{
+            backgroundImage: `url(${value.image})`,
+            backgroundColor: '#2a2d32'
+          }}
+        />
+
+        {/* Card Content */}
+        <div className="px-2">
+          <h3 className="text-white text-lg md:text-xl lg:text-2xl font-bold mb-2" style={{ fontFamily: '"Poppins", sans-serif' }}>
+            {value.title}
+          </h3>
+          <p className="text-gray-400 text-sm leading-relaxed" style={{ fontFamily: '"Poppins", sans-serif' }}>
+            {value.description}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 
 export default function AboutValues() {
@@ -22,6 +95,9 @@ export default function AboutValues() {
   const [pathLength, setPathLength] = useState(0);
   const [calculatedHeight, setCalculatedHeight] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [firstBoxOffset, setFirstBoxOffset] = useState(300);
+  const cardsContainerRef = useRef<HTMLDivElement>(null);
 
   // Dynamic values data using translations
   const valuesData = [
@@ -87,21 +163,75 @@ export default function AboutValues() {
             const section = sectionRef.current;
             if (!section) return;
 
-            const sectionTop = section.offsetTop;
+            const rect = section.getBoundingClientRect();
+            const sectionTop = rect.top + window.scrollY;
             const sectionHeight = section.offsetHeight;
             const currentScroll = window.scrollY;
             const windowHeight = window.innerHeight;
 
-            // Use viewport center as reference point
-            const viewportCenter = currentScroll + windowHeight / 2;
+            // Check if section is in viewport
+            const sectionBottom = sectionTop + sectionHeight;
+            const viewportBottom = currentScroll + windowHeight;
 
-            // Calculate progress through Values section only (0% at start, 100% at end)
-            let progress = (viewportCenter - sectionTop) / sectionHeight;
+            // Only start animation when section top is visible in viewport
+            const viewportTop = currentScroll;
+
+            // Section hasn't entered viewport yet
+            if (sectionTop > viewportBottom) {
+              setScrollProgress(0);
+              ticking = false;
+              return;
+            }
+
+            // Section has completely passed
+            if (sectionBottom < viewportTop) {
+              setScrollProgress(1);
+              ticking = false;
+              return;
+            }
+
+            // Calculate progress ONLY when scrolling through the section itself
+            // Use dynamic firstBoxOffset calculated from actual DOM
+            const isMobileView = window.innerWidth < 768;
+
+            // The animation should start when the first box is approaching the viewport center
+            const firstBoxTop = sectionTop + firstBoxOffset;
+            const delayOffset = isMobileView ? 300 : 700; // Less delay on mobile
+            const triggerPoint = firstBoxTop - windowHeight + delayOffset;
+
+            // Only start animating after we've scrolled past the trigger point
+            if (currentScroll < triggerPoint) {
+              setScrollProgress(0);
+              ticking = false;
+              return;
+            }
+
+            // Calculate progress from when first box enters viewport
+            const scrolledPastTrigger = currentScroll - triggerPoint;
+            const totalScrollRange = sectionHeight - windowHeight; // More accurate range
+
+            let progress = scrolledPastTrigger / totalScrollRange;
             progress = Math.max(0, Math.min(1, progress));
 
-            // Enhanced curve speed - path moves faster through curves to maintain leading
-            const leadingProgress = Math.min(1, progress * 1.3);
+            // Animation speed that keeps pace with scrolling
+            // Use a formula that ensures the animation completes when scrolling completes
+            const baseLeadProgress = 0.05; // Small base to start smooth
+            const speedMultiplier = isMobileView ? 0.85 : 1.2; // Much slower on mobile to match scrolling
+            const leadingProgress = Math.min(1, baseLeadProgress + (progress * speedMultiplier));
             setScrollProgress(leadingProgress);
+
+            console.log('AboutValues Animation Debug:', {
+              sectionTop,
+              firstBoxTop,
+              triggerPoint,
+              currentScroll,
+              windowHeight,
+              scrolledPastTrigger,
+              totalScrollRange,
+              progress,
+              leadingProgress,
+              pathLength
+            });
           } catch (error) {
             console.warn('Error in scroll handler:', error);
           }
@@ -119,23 +249,65 @@ export default function AboutValues() {
         ticking = false;
       }
     };
+  }, [firstBoxOffset, pathLength]);
+
+  // Detect mobile screen
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  // Dynamically calculate first box position
+  useEffect(() => {
+    const calculateFirstBoxPosition = () => {
+      if (cardsContainerRef.current && sectionRef.current) {
+        const sectionRect = sectionRef.current.getBoundingClientRect();
+        const firstCard = cardsContainerRef.current.querySelector('.flex');
+
+        if (firstCard) {
+          const firstCardRect = firstCard.getBoundingClientRect();
+          const offset = firstCardRect.top - sectionRect.top;
+          setFirstBoxOffset(Math.max(200, offset)); // Minimum 200px offset
+        }
+      }
+    };
+
+    // Calculate after a delay to ensure DOM is ready
+    const timer = setTimeout(calculateFirstBoxPosition, 500);
+    window.addEventListener('resize', calculateFirstBoxPosition);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', calculateFirstBoxPosition);
+    };
+  }, [isMobile]);
 
   // Set up path length for animation with error handling
   useEffect(() => {
-    try {
-      if (pathRef.current && typeof pathRef.current.getTotalLength === 'function') {
-        const length = pathRef.current.getTotalLength();
-        if (length && isFinite(length) && length > 0) {
-          setPathLength(length);
-        } else {
-          console.warn('Invalid path length calculated');
+    // Add a small delay to ensure SVG is rendered
+    const timer = setTimeout(() => {
+      try {
+        if (pathRef.current && typeof pathRef.current.getTotalLength === 'function') {
+          const length = pathRef.current.getTotalLength();
+          console.log('AboutValues Path Length:', length);
+          if (length && isFinite(length) && length > 0) {
+            setPathLength(length);
+          } else {
+            console.warn('Invalid path length calculated');
+          }
         }
+      } catch (error) {
+        console.warn('Error calculating SVG path length:', error);
       }
-    } catch (error) {
-      console.warn('Error calculating SVG path length:', error);
-    }
-  }, []);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [isMobile]); // Recalculate when mobile state changes
 
   // Calculate dynamic height based on actual content with error handling
   useEffect(() => {
@@ -194,75 +366,94 @@ export default function AboutValues() {
         minHeight: calculatedHeight > 0 ? `${calculatedHeight}px` : 'auto'
       }}
     >
+      {/* Title Section - Simple left-aligned */}
+      <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 relative mb-6 md:mb-12 lg:mb-16">
+        <h2
+          className="font-bold capitalize text-left text-[50px] md:text-[100px] lg:text-[200px] leading-[60px] md:leading-[100px] lg:leading-[200px] tracking-0 lg:tracking-[-2px]"
+          style={{
+            background: 'linear-gradient(90deg, #a095e1, #74cfaa)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            fontFamily: '"Poppins", sans-serif'
+          }}
+        >
+          {t('title')}
+        </h2>
+
+        {/* SVG Logo beside title - Responsive sizing and opacity */}
+        <div
+          className="absolute opacity-30 md:opacity-40 lg:opacity-50 bg-center bg-cover bg-no-repeat
+                     w-[150px] h-[235px] md:w-[250px] md:h-[390px] lg:w-[302px] lg:h-[469px]
+                     -top-[80px] md:-top-[150px] lg:-top-[208px] right-0"
+          style={{
+            backgroundImage: `url('/optimized/aboutvalues/7d0b4204ecf2732587fef2b7f191e56d708f7342-logo-decoration.webp')`
+          }}
+        />
+      </div>
+
       <div ref={contentRef} className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 relative">
-        {/* Title with SVG Logo */}
-        <div className="relative mb-6 md:mb-12 lg:mb-16">
-          <h2 
-            className="text-[100px] md:text-[130px] lg:text-[150px] font-bold leading-[96px] md:leading-[120px] lg:leading-[144px] capitalize"
-            style={{
-              background: 'linear-gradient(90deg, #a095e1, #74cfaa)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              fontFamily: '"Poppins", sans-serif'
-            }}
-          >
-            {t('title')}
-          </h2>
-          
-          {/* SVG Logo beside title */}
-          <div
-            className="absolute w-[302px] h-[469px] opacity-50"
-            style={{
-              top: '-208px',
-              right: '0px'
-            }}
-          >
-            <LocationAwareImage
-              src="/optimized/about-hero/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329-about-hero-desktop.webp"
-              location="about-hero"
-              alt="Company logo"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
 
         {/* Simple SVG Background Path */}
-        <svg 
+        <svg
           className="absolute inset-0 w-full h-full pointer-events-none"
-          viewBox="0 0 1200 2400"
-          preserveAspectRatio="none"
+          viewBox={isMobile ? "0 0 600 4500" : "0 0 1200 4000"}
+          preserveAspectRatio="xMidYMid slice"
         >
           <defs>
             <linearGradient id="repeatingGradient" x1="0%" y1="0%" x2="100%" y2="0%" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#9ea7ff" />
-              <stop offset="14.28%" stopColor="#79e7c7" />
-              <stop offset="28.56%" stopColor="#9ea7ff" />
-              <stop offset="42.84%" stopColor="#79e7c7" />
-              <stop offset="57.12%" stopColor="#9ea7ff" />
-              <stop offset="71.4%" stopColor="#79e7c7" />
-              <stop offset="85.68%" stopColor="#9ea7ff" />
-              <stop offset="100%" stopColor="#79e7c7" />
+              <stop offset="0%" stopColor="#a095e1" />
+              <stop offset="20%" stopColor="#7afdd6" />
+              <stop offset="40%" stopColor="#a095e1" />
+              <stop offset="60%" stopColor="#74cfaa" />
+              <stop offset="80%" stopColor="#a095e1" />
+              <stop offset="100%" stopColor="#7afdd6" />
             </linearGradient>
           </defs>
-          
-          {/* Smooth path with no sharp edges - extended to last image */}
+
+          {/* Extended zigzag path through all 7 boxes - responsive for mobile/desktop */}
           <path
             ref={pathRef}
-            d="M 200 300
-               C 400 250, 600 250, 800 350
-               S 1200 450, 1000 550
-               S 600 650, 400 750  
-               S 0 850, 200 950
-               S 600 1050, 800 1150
-               S 1200 1250, 1000 1350
-               S 600 1450, 400 1550
-               S 200 1650, 600 1750
-               S 1000 1850, 800 1950
-               S 400 2050, 600 2150"
+            d={isMobile
+              ? // Mobile path - dynamically spaced for 7 boxes
+                // Start below the firstBoxOffset for mobile screens
+                (() => {
+                  // Start at the vertical center of the first box (approximately half the card height up)
+                  const startY = Math.max(100, firstBoxOffset - 200); // Move up by 200px to hit box center
+                  const endY = 4200;
+                  const boxSpacing = (endY - startY) / 6; // 6 gaps for 7 boxes
+
+                  return `M 150 ${startY}
+                   C 250 ${startY + boxSpacing * 0.2}, 350 ${startY + boxSpacing * 0.4}, 450 ${startY + boxSpacing * 0.6}
+                   C 500 ${startY + boxSpacing * 0.8}, 450 ${startY + boxSpacing}, 400 ${startY + boxSpacing * 1.2}
+                   C 350 ${startY + boxSpacing * 1.4}, 200 ${startY + boxSpacing * 1.6}, 150 ${startY + boxSpacing * 1.8}
+                   C 100 ${startY + boxSpacing * 2}, 150 ${startY + boxSpacing * 2.2}, 200 ${startY + boxSpacing * 2.4}
+                   C 250 ${startY + boxSpacing * 2.6}, 400 ${startY + boxSpacing * 2.8}, 450 ${startY + boxSpacing * 3}
+                   C 500 ${startY + boxSpacing * 3.2}, 450 ${startY + boxSpacing * 3.4}, 400 ${startY + boxSpacing * 3.6}
+                   C 350 ${startY + boxSpacing * 3.8}, 200 ${startY + boxSpacing * 4}, 150 ${startY + boxSpacing * 4.2}
+                   C 100 ${startY + boxSpacing * 4.4}, 150 ${startY + boxSpacing * 4.6}, 200 ${startY + boxSpacing * 4.8}
+                   C 250 ${startY + boxSpacing * 5}, 400 ${startY + boxSpacing * 5.2}, 450 ${startY + boxSpacing * 5.4}
+                   C 500 ${startY + boxSpacing * 5.6}, 450 ${startY + boxSpacing * 5.8}, 400 ${startY + boxSpacing * 6}
+                   C 350 ${endY - 100}, 300 ${endY - 50}, 300 ${endY}`;
+                })()
+              : // Desktop path - aligned with first box center
+                `M 250 250
+                 C 450 300, 650 350, 850 400
+                 C 1050 450, 1050 550, 850 650
+                 C 650 750, 450 850, 250 950
+                 C 50 1050, 50 1150, 250 1250
+                 C 450 1350, 650 1450, 850 1550
+                 C 1050 1650, 1050 1750, 850 1850
+                 C 650 1950, 450 2050, 250 2150
+                 C 50 2250, 50 2350, 250 2450
+                 C 450 2550, 650 2650, 850 2750
+                 C 1050 2850, 1050 2950, 850 3050
+                 C 650 3150, 600 3250, 600 3350
+                 C 600 3450, 600 3550, 600 3550`
+            }
             fill="none"
             stroke="url(#repeatingGradient)"
-            strokeWidth="12"
+            strokeWidth={isMobile ? "20" : "35"}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeDasharray={pathLength}
@@ -274,54 +465,20 @@ export default function AboutValues() {
         </svg>
 
         {/* Values Cards Container */}
-        <div className="relative space-y-32">
-          {valuesData.map((value, index) => {
-            const alignment = value.position.col === 'left' 
-              ? 'justify-start' 
-              : value.position.col === 'right' 
-              ? 'justify-end' 
+        <div ref={cardsContainerRef} className="relative space-y-32">
+          {valuesData.map((value) => {
+            const alignment = value.position.col === 'left'
+              ? 'justify-start'
+              : value.position.col === 'right'
+              ? 'justify-end'
               : 'justify-center';
-            
-            // Dynamic viewport-based trigger points for responsive appearance
-            const totalCards = valuesData.length;
-            const cardSpacing = 0.8 / totalCards; // Spread cards across 80% of scroll progress
-            const startOffset = 0.1; // Start showing cards after 10% scroll
-            const triggerPoint = startOffset + (index * cardSpacing);
 
-            const shouldShow = scrollProgress >= triggerPoint;
-            
             return (
-              <div 
+              <ValueCard
                 key={value.id}
-                className={`flex ${alignment}`}
-                style={{
-                  opacity: shouldShow ? 1 : 0,
-                  transform: `translateY(${shouldShow ? 0 : 40}px)`,
-                  transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
-                }}
-              >
-                <div className="w-full max-w-sm md:max-w-md lg:max-w-lg">
-                  {/* Card Image */}
-                  <div className="aspect-[4/3] rounded-3xl mb-4 overflow-hidden bg-[#2a2d32]">
-                    <LocationAwareImage
-                      src={value.image}
-                      location={value.id === 'purpose' ? 'industry-showcase' : 'about-hero'}
-                      alt={value.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  
-                  {/* Card Content */}
-                  <div className="px-2">
-                    <h3 className="text-white text-lg md:text-xl lg:text-2xl font-bold mb-2" style={{ fontFamily: '"Poppins", sans-serif' }}>
-                      {value.title}
-                    </h3>
-                    <p className="text-gray-400 text-sm leading-relaxed" style={{ fontFamily: '"Poppins", sans-serif' }}>
-                      {value.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
+                value={value}
+                alignment={alignment}
+              />
             );
           })}
         </div>
@@ -340,19 +497,14 @@ export default function AboutValues() {
           {Array.from({ length: 15 }, (_, i) => (
             <div
               key={i}
-              className="flex-shrink-0 opacity-60"
+              className="bg-center bg-cover bg-no-repeat flex-shrink-0"
               style={{
                 width: '180px',
-                height: '180px'
+                height: '180px',
+                backgroundImage: `url('/optimized/aboutvalues/b4078e8028eba5003e2e49b208e4f7a73ef31801-bottom-pattern.webp')`,
+                opacity: 0.6
               }}
-            >
-              <LocationAwareImage
-                src="/optimized/about-hero/7854b2fa3456db2dfe1f88a71484d2ef952fd4d6-about-hero-desktop.webp"
-                location="about-hero"
-                alt="Pattern element"
-                className="w-full h-full object-cover"
-              />
-            </div>
+            />
           ))}
         </div>
       </div>

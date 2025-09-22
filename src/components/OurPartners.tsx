@@ -3,12 +3,13 @@
 import { useTranslations } from 'next-intl';
 import ClientsPartnersTemplate, { CardConfig, BackgroundElement } from './ClientsPartnersTemplate';
 
-const imgRectangle4 = "/optimized/about-hero/174d9ed83a90c0514d54b7cbb68f8656ca74592c-about-hero-desktop.webp";
-const imgRectangle5 = "/optimized/article-featured/0bb8e976afa37efb2547ff983a789a24c46bc909-article-featured-desktop.webp";
-const imgRectangle6 = "/optimized/service-detail/0599bc8efb3df6cbf4d2b5cc07e1932dc0d2a400-service-detail-desktop.webp";
-const imgRectangle7 = "/optimized/gallery-thumbnail/d079f823333ca8bce293bcab9a39cb1aea4b5439-gallery-thumbnail-desktop.webp";
-const imgPattern0212 = "/optimized/cta-background/ef25fd14e49122ddd6cbc03c8a92caff93500eb7-cta-background-desktop.webp";
-const imgPattern0453 = "/optimized/gallery-thumbnail/6cdd4333a240b46dead9df86c5a83772e81b76fc-gallery-thumbnail-desktop.webp";
+// Assets - Optimized WebP images
+const imgRectangle4 = "/optimized/our-partners/25a3c987de99ab2440f03dde0b9a9111c3d9dccb-partners-government.webp";
+const imgRectangle5 = "/optimized/our-partners/1c402bb4f9f0d80514e68d7faa14500c7f4b4dfa-partners-tourism.webp";
+const imgRectangle6 = "/optimized/our-partners/b63907c1eda86720102ba245b5a314b2de91bce0-partners-marketing.webp";
+const imgRectangle7 = "/optimized/our-partners/fa1edbb6431470f957c17a24e3cdd43536deb191-partners-enterprise.webp";
+const imgPattern0212 = "/optimized/our-partners/e6df81b755cd4ab7252dbbecf7a43a27372c9ca8-partners-pattern-1.webp";
+const imgPattern0453 = "/optimized/our-partners/387db429def8526f504ca1667390161ed52cad5a-partners-pattern-2.webp";
 
 
 const backgroundElements: BackgroundElement[] = [

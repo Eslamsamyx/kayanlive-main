@@ -4,18 +4,18 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-// Assets from Figma
-const imgRectangle4241 = "/optimized/gallery-thumbnail/b74a7a7d29dd66a6cd62e4edfe0512fa5a3b97ad-gallery-thumbnail-desktop.webp";
-const imgRectangle4240 = "/optimized/gallery-thumbnail/776958ae56ed264aecd4c182054c75bc576a1d2f-gallery-thumbnail-desktop.webp";
+// Assets from Figma - Optimized WebP images
+const imgRectangle4241 = "/optimized/work/a3b5baba83b75945699bcee9522e99831a9f57a2-work-outcomes-1.webp";
+const imgRectangle4240 = "/optimized/work/a420f3b3a1dde22b002e1620b473ca2e9e6fdbe5-work-outcomes-2.webp";
 const imgEllipse3625 = "/assets/60821832f15b930b8fe851aa226b08c11f1ef46b.svg";
 const imgMdiTwitter = "/assets/def48b10f3af85b72c9c1340300144e654a156e1.svg";
 const imgLogosFacebook = "/assets/69e31bfddbf7233cc0877c3ef5b4edc8be21a2aa.svg";
 const imgIcomoonFreeLinkedin2 = "/assets/29c078eff0cb9c150c3699b142068664db1faceb.svg";
 const imgSkillIconsInstagram = "/assets/83fa7d33c676fd60c6236412ca0aa58eee80b908.svg";
 
-// Mobile Assets - using the same images from Figma mobile design
-const imgRectangle4246 = "/optimized/gallery-thumbnail/5fe3ba66a055c9a5b01ea404941b7097da5ffdb0-gallery-thumbnail-desktop.webp";
-const imgRectangle4247 = "/optimized/gallery-thumbnail/c57c28aa85c3935c2914aa9ff408c9f8c8f2fe68-gallery-thumbnail-desktop.webp";
+// Mobile Assets - using the same images from Figma mobile design - Optimized WebP
+const imgRectangle4246 = "/optimized/work/425c425068870bb86ed7e8c38ffc7b92e6e39a67-work-mobile-1.webp";
+const imgRectangle4247 = "/optimized/work/98504c47236d5a98548c64c0e3cb4305deab026d-work-mobile-2.webp";
 
 export default function WorkOutcomes() {
   const t = useTranslations('work.outcomes');

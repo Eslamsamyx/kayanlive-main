@@ -6,8 +6,8 @@ import { useRef } from 'react';
 import { getMarkdownHTML } from '@/utils/markdownUtils';
 import AnimatedPath from './AnimatedPath';
 
-const imgPattern = "/optimized/about-hero/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329-about-hero-desktop.webp";
-const kayanLogo = "/optimized/client-logo/a01d943cb7ebcf5598b83131f56810cf97a4e883-client-logo-desktop.webp";
+const imgPattern = "/optimized/whykayan-assets/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.webp";
+const kayanLogo = "/optimized/whykayan-assets/a01d943cb7ebcf5598b83131f56810cf97a4e883.webp";
 
 export default function WhyKayanLive() {
   const t = useTranslations();
@@ -24,7 +24,7 @@ export default function WhyKayanLive() {
           width: '370px',
           height: '572px',
           [locale === 'ar' ? 'right' : 'left']: '-124px',
-          top: '3px',
+          top: '-30px',
           zIndex: 1,
           filter: 'invert(1) brightness(0)',
           opacity: 0.5
@@ -38,7 +38,7 @@ export default function WhyKayanLive() {
           width: '370px',
           height: '572px',
           [locale === 'ar' ? 'left' : 'right']: '0px',
-          bottom: '0px',
+          bottom: '-30px',
           zIndex: 1
         }}
       >
@@ -166,7 +166,7 @@ export default function WhyKayanLive() {
       </div>
 
       {/* Mobile Content Container - Optimized for responsive best practices */}
-      <section className="lg:hidden flex flex-col items-center justify-center w-full min-h-screen py-8 px-4 sm:px-6 md:px-8 gap-8 sm:gap-10 md:gap-12">
+      <section className="lg:hidden flex flex-col items-center justify-center w-full min-h-screen py-8 px-4 sm:px-6 md:px-8 gap-8 sm:gap-10 md:gap-12 relative z-10">
         {/* Why heading - Mobile version with larger fluid typography */}
         <header className="text-center">
           <h1 

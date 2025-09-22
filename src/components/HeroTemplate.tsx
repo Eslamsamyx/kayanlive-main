@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import type { ReactNode, CSSProperties } from 'react';
 
 // ==================== CONSTANTS ====================
-const DECORATIVE_IMAGE_PATH = "/optimized/about-hero/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329-about-hero-desktop.webp";
+const DECORATIVE_IMAGE_PATH = "/optimized/herotemplate/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.webp";
 
 const ANIMATION_TIMING = {
   LOAD_DELAY: 100,
@@ -534,7 +534,7 @@ export default function HeroTemplate(props: HeroTemplateProps) {
         {/* Unified Grid Layout - Responsive Across All Screen Sizes */}
         <div className="grid h-full py-4 px-4 md:py-6 md:px-6 lg:py-6 lg:px-12 xl:px-16" style={{ zIndex: Z_INDEX.CONTENT }}>
           {/* Mobile/Tablet Layout (Single Column Centered) */}
-          <div className="lg:hidden grid grid-rows-[auto_auto_auto] gap-3 md:gap-4 place-items-center justify-center min-h-full">
+          <div className="lg:hidden grid grid-rows-[auto_auto_auto] gap-2 md:gap-3 place-items-center justify-center min-h-full">
             <header
               className={`text-center w-full max-w-md ${state.isVisible ? 'animate-fade-up-1' : 'opacity-0'}`}
               style={memoizedStyles.mobileHeader}
@@ -563,7 +563,7 @@ export default function HeroTemplate(props: HeroTemplateProps) {
                 </div>
               ))}
               {sanitizedProps.mobileSubtitleWhite && (
-                <div className="text-white mt-4">
+                <div className="text-white mt-2">
                   {sanitizedProps.mobileSubtitleWhite}
                 </div>
               )}

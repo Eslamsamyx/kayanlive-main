@@ -8,7 +8,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
 
 // Assets - Using optimized WebP version
-const imgKayanLogo = "/optimized/footer-logo/823c27de600ccd2f92af3e073c8e10df3a192e5c-footer-logo-desktop.webp";
+const imgKayanLogo = "/optimized/footer/823c27de600ccd2f92af3e073c8e10df3a192e5c.webp";
 
 // Social media brand colors and X icon
 const socialIconBrandColors = {

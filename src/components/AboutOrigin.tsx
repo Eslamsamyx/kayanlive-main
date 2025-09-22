@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState, useRef, useMemo } from 'react';
 
 // Constants
-const PATTERN_IMAGE = "/optimized/cta-background/ef25fd14e49122ddd6cbc03c8a92caff93500eb7-cta-background-desktop.webp";
+const PATTERN_IMAGE = "/optimized/aboutorigin/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.webp";
 const INTERSECTION_THRESHOLD = 0.1;
 const INTERSECTION_ROOT_MARGIN = '50px';
 const FALLBACK_DELAY = 300;

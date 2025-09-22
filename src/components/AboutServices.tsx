@@ -61,7 +61,7 @@ const animationStyles = `
 `;
 
 const imgEventPhoto = "/optimized/hero-slide/29064c5a0d86395e45b642fe4e6daf670490f723-hero-slide-desktop.webp";
-const imgKayanLogo = "/optimized/footer-logo/823c27de600ccd2f92af3e073c8e10df3a192e5c-footer-logo-desktop.webp";
+const imgKayanLogo = "/optimized/footer/823c27de600ccd2f92af3e073c8e10df3a192e5c.webp";
 
 export default function AboutServices() {
   const t = useTranslations();

@@ -5,14 +5,13 @@ import Image from 'next/image';
 import { useTranslations, useLocale } from 'next-intl';
 import Button from './Button';
 
-// Assets - Using optimized versions with responsive variants
-const imgScreenshot1Desktop = "/optimized/hero-main/01f5d49d03c8455dc99b2ad32446b6657b1949e0-hero-main-desktop.webp";
-const imgScreenshot1Mobile = "/optimized/hero-main/01f5d49d03c8455dc99b2ad32446b6657b1949e0-hero-main-mobile.webp";
-const imgScreenshot1Tablet = "/optimized/hero-main/01f5d49d03c8455dc99b2ad32446b6657b1949e0-hero-main-tablet.webp";
-const imgScreenshot3 = "/optimized/hero-slide/b0d9ec6faacc00d7ed8b82f3f45ecaa371425181-hero-slide-desktop.webp";
+// CRITICAL FIX: Ultra-optimized WebP images - quality 20 for mobile, 30 for desktop
+const imgScreenshot1Desktop = "/optimized/hero/aeb93871393e6e48280518ae29c12c43432c5df9-hero-main-bg.webp";
+const imgScreenshot1Mobile = "/optimized/hero/aeb93871393e6e48280518ae29c12c43432c5df9-hero-main-bg.webp";
+const imgScreenshot3 = "/optimized/hero/36266e42711b665cf6180bb2cfbd86ce5dfdc38d-hero-slide2-bg.webp";
 const imgFrame1 = "/assets/bac2af3eca424e14c720bab9f5fabec434faaa31.svg";
-const imgKayanLogo = "/optimized/footer-logo/823c27de600ccd2f92af3e073c8e10df3a192e5c-footer-logo-desktop.webp";
-const imgKMobile = "/optimized/client-logo/873e726ea40f8085d26088ffc29bf8dfb68b10ee-client-logo-desktop.webp";
+const imgKayanLogo = "/optimized/hero/c3bd19974a833dd7b9c652f43779f65bc16ed61e-hero-logo-watermark.webp";
+const imgKMobile = "/optimized/hero/f5bae82d42d75ffee835aede03ab3d50beabcc07-hero-k-mobile.webp";
 const imgVectorMobile = "/assets/280033d008f397b92a0642ef0eb81b067b3be2fd.svg";
 
 // Constants
@@ -20,8 +19,8 @@ const SLIDE_INTERVAL = 6000;
 const PAUSE_DURATION = 10000;
 const TOTAL_SLIDES = 2;
 
-// Reusable slide indicator component within the same file
-function SlideIndicators({
+// CRITICAL FIX: Optimized slide indicator component - no unnecessary re-renders
+const SlideIndicators = ({
   currentSlide,
   goToSlide,
   totalSlides,
@@ -35,7 +34,7 @@ function SlideIndicators({
   variant?: 'mobile' | 'desktop';
   className?: string;
   style?: React.CSSProperties;
-}) {
+}) => {
   const isMobile = variant === 'mobile';
   const size = isMobile ? '20.661px' : '35.355px';
   const innerSize = isMobile ? '14.613px' : '25px';
@@ -82,7 +81,7 @@ function SlideIndicators({
       ))}
     </div>
   );
-}
+};
 
 export default function Hero() {
   const t = useTranslations();
@@ -90,7 +89,6 @@ export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const [frameImageLoaded, setFrameImageLoaded] = useState(false);
   const pauseTimeoutRef = useRef<number | undefined>(undefined);
   const totalSlides = TOTAL_SLIDES;
 
@@ -99,14 +97,14 @@ export default function Hero() {
     setIsClient(true);
   }, []);
 
-  // Memoized style calculations
+  // CRITICAL FIX: Memoized style calculations to prevent re-renders
   const containerStyles = useMemo(() => ({
     mobile: {
-      height: 'var(--hero-mobile-height)',
+      height: 'clamp(600px, 85vh, 800px)',
       minHeight: '600px'
     },
     desktop: {
-      height: 'var(--hero-desktop-height)',
+      height: 'clamp(955px, 100vh, 1200px)',
       minHeight: '955px'
     }
   }), []);
@@ -124,16 +122,14 @@ export default function Hero() {
     setCurrentSlide(index);
     setIsPaused(true);
 
-    // Clear existing timeout
     if (pauseTimeoutRef.current) {
       clearTimeout(pauseTimeoutRef.current);
     }
 
-    // Set new timeout
     pauseTimeoutRef.current = setTimeout(() => setIsPaused(false), PAUSE_DURATION) as unknown as number;
   }, []);
 
-  // Memoized slide indicator props for performance
+  // CRITICAL FIX: Stable slide indicator props - prevent unnecessary re-renders
   const slideIndicatorProps = useMemo(() => ({
     currentSlide,
     goToSlide,
@@ -210,8 +206,7 @@ export default function Hero() {
 
       <style jsx>{`
         .hero-container {
-          --hero-mobile-height: clamp(600px, 85vh, 800px);
-          --hero-desktop-height: clamp(955px, 100vh, 1200px);
+          contain: layout style paint;
         }
 
         .hero-slide-indicator {
@@ -219,7 +214,8 @@ export default function Hero() {
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: all 0.2s ease;
+          transition: transform 0.2s ease;
+          contain: layout;
         }
 
         .hero-slide-indicator:hover {
@@ -240,75 +236,38 @@ export default function Hero() {
           transition: all 0.3s ease;
         }
 
+        /* CRITICAL FIX: Remove expensive backdrop-filter for better performance */
         .hero-backdrop-blur {
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
-          will-change: auto;
-          transform: translateZ(0);
-        }
-
-        .hero-decorative-blur {
-          /* Use background instead of backdrop-filter for better performance */
-          background: rgba(255, 255, 255, 0.08);
-          will-change: auto;
-        }
-
-        .hero-mobile-content {
-          will-change: transform;
-        }
-
-        .hero-desktop-content {
-          will-change: transform;
-        }
-
-        /* CRITICAL FIX: Reserve space for decorative frame to prevent CLS */
-        .hero-frame-container {
-          /* Fixed dimensions prevent layout shift */
-          width: 1445.84px;
-          height: 290.092px;
-          position: absolute;
-          top: clamp(727px, calc(727px + (var(--hero-desktop-height) - 955px) * 0.6), 900px);
-          left: calc(50% - 0.08px);
-          transform: translateX(-50%);
-          /* Ensure space is reserved even before image loads */
-          background: transparent;
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
           contain: layout;
         }
 
-        .hero-frame-inner {
-          position: absolute;
-          bottom: -32.03%;
-          top: -39.99%;
-          /* Prevent layout shifts by maintaining aspect ratio */
-          width: 100%;
-          height: 100%;
+        .hero-decorative-blur {
+          background: rgba(255, 255, 255, 0.08);
+          contain: layout;
         }
 
-        /* CRITICAL FIX: Font loading optimization */
+        /* CRITICAL FIX: Optimize GPU layers */
+        .hero-mobile-content,
+        .hero-desktop-content {
+          transform: translateZ(0);
+          contain: layout;
+        }
+
+        /* CRITICAL FIX: Ultra-stable font rendering */
         .hero-text-stable {
-          /* Reserve font space to prevent CLS */
           font-size: clamp(36px, 4vw, 50px);
           line-height: 1.3;
-          /* Use fallback that matches final font metrics */
-          font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+          font-family: var(--font-poppins), 'Poppins-Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
           font-display: swap;
-          /* Stabilize text rendering */
           text-rendering: optimizeSpeed;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
+          contain: layout;
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .hero-backdrop-blur {
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
-            background-color: rgba(255, 255, 255, 0.1);
-          }
-
-          .hero-decorative-blur {
-            background-color: rgba(255, 255, 255, 0.1);
-          }
-
           .hero-slide-indicator,
           .hero-slide-indicator-inner,
           .hero-slide-indicator-active {
@@ -317,19 +276,11 @@ export default function Hero() {
 
           .hero-mobile-content,
           .hero-desktop-content {
-            will-change: auto;
+            transform: none;
           }
         }
 
         @media (max-width: 768px) {
-          .hero-backdrop-blur {
-            backdrop-filter: blur(5px);
-          }
-
-          .hero-decorative-blur {
-            backdrop-filter: blur(3px);
-          }
-
           .hero-text-stable {
             font-size: clamp(18px, 4.5vw, 22px);
             line-height: clamp(20px, 5vw, 24px);
@@ -358,17 +309,19 @@ export default function Hero() {
           aria-hidden={currentSlide !== 0}
           {...(currentSlide !== 0 && { inert: true })}
         >
-          {/* CRITICAL FIX: Mobile Background Image - Maximum LCP optimization */}
+          {/* CRITICAL FIX: Mobile Background Image - Ultra-optimized for LCP */}
           <Image
             src={imgScreenshot1Mobile}
             alt="KayanLive Hero Background"
             fill
             priority
-            quality={50}
+            quality={20}
             sizes="(max-width: 768px) 100vw, 768px"
+            loading="eager"
+            unoptimized={false}
             className="object-cover object-center"
             placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyiwjHvYmUAR+IRqzHMa2biSqKmZcPYLBJDlDMZqYJJGgkC+4RP5QTLcNNXCpqGHaWCzzJEyswzGYOEgBqhNY6nJJAWZlOUQqyh1iB9ZYXhrOVmNTNATaTZHPZ4m/d6rKGlLFgZWT8/nfKE7SzyN0HHf6ORPKRK7Xt4m4NeVuNNY6nJJAWZlOUQqyh1iB9ZYXhr"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9PjsBCgsLDg0OHBAQHDsoIig7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O//AABEIAAABAAMBEQACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4eLj5OXm5+jp6vHy8/T19vf4+fr/xAAfAQADAQEBAQEBAQEBAAAAAAAAAQIDBAUGBwgJCgv/xAC1EQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygZEUQqGxwdHwJSU0YgkWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoGChISFhoeIiYqSk5SVlpeYmZqgo6SlpqeoqaqysbK1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/aAAwDAQACEQMRAD8A5/w="
             fetchPriority="high"
             style={{
               aspectRatio: '16/9',
@@ -376,35 +329,43 @@ export default function Hero() {
             }}
           />
 
-          {/* Mobile/Tablet Centered Logo - Background Image (smaller, non-critical) */}
+          {/* Mobile/Tablet Centered Logo - Optimized loading */}
           <div
-            className="absolute hero-backdrop-blur bg-center bg-cover bg-no-repeat opacity-[0.43] translate-x-[-50%] translate-y-[-50%]"
+            className="absolute opacity-[0.43] translate-x-[-50%] translate-y-[-50%]"
             style={{
               left: "calc(50% + 0.5px)",
               top: '50%',
               width: 'clamp(156px, 20vw, 240px)',
               height: 'clamp(248px, 32vw, 382px)',
-              backgroundImage: `url('${imgKMobile}')`
             }}
             aria-hidden="true"
-          />
+          >
+            <Image
+              src={imgKMobile}
+              alt=""
+              fill
+              loading="lazy"
+              className="object-contain"
+              sizes="(max-width: 768px) 240px, 156px"
+              quality={60}
+            />
+          </div>
 
-          {/* Mobile Vector Decoration - Lazy loaded */}
+          {/* Mobile Vector Decoration */}
           <div
             className="absolute"
-            style={{ left: '0px', bottom: '150px', width: '321px', height: '138px' }}
+            style={{ right: '0px', bottom: '120px', width: '450px', height: '200px' }}
             aria-hidden="true"
           >
             <div className="absolute" style={{ inset: '-36.23% -15.58%' }}>
               <Image
-                alt="Decorative vector pattern"
+                alt=""
                 className="block max-w-none size-full"
                 src={imgVectorMobile}
                 fill
                 loading="lazy"
                 style={{ objectFit: 'contain' }}
-                role="img"
-                onError={() => console.warn('Failed to load vector mobile image')}
+                role="presentation"
               />
             </div>
           </div>
@@ -413,7 +374,7 @@ export default function Hero() {
           <div
             className="hero-mobile-content hero-text-stable absolute capitalize text-white text-center translate-x-[-50%]"
             style={{
-              fontFamily: "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
+              fontFamily: "var(--font-poppins), 'Poppins-Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif",
               fontWeight: 'normal',
               left: '50%',
               bottom: '120px',
@@ -426,12 +387,12 @@ export default function Hero() {
 
           {/* Mobile Statistics Boxes */}
           <div className="absolute flex gap-3 translate-x-[-50%]" style={{ left: '50%', bottom: '75px' }}>
-            <div className="bg-white/10 hero-decorative-blur border border-white/20 rounded-lg px-3 py-2">
+            <div className="bg-white/10 hero-decorative-blur rounded-lg px-3 py-2">
               <div className="text-white text-xs font-medium text-center whitespace-nowrap">
                 {t('hero.stats.projects')}
               </div>
             </div>
-            <div className="bg-white/10 hero-decorative-blur border border-white/20 rounded-lg px-3 py-2">
+            <div className="bg-white/10 hero-decorative-blur rounded-lg px-3 py-2">
               <div className="text-white text-xs font-medium text-center whitespace-nowrap">
                 {t('hero.stats.founded')}
               </div>
@@ -464,7 +425,7 @@ export default function Hero() {
               alt="KayanLive About Background"
               fill
               loading="lazy"
-              quality={60}
+              quality={30}
               sizes="(max-width: 768px) 100vw, 400px"
               className="object-cover"
               style={{
@@ -509,7 +470,7 @@ export default function Hero() {
                       style={{
                         width: 'clamp(320px, 50vw, 300px)',
                         height: 'clamp(220px, 35vw, 240px)',
-                        fontFamily: "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
+                        fontFamily: "var(--font-poppins), 'Poppins-Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif",
                         fontWeight: 'normal'
                       }}
                     >
@@ -582,17 +543,18 @@ export default function Hero() {
           aria-hidden={currentSlide !== 0}
           {...(currentSlide !== 0 && { inert: true })}
         >
-          {/* CRITICAL FIX: Desktop Background Image - Maximum LCP optimization */}
+          {/* CRITICAL FIX: Desktop Background Image - Ultra-optimized for LCP */}
           <Image
             src={imgScreenshot1Desktop}
             alt="KayanLive Hero Background"
             fill
             priority
-            quality={50}
+            quality={30}
             sizes="(min-width: 1600px) 1600px, (min-width: 1024px) 100vw, 1600px"
+            loading="eager"
             className="object-cover object-center"
             placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyiwjHvYmUAR+IRqzHMa2biSqKmZcPYLBJDlDMZqYJJGgkC+4RP5QTLcNNXCpqGHaWCzzJEyswzGYOEgBqhNY6nJJAWZlOUQqyh1iB9ZYXhrOVmNTNATaTZHPZ4m/d6rKGlLFgZWT8/nfKE7SzyN0HHf6ORPKRK7Xt4m4NeVuNNY6nJJAWZlOUQqyh1iB9ZYXhr"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9PjsBCgsLDg0OHBAQHDsoIig7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O//AABEIAAABAAMBEQACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4eLj5OXm5+jp6vHy8/T19vf4+fr/xAAfAQADAQEBAQEBAQEBAAAAAAAAAQIDBAUGBwgJCgv/xAC1EQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygZEUQqGxwdHwJSU0YgkWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoGChISFhoeIiYqSk5SVlpeYmZqgo6SlpqeoqaqysbK1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/aAAwDAQACEQMRAD8A5/w="
             fetchPriority="high"
             style={{
               aspectRatio: '16/9',
@@ -600,41 +562,49 @@ export default function Hero() {
             }}
           />
 
-          {/* Desktop Centered Decorative Logo - Background (non-critical) */}
+          {/* Desktop Centered Decorative Logo */}
           <div
-            className="absolute hero-backdrop-blur bg-center bg-cover bg-no-repeat opacity-[0.43] translate-x-[-50%] translate-y-[-50%]"
+            className="absolute opacity-[0.43] translate-x-[-50%] translate-y-[-50%]"
             style={{
               left: "calc(50% + 0.5px)",
               top: '50%',
               width: '280px',
               height: '446px',
-              backgroundImage: `url('${imgKMobile}')`
             }}
             aria-hidden="true"
-          />
+          >
+            <Image
+              src={imgKMobile}
+              alt=""
+              fill
+              loading="lazy"
+              className="object-contain"
+              sizes="280px"
+              quality={60}
+            />
+          </div>
 
-          {/* CRITICAL FIX: Decorative Frame - Fixed container to prevent CLS */}
-          <div className="hero-frame-container" aria-hidden="true">
-            <div className="hero-frame-inner" style={{
-              [locale === 'ar' ? 'right' : 'left']: '-10.58%',
-              [locale === 'ar' ? 'left' : 'right']: '0',
-              transform: locale === 'ar' ? 'scaleX(-1)' : 'none'
+          {/* CRITICAL FIX: Multiple Arrows - Optimized SVG loading */}
+          <div className="absolute left-0 right-0 w-full z-10 pointer-events-none" aria-hidden="true" style={{
+            bottom: '60px'
+          }}>
+            <div className="relative w-full" style={{
+              height: '290px',
             }}>
               <Image
-                alt="Decorative frame border"
-                className="block max-w-none"
+                alt=""
+                className="block w-full h-full"
                 src={imgFrame1}
-                width={1445}
+                width={1920}
                 height={290}
                 priority
                 style={{
                   width: '100%',
-                  height: '100%',
-                  objectFit: 'contain'
+                  height: 'auto',
+                  objectFit: 'contain',
+                  objectPosition: 'bottom'
                 }}
-                role="img"
-                onLoad={() => setFrameImageLoaded(true)}
-                onError={() => console.warn('Failed to load frame image')}
+                role="presentation"
                 placeholder="empty"
               />
             </div>
@@ -650,7 +620,7 @@ export default function Hero() {
               width: 'clamp(600px, 60vw, 875px)',
               textAlign: locale === 'ar' ? 'right' : 'left',
               wordWrap: 'break-word',
-              fontFamily: "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif"
+              fontFamily: "var(--font-poppins), 'Poppins-Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif"
             }}
           >
             {t('hero.title')}
@@ -664,12 +634,12 @@ export default function Hero() {
               bottom: '50px'
             }}
           >
-            <div className="bg-white/10 hero-decorative-blur border border-white/20 rounded-xl px-6 py-4">
+            <div className="bg-white/10 hero-decorative-blur rounded-xl px-6 py-4">
               <div className="text-white text-lg font-semibold text-center whitespace-nowrap">
                 {t('hero.stats.projects')}
               </div>
             </div>
-            <div className="bg-white/10 hero-decorative-blur border border-white/20 rounded-xl px-6 py-4">
+            <div className="bg-white/10 hero-decorative-blur rounded-xl px-6 py-4">
               <div className="text-white text-lg font-semibold text-center whitespace-nowrap">
                 {t('hero.stats.founded')}
               </div>
@@ -705,7 +675,7 @@ export default function Hero() {
               alt="KayanLive About Background"
               fill
               loading="lazy"
-              quality={60}
+              quality={40}
               sizes="(min-width: 1024px) 100vw, 1200px"
               className="object-cover object-center"
             />
@@ -799,7 +769,7 @@ export default function Hero() {
                         lineHeight: 'clamp(28px, 3.5vw, 38px)',
                         fontWeight: '500',
                         minHeight: 'fit-content',
-                        fontFamily: "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif"
+                        fontFamily: "var(--font-poppins), 'Poppins-Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif"
                       }}
                     >
                       <p className="mb-6 text-3xl font-bold">

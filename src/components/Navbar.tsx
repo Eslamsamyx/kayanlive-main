@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import '../styles/navbar-animations.css';
 import Button from './Button';
 
-const imgKayanLogoOpenFile31 = "/optimized/footer-logo/823c27de600ccd2f92af3e073c8e10df3a192e5c-footer-logo-desktop.webp";
+const imgKayanLogoOpenFile31 = "/optimized/footer/823c27de600ccd2f92af3e073c8e10df3a192e5c.webp";
 const imgArrow1 = "/assets/35f8e962d2ce4403cee4cf1b70df11920a8fa4b6.svg";
 
 interface NavbarProps {

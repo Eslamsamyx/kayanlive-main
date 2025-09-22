@@ -10,7 +10,7 @@ export default function ServicesHero() {
     <HeroTemplate
       ariaLabel={t('ariaLabel')}
       mobileTitle={t('title')}
-      mobileSubtitleGradient={t('subtitleGradient').split('. ')}
+      mobileSubtitleGradient={[t('subtitleGradient')]}
       mobileSubtitleWhite={t('subtitleWhite')}
       mobileBodyParagraphs={[
         t('bodyParagraph1'),

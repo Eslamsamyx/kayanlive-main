@@ -5,14 +5,11 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import CTAButton from './CTAButton';
 
-// Assets from Figma
-const imgOutline1 = "/optimized/about-hero/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329-about-hero-desktop.webp";
-const imgPattern0452 = "/optimized/gallery-thumbnail/6cdd4333a240b46dead9df86c5a83772e81b76fc-gallery-thumbnail-desktop.webp";
-const imgFreepikTheStyleIsCandidImagePhotographyWithNatural627961 = "/optimized/service-card/0a0c21416d9d9b2c97aedc8aa51e7c6619486a15-service-card-desktop.webp";
+// Assets from Figma - Optimized WebP images
+const imgOutline1 = "/optimized/work-cta/7d0b4204ecf2732587fef2b7f191e56d708f7342-work-cta-outline.webp";
+const imgPattern0452 = "/optimized/work-cta/387db429def8526f504ca1667390161ed52cad5a-work-cta-pattern.webp";
+const imgFreepikTheStyleIsCandidImagePhotographyWithNatural627961 = "/optimized/work-cta/a9fd0d21f36d5cfd66da463407810fac3f7425a2-work-cta-image.webp";
 const imgEllipse3626 = "/assets/34146dbe8aeb9c1892f700cd9059e41d476db4b0.svg";
-
-// Mobile-specific assets
-const imgFrame1618874025 = "/optimized/service-card/0a0c21416d9d9b2c97aedc8aa51e7c6619486a15-service-card-mobile.webp";
 
 interface WorkCallToActionProps {
   locale?: string;
@@ -20,18 +17,10 @@ interface WorkCallToActionProps {
 
 export default function WorkCallToAction({ locale = 'en' }: WorkCallToActionProps) {
   const t = useTranslations('work.callToAction');
-  const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   // Prevent hydration mismatch
@@ -39,219 +28,135 @@ export default function WorkCallToAction({ locale = 'en' }: WorkCallToActionProp
     return null;
   }
 
-  if (isMobile) {
-    // Mobile Layout - Based on Figma Design
-    return (
-      <div className="bg-[#2c2c2b] box-border flex flex-col gap-[31px] items-center justify-center px-[27px] py-20 relative w-full overflow-hidden min-h-[700px]">
-        {/* Decorative Pattern - Mobile - White - Bigger and partially outside */}
-        <div 
-          className="absolute bg-center bg-cover bg-no-repeat h-[280px] w-[180px]"
-          style={{ 
-            backgroundImage: `url('${imgPattern0452}')`,
-            right: '-50px',
-            top: '300px',
-            filter: 'brightness(0) invert(1)',
-            opacity: 0.8
-          }} 
-        />
-        
-        {/* Business Meeting Image */}
-        <div 
-          className="bg-center bg-cover bg-no-repeat h-[239px] rounded-[20px] w-full max-w-[420px]"
-          style={{ backgroundImage: `url('${imgFrame1618874025}')` }}
-        />
-        
-        {/* Content Card with Glass Morphism */}
-        <div className="bg-white/[0.03] backdrop-blur-md box-border flex flex-col gap-[25px] items-start justify-center px-[30px] py-[35px] relative rounded-[35px] w-full max-w-[420px] overflow-hidden">
-          {/* Gradient Border */}
-          <div 
-            aria-hidden="true" 
-            className="absolute border border-[#74cfaa] border-solid inset-0 pointer-events-none rounded-[35px]" 
-          />
-          
-          {/* Gradient Title */}
-          <div 
-            className="bg-clip-text bg-gradient-to-r capitalize from-[#a095e1] to-[#74cfaa] w-[200px]"
-            style={{
-              fontFamily: '"Poppins", sans-serif',
-              fontWeight: 'bold',
-              fontSize: '30px',
-              lineHeight: '31px',
-              letterSpacing: '-0.6px',
-              WebkitTextFillColor: 'transparent'
-            }}
-          >
-            <p>{t('title')}</p>
-          </div>
-          
-          {/* Content Text */}
-          <div className="w-full" style={{
-            fontFamily: '"Poppins", sans-serif',
-            fontSize: '16px',
-            lineHeight: '20px',
-            color: '#c3c3c3'
-          }}>
-            <p className="mb-0">{t('question')}</p>
-            <p className="mb-0 text-white font-bold">{t('callout')}</p>
-            <p className="mb-0">&nbsp;</p>
-            <p>{t('description')}</p>
-            <p className="mb-0">&nbsp;</p>
-            <p>{t('promise')}</p>
-          </div>
-        </div>
-        
-        {/* CTA Button */}
-        <CTAButton
-          href={`/${locale}/contact`}
-          ariaLabel={t('buttonAriaLabel')}
-        >
-          {t('buttonText')}
-        </CTAButton>
-      </div>
-    );
-  }
-
-  // Desktop Layout - Original Design
-
   return (
-    <div
-      className="bg-[#2c2c2b] relative w-full overflow-clip"
-      style={{ minHeight: 'clamp(600px, 70vw, 1050px)' }}
+    <section
+      className="relative w-full bg-[#2c2c2b] overflow-hidden"
+      aria-labelledby="work-cta-title"
     >
-      {/* Background Decorative Elements */}
-      <div 
-        className="absolute bg-center bg-cover bg-no-repeat opacity-50" 
-        style={{ 
-          backgroundImage: `url('${imgOutline1}')`,
-          height: 'clamp(600px, 72.4vw, 1094px)',
-          left: 'clamp(-400px, -35vw, -500px)',
-          top: 'clamp(180px, 20.8vw, 314px)',
-          width: 'clamp(400px, 46.6vw, 704px)'
-        }} 
-      />
-      {/* Top-Right Pattern - Completely White */}
-      <div 
-        className="absolute bg-center bg-cover bg-no-repeat" 
-        style={{ 
-          backgroundImage: `url('${imgPattern0452}')`,
-          height: 'clamp(280px, 30.8vw, 466px)',
-          left: 'clamp(800px, 84.2vw, 1273px)',
-          top: 'clamp(-40px, -4.3vw, -65px)',
-          width: 'clamp(180px, 20.2vw, 305px)',
-          filter: 'brightness(0) invert(1)',
-          opacity: 0.8
-        }} 
-      />
+      {/* Container with proper padding for all screen sizes */}
+      <div className="relative min-h-[600px] md:min-h-[700px] lg:min-h-[800px] xl:min-h-[900px] 2xl:min-h-[1000px]">
 
-      {/* Main Content Container - Responsive and Centered */}
-      <div 
-        className="absolute flex flex-col items-center justify-start translate-x-[-50%] translate-y-[-50%]"
-        style={{
-          left: '50%',
-          top: 'calc(50% + 0.5px)',
-          width: 'clamp(320px, 88.6vw, 1339px)',
-          gap: 'clamp(30px, 3vw, 46px)',
-          maxWidth: '95vw'
-        }}
-      >
-        {/* Two Column Layout - Responsive */}
-        <div 
-          className="flex flex-col lg:flex-row items-center justify-center relative w-full"
-          style={{ 
-            gap: 'clamp(15px, 1.7vw, 25px)'
+        {/* Decorative Circle - At the very top of the component */}
+        <div className="absolute -top-24 md:-top-32 lg:-top-40 xl:-top-48 left-1/2 transform -translate-x-1/2 w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96 z-0">
+          <Image
+            src={imgEllipse3626}
+            alt=""
+            fill
+            className="object-contain opacity-50 md:opacity-60 lg:opacity-70"
+          />
+        </div>
+
+        {/* Top-Right Pattern - Visible on all screen sizes */}
+        <div
+          className="absolute"
+          style={{
+            backgroundImage: `url('${imgPattern0452}')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            width: 'clamp(100px, 15vw, 300px)',
+            height: 'clamp(150px, 25vw, 450px)',
+            right: 'clamp(-30px, -5vw, -100px)',
+            top: 'clamp(-20px, -3vw, -60px)',
+            filter: 'brightness(0) invert(1)',
+            opacity: 0.6
           }}
-        >
-          {/* Left Image - Responsive */}
+        />
+
+        {/* Left Background Pattern - Hidden on mobile for performance */}
+        <div className="hidden md:block">
           <div
-            className="bg-white overflow-clip relative flex-shrink-0"
+            className="absolute opacity-30 lg:opacity-50"
             style={{
-              minHeight: 'clamp(280px, 33.9vw, 513px)',
-              width: 'clamp(320px, 43.5vw, 657px)',
-              borderRadius: 'clamp(20px, 2.6vw, 40px)',
-              maxWidth: '100%'
+              backgroundImage: `url('${imgOutline1}')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              width: 'clamp(300px, 35vw, 700px)',
+              height: 'clamp(400px, 50vw, 1000px)',
+              left: 'clamp(-300px, -25vw, -500px)',
+              top: '20%'
             }}
-          >
-            <div 
-              className="absolute bg-center bg-cover bg-no-repeat inset-0" 
-              style={{ backgroundImage: `url('${imgFreepikTheStyleIsCandidImagePhotographyWithNatural627961}')` }} 
-            />
-            {/* Decorative Circle - Responsive */}
-            <div 
-              className="absolute"
-              style={{
-                height: 'clamp(180px, 20.6vw, 311px)',
-                left: 'clamp(240px, 32.1vw, 485px)',
-                top: 'clamp(-95px, -10.5vw, -159px)',
-                width: 'clamp(200px, 23.5vw, 356px)'
-              }}
-            >
-              <div className="absolute inset-[-96.46%_-84.27%]">
-                <Image alt="" className="block max-w-none size-full" src={imgEllipse3626} fill style={{objectFit: 'cover'}} />
+          />
+        </div>
+
+        {/* Main Content - Top aligned instead of centered */}
+        <div className="relative z-10 min-h-[600px] md:min-h-[700px] lg:min-h-[800px] xl:min-h-[900px] 2xl:min-h-[1000px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-12 md:py-16 lg:py-20">
+
+          <div className="w-full max-w-7xl mx-auto">
+            {/* Grid Layout - Responsive for all screens */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 xl:gap-12 items-start">
+
+              {/* Left Column - Image */}
+              <div className="relative w-full h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] xl:h-[500px] 2xl:h-[550px] rounded-2xl md:rounded-3xl lg:rounded-[40px] overflow-hidden bg-white group">
+                {/* Main Image with proper responsive sizing */}
+                <Image
+                  src={imgFreepikTheStyleIsCandidImagePhotographyWithNatural627961}
+                  alt="Business meeting showcasing our work"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 50vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  priority
+                />
+
+                {/* Subtle gradient overlay for better text contrast on mobile */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent lg:hidden" />
+              </div>
+
+              {/* Right Column - Content */}
+              <div className="flex items-start justify-center">
+                <div className="relative w-full h-full min-h-[300px] sm:min-h-[350px] md:min-h-[400px] lg:min-h-[450px] xl:min-h-[500px] 2xl:min-h-[550px]">
+                  {/* Glass Morphism Card */}
+                  <div className="h-full bg-white/[0.03] backdrop-blur-md rounded-2xl md:rounded-3xl lg:rounded-[35px] p-6 sm:p-8 md:p-10 lg:p-12 xl:p-14 border border-[#74cfaa]/50 hover:border-[#74cfaa]/70 transition-all duration-500 hover:bg-white/[0.05]">
+
+                    {/* Title with responsive typography */}
+                    <h2
+                      id="work-cta-title"
+                      className="bg-clip-text bg-gradient-to-r from-[#a095e1] to-[#74cfaa] font-bold mb-6 md:mb-8 lg:mb-10"
+                      style={{
+                        WebkitTextFillColor: 'transparent',
+                        fontSize: 'clamp(1.75rem, 4vw, 5rem)',
+                        lineHeight: 'clamp(2rem, 4.5vw, 5.5rem)',
+                        letterSpacing: 'clamp(-0.5px, -0.08vw, -1.6px)'
+                      }}
+                    >
+                      {t('title')}
+                    </h2>
+
+                    {/* Content with better responsive typography */}
+                    <div className="space-y-3 md:space-y-4 lg:space-y-5 text-[#c3c3c3]">
+                      <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed">
+                        {t('question')}
+                      </p>
+
+                      <p className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
+                        {t('callout')}
+                      </p>
+
+                      <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed pt-2 md:pt-3 lg:pt-4">
+                        {t('description')}
+                      </p>
+
+                      <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed">
+                        {t('promise')}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Right Content Box - Responsive with Glass Morphism */}
-          <div
-            className="bg-white/[0.03] backdrop-blur-md box-border flex flex-col items-start justify-start relative flex-shrink-0 overflow-hidden"
-            style={{
-              gap: 'clamp(25px, 2.9vw, 44px)',
-              minHeight: 'clamp(280px, 33.9vw, 513px)',
-              width: 'clamp(320px, 43.5vw, 657px)',
-              padding: 'clamp(25px, 3.3vw, 50px)',
-              borderRadius: 'clamp(20px, 2.3vw, 35px)',
-              maxWidth: '100%'
-            }}
-          >
-            {/* Simple Green Border */}
-            <div 
-              aria-hidden="true" 
-              className="absolute border border-[#74cfaa] border-solid inset-0 pointer-events-none"
-              style={{ borderRadius: 'clamp(20px, 2.3vw, 35px)' }}
-            />
-            
-            {/* Gradient Title - Responsive */}
-            <div 
-              className="bg-clip-text bg-gradient-to-r capitalize font-normal from-[#a095e1] leading-relaxed not-italic relative to-[#74cfaa]"
-              style={{ 
-                WebkitTextFillColor: "transparent",
-                fontSize: 'clamp(32px, 5.3vw, 80px)',
-                letterSpacing: 'clamp(-0.8px, -0.11vw, -1.6px)',
-                lineHeight: 'clamp(44px, 6vw, 85px)',
-                maxWidth: '100%',
-                paddingBottom: 'clamp(8px, 1vw, 12px)'
-              }}
-            >
-              {t('title')}
-            </div>
-
-            {/* Content Text - Responsive */}
-            <div
-              className="font-medium not-italic relative text-[#c3c3c3]"
-              style={{
-                fontSize: 'clamp(14px, 1.5vw, 22px)',
-                lineHeight: 'clamp(18px, 1.9vw, 28px)',
-                width: '100%'
-              }}
-            >
-              <p className="font-normal mb-0">{t('question')}</p>
-              <p className="font-bold mb-0 text-white">{t('callout')}</p>
-              <p className="mb-0">&nbsp;</p>
-              <p className="font-normal">{t('description')}</p>
-              <p className="mb-0">&nbsp;</p>
-              <p className="font-normal">{t('promise')}</p>
+            {/* CTA Button - Centered with proper spacing */}
+            <div className="flex justify-center mt-8 md:mt-10 lg:mt-12 xl:mt-14">
+              <CTAButton
+                href={`/${locale}/contact`}
+                ariaLabel={t('buttonAriaLabel')}
+                className="transform hover:scale-105 transition-transform duration-300"
+              >
+                {t('buttonText')}
+              </CTAButton>
             </div>
           </div>
         </div>
-
-        {/* CTA Button */}
-        <CTAButton
-          href={`/${locale}/contact`}
-          ariaLabel={t('buttonAriaLabel')}
-        >
-          {t('buttonText')}
-        </CTAButton>
       </div>
-    </div>
+    </section>
   );
 }

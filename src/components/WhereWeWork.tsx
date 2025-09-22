@@ -5,7 +5,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { getMarkdownHTML } from '@/utils/markdownUtils';
 import CTAButton from './CTAButton';
 
-const imgPattern = "/optimized/cta-background/ef25fd14e49122ddd6cbc03c8a92caff93500eb7-cta-background-desktop.webp";
+const imgPattern = "/optimized/wherewework/ef25fd14e49122ddd6cbc03c8a92caff93500eb7.webp";
 const imgCheckmark = "/assets/d57e8b023cc2954fe2c89c41bd7f2153074ba9c1.svg";
 
 export default function WhereWeWork() {
@@ -139,15 +139,14 @@ export default function WhereWeWork() {
             style={{
               width: '749px',
               height: '757px',
-              right: '-105px',
+              right: '-50px',
               bottom: '-223px'
             }}
           >
             <div
               className="w-full h-full bg-center bg-cover opacity-10"
               style={{
-                backgroundImage: `url('${imgPattern}')`,
-                transform: 'rotate(90deg)'
+                backgroundImage: `url('${imgPattern}')`
               }}
             />
           </div>
@@ -178,8 +177,8 @@ export default function WhereWeWork() {
             </div>
           </div>
 
-          <div className="md:hidden absolute bottom-[-125.5px] flex h-[319px] items-center justify-center translate-x-[-50%] w-[315px]" style={{ left: "calc(50% + 3px)" }}>
-            <div className="flex-none rotate-[90deg]">
+          <div className="md:hidden absolute bottom-[-125.5px] flex h-[319px] items-center justify-center translate-x-[-50%] w-[315px]" style={{ left: "calc(50% + 20px)" }}>
+            <div className="flex-none">
               <div
                 className="bg-center bg-cover bg-no-repeat h-[315px] w-[319px]"
                 style={{
@@ -192,8 +191,8 @@ export default function WhereWeWork() {
           </div>
 
           {/* Desktop Pattern - Right Side - From Figma */}
-          <div className="absolute hidden md:flex bottom-[-223px] h-[757px] items-center justify-center right-[-50px] w-[400px] z-20 overflow-hidden">
-            <div className="flex-none rotate-[90deg]">
+          <div className="absolute hidden md:flex bottom-[-223px] h-[757px] items-center justify-center right-[50px] w-[500px] z-0 overflow-visible">
+            <div className="flex-none">
               <div
                 className="bg-center bg-cover bg-no-repeat h-[749px] w-[757px]"
                 style={{
@@ -206,7 +205,7 @@ export default function WhereWeWork() {
           </div>
 
           {/* Content - Responsive */}
-          <div className="absolute left-4 md:left-[137px] top-1/2 -translate-y-1/2 w-[calc(100%-2rem)] md:w-[700px] flex flex-col gap-[24px] md:gap-[32px] z-10">
+          <div className="absolute left-4 md:left-[137px] top-1/2 -translate-y-1/2 w-[calc(100%-2rem)] md:w-[700px] flex flex-col gap-[24px] md:gap-[32px] z-30">
             <h2
               className="text-white text-center md:text-left heading-overflow-safe"
               style={{
