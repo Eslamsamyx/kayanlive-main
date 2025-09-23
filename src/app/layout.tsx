@@ -8,7 +8,7 @@ import '@/styles/globals.css';
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '600'], // Only critical weights
-  display: 'swap',
+  display: 'swap', // Use swap for better performance
   preload: true,
   fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Arial', 'sans-serif'],
   variable: '--font-poppins',
@@ -94,72 +94,20 @@ export default function RootLayout({
           rel="preload"
           as="image"
           type="image/webp"
-          href="/optimized/hero-main/01f5d49d03c8455dc99b2ad32446b6657b1949e0-hero-main-desktop.webp"
-          media="(min-width: 1024px)"
-          fetchPriority="high"
-        />
-        <link
-          rel="preload"
-          as="image"
-          type="image/webp"
-          href="/optimized/hero-main/01f5d49d03c8455dc99b2ad32446b6657b1949e0-hero-main-mobile.webp"
-          media="(max-width: 1023px)"
+          href="/optimized/hero/aeb93871393e6e48280518ae29c12c43432c5df9-hero-main-bg.webp"
           fetchPriority="high"
         />
 
-        {/* CRITICAL FIX: Preload critical SVG to prevent CLS */}
-        <link
-          rel="preload"
-          as="image"
-          type="image/svg+xml"
-          href="/assets/bac2af3eca424e14c720bab9f5fabec434faaa31.svg"
-          media="(min-width: 1024px)"
-        />
-
-        {/* CRITICAL FIX: Font optimization CSS - prevent FOIT/FOUT */}
+        {/* CRITICAL FIX: Minimal critical CSS for 100% performance */}
         <style dangerouslySetInnerHTML={{
           __html: `
-            /* Ultra-optimized fallback font with precise metrics matching */
-            @font-face {
-              font-family: 'Poppins-Fallback';
-              src: local('system-ui'), local('-apple-system'), local('BlinkMacSystemFont'), local('Segoe UI'), local('Arial');
-              size-adjust: 107%; /* Precisely matched to Poppins */
-              ascent-override: 105%;
-              descent-override: 25%;
-              line-gap-override: 0%;
-            }
-
-            /* Critical font loading optimization */
-            .font-loading {
-              font-family: 'Poppins-Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-            }
-
-            /* Critical rendering optimization */
-            * {
-              text-rendering: optimizeSpeed;
+            body {
+              font-family: var(--font-poppins, system-ui, -apple-system, sans-serif);
               -webkit-font-smoothing: antialiased;
               -moz-osx-font-smoothing: grayscale;
             }
-
-            /* CRITICAL FIX: Prevent layout shift during font loading */
-            .font-poppins {
-              font-feature-settings: normal;
-              font-variation-settings: normal;
-            }
-
-            /* Performance CSS: GPU acceleration for critical elements */
-            .hero-container,
-            .logo-carousel,
-            .nav-container {
-              transform: translateZ(0);
-              will-change: auto;
-            }
-
-            /* Critical CSS: Prevent hydration mismatches */
-            body {
-              -webkit-text-size-adjust: 100%;
-              text-size-adjust: 100%;
-            }
+            .hero-container { contain: layout style paint; }
+            img { content-visibility: auto; }
           `
         }} />
       </head>

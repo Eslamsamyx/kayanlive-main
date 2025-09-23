@@ -98,7 +98,7 @@ const LogoCard = ({ item, className = '' }: LogoCardProps) => {
             }}
             loading="lazy"
             quality={80}
-            sizes="260px"
+            sizes="(max-width: 640px) 140px, (max-width: 768px) 180px, (max-width: 1024px) 220px, 260px"
           />
         </div>
       </div>

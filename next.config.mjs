@@ -9,6 +9,13 @@ const nextConfig = {
   poweredByHeader: false,
   compress: true,
 
+  // Image optimization configuration
+  images: {
+    // Configure all quality values used in the application
+    qualities: [20, 30, 60, 75, 80, 90, 100],
+    formats: ['image/webp'],
+  },
+
   // CRITICAL FIX: Ultra-performance optimizations for 100% scores
   experimental: {
     optimizePackageImports: [
@@ -40,10 +47,10 @@ const nextConfig = {
         ...config.optimization,
         splitChunks: {
           chunks: 'all',
-          maxAsyncRequests: 25, // Reduced for better initial load
-          maxInitialRequests: 15, // Reduced for better initial load
-          minSize: 30000, // Increased minimum chunk size
-          maxSize: 200000, // Limit max chunk size
+          maxAsyncRequests: 10, // Ultra reduced for 100% performance
+          maxInitialRequests: 5, // Ultra reduced for 100% performance
+          minSize: 50000, // Larger chunks for fewer requests
+          maxSize: 300000, // Increased to reduce splits
           cacheGroups: {
             default: false,
             vendors: false,
@@ -203,7 +210,8 @@ const nextConfig = {
 
     // CRITICAL FIX: Development performance
     if (dev) {
-      config.devtool = 'eval-cheap-module-source-map';
+      // Don't override devtool in development to avoid performance regressions
+      // Next.js will handle the optimal devtool setting
       // Faster builds in development
       config.optimization.removeAvailableModules = false;
       config.optimization.removeEmptyChunks = false;
@@ -213,29 +221,6 @@ const nextConfig = {
     return config;
   },
 
-  // CRITICAL FIX: Ultra-optimized image settings for LCP
-  images: {
-    formats: ['image/avif', 'image/webp'], // AVIF first for better compression
-    deviceSizes: [320, 420, 768, 1024, 1200, 1600, 1920],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year
-    dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    unoptimized: false,
-
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'picsum.photos',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'api.dicebear.com',
-        pathname: '/**',
-      },
-    ],
-  },
 
   // CRITICAL FIX: Performance-optimized headers
   async headers() {
