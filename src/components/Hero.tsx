@@ -315,7 +315,7 @@ export default function Hero() {
             alt="KayanLive Hero Background"
             fill
             priority
-            quality={20}
+            quality={90}
             sizes="(max-width: 768px) 100vw, 768px"
             loading="eager"
             unoptimized={false}
@@ -347,7 +347,7 @@ export default function Hero() {
               loading="lazy"
               className="object-contain"
               sizes="(max-width: 768px) 240px, 156px"
-              quality={60}
+              quality={90}
             />
           </div>
 
@@ -425,13 +425,9 @@ export default function Hero() {
               alt="KayanLive About Background"
               fill
               loading="lazy"
-              quality={30}
+              quality={100}
               sizes="(max-width: 768px) 100vw, 400px"
-              className="object-cover"
-              style={{
-                objectPosition: '47.69% 0%',
-                transform: 'scale(3.7372)'
-              }}
+              className="object-cover object-center"
             />
           )}
 
@@ -549,7 +545,7 @@ export default function Hero() {
             alt="KayanLive Hero Background"
             fill
             priority
-            quality={30}
+            quality={100}
             sizes="(min-width: 1600px) 1600px, (min-width: 1024px) 100vw, 1600px"
             loading="eager"
             className="object-cover object-center"
@@ -580,7 +576,7 @@ export default function Hero() {
               loading="lazy"
               className="object-contain"
               sizes="280px"
-              quality={60}
+              quality={90}
             />
           </div>
 
@@ -675,7 +671,7 @@ export default function Hero() {
               alt="KayanLive About Background"
               fill
               loading="lazy"
-              quality={40}
+              quality={100}
               sizes="(min-width: 1024px) 100vw, 1200px"
               className="object-cover object-center"
             />
