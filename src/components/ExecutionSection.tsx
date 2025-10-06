@@ -153,15 +153,36 @@ export default function ExecutionSection() {
               transform: 'translate(-50%, -50%)'
             }}
           >
-            {/* Heading - responsive font sizing */}
-            <h2 className="capitalize text-white font-normal w-full lg:w-[524px]"
-              style={{
-                fontSize: 'clamp(32px, 8vw, 80px)',
-                lineHeight: 'clamp(36px, 9vw, 77px)'
-              }}>
-              {t('execution.heading')}
-            </h2>
-            
+            {/* Content section with heading, subtitle and description */}
+            <div className="flex flex-col gap-4 md:gap-6">
+              {/* Heading - responsive font sizing */}
+              <h2 className="capitalize text-white font-normal w-full lg:w-[524px]"
+                style={{
+                  fontSize: 'clamp(32px, 8vw, 80px)',
+                  lineHeight: 'clamp(36px, 9vw, 77px)'
+                }}>
+                {t('execution.heading')}
+              </h2>
+
+              {/* Subtitle */}
+              <p className="text-white/90 font-medium w-full lg:w-[650px]"
+                style={{
+                  fontSize: 'clamp(18px, 3vw, 24px)',
+                  lineHeight: 'clamp(24px, 3.5vw, 32px)'
+                }}>
+                {t('execution.subtitle')}
+              </p>
+
+              {/* Description */}
+              <p className="text-white/80 font-normal w-full lg:w-[700px]"
+                style={{
+                  fontSize: 'clamp(14px, 2vw, 18px)',
+                  lineHeight: 'clamp(20px, 2.5vw, 28px)'
+                }}>
+                {t('execution.description')}
+              </p>
+            </div>
+
             {/* CTA Button - responsive */}
             <div className="flex flex-row items-center">
               <button className="flex items-center justify-center gap-2 md:gap-2.5 bg-[#7afdd6] hover:bg-[#6ee8c5] transition-colors duration-300 rounded-full px-4 py-3 md:px-6 md:py-4 lg:px-[25px] lg:py-[18px] h-[50px] md:h-[60px] lg:h-[65px]">

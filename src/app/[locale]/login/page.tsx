@@ -12,7 +12,8 @@ interface LoginForm {
   password: string;
 }
 
-const imgMaskGroup = "/optimized/achievement-icon/638442c54db92ce49b3ad8194a062a52ba973004-achievement-icon-desktop.webp";
+// Using original high-quality PNG for better background quality
+const imgMaskGroup = "/assets/638442c54db92ce49b3ad8194a062a52ba973004.png";
 const imgEllipse1 = "/assets/575a92ae113574b10651d37ad7654adf9fb7bd85.svg";
 const imgEllipse2 = "/assets/dcc83c6de9d9f4b919b448af6ce767c528855540.svg";
 
@@ -32,6 +33,14 @@ export default function AdminLogin() {
   } = useForm<LoginForm>();
 
   useEffect(() => {
+    // Preload high-quality background image
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = imgMaskGroup;
+    link.type = 'image/png';
+    document.head.appendChild(link);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -55,6 +64,7 @@ export default function AdminLogin() {
     return () => {
       observer.disconnect();
       clearTimeout(timer);
+      document.head.removeChild(link);
     };
   }, []);
 
@@ -93,25 +103,27 @@ export default function AdminLogin() {
   };
 
   return (
-    <div
-      ref={containerRef}
-      className="min-h-screen bg-[#2c2c2b] relative w-full overflow-hidden flex items-center justify-center"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onMouseMove={handleMouseMove}
-    >
+    <div className="min-h-screen flex items-center justify-center px-4 py-8">
+      <div
+        ref={containerRef}
+        className="relative bg-[#2c2c2b] w-full max-w-[1600px] min-h-[800px] overflow-hidden flex items-center justify-center rounded-[25px] md:rounded-[43px] lg:rounded-[61px]"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onMouseMove={handleMouseMove}
+      >
       {/* Full Background Pattern - Always present but masked */}
       <div
-        className="absolute inset-0 bg-repeat opacity-100"
+        className="absolute inset-0 bg-repeat opacity-100 rounded-[25px] md:rounded-[43px] lg:rounded-[61px]"
         style={{
           backgroundImage: `url('${imgMaskGroup}')`,
-          backgroundSize: '400px 400px'
+          backgroundSize: '600px 600px',
+          imageRendering: 'crisp-edges' as any
         }}
       />
 
       {/* Mask overlay that hides the pattern except around cursor */}
       <div
-        className={`absolute inset-0 bg-[#2c2c2b] transition-opacity duration-300 ${
+        className={`absolute inset-0 bg-[#2c2c2b] transition-opacity duration-300 rounded-[25px] md:rounded-[43px] lg:rounded-[61px] ${
           isHovered ? 'opacity-100' : 'opacity-100'
         }`}
         style={{
@@ -333,6 +345,7 @@ export default function AdminLogin() {
           </motion.div>
         </div>
       </motion.div>
+      </div>
     </div>
   );
 }

@@ -257,8 +257,8 @@ export default function Hero() {
 
         /* CRITICAL FIX: Ultra-stable font rendering */
         .hero-text-stable {
-          font-size: clamp(36px, 4vw, 50px);
-          line-height: 1.3;
+          font-size: clamp(24px, 3vw, 36px);
+          line-height: 1.5;
           font-family: var(--font-poppins), 'Poppins-Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
           font-display: swap;
           text-rendering: optimizeSpeed;
@@ -282,8 +282,8 @@ export default function Hero() {
 
         @media (max-width: 768px) {
           .hero-text-stable {
-            font-size: clamp(18px, 4.5vw, 22px);
-            line-height: clamp(20px, 5vw, 24px);
+            font-size: clamp(14px, 3.5vw, 18px);
+            line-height: clamp(21px, 5vw, 27px);
           }
         }
       `}</style>
@@ -372,17 +372,44 @@ export default function Hero() {
 
           {/* Mobile Text Content - CRITICAL FIX: Stable text metrics */}
           <div
-            className="hero-mobile-content hero-text-stable absolute capitalize text-white text-center translate-x-[-50%]"
+            className="hero-mobile-content absolute translate-x-[-50%]"
             style={{
-              fontFamily: "var(--font-poppins), 'Poppins-Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif",
-              fontWeight: 'normal',
               left: '50%',
               bottom: '120px',
-              width: 'clamp(260px, 70vw, 281px)',
-              wordWrap: 'break-word'
+              width: 'clamp(320px, 85vw, 400px)'
             }}
           >
-            {t('hero.title')}
+            <div
+              className="bg-black/40 backdrop-blur-sm rounded-xl px-4 py-3"
+              style={{
+                border: '1px solid rgba(255, 255, 255, 0.1)'
+              }}
+            >
+              <div
+                className="text-white text-center font-semibold mb-2"
+                style={{
+                  fontFamily: "var(--font-poppins), 'Poppins-Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif",
+                  fontSize: 'clamp(16px, 4vw, 22px)',
+                  lineHeight: '1.3',
+                  direction: locale === 'ar' ? 'rtl' : 'ltr'
+                }}
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}
+              >
+                {t('hero.welcome')}
+              </div>
+              <div
+                className="hero-text-stable capitalize text-white text-center"
+                style={{
+                  fontFamily: "var(--font-poppins), 'Poppins-Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif",
+                  fontWeight: 'normal',
+                  wordWrap: 'break-word',
+                  direction: locale === 'ar' ? 'rtl' : 'ltr'
+                }}
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}
+              >
+                {t('hero.title')}
+              </div>
+            </div>
           </div>
 
           {/* Mobile Statistics Boxes */}
@@ -608,18 +635,47 @@ export default function Hero() {
 
           {/* Text Content - CRITICAL FIX: Stable text metrics */}
           <div
-            className="hero-desktop-content hero-text-stable absolute capitalize text-white"
+            className="hero-desktop-content absolute"
             style={{
-              fontWeight: 'bold',
               [locale === 'ar' ? 'right' : 'left']: '42px',
               bottom: '120px',
-              width: 'clamp(600px, 60vw, 875px)',
-              textAlign: locale === 'ar' ? 'right' : 'left',
-              wordWrap: 'break-word',
-              fontFamily: "var(--font-poppins), 'Poppins-Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif"
+              width: 'clamp(700px, 70vw, 1100px)'
             }}
           >
-            {t('hero.title')}
+            <div
+              className="bg-black/40 backdrop-blur-md rounded-2xl px-8 py-6"
+              style={{
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)'
+              }}
+            >
+              <div
+                className="text-white font-bold mb-3"
+                style={{
+                  textAlign: locale === 'ar' ? 'right' : 'left',
+                  fontFamily: "var(--font-poppins), 'Poppins-Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif",
+                  fontSize: 'clamp(28px, 3.5vw, 42px)',
+                  lineHeight: '1.3',
+                  direction: locale === 'ar' ? 'rtl' : 'ltr'
+                }}
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}
+              >
+                {t('hero.welcome')}
+              </div>
+              <div
+                className="hero-text-stable capitalize text-white"
+                style={{
+                  fontWeight: 'normal',
+                  textAlign: locale === 'ar' ? 'right' : 'left',
+                  wordWrap: 'break-word',
+                  fontFamily: "var(--font-poppins), 'Poppins-Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif",
+                  direction: locale === 'ar' ? 'rtl' : 'ltr'
+                }}
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}
+              >
+                {t('hero.title')}
+              </div>
+            </div>
           </div>
 
           {/* Desktop Statistics Boxes */}

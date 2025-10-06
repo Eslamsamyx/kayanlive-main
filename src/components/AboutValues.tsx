@@ -369,7 +369,7 @@ export default function AboutValues() {
       {/* Title Section - Simple left-aligned */}
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 relative mb-6 md:mb-12 lg:mb-16">
         <h2
-          className="font-bold capitalize text-left text-[50px] md:text-[100px] lg:text-[200px] leading-[60px] md:leading-[100px] lg:leading-[200px] tracking-0 lg:tracking-[-2px]"
+          className="font-bold capitalize text-left text-[50px] md:text-[100px] lg:text-[200px] leading-[65px] md:leading-[120px] lg:leading-[230px] tracking-0 lg:tracking-[-2px]"
           style={{
             background: 'linear-gradient(90deg, #a095e1, #74cfaa)',
             WebkitBackgroundClip: 'text',
@@ -380,6 +380,12 @@ export default function AboutValues() {
         >
           {t('title')}
         </h2>
+
+        {/* Subtitle */}
+        <p className="text-white/80 text-base md:text-lg lg:text-xl mt-4 md:mt-6 max-w-3xl leading-relaxed"
+           style={{ fontFamily: '"Poppins", sans-serif' }}>
+          {t('subtitle')}
+        </p>
 
         {/* SVG Logo beside title - Responsive sizing and opacity */}
         <div
@@ -482,7 +488,15 @@ export default function AboutValues() {
             );
           })}
         </div>
-        
+
+        {/* Outro Text */}
+        <div className="mt-20 md:mt-32 max-w-4xl mx-auto px-4">
+          <p className="text-white/90 text-center text-base md:text-lg lg:text-xl leading-relaxed"
+             style={{ fontFamily: '"Poppins", sans-serif' }}>
+            {t('outro')}
+          </p>
+        </div>
+
         {/* Spacing above pattern */}
         <div className="h-32"></div>
       </div>

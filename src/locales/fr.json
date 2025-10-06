@@ -9,7 +9,8 @@
     "clientsPartners": "Clients & Partenaires"
   },
   "hero": {
-    "title": "Bienvenue chez KayanLive Gestion d'Événements de Premier Plan en Arabie Saoudite, aux EAU et à Travers le CCG",
+    "welcome": "Bienvenue chez KayanLive",
+    "title": "Gestion d'Événements de Premier Plan en Arabie Saoudite, aux EAU et à Travers le CCG",
     "slide2Title": "Livrant Créativité, Innovation et Exécution le Tout Sous un Même Toit",
     "slide2Subtitle": "Nous Vous Apportons une Stratégie d'Élite, une Exécution Rapide et une Maîtrise Culturelle - Sans Compromis.",
     "description": "Gestion d'Événements de Premier Plan en Arabie Saoudite, à Dubaï et dans tout le CCG—Offrant Créativité, Innovation et Exécution Sous un Même Toit. Quand d'Autres Hésitent, Paniquent ou Reculent, Nous Passons à l'Action. Nous Vous Apportons une Stratégie d'Élite, une Exécution Rapide et une Maîtrise Culturelle Sans Compromis.",
@@ -147,11 +148,13 @@
     "yearsExpertise": "15+ Années d'Expertise"
   },
   "execution": {
-    "heading": "Là où d'Autres Peinent, Nous Exécutons avec Précision",
+    "heading": "Commencez avec Confiance",
+    "subtitle": "Délais rapides. Idées audacieuses. Pas de place pour l'erreur.",
+    "description": "Notre unité 'Zone Rouge' intervient dès le premier jour, s'adapte rapidement et exécute avec une clarté absolue. Lorsque les initiatives nécessitent un mélange d'échelle, de vitesse et de précision, commencez bien avec l'équipe conçue exactement pour cela.",
+    "outro": "Commençons à planifier votre prochaine stratégie ensemble.",
     "headlineV1": "Quand l'Exécution ne Peut Pas Échouer, Comptez sur KayanLive.",
     "headlineV2": "Quand la Plupart des Équipes Craquent, Nous Faisons que Ça Arrive",
     "headlineV3": "Là où d'Autres Peinent, Nous Exécutons avec Précision",
-    "description": "Votre brief vient de changer. Le lieu est confirmé, mais rien d'autre ne l'est. Tout le monde vous regarde, et vous cherchez quelqu'un qui peut réellement faire cela.",
     "promise": "Nous avons fait un business de faire que ça arrive.",
     "guarantee1": "Pas de seconde chance. Pas de surprises de dernière minute.",
     "guarantee2": "KayanLive assure une exécution fluide du début à la fin.",
@@ -193,6 +196,7 @@
     },
     "values": {
       "title": "Valeurs Qui Activent les Résultats",
+      "subtitle": "Nous fonctionnons sur des principes, pas des préférences. Nos valeurs guident chaque étape:",
       "cards": {
         "purpose": {
           "title": "Créativité Axée sur l'Objectif",
@@ -222,7 +226,8 @@
           "title": "Échelle Stratégique",
           "description": "Qu'il s'agisse d'un lancement ciblé ou d'une expo multi-salles, nous livrons avec la portée d'une entreprise d'exposition leader"
         }
-      }
+      },
+      "outro": "Grâce à notre expertise en tant qu'entreprise d'expositions, nous avons établi notre position parmi les spécialistes les plus éminents de la région dans l'organisation d'expositions et de conférences."
     }
   },
   "services": {

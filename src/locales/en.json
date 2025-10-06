@@ -10,7 +10,8 @@
     "articles": "Articles"
   },
   "hero": {
-    "title": "Welcome to KayanLive Premier Event Management in UAE, Saudi Arabia, and Across the GCC",
+    "welcome": "Welcome to KayanLive",
+    "title": "Premier Event Management in UAE, Saudi Arabia, and Across the GCC",
     "slide2Title": "Delivering Creativity, Innovation, and Execution All Under One Roof",
     "slide2Subtitle": "Bringing You Elite Strategy, Fast Execution, And Cultural Fluency - Without Compromise.",
     "description": "Premier Event Management in Saudi Arabia, Dubai, and Across the GCC—Delivering Creativity, Innovation, and Execution All Under One Roof. When Others Stall, Panic, or Back Down, We Get to Work. Bringing You Elite Strategy, Fast Execution, And Cultural Fluency Without Compromise.",
@@ -149,10 +150,11 @@
   },
   "execution": {
     "heading": "Where Others Struggle, We Execute with Precision",
+    "subtitle": "Fast timelines. Bold ideas. No room for error.",
+    "description": "Your brief just changed. The venue's confirmed, but nothing else is. Everyone's looking to you, and you're looking for someone who can actually do this.",
     "headlineV1": "When Execution Can't Fail, Count on KayanLive.",
     "headlineV2": "When Most Teams Crack, We Make it Happen",
     "headlineV3": "Where Others Struggle, We Execute with Precision",
-    "description": "Your brief just changed. The venue's confirmed, but nothing else is. Everyone's looking to you, and you're looking for someone who can actually do this.",
     "promise": "We've made a business out of making it happen.",
     "guarantee1": "No second chances. No last-minute surprises.",
     "guarantee2": "KayanLive ensures smooth execution from start to finish.",
@@ -194,6 +196,7 @@
     },
     "values": {
       "title": "Values That Activate Outcomes",
+      "subtitle": "We operate on principles, not preferences. Our values drive every step:",
       "cards": {
         "purpose": {
           "title": "Purpose Driven Creativity",
@@ -223,7 +226,8 @@
           "title": "Strategic Scale",
           "description": "Whether a focused launch or multi-hall expo, we deliver with the reach of a leading exhibition company"
         }
-      }
+      },
+      "outro": "Through our expertise as an exhibitions company, we've established our position among the region's most prominent specialists in exhibitions and conferences organization."
     }
   },
   "services": {

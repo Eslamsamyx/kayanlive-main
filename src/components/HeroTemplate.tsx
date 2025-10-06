@@ -161,7 +161,7 @@ export default function HeroTemplate(props: HeroTemplateProps) {
     mobileHeader: {
       width: 'clamp(260px, 70vw, 380px)',
       fontSize: 'clamp(60px, 11vw, 85px)',
-      lineHeight: 'clamp(52px, 9.5vw, 75px)',
+      lineHeight: 'clamp(72px, 13vw, 100px)',
       fontFamily: FONT_FAMILIES.PRIMARY,
       marginBottom: 'clamp(20px, 4vw, 30px)',
       paddingLeft: 'clamp(16px, 4vw, 20px)',
@@ -596,7 +596,7 @@ export default function HeroTemplate(props: HeroTemplateProps) {
                   className="font-bold"
                   style={{
                     fontSize: "clamp(3.5vw, 9.9vw, 150px)",
-                    lineHeight: "0.93em",
+                    lineHeight: "1.1em",
                     fontFamily: FONT_FAMILIES.PRIMARY,
                     ...memoizedStyles.gradientText
                   }}

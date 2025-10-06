@@ -25,7 +25,7 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider messages={messages} locale={locale}>
       <div className="min-h-screen bg-white overflow-x-hidden">
-        <div className="fixed top-0 left-0 right-0 z-50">
+          <div className="fixed top-0 left-0 right-0 z-50">
           <div className="max-w-[1600px] mx-auto px-4 py-4">
             <Navbar locale={locale} />
           </div>

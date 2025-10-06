@@ -46,19 +46,8 @@ HighImpactExperience.displayName = 'HighImpactExperience';
 
 export default HighImpactExperience;
 
-// Export the V2 component directly for advanced usage
-export { default as HighImpactExperienceV2 } from './HighImpactExperienceV2';
-
 // Export the legacy component for direct access
 export { default as HighImpactExperienceLegacy } from './HighImpactExperienceLegacy';
-
-// Export all sub-components for external usage
-export {
-  MobileLayout,
-  DesktopLayout,
-  LoadingSkeleton,
-  ErrorFallback,
-} from './HighImpactExperience.components';
 
 // Export hooks for advanced usage
 export {
