@@ -4,7 +4,6 @@ import { TRPCReactProvider } from '@/trpc/react';
 import { Providers } from '@/components/Providers';
 import '@/styles/globals.css';
 
-// CRITICAL FIX: Ultra-optimized font loading for 100% performance
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '600'], // Only critical weights
@@ -85,11 +84,9 @@ export default function RootLayout({
       <head>
         <meta name="description" content="Leading event management company in Dubai and across the GCC. Delivering creativity, innovation, and execution for live events, exhibitions, conferences, and immersive experiences." />
 
-        {/* CRITICAL FIX: Priority resource hints for 100% performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
-        {/* CRITICAL FIX: Preload ultra-optimized hero images with precise sizes */}
         <link
           rel="preload"
           as="image"
@@ -98,7 +95,6 @@ export default function RootLayout({
           fetchPriority="high"
         />
 
-        {/* CRITICAL FIX: Minimal critical CSS for 100% performance */}
         <style dangerouslySetInnerHTML={{
           __html: `
             body {

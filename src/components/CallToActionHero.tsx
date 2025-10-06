@@ -127,7 +127,7 @@ export default function CallToActionHero() {
 
       {/* Main Content Box - Desktop Only */}
       <div
-        className="absolute bg-white/[0.03] backdrop-blur-md box-border content-stretch flex flex-col gap-[40px] items-start justify-start overflow-hidden px-[61px] py-[68px] rounded-[76px] translate-x-[-50%] translate-y-[-50%] w-[854px]"
+        className={`absolute bg-white/[0.03] backdrop-blur-md box-border content-stretch flex flex-col gap-[40px] items-start justify-start overflow-hidden px-[61px] py-[68px] rounded-[76px] ${locale === 'ar' ? 'translate-x-[50%]' : 'translate-x-[-50%]'} translate-y-[-50%] w-[854px]`}
         style={{
           top: "calc(50% - 0.5px)",
           [locale === 'ar' ? 'right' : 'left']: "calc(50% - 214px)"
@@ -138,7 +138,8 @@ export default function CallToActionHero() {
              style={{
                fontSize: 'clamp(48px, 6vw, 64px)',
                minHeight: 'clamp(240px, 25vw, 320px)'
-             }}>
+             }}
+             dir={locale === 'ar' ? 'rtl' : 'ltr'}>
           {headlines.map((headline, index) => (
             <p
               key={index}
@@ -154,30 +155,25 @@ export default function CallToActionHero() {
 
         {/* Problem Description */}
         <div className="flex flex-col gap-[24px] w-full max-w-[732px]">
-          <p className="text-white text-[20px] leading-[28px] font-['Poppins',_sans-serif]">
+          <p className="text-white text-[20px] leading-[28px] font-['Poppins',_sans-serif]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
             {t('execution.description')}
           </p>
 
-          <p className="text-[#7afdd6] text-[22px] leading-[30px] font-['Poppins',_sans-serif] font-medium">
+          <p className="text-[#7afdd6] text-[22px] leading-[30px] font-['Poppins',_sans-serif] font-medium" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
             {t('execution.promise')}
           </p>
         </div>
 
-        {/* Guarantees */}
-        <div className="flex flex-col gap-[16px] w-full max-w-[732px]">
-          <p className="text-white text-[18px] leading-[26px] font-['Poppins',_sans-serif]">
-            {t('execution.guarantee1')}
-          </p>
-          <p className="text-white text-[18px] leading-[26px] font-['Poppins',_sans-serif]">
-            {t('execution.guarantee2')}
-          </p>
-        </div>
+        {/* Guarantee */}
+        <p className="text-white text-[18px] leading-[26px] font-['Poppins',_sans-serif] w-full max-w-[732px]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+          {t('execution.guarantee2')}
+        </p>
 
         {/* CTA Section */}
         <div className="flex flex-col gap-[16px] items-start">
           {/* CTA Tag */}
           <div className="bg-[#7afdd6]/20 backdrop-blur-sm px-4 py-2 rounded-full">
-            <span className="text-[#7afdd6] text-[14px] font-['Poppins',_sans-serif] font-medium">
+            <span className="text-[#7afdd6] text-[14px] font-['Poppins',_sans-serif] font-medium" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               {t('execution.ctaTag')}
             </span>
           </div>
@@ -212,20 +208,24 @@ export default function CallToActionHero() {
           className="absolute bg-center bg-cover bg-no-repeat h-full left-0 rounded-[48px] top-0 w-full"
           style={{ backgroundImage: `url('${imgRectangle6}')` }}
         />
-        <div className="absolute bg-[#2c2c2b] blur-[150px] filter h-[1000px] left-[-300px] top-[-200px] w-[700px]" />
+        <div
+          className="absolute bg-[#2c2c2b] blur-[150px] filter h-[1000px] top-[-200px] w-[700px]"
+          style={{ [locale === 'ar' ? 'right' : 'left']: '-300px' }}
+        />
 
         <div
-          className="absolute bg-white/[0.03] backdrop-blur-md box-border flex flex-col gap-[32px] items-center justify-center overflow-hidden px-[40px] py-[50px] rounded-[48px] translate-x-[-50%] translate-y-[-50%] w-[90%] max-w-[600px]"
+          className={`absolute bg-white/[0.03] backdrop-blur-md box-border flex flex-col gap-[32px] items-center justify-center overflow-hidden px-[40px] py-[50px] rounded-[48px] ${locale === 'ar' ? 'translate-x-[50%]' : 'translate-x-[-50%]'} translate-y-[-50%] w-[90%] max-w-[600px]`}
           style={{
             top: "50%",
-            left: "50%"
+            [locale === 'ar' ? 'right' : 'left']: "50%"
           }}
         >
           <div className="capitalize font-['Poppins',_sans-serif] leading-tight not-italic relative shrink-0 text-center text-white overflow-hidden w-full"
                style={{
                  fontSize: 'clamp(36px, 5vw, 48px)',
                  minHeight: 'clamp(200px, 20vw, 260px)'
-               }}>
+               }}
+               dir={locale === 'ar' ? 'rtl' : 'ltr'}>
             {headlines.map((headline, index) => (
               <p
                 key={index}
@@ -241,30 +241,25 @@ export default function CallToActionHero() {
 
           {/* Problem Description - Tablet */}
           <div className="flex flex-col gap-[20px] w-full text-center">
-            <p className="text-white text-[16px] leading-[24px] font-['Poppins',_sans-serif]">
+            <p className="text-white text-[16px] leading-[24px] font-['Poppins',_sans-serif]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               {t('execution.description')}
             </p>
 
-            <p className="text-[#7afdd6] text-[18px] leading-[26px] font-['Poppins',_sans-serif] font-medium">
+            <p className="text-[#7afdd6] text-[18px] leading-[26px] font-['Poppins',_sans-serif] font-medium" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               {t('execution.promise')}
             </p>
           </div>
 
-          {/* Guarantees - Tablet */}
-          <div className="flex flex-col gap-[12px] w-full text-center">
-            <p className="text-white text-[14px] leading-[22px] font-['Poppins',_sans-serif]">
-              {t('execution.guarantee1')}
-            </p>
-            <p className="text-white text-[14px] leading-[22px] font-['Poppins',_sans-serif]">
-              {t('execution.guarantee2')}
-            </p>
-          </div>
+          {/* Guarantee - Tablet */}
+          <p className="text-white text-[14px] leading-[22px] font-['Poppins',_sans-serif] w-full text-center" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+            {t('execution.guarantee2')}
+          </p>
 
           {/* CTA Section - Tablet */}
           <div className="flex flex-col gap-[12px] items-center">
             {/* CTA Tag */}
             <div className="bg-[#7afdd6]/20 backdrop-blur-sm px-3 py-1.5 rounded-full">
-              <span className="text-[#7afdd6] text-[12px] font-['Poppins',_sans-serif] font-medium">
+              <span className="text-[#7afdd6] text-[12px] font-['Poppins',_sans-serif] font-medium" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                 {t('execution.ctaTag')}
               </span>
             </div>
@@ -288,11 +283,12 @@ export default function CallToActionHero() {
         />
         <div className="flex flex-col gap-[31px] items-center justify-center px-[27px] py-0 relative h-full">
           <div className="bg-[rgba(255,255,255,0.03)] backdrop-blur-md box-border flex flex-col gap-[24px] items-start justify-center overflow-clip px-[32px] py-[40px] relative rounded-[20px] shrink-0 w-full">
-            <div className="capitalize font-['Poppins',_sans-serif] leading-tight not-italic relative shrink-0 text-left text-white w-full overflow-hidden"
+            <div className={`capitalize font-['Poppins',_sans-serif] leading-tight not-italic relative shrink-0 ${locale === 'ar' ? 'text-right' : 'text-left'} text-white w-full overflow-hidden`}
                  style={{
                    fontSize: 'clamp(28px, 8vw, 42px)',
                    minHeight: 'clamp(160px, 30vw, 220px)'
-                 }}>
+                 }}
+                 dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               {headlines.map((headline, index) => (
                 <p
                   key={index}
@@ -308,30 +304,25 @@ export default function CallToActionHero() {
 
             {/* Problem Description - Mobile */}
             <div className="flex flex-col gap-[16px] w-full">
-              <p className="text-white text-[14px] leading-[20px] font-['Poppins',_sans-serif]">
+              <p className="text-white text-[14px] leading-[20px] font-['Poppins',_sans-serif]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                 {t('execution.description')}
               </p>
 
-              <p className="text-[#7afdd6] text-[16px] leading-[22px] font-['Poppins',_sans-serif] font-medium">
+              <p className="text-[#7afdd6] text-[16px] leading-[22px] font-['Poppins',_sans-serif] font-medium" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                 {t('execution.promise')}
               </p>
             </div>
 
-            {/* Guarantees - Mobile */}
-            <div className="flex flex-col gap-[8px] w-full">
-              <p className="text-white text-[12px] leading-[18px] font-['Poppins',_sans-serif]">
-                {t('execution.guarantee1')}
-              </p>
-              <p className="text-white text-[12px] leading-[18px] font-['Poppins',_sans-serif]">
-                {t('execution.guarantee2')}
-              </p>
-            </div>
+            {/* Guarantee - Mobile */}
+            <p className="text-white text-[12px] leading-[18px] font-['Poppins',_sans-serif] w-full" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+              {t('execution.guarantee2')}
+            </p>
 
             {/* CTA Section - Mobile */}
             <div className="flex flex-col gap-[12px] items-start w-full">
               {/* CTA Tag */}
               <div className="bg-[#7afdd6]/20 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                <span className="text-[#7afdd6] text-[11px] font-['Poppins',_sans-serif] font-medium">
+                <span className="text-[#7afdd6] text-[11px] font-['Poppins',_sans-serif] font-medium" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                   {t('execution.ctaTag')}
                 </span>
               </div>

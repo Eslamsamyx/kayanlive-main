@@ -127,13 +127,14 @@ export default function AboutServices() {
 
       <div className="max-w-[1600px] mx-auto px-4 sm:px-8 md:px-12 lg:px-20">
         {/* Section Title */}
-        <div className="text-center mb-12 md:mb-16 lg:mb-20">
+        <div className={`text-center mb-12 md:mb-16 lg:mb-20 ${locale === 'ar' ? 'px-4' : ''}`}>
           <h2
             className="text-[#2c2c2b] font-bold mb-8"
             style={{
               fontSize: 'clamp(32px, 6vw, 64px)',
               lineHeight: 'clamp(40px, 7vw, 72px)',
-              letterSpacing: 'clamp(-1px, -0.15vw, -2px)'
+              letterSpacing: 'clamp(-1px, -0.15vw, -2px)',
+              direction: locale === 'ar' ? 'rtl' : 'ltr'
             }}
           >
             {t('aboutServices.title')}
@@ -141,49 +142,51 @@ export default function AboutServices() {
         </div>
 
         {/* Content Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 md:mb-16 lg:mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 md:mb-16 lg:mb-20" style={{ direction: locale === 'ar' ? 'rtl' : 'ltr' }}>
 
           {/* Card 1 - Market Position */}
-          <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300">
-            <div className="flex items-start space-x-4 mb-6">
+          <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300" style={{ direction: 'ltr' }}>
+            <div className={`flex items-start gap-4 mb-6 ${locale === 'ar' ? 'flex-row-reverse' : ''}`}>
               <div className="w-12 h-12 bg-gradient-to-r from-[#74cfaa] to-[#a095e1] rounded-2xl flex items-center justify-center flex-shrink-0">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H3m2 0h4M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                 </svg>
               </div>
               <div className="flex-1">
-                <h3 className="text-[#2c2c2b] font-semibold text-lg mb-3">{t('aboutServices.cards.marketLeadership')}</h3>
+                <h3 className="text-[#2c2c2b] font-semibold text-lg mb-3" dir={locale === 'ar' ? 'rtl' : 'ltr'}>{t('aboutServices.cards.marketLeadership')}</h3>
                 <p
                   className="text-[#666666] leading-relaxed"
                   style={{ fontSize: 'clamp(16px, 2vw, 18px)', lineHeight: 'clamp(22px, 2.8vw, 26px)' }}
                   dangerouslySetInnerHTML={getMarkdownHTML(t('aboutServices.description1'))}
+                  dir={locale === 'ar' ? 'rtl' : 'ltr'}
                 />
               </div>
             </div>
           </div>
 
           {/* Card 2 - Technology & Innovation */}
-          <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300">
-            <div className="flex items-start space-x-4 mb-6">
+          <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300" style={{ direction: 'ltr' }}>
+            <div className={`flex items-start gap-4 mb-6 ${locale === 'ar' ? 'flex-row-reverse' : ''}`}>
               <div className="w-12 h-12 bg-gradient-to-r from-[#a095e1] to-[#74cfaa] rounded-2xl flex items-center justify-center flex-shrink-0">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                 </svg>
               </div>
               <div className="flex-1">
-                <h3 className="text-[#2c2c2b] font-semibold text-lg mb-3">{t('aboutServices.cards.techInnovation')}</h3>
+                <h3 className="text-[#2c2c2b] font-semibold text-lg mb-3" dir={locale === 'ar' ? 'rtl' : 'ltr'}>{t('aboutServices.cards.techInnovation')}</h3>
                 <p
                   className="text-[#666666] leading-relaxed"
                   style={{ fontSize: 'clamp(16px, 2vw, 18px)', lineHeight: 'clamp(22px, 2.8vw, 26px)' }}
                   dangerouslySetInnerHTML={getMarkdownHTML(t('aboutServices.description2'))}
+                  dir={locale === 'ar' ? 'rtl' : 'ltr'}
                 />
               </div>
             </div>
           </div>
 
           {/* Card 3 - Regional Presence */}
-          <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300">
-            <div className="flex items-start space-x-4 mb-6">
+          <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300" style={{ direction: 'ltr' }}>
+            <div className={`flex items-start gap-4 mb-6 ${locale === 'ar' ? 'flex-row-reverse' : ''}`}>
               <div className="w-12 h-12 bg-gradient-to-r from-[#74cfaa] to-[#a095e1] rounded-2xl flex items-center justify-center flex-shrink-0">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
@@ -191,30 +194,32 @@ export default function AboutServices() {
                 </svg>
               </div>
               <div className="flex-1">
-                <h3 className="text-[#2c2c2b] font-semibold text-lg mb-3">{t('aboutServices.cards.regionalExcellence')}</h3>
+                <h3 className="text-[#2c2c2b] font-semibold text-lg mb-3" dir={locale === 'ar' ? 'rtl' : 'ltr'}>{t('aboutServices.cards.regionalExcellence')}</h3>
                 <p
                   className="text-[#666666] leading-relaxed"
                   style={{ fontSize: 'clamp(16px, 2vw, 18px)', lineHeight: 'clamp(22px, 2.8vw, 26px)' }}
                   dangerouslySetInnerHTML={getMarkdownHTML(t('aboutServices.description3'))}
+                  dir={locale === 'ar' ? 'rtl' : 'ltr'}
                 />
               </div>
             </div>
           </div>
 
           {/* Card 4 - Execution Excellence */}
-          <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300">
-            <div className="flex items-start space-x-4 mb-6">
+          <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300" style={{ direction: 'ltr' }}>
+            <div className={`flex items-start gap-4 mb-6 ${locale === 'ar' ? 'flex-row-reverse' : ''}`}>
               <div className="w-12 h-12 bg-gradient-to-r from-[#a095e1] to-[#74cfaa] rounded-2xl flex items-center justify-center flex-shrink-0">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                 </svg>
               </div>
               <div className="flex-1">
-                <h3 className="text-[#2c2c2b] font-semibold text-lg mb-3">{t('aboutServices.cards.swiftExecution')}</h3>
+                <h3 className="text-[#2c2c2b] font-semibold text-lg mb-3" dir={locale === 'ar' ? 'rtl' : 'ltr'}>{t('aboutServices.cards.swiftExecution')}</h3>
                 <p
                   className="text-[#666666] leading-relaxed"
                   style={{ fontSize: 'clamp(16px, 2vw, 18px)', lineHeight: 'clamp(22px, 2.8vw, 26px)' }}
                   dangerouslySetInnerHTML={getMarkdownHTML(t('aboutServices.description4'))}
+                  dir={locale === 'ar' ? 'rtl' : 'ltr'}
                 />
               </div>
             </div>
@@ -235,6 +240,7 @@ export default function AboutServices() {
                 fontSize: 'clamp(20px, 3vw, 28px)',
                 lineHeight: 'clamp(26px, 3.5vw, 36px)'
               }}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             >
               {t('aboutServices.whyChoose')}
             </h3>
@@ -242,9 +248,10 @@ export default function AboutServices() {
               className="text-white/90 leading-relaxed mb-8"
               style={{ fontSize: 'clamp(16px, 2vw, 20px)', lineHeight: 'clamp(22px, 2.8vw, 28px)' }}
               dangerouslySetInnerHTML={getMarkdownHTML(t('aboutServices.description5'))}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             />
-            <div className="flex justify-center">
-              <a href={`/${locale}/contact`}>
+            <div className="flex justify-center overflow-visible px-4">
+              <a href={`/${locale}/contact`} className="overflow-visible inline-block">
                 <CTAButton
                   variant="white"
                   ariaLabel={t('common.contactUs')}
@@ -268,7 +275,7 @@ export default function AboutServices() {
             {/* Title with gradient background */}
             <div className="relative inline-block">
               <div className="bg-gradient-to-r from-[#74cfaa]/10 to-[#a095e1]/10 rounded-2xl px-8 py-6 backdrop-blur-sm border border-[#74cfaa]/20">
-                <div className="flex items-center justify-center space-x-4 mb-3">
+                <div className={`flex items-center justify-center gap-4 mb-3 ${locale === 'ar' ? 'flex-row-reverse' : ''}`}>
                   <div className="w-8 h-8 bg-gradient-to-r from-[#74cfaa] to-[#a095e1] rounded-lg flex items-center justify-center">
                     <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
@@ -287,7 +294,7 @@ export default function AboutServices() {
                       letterSpacing: 'clamp(-0.8px, -0.15vw, -1.5px)'
                     }}
                   >
-                    {t('aboutServices.pipelineTitle').split(' ')[0]}{'-'}{t('aboutServices.pipelineTitle').split(' ')[1]}{' '}
+                    {t('aboutServices.pipelineTitle').split(' ')[0]}{' '}{t('aboutServices.pipelineTitle').split(' ')[1]}{' '}
                   </span>
                   <span
                     className="bg-gradient-to-r from-[#74cfaa] to-[#a095e1] bg-clip-text text-transparent"
@@ -296,7 +303,11 @@ export default function AboutServices() {
                       lineHeight: 'clamp(36px, 6vw, 64px)',
                       letterSpacing: 'clamp(-0.8px, -0.15vw, -1.5px)',
                       WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent'
+                      WebkitTextFillColor: 'transparent',
+                      paddingTop: '2px',
+                      paddingBottom: '2px',
+                      paddingLeft: '2px',
+                      paddingRight: '2px'
                     }}
                   >
                     {t('aboutServices.pipelineTitle').split(' ')[2]}
@@ -326,12 +337,12 @@ export default function AboutServices() {
           </div>
 
           {/* Services Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" style={{ direction: locale === 'ar' ? 'rtl' : 'ltr' }}>
 
             {/* Featured Visual Showcase Card - First Position */}
             <div className="pipeline-card" data-card-index="0">
               <a href={`/${locale}/contact`} className="block h-full cursor-pointer" aria-label="Contact us for event management services">
-                <div className="group relative bg-gradient-to-br from-[#7afdd6] to-[#74cfaa] rounded-3xl overflow-hidden h-full md:col-span-2 lg:col-span-1 min-h-[400px] shadow-xl hover:shadow-2xl transition-shadow duration-500">
+                <div className="group relative bg-gradient-to-br from-[#7afdd6] to-[#74cfaa] rounded-3xl overflow-hidden h-full md:col-span-2 lg:col-span-1 min-h-[400px] shadow-xl hover:shadow-2xl transition-shadow duration-500" style={{ direction: 'ltr' }}>
                   <AnimatedServiceContent isImage={true} className="absolute inset-0">
                     <div
                       className="w-full h-full bg-center bg-cover bg-no-repeat group-hover:scale-105 transition-transform duration-700"
@@ -386,26 +397,24 @@ export default function AboutServices() {
 
             {/* Live Events & Shows */}
             <div className="pipeline-card" data-card-index="1">
-              <div className="group relative bg-white rounded-3xl p-8 border border-gray-100 hover:border-[#74cfaa]/30 transition-all duration-500 h-full hover:shadow-xl hover:shadow-[#74cfaa]/10 overflow-hidden">
+              <div className="group relative bg-white rounded-3xl p-8 border border-gray-100 hover:border-[#74cfaa]/30 transition-all duration-500 h-full hover:shadow-xl hover:shadow-[#74cfaa]/10 overflow-hidden" style={{ direction: 'ltr' }}>
                 {/* Decorative background elements */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#74cfaa]/5 to-[#a095e1]/5 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-700"></div>
+                <div className={`absolute top-0 ${locale === 'ar' ? 'left-0 -translate-x-16' : 'right-0 translate-x-16'} w-32 h-32 bg-gradient-to-br from-[#74cfaa]/5 to-[#a095e1]/5 rounded-full -translate-y-16 group-hover:scale-150 transition-transform duration-700`}></div>
 
                 <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-16 h-16 bg-gradient-to-br from-[#74cfaa] to-[#a095e1] rounded-2xl flex items-center justify-center shadow-lg shadow-[#74cfaa]/25 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m0 0V1h4a2 2 0 012 2v18a2 2 0 01-2 2H4a2 2 0 01-2-2V3a2 2 0 012-2h4v3"></path>
-                        </svg>
-                      </div>
-                      <h4 className="text-[#2c2c2b] font-bold text-xl leading-tight group-hover:text-[#74cfaa] transition-colors duration-300">
-                        {t('aboutServices.services.liveEvents.title')}
-                      </h4>
+                  <div className={`flex items-center gap-4 mb-6 ${locale === 'ar' ? 'flex-row-reverse' : ''}`}>
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#74cfaa] to-[#a095e1] rounded-2xl flex items-center justify-center shadow-lg shadow-[#74cfaa]/25 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m0 0V1h4a2 2 0 012 2v18a2 2 0 01-2 2H4a2 2 0 01-2-2V3a2 2 0 012-2h4v3"></path>
+                      </svg>
                     </div>
-                    <div className="w-2 h-2 bg-[#74cfaa] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h4 className="text-[#2c2c2b] font-bold text-xl leading-tight group-hover:text-[#74cfaa] transition-colors duration-300 flex-1" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+                      {t('aboutServices.services.liveEvents.title')}
+                    </h4>
+                    <div className="w-2 h-2 bg-[#74cfaa] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex-shrink-0"></div>
                   </div>
 
-                  <p className="text-[#666666] text-base leading-relaxed mb-6">
+                  <p className="text-[#666666] text-base leading-relaxed mb-6" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                     {t('aboutServices.services.liveEvents.description')}
                   </p>
 
@@ -413,6 +422,7 @@ export default function AboutServices() {
                     <p
                       className="text-[#74cfaa] text-sm font-semibold"
                       dangerouslySetInnerHTML={getMarkdownHTML(t('aboutServices.services.liveEvents.idealFor'))}
+                      dir={locale === 'ar' ? 'rtl' : 'ltr'}
                     />
                   </div>
                 </div>
@@ -421,26 +431,24 @@ export default function AboutServices() {
 
             {/* Conferences & Summits */}
             <div className="pipeline-card" data-card-index="2">
-              <div className="group relative bg-white rounded-3xl p-8 border border-gray-100 hover:border-[#a095e1]/30 transition-all duration-500 h-full hover:shadow-xl hover:shadow-[#a095e1]/10 overflow-hidden">
+              <div className="group relative bg-white rounded-3xl p-8 border border-gray-100 hover:border-[#a095e1]/30 transition-all duration-500 h-full hover:shadow-xl hover:shadow-[#a095e1]/10 overflow-hidden" style={{ direction: 'ltr' }}>
                 {/* Decorative background elements */}
-                <div className="absolute top-0 left-0 w-28 h-28 bg-gradient-to-br from-[#a095e1]/5 to-[#74cfaa]/5 rounded-full -translate-y-14 -translate-x-14 group-hover:scale-150 transition-transform duration-700"></div>
+                <div className={`absolute top-0 ${locale === 'ar' ? 'right-0 translate-x-14' : 'left-0 -translate-x-14'} w-28 h-28 bg-gradient-to-br from-[#a095e1]/5 to-[#74cfaa]/5 rounded-full -translate-y-14 group-hover:scale-150 transition-transform duration-700`}></div>
 
                 <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-16 h-16 bg-gradient-to-br from-[#a095e1] to-[#74cfaa] rounded-2xl flex items-center justify-center shadow-lg shadow-[#a095e1]/25 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
-                      </div>
-                      <h4 className="text-[#2c2c2b] font-bold text-xl leading-tight group-hover:text-[#a095e1] transition-colors duration-300">
-                        {t('aboutServices.services.conferences.title')}
-                      </h4>
+                  <div className={`flex items-center gap-4 mb-6 ${locale === 'ar' ? 'flex-row-reverse' : ''}`}>
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#a095e1] to-[#74cfaa] rounded-2xl flex items-center justify-center shadow-lg shadow-[#a095e1]/25 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                      </svg>
                     </div>
-                    <div className="w-2 h-2 bg-[#a095e1] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h4 className="text-[#2c2c2b] font-bold text-xl leading-tight group-hover:text-[#a095e1] transition-colors duration-300 flex-1" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+                      {t('aboutServices.services.conferences.title')}
+                    </h4>
+                    <div className="w-2 h-2 bg-[#a095e1] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex-shrink-0"></div>
                   </div>
 
-                  <p className="text-[#666666] text-base leading-relaxed mb-6">
+                  <p className="text-[#666666] text-base leading-relaxed mb-6" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                     {t('aboutServices.services.conferences.description')}
                   </p>
 
@@ -448,6 +456,7 @@ export default function AboutServices() {
                     <p
                       className="text-[#a095e1] text-sm font-semibold"
                       dangerouslySetInnerHTML={getMarkdownHTML(t('aboutServices.services.conferences.idealFor'))}
+                      dir={locale === 'ar' ? 'rtl' : 'ltr'}
                     />
                   </div>
                 </div>
@@ -456,26 +465,24 @@ export default function AboutServices() {
 
             {/* Exhibitions & Brand Experiences */}
             <div className="pipeline-card" data-card-index="3">
-              <div className="group relative bg-white rounded-3xl p-8 border border-gray-100 hover:border-[#74cfaa]/30 transition-all duration-500 h-full hover:shadow-xl hover:shadow-[#74cfaa]/10 overflow-hidden">
+              <div className="group relative bg-white rounded-3xl p-8 border border-gray-100 hover:border-[#74cfaa]/30 transition-all duration-500 h-full hover:shadow-xl hover:shadow-[#74cfaa]/10 overflow-hidden" style={{ direction: 'ltr' }}>
                 {/* Decorative background elements */}
-                <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-br from-[#74cfaa]/5 to-[#a095e1]/5 rounded-full translate-y-12 translate-x-12 group-hover:scale-150 transition-transform duration-700"></div>
+                <div className={`absolute bottom-0 ${locale === 'ar' ? 'left-0 -translate-x-12' : 'right-0 translate-x-12'} w-24 h-24 bg-gradient-to-br from-[#74cfaa]/5 to-[#a095e1]/5 rounded-full translate-y-12 group-hover:scale-150 transition-transform duration-700`}></div>
 
                 <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-16 h-16 bg-gradient-to-br from-[#74cfaa] to-[#a095e1] rounded-2xl flex items-center justify-center shadow-lg shadow-[#74cfaa]/25 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H3m2 0h4M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                        </svg>
-                      </div>
-                      <h4 className="text-[#2c2c2b] font-bold text-xl leading-tight group-hover:text-[#74cfaa] transition-colors duration-300">
-                        {t('aboutServices.services.exhibitions.title')}
-                      </h4>
+                  <div className={`flex items-center gap-4 mb-6 ${locale === 'ar' ? 'flex-row-reverse' : ''}`}>
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#74cfaa] to-[#a095e1] rounded-2xl flex items-center justify-center shadow-lg shadow-[#74cfaa]/25 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H3m2 0h4M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                      </svg>
                     </div>
-                    <div className="w-2 h-2 bg-[#74cfaa] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h4 className="text-[#2c2c2b] font-bold text-xl leading-tight group-hover:text-[#74cfaa] transition-colors duration-300 flex-1" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+                      {t('aboutServices.services.exhibitions.title')}
+                    </h4>
+                    <div className="w-2 h-2 bg-[#74cfaa] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex-shrink-0"></div>
                   </div>
 
-                  <p className="text-[#666666] text-base leading-relaxed mb-6">
+                  <p className="text-[#666666] text-base leading-relaxed mb-6" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                     {t('aboutServices.services.exhibitions.description')}
                   </p>
 
@@ -483,6 +490,7 @@ export default function AboutServices() {
                     <p
                       className="text-[#74cfaa] text-sm font-semibold"
                       dangerouslySetInnerHTML={getMarkdownHTML(t('aboutServices.services.exhibitions.idealFor'))}
+                      dir={locale === 'ar' ? 'rtl' : 'ltr'}
                     />
                   </div>
                 </div>
@@ -491,26 +499,24 @@ export default function AboutServices() {
 
             {/* Immersive AV & Tech */}
             <div className="pipeline-card" data-card-index="4">
-              <div className="group relative bg-white rounded-3xl p-8 border border-gray-100 hover:border-[#a095e1]/30 transition-all duration-500 h-full hover:shadow-xl hover:shadow-[#a095e1]/10 overflow-hidden">
+              <div className="group relative bg-white rounded-3xl p-8 border border-gray-100 hover:border-[#a095e1]/30 transition-all duration-500 h-full hover:shadow-xl hover:shadow-[#a095e1]/10 overflow-hidden" style={{ direction: 'ltr' }}>
                 {/* Decorative background elements */}
-                <div className="absolute bottom-0 left-0 w-36 h-36 bg-gradient-to-br from-[#a095e1]/5 to-[#74cfaa]/5 rounded-full translate-y-18 -translate-x-18 group-hover:scale-150 transition-transform duration-700"></div>
+                <div className={`absolute bottom-0 ${locale === 'ar' ? 'right-0 translate-x-18' : 'left-0 -translate-x-18'} w-36 h-36 bg-gradient-to-br from-[#a095e1]/5 to-[#74cfaa]/5 rounded-full translate-y-18 group-hover:scale-150 transition-transform duration-700`}></div>
 
                 <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-16 h-16 bg-gradient-to-br from-[#a095e1] to-[#74cfaa] rounded-2xl flex items-center justify-center shadow-lg shadow-[#a095e1]/25 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                        </svg>
-                      </div>
-                      <h4 className="text-[#2c2c2b] font-bold text-xl leading-tight group-hover:text-[#a095e1] transition-colors duration-300">
-                        {t('aboutServices.services.immersiveAV.title')}
-                      </h4>
+                  <div className={`flex items-center gap-4 mb-6 ${locale === 'ar' ? 'flex-row-reverse' : ''}`}>
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#a095e1] to-[#74cfaa] rounded-2xl flex items-center justify-center shadow-lg shadow-[#a095e1]/25 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                      </svg>
                     </div>
-                    <div className="w-2 h-2 bg-[#a095e1] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h4 className="text-[#2c2c2b] font-bold text-xl leading-tight group-hover:text-[#a095e1] transition-colors duration-300 flex-1" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+                      {t('aboutServices.services.immersiveAV.title')}
+                    </h4>
+                    <div className="w-2 h-2 bg-[#a095e1] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex-shrink-0"></div>
                   </div>
 
-                  <p className="text-[#666666] text-base leading-relaxed mb-6">
+                  <p className="text-[#666666] text-base leading-relaxed mb-6" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                     {t('aboutServices.services.immersiveAV.description')}
                   </p>
 
@@ -518,6 +524,7 @@ export default function AboutServices() {
                     <p
                       className="text-[#a095e1] text-sm font-semibold"
                       dangerouslySetInnerHTML={getMarkdownHTML(t('aboutServices.services.immersiveAV.idealFor'))}
+                      dir={locale === 'ar' ? 'rtl' : 'ltr'}
                     />
                   </div>
                 </div>
@@ -526,34 +533,35 @@ export default function AboutServices() {
 
             {/* Last-Call Event Rescue - Premium Featured Card */}
             <div className="pipeline-card" data-card-index="5">
-              <div className="group relative bg-gradient-to-br from-[#74cfaa] via-[#8bb4d1] to-[#a095e1] rounded-3xl p-8 text-white h-full md:col-span-2 lg:col-span-1 overflow-hidden shadow-2xl shadow-[#74cfaa]/20">
+              <div className="group relative bg-gradient-to-br from-[#74cfaa] via-[#8bb4d1] to-[#a095e1] rounded-3xl p-8 text-white h-full md:col-span-2 lg:col-span-1 overflow-hidden shadow-2xl shadow-[#74cfaa]/20" style={{ direction: 'ltr' }}>
                 {/* Animated background effects */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-20 translate-x-20 group-hover:scale-125 transition-transform duration-700"></div>
 
                 <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="w-18 h-18 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg group-hover:bg-white/30 group-hover:scale-110 transition-all duration-300">
+                  <div className={`flex items-center gap-4 mb-6 ${locale === 'ar' ? 'flex-row-reverse' : ''}`}>
+                    <div className="w-18 h-18 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg group-hover:bg-white/30 group-hover:scale-110 transition-all duration-300 flex-shrink-0">
                       <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                       </svg>
                     </div>
-                    <div className="flex space-x-2">
+                    <div className="flex-1"></div>
+                    <div className={`flex ${locale === 'ar' ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
                       <div className="w-2 h-2 bg-white/60 rounded-full"></div>
                       <div className="w-2 h-2 bg-white/40 rounded-full"></div>
-                      <div className="w-2 h-2 bg-white/60 rounded-full"></div>
+                      <div className="w-2 h-2 bg-white/60 rounded-full flex-shrink-0"></div>
                     </div>
                   </div>
 
-                  <div className="inline-flex items-center px-3 py-1 bg-white/20 rounded-full text-xs font-semibold mb-4 backdrop-blur-sm">
-                    <span>⚡ {t('aboutServices.emergencyResponse')}</span>
+                  <div className={`inline-flex items-center px-3 py-1 bg-white/20 rounded-full text-xs font-semibold mb-4 backdrop-blur-sm ${locale === 'ar' ? 'float-right mx-4' : 'mx-4'}`}>
+                    <span dir={locale === 'ar' ? 'rtl' : 'ltr'}>⚡ {t('aboutServices.emergencyResponse')}</span>
                   </div>
 
-                  <h4 className="text-white font-bold text-2xl mb-4 leading-tight">
+                  <h4 className="text-white font-bold text-2xl mb-4 leading-tight" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                     {t('aboutServices.services.eventRescue.title')}
                   </h4>
 
-                  <p className="text-white/90 text-base leading-relaxed mb-6">
+                  <p className="text-white/90 text-base leading-relaxed mb-6" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                     {t('aboutServices.services.eventRescue.description')}
                   </p>
 
@@ -561,6 +569,7 @@ export default function AboutServices() {
                     <p
                       className="text-white font-bold text-sm"
                       dangerouslySetInnerHTML={getMarkdownHTML(t('aboutServices.services.eventRescue.idealFor'))}
+                      dir={locale === 'ar' ? 'rtl' : 'ltr'}
                     />
                   </div>
                 </div>
@@ -592,7 +601,7 @@ export default function AboutServices() {
                     className="mb-6 opacity-0 translate-y-8 animate-fade-in"
                     style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}
                   >
-                    <div className="inline-flex items-center justify-center space-x-4 bg-white/20 backdrop-blur-sm rounded-2xl px-6 py-3 border border-white/30">
+                    <div className={`inline-flex items-center justify-center gap-4 bg-white/20 backdrop-blur-sm rounded-2xl px-6 py-3 border border-white/30 ${locale === 'ar' ? 'flex-row-reverse' : ''}`}>
                       <div className="w-12 h-12 bg-gradient-to-r from-[#74cfaa] to-[#a095e1] rounded-xl flex items-center justify-center shadow-lg">
                         <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
@@ -665,13 +674,13 @@ export default function AboutServices() {
             <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-[#74cfaa] via-[#8bb4d1] to-[#a095e1] transform -translate-y-1/2 opacity-30"></div>
 
             {/* Pipeline Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12" style={{ direction: locale === 'ar' ? 'rtl' : 'ltr' }}>
 
               {/* Step 1: Discovery & Briefing */}
               <div className="relative group">
-                <div className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-[#74cfaa]/30 transition-all duration-500 hover:shadow-xl hover:shadow-[#74cfaa]/10 relative z-10">
+                <div className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-[#74cfaa]/30 transition-all duration-500 hover:shadow-xl hover:shadow-[#74cfaa]/10 relative z-10" style={{ direction: 'ltr' }}>
                   {/* Step Number */}
-                  <div className="absolute -top-4 left-6 w-8 h-8 bg-gradient-to-r from-[#74cfaa] to-[#a095e1] rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                  <div className={`absolute -top-4 ${locale === 'ar' ? 'right-6' : 'left-6'} w-8 h-8 bg-gradient-to-r from-[#74cfaa] to-[#a095e1] rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg`}>
                     1
                   </div>
 
@@ -691,9 +700,9 @@ export default function AboutServices() {
                 </div>
 
                 {/* Connector Arrow - Hidden on mobile */}
-                <div className="hidden lg:block absolute top-1/2 -right-6 transform -translate-y-1/2 z-20">
+                <div className={`hidden lg:block absolute top-1/2 ${locale === 'ar' ? '-left-6' : '-right-6'} transform -translate-y-1/2 z-20`}>
                   <div className="w-12 h-12 bg-gradient-to-r from-[#74cfaa] to-[#a095e1] rounded-full flex items-center justify-center shadow-lg">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ transform: locale === 'ar' ? 'scaleX(-1)' : 'none' }}>
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                     </svg>
                   </div>
@@ -702,9 +711,9 @@ export default function AboutServices() {
 
               {/* Step 2: Creative Experience Design */}
               <div className="relative group">
-                <div className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-[#a095e1]/30 transition-all duration-500 hover:shadow-xl hover:shadow-[#a095e1]/10 relative z-10">
+                <div className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-[#a095e1]/30 transition-all duration-500 hover:shadow-xl hover:shadow-[#a095e1]/10 relative z-10" style={{ direction: 'ltr' }}>
                   {/* Step Number */}
-                  <div className="absolute -top-4 left-6 w-8 h-8 bg-gradient-to-r from-[#a095e1] to-[#74cfaa] rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                  <div className={`absolute -top-4 ${locale === 'ar' ? 'right-6' : 'left-6'} w-8 h-8 bg-gradient-to-r from-[#a095e1] to-[#74cfaa] rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg`}>
                     2
                   </div>
 
@@ -724,9 +733,9 @@ export default function AboutServices() {
                 </div>
 
                 {/* Connector Arrow - Hidden on mobile */}
-                <div className="hidden lg:block absolute top-1/2 -right-6 transform -translate-y-1/2 z-20">
+                <div className={`hidden lg:block absolute top-1/2 ${locale === 'ar' ? '-left-6' : '-right-6'} transform -translate-y-1/2 z-20`}>
                   <div className="w-12 h-12 bg-gradient-to-r from-[#a095e1] to-[#74cfaa] rounded-full flex items-center justify-center shadow-lg">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ transform: locale === 'ar' ? 'scaleX(-1)' : 'none' }}>
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                     </svg>
                   </div>
@@ -735,9 +744,9 @@ export default function AboutServices() {
 
               {/* Step 3: Technical Planning */}
               <div className="relative group">
-                <div className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-[#74cfaa]/30 transition-all duration-500 hover:shadow-xl hover:shadow-[#74cfaa]/10 relative z-10">
+                <div className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-[#74cfaa]/30 transition-all duration-500 hover:shadow-xl hover:shadow-[#74cfaa]/10 relative z-10" style={{ direction: 'ltr' }}>
                   {/* Step Number */}
-                  <div className="absolute -top-4 left-6 w-8 h-8 bg-gradient-to-r from-[#74cfaa] to-[#a095e1] rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                  <div className={`absolute -top-4 ${locale === 'ar' ? 'right-6' : 'left-6'} w-8 h-8 bg-gradient-to-r from-[#74cfaa] to-[#a095e1] rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg`}>
                     3
                   </div>
 
@@ -758,9 +767,9 @@ export default function AboutServices() {
                 </div>
 
                 {/* Connector Arrow - Hidden on mobile */}
-                <div className="hidden lg:block absolute top-1/2 -right-6 transform -translate-y-1/2 z-20">
+                <div className={`hidden lg:block absolute top-1/2 ${locale === 'ar' ? '-left-6' : '-right-6'} transform -translate-y-1/2 z-20`}>
                   <div className="w-12 h-12 bg-gradient-to-r from-[#74cfaa] to-[#a095e1] rounded-full flex items-center justify-center shadow-lg">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ transform: locale === 'ar' ? 'scaleX(-1)' : 'none' }}>
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                     </svg>
                   </div>
@@ -769,9 +778,9 @@ export default function AboutServices() {
 
               {/* Step 4: Production & Execution */}
               <div className="relative group">
-                <div className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-[#a095e1]/30 transition-all duration-500 hover:shadow-xl hover:shadow-[#a095e1]/10 relative z-10">
+                <div className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-[#a095e1]/30 transition-all duration-500 hover:shadow-xl hover:shadow-[#a095e1]/10 relative z-10" style={{ direction: 'ltr' }}>
                   {/* Step Number */}
-                  <div className="absolute -top-4 left-6 w-8 h-8 bg-gradient-to-r from-[#a095e1] to-[#74cfaa] rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                  <div className={`absolute -top-4 ${locale === 'ar' ? 'right-6' : 'left-6'} w-8 h-8 bg-gradient-to-r from-[#a095e1] to-[#74cfaa] rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg`}>
                     4
                   </div>
 
@@ -791,9 +800,9 @@ export default function AboutServices() {
                 </div>
 
                 {/* Connector Arrow - Hidden on mobile */}
-                <div className="hidden lg:block absolute top-1/2 -right-6 transform -translate-y-1/2 z-20">
+                <div className={`hidden lg:block absolute top-1/2 ${locale === 'ar' ? '-left-6' : '-right-6'} transform -translate-y-1/2 z-20`}>
                   <div className="w-12 h-12 bg-gradient-to-r from-[#a095e1] to-[#74cfaa] rounded-full flex items-center justify-center shadow-lg">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ transform: locale === 'ar' ? 'scaleX(-1)' : 'none' }}>
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                     </svg>
                   </div>
@@ -802,9 +811,9 @@ export default function AboutServices() {
 
               {/* Step 5: Show Control */}
               <div className="relative group">
-                <div className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-[#74cfaa]/30 transition-all duration-500 hover:shadow-xl hover:shadow-[#74cfaa]/10 relative z-10">
+                <div className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-[#74cfaa]/30 transition-all duration-500 hover:shadow-xl hover:shadow-[#74cfaa]/10 relative z-10" style={{ direction: 'ltr' }}>
                   {/* Step Number */}
-                  <div className="absolute -top-4 left-6 w-8 h-8 bg-gradient-to-r from-[#74cfaa] to-[#a095e1] rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                  <div className={`absolute -top-4 ${locale === 'ar' ? 'right-6' : 'left-6'} w-8 h-8 bg-gradient-to-r from-[#74cfaa] to-[#a095e1] rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg`}>
                     5
                   </div>
 
@@ -824,9 +833,9 @@ export default function AboutServices() {
                 </div>
 
                 {/* Connector Arrow - Hidden on mobile */}
-                <div className="hidden lg:block absolute top-1/2 -right-6 transform -translate-y-1/2 z-20">
+                <div className={`hidden lg:block absolute top-1/2 ${locale === 'ar' ? '-left-6' : '-right-6'} transform -translate-y-1/2 z-20`}>
                   <div className="w-12 h-12 bg-gradient-to-r from-[#74cfaa] to-[#a095e1] rounded-full flex items-center justify-center shadow-lg">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ transform: locale === 'ar' ? 'scaleX(-1)' : 'none' }}>
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                     </svg>
                   </div>
@@ -835,14 +844,14 @@ export default function AboutServices() {
 
               {/* Step 6: Post-Event (Optional) */}
               <div className="relative group">
-                <div className="bg-gradient-to-br from-[#74cfaa]/5 to-[#a095e1]/5 rounded-2xl p-6 border border-[#74cfaa]/20 hover:border-[#a095e1]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#a095e1]/10 relative z-10">
+                <div className="bg-gradient-to-br from-[#74cfaa]/5 to-[#a095e1]/5 rounded-2xl p-6 border border-[#74cfaa]/20 hover:border-[#a095e1]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#a095e1]/10 relative z-10" style={{ direction: 'ltr' }}>
                   {/* Step Number */}
-                  <div className="absolute -top-4 left-6 w-8 h-8 bg-gradient-to-r from-[#a095e1] to-[#74cfaa] rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                  <div className={`absolute -top-4 ${locale === 'ar' ? 'right-6' : 'left-6'} w-8 h-8 bg-gradient-to-r from-[#a095e1] to-[#74cfaa] rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg`}>
                     6
                   </div>
 
                   {/* Optional Badge */}
-                  <div className="absolute -top-2 -right-2 bg-[#74cfaa] text-black text-xs px-2 py-1 rounded-full font-semibold">
+                  <div className={`absolute -top-2 ${locale === 'ar' ? '-left-2' : '-right-2'} bg-[#74cfaa] text-black text-xs px-2 py-1 rounded-full font-semibold`}>
                     {t('aboutServices.process.steps.postEvent.badge')}
                   </div>
 

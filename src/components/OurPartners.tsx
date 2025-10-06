@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import ClientsPartnersTemplate, { CardConfig, BackgroundElement } from './ClientsPartnersTemplate';
 
 // Assets - Optimized WebP images
@@ -61,6 +61,7 @@ const backgroundElements: BackgroundElement[] = [
 
 export default function OurPartners() {
   const t = useTranslations('clientsPartners.partners');
+  const locale = useLocale();
 
   const cards: CardConfig[] = [
     {

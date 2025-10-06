@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 
 // Assets from Figma - Optimized WebP images
@@ -16,6 +16,7 @@ const imgVector8Mobile = "/assets/1eb3acc2c8c88219785b7efeb93b6f426b4134dd.svg";
 
 export default function ExperienceCenters() {
   const t = useTranslations('services.experienceCenters');
+  const locale = useLocale();
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -75,13 +76,14 @@ export default function ExperienceCenters() {
       >
         {/* Title - Optimized Mobile-First Typography */}
         <div className="text-center mb-8 px-6 sm:px-8 md:px-12">
-          <h1 
+          <h1
             className="font-bold capitalize tracking-[-2.7px] text-[48px] leading-[52px] md:text-[68px] md:leading-[74px] lg:text-[90px] lg:leading-[98px] xl:text-[120px] xl:leading-[130px]"
             style={{
               fontFamily: '"Poppins", sans-serif'
             }}
+            dir={locale === 'ar' ? 'rtl' : 'ltr'}
           >
-            <span 
+            <span
               style={{
                 background: 'linear-gradient(to right, #a095e1, #74cfaa)',
                 WebkitBackgroundClip: 'text',
@@ -159,12 +161,12 @@ export default function ExperienceCenters() {
             }`}
           >
             {/* Header Badge - Centered */}
-            <div 
+            <div
               className={`box-border flex gap-2.5 items-center justify-center overflow-clip px-4 py-5 relative rounded-[900px] w-full ${
                 card.isDark ? 'bg-[rgba(66,62,63,0.93)]' : 'bg-[rgba(255,255,255,0.93)]'
               }`}
             >
-              <div 
+              <div
                 className="bg-clip-text bg-gradient-to-r capitalize not-italic relative text-center w-full"
                 style={{
                   fontFamily: '"Poppins", sans-serif',
@@ -175,21 +177,23 @@ export default function ExperienceCenters() {
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text'
                 }}
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}
               >
                 <p>{card.title}</p>
               </div>
             </div>
-            
+
             {/* Description - Centered */}
-            <div 
+            <div
               className={`lowercase not-italic relative text-center w-full ${
                 card.isDark ? 'text-neutral-400' : 'text-[#888888]'
               }`}
-              style={{ 
+              style={{
                 fontFamily: '"Poppins", sans-serif',
                 fontSize: 'clamp(14px, 3.5vw, 16px)',
                 lineHeight: '1.5'
               }}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             >
               <p>{card.description}</p>
             </div>
@@ -235,7 +239,7 @@ export default function ExperienceCenters() {
       />
 
       {/* Title Section - Desktop Optimized */}
-      <div 
+      <div
         className="absolute capitalize not-italic text-center tracking-[-2.7px] translate-x-[-50%] z-30"
         style={{
           top: '91px',
@@ -243,15 +247,16 @@ export default function ExperienceCenters() {
           width: '969px'
         }}
       >
-        <h1 
+        <h1
           className="font-bold"
           style={{
             fontFamily: '"Poppins", sans-serif',
             fontSize: '90px',
             lineHeight: '98px'
           }}
+          dir={locale === 'ar' ? 'rtl' : 'ltr'}
         >
-          <span 
+          <span
             style={{
               background: 'linear-gradient(to right, #a095e1, #74cfaa)',
               WebkitBackgroundClip: 'text',
@@ -354,11 +359,11 @@ export default function ExperienceCenters() {
             paddingBottom: '43px'
           }}
         >
-          <div 
+          <div
             className="bg-[rgba(66,62,63,0.93)] overflow-clip relative rounded-[900px] shrink-0 w-full flex items-center justify-center"
             style={{ height: '69px' }}
           >
-            <div 
+            <div
               className="bg-clip-text bg-gradient-to-r capitalize not-italic text-center"
               style={{
                 fontFamily: '"Poppins", sans-serif',
@@ -368,20 +373,22 @@ export default function ExperienceCenters() {
                 backgroundClip: 'text',
                 fontSize: 'clamp(20px, 4vw, 30px)'
               }}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             >
               <p style={{ lineHeight: '36px' }}>
                 {t('centers.digitalExperience.title')}
               </p>
             </div>
           </div>
-          
-          <div 
+
+          <div
             className="relative shrink-0 text-neutral-400 w-full lowercase not-italic"
             style={{
               fontFamily: '"Poppins", sans-serif',
               fontSize: '19px',
               lineHeight: '0'
             }}
+            dir={locale === 'ar' ? 'rtl' : 'ltr'}
           >
             <p style={{ lineHeight: '24px' }}>
               {t('centers.digitalExperience.description')}
@@ -428,14 +435,14 @@ export default function ExperienceCenters() {
             >
               <div className="flex items-center justify-center relative shrink-0">
                 <div className="flex-none rotate-[180deg] scale-y-[-100%]">
-                  <div 
+                  <div
                     className="bg-white overflow-clip relative rounded-[900px] flex items-center justify-center"
                     style={{
                       height: '69px',
                       width: '275px'
                     }}
                   >
-                    <div 
+                    <div
                       className="bg-clip-text bg-gradient-to-r capitalize not-italic text-center"
                       style={{
                         fontFamily: '"Poppins", sans-serif',
@@ -445,6 +452,7 @@ export default function ExperienceCenters() {
                         backgroundClip: 'text',
                         fontSize: '30px',
                       }}
+                      dir={locale === 'ar' ? 'rtl' : 'ltr'}
                     >
                       <p style={{ lineHeight: '36px' }}>
                         {t('centers.digitalMuseums.title')}
@@ -453,19 +461,20 @@ export default function ExperienceCenters() {
                   </div>
                 </div>
               </div>
-              
-              <div 
+
+              <div
                 className="flex items-center justify-center min-w-full relative shrink-0"
                 style={{ width: 'min-content' }}
               >
                 <div className="flex-none rotate-[180deg] scale-y-[-100%] w-full">
-                  <div 
+                  <div
                     className="relative text-[#6b6b81] w-full lowercase not-italic"
                     style={{
                       fontFamily: '"Poppins", sans-serif',
                       fontSize: '19px',
                       lineHeight: '24px'
                     }}
+                    dir={locale === 'ar' ? 'rtl' : 'ltr'}
                   >
                     <p className="mb-0">
                       {t('centers.digitalMuseums.description')}
@@ -516,14 +525,14 @@ export default function ExperienceCenters() {
             >
               <div className="flex items-center justify-center relative shrink-0">
                 <div className="flex-none rotate-[180deg] scale-y-[-100%]">
-                  <div 
+                  <div
                     className="bg-white overflow-clip relative rounded-[900px] flex items-center justify-center"
                     style={{
                       height: '69px',
                       width: '250px'
                     }}
                   >
-                    <div 
+                    <div
                       className="bg-clip-text bg-gradient-to-r capitalize not-italic text-center"
                       style={{
                         fontFamily: '"Poppins", sans-serif',
@@ -533,6 +542,7 @@ export default function ExperienceCenters() {
                         backgroundClip: 'text',
                         fontSize: '30px',
                       }}
+                      dir={locale === 'ar' ? 'rtl' : 'ltr'}
                     >
                       <p style={{ lineHeight: '36px' }}>
                         {t('centers.expoPavilions.title')}
@@ -541,19 +551,20 @@ export default function ExperienceCenters() {
                   </div>
                 </div>
               </div>
-              
-              <div 
+
+              <div
                 className="flex items-center justify-center min-w-full relative shrink-0"
                 style={{ width: 'min-content' }}
               >
                 <div className="flex-none rotate-[180deg] scale-y-[-100%] w-full">
-                  <div 
+                  <div
                     className="relative text-[#6b6b81] w-full lowercase not-italic"
                     style={{
                       fontFamily: '"Poppins", sans-serif',
                       fontSize: '19px',
                       lineHeight: '24px'
                     }}
+                    dir={locale === 'ar' ? 'rtl' : 'ltr'}
                   >
                     <p className="mb-0">
                       {t('centers.expoPavilions.description')}
@@ -604,14 +615,14 @@ export default function ExperienceCenters() {
             >
               <div className="flex items-center justify-center relative shrink-0">
                 <div className="flex-none rotate-[180deg] scale-y-[-100%]">
-                  <div 
+                  <div
                     className="bg-white overflow-clip relative rounded-[900px] flex items-center justify-center"
                     style={{
                       height: '69px',
                       width: '303px'
                     }}
                   >
-                    <div 
+                    <div
                       className="bg-clip-text bg-gradient-to-r capitalize not-italic text-center"
                       style={{
                         fontFamily: '"Poppins", sans-serif',
@@ -621,6 +632,7 @@ export default function ExperienceCenters() {
                         backgroundClip: 'text',
                         fontSize: '30px',
                       }}
+                      dir={locale === 'ar' ? 'rtl' : 'ltr'}
                     >
                       <p style={{ lineHeight: '36px' }}>
                         {t('centers.innovationCenters.title')}
@@ -629,19 +641,20 @@ export default function ExperienceCenters() {
                   </div>
                 </div>
               </div>
-              
-              <div 
+
+              <div
                 className="flex items-center justify-center min-w-full relative shrink-0"
                 style={{ width: 'min-content' }}
               >
                 <div className="flex-none rotate-[180deg] scale-y-[-100%] w-full">
-                  <div 
+                  <div
                     className="relative text-[#6b6b81] w-full lowercase not-italic"
                     style={{
                       fontFamily: '"Poppins", sans-serif',
                       fontSize: '19px',
                       lineHeight: '24px'
                     }}
+                    dir={locale === 'ar' ? 'rtl' : 'ltr'}
                   >
                     <p className="mb-0">
                       {t('centers.innovationCenters.description')}
@@ -692,14 +705,14 @@ export default function ExperienceCenters() {
             >
               <div className="flex items-center justify-center relative shrink-0">
                 <div className="flex-none rotate-[180deg] scale-y-[-100%]">
-                  <div 
+                  <div
                     className="bg-white overflow-clip relative rounded-[900px] flex items-center justify-center"
                     style={{
                       height: '69px',
                       width: '365px'
                     }}
                   >
-                    <div 
+                    <div
                       className="bg-clip-text bg-gradient-to-r capitalize not-italic text-center"
                       style={{
                         fontFamily: '"Poppins", sans-serif',
@@ -709,6 +722,7 @@ export default function ExperienceCenters() {
                         backgroundClip: 'text',
                         fontSize: '30px',
                       }}
+                      dir={locale === 'ar' ? 'rtl' : 'ltr'}
                     >
                       <p style={{ lineHeight: '36px' }}>
                         {t('centers.permanentInstallations.title')}
@@ -717,19 +731,20 @@ export default function ExperienceCenters() {
                   </div>
                 </div>
               </div>
-              
-              <div 
+
+              <div
                 className="flex items-center justify-center min-w-full relative shrink-0"
                 style={{ width: 'min-content' }}
               >
                 <div className="flex-none rotate-[180deg] scale-y-[-100%] w-full">
-                  <div 
+                  <div
                     className="relative text-[#6b6b81] w-full lowercase not-italic"
                     style={{
                       fontFamily: '"Poppins", sans-serif',
                       fontSize: '19px',
                       lineHeight: '24px'
                     }}
+                    dir={locale === 'ar' ? 'rtl' : 'ltr'}
                   >
                     <p className="mb-0">
                       {t('centers.permanentInstallations.description')}

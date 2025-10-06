@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 // Images - Optimized WebP versions
 const images = {
@@ -74,10 +74,10 @@ function ValueCard({ value, alignment }: { value: Value, alignment: string }) {
 
         {/* Card Content */}
         <div className="px-2">
-          <h3 className="text-white text-lg md:text-xl lg:text-2xl font-bold mb-2" style={{ fontFamily: '"Poppins", sans-serif' }}>
+          <h3 className="text-white text-lg md:text-xl lg:text-2xl font-bold mb-2" style={{ fontFamily: '"Poppins", sans-serif' }} dir="ltr">
             {value.title}
           </h3>
-          <p className="text-gray-400 text-sm leading-relaxed" style={{ fontFamily: '"Poppins", sans-serif' }}>
+          <p className="text-gray-400 text-sm leading-relaxed" style={{ fontFamily: '"Poppins", sans-serif' }} dir="ltr">
             {value.description}
           </p>
         </div>
@@ -89,6 +89,7 @@ function ValueCard({ value, alignment }: { value: Value, alignment: string }) {
 
 export default function AboutValues() {
   const t = useTranslations('about.values');
+  const locale = useLocale();
   const [scrollProgress, setScrollProgress] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
@@ -377,13 +378,15 @@ export default function AboutValues() {
             backgroundClip: 'text',
             fontFamily: '"Poppins", sans-serif'
           }}
+          dir={locale === 'ar' ? 'rtl' : 'ltr'}
         >
           {t('title')}
         </h2>
 
         {/* Subtitle */}
         <p className="text-white/80 text-base md:text-lg lg:text-xl mt-4 md:mt-6 max-w-3xl leading-relaxed"
-           style={{ fontFamily: '"Poppins", sans-serif' }}>
+           style={{ fontFamily: '"Poppins", sans-serif' }}
+           dir={locale === 'ar' ? 'rtl' : 'ltr'}>
           {t('subtitle')}
         </p>
 
@@ -492,7 +495,8 @@ export default function AboutValues() {
         {/* Outro Text */}
         <div className="mt-20 md:mt-32 max-w-4xl mx-auto px-4">
           <p className="text-white/90 text-center text-base md:text-lg lg:text-xl leading-relaxed"
-             style={{ fontFamily: '"Poppins", sans-serif' }}>
+             style={{ fontFamily: '"Poppins", sans-serif' }}
+             dir={locale === 'ar' ? 'rtl' : 'ltr'}>
             {t('outro')}
           </p>
         </div>

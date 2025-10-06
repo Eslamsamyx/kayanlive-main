@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 // Assets from Figma - Optimized WebP images
 const imgRectangle4241 = "/optimized/work/a3b5baba83b75945699bcee9522e99831a9f57a2-work-outcomes-1.webp";
@@ -19,6 +19,7 @@ const imgRectangle4247 = "/optimized/work/98504c47236d5a98548c64c0e3cb4305deab02
 
 export default function WorkOutcomes() {
   const t = useTranslations('work.outcomes');
+  const locale = useLocale();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -43,7 +44,8 @@ export default function WorkOutcomes() {
               lineHeight: 'clamp(42px, 8vw, 52px)',
               letterSpacing: '-2px',
               color: '#2c2c2b'
-            }}>
+            }}
+            dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               <p className="mb-0">{t('title.measurable')}</p>
               <p>{t('title.outcomes')}</p>
             </div>
@@ -58,6 +60,7 @@ export default function WorkOutcomes() {
                 paddingTop: '4px',
                 paddingBottom: '4px'
               }}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             >
               <p>{t('title.realEnvironments')}</p>
             </div>
@@ -79,7 +82,8 @@ export default function WorkOutcomes() {
             fontSize: 'clamp(14px, 4vw, 16px)',
             lineHeight: 'clamp(18px, 5vw, 20px)',
             color: '#888888'
-          }}>
+          }}
+          dir={locale === 'ar' ? 'rtl' : 'ltr'}>
             <p className="mb-2">{t('mobileDescription')}</p>
             <p className="mb-0">{t('mobilePhilosophy')}</p>
           </div>
@@ -111,6 +115,7 @@ export default function WorkOutcomes() {
                   lineHeight: 'clamp(4rem, 6vw, 5.3rem)',
                   letterSpacing: 'clamp(-2px, -0.3vw, -4px)'
                 }}
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}
               >
                 <p className="mb-0">{t('title.measurable')}</p>
                 <p>{t('title.outcomes')}</p>
@@ -126,6 +131,7 @@ export default function WorkOutcomes() {
                   lineHeight: 'clamp(4rem, 6vw, 5.3rem)',
                   letterSpacing: 'clamp(-2px, -0.3vw, -4px)'
                 }}
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}
               >
                 <p>{t('title.realEnvironments')}.</p>
               </div>
@@ -170,7 +176,7 @@ export default function WorkOutcomes() {
                 </div>
 
                 {/* Social Icons */}
-                <div className="absolute bottom-8 right-8 flex flex-col gap-4">
+                <div className="absolute flex flex-col gap-4" style={{ bottom: '2rem', [locale === 'ar' ? 'left' : 'right']: '2rem' }}>
                   {/* Twitter */}
                   <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
                     <div className="w-6 h-6 relative">
@@ -233,6 +239,7 @@ export default function WorkOutcomes() {
                   fontSize: 'clamp(1.125rem, 1.5vw, 1.5rem)',
                   lineHeight: 'clamp(1.75rem, 2.25vw, 2rem)'
                 }}
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}
               >
                 <p className="mb-4">{t('description')}</p>
 

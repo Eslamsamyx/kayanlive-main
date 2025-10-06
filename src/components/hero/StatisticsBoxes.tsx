@@ -43,12 +43,12 @@ const StatisticsBoxes = memo<StatisticsBoxesProps>(({
       aria-label="Company statistics"
     >
       <div className={boxClasses}>
-        <div className={textClasses}>
+        <div className={textClasses} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
           {t('hero.stats.projects')}
         </div>
       </div>
       <div className={boxClasses}>
-        <div className={textClasses}>
+        <div className={textClasses} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
           {t('hero.stats.founded')}
         </div>
       </div>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { useLocale } from 'next-intl';
 
 export interface CardConfig {
   id: string;
@@ -65,6 +66,7 @@ export default function ClientsPartnersTemplate({
   containerClass = '',
   customTitleStyle
 }: ClientsPartnersTemplateProps) {
+  const locale = useLocale();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
@@ -294,29 +296,31 @@ export default function ClientsPartnersTemplate({
         zIndex: 10
       }}>
         {/* Badge */}
-        <div 
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            padding: '12px 24px',
-            borderRadius: '9999px',
-            border: '2px solid #7afdd6',
-            marginBottom: isMobile ? '24px' : '32px',
-            width: badgeWidth,
-            height: '62px',
-            justifyContent: 'center'
-          }}
-        >
-          <span style={{
-            color: '#7afdd6',
-            fontSize: '14px',
-            fontWeight: 'bold',
-            textTransform: 'uppercase',
-            letterSpacing: '0.05em'
-          }}>
-            {badgeText}
-          </span>
-        </div>
+        {badgeText && (
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              padding: '12px 24px',
+              borderRadius: '9999px',
+              border: '2px solid #7afdd6',
+              marginBottom: isMobile ? '24px' : '32px',
+              width: badgeWidth,
+              height: '62px',
+              justifyContent: 'center'
+            }}
+          >
+            <span style={{
+              color: '#7afdd6',
+              fontSize: '14px',
+              fontWeight: 'bold',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em'
+            }}>
+              {badgeText}
+            </span>
+          </div>
+        )}
 
         {/* Main Title */}
         <h1
@@ -324,6 +328,7 @@ export default function ClientsPartnersTemplate({
           style={{
             fontWeight: customTitleStyle?.fontWeight || 'bold',
             marginBottom: isMobile ? '32px' : '64px',
+            paddingBottom: badgeText ? '0' : (isMobile ? '16px' : '24px'),
             fontSize: customTitleStyle
               ? (isMobile
                   ? customTitleStyle.mobile?.fontSize || '50px'
@@ -359,7 +364,8 @@ export default function ClientsPartnersTemplate({
           gap: isMobile ? '24px' : '24px',
           width: '100%',
           maxWidth: isMobile ? '384px' : 'none',
-          margin: isMobile ? '0 auto' : undefined
+          margin: isMobile ? '0 auto' : undefined,
+          direction: locale === 'ar' ? 'rtl' : 'ltr'
         }}>
           {cards.map((card) => (
             <div 

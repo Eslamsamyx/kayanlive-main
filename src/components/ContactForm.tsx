@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import CTAButton from './CTAButton';
 import { api } from '@/trpc/react';
 // import Image from 'next/image';
@@ -19,6 +19,7 @@ interface Toast {
 
 export default function ContactForm() {
   const t = useTranslations('contact.form');
+  const locale = useLocale();
   const [isUrgent, setIsUrgent] = useState<'yes' | 'no' | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -164,7 +165,7 @@ export default function ContactForm() {
             
             {/* Full Name */}
             <div className="flex flex-col gap-3 w-full">
-              <label htmlFor="fullName" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }}>
+              <label htmlFor="fullName" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                 {t('labels.fullName')} *
               </label>
               <div className="relative">
@@ -179,7 +180,7 @@ export default function ContactForm() {
                   aria-describedby={errors.fullName ? "fullName-error" : undefined}
                 />
                 {errors.fullName && (
-                  <p id="fullName-error" className="text-red-400 text-sm mt-1" role="alert">
+                  <p id="fullName-error" className="text-red-400 text-sm mt-1" role="alert" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                     {errors.fullName}
                   </p>
                 )}
@@ -188,7 +189,7 @@ export default function ContactForm() {
 
             {/* Organization */}
             <div className="flex flex-col gap-3 w-full">
-              <label htmlFor="organization" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }}>
+              <label htmlFor="organization" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                 {t('labels.organization')}
               </label>
               <input
@@ -204,7 +205,7 @@ export default function ContactForm() {
 
             {/* Email */}
             <div className="flex flex-col gap-3 w-full">
-              <label htmlFor="email" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }}>
+              <label htmlFor="email" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                 {t('labels.email')} *
               </label>
               <div className="relative">
@@ -219,7 +220,7 @@ export default function ContactForm() {
                   aria-describedby={errors.email ? "email-error" : undefined}
                 />
                 {errors.email && (
-                  <p id="email-error" className="text-red-400 text-sm mt-1" role="alert">
+                  <p id="email-error" className="text-red-400 text-sm mt-1" role="alert" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                     {errors.email}
                   </p>
                 )}
@@ -228,7 +229,7 @@ export default function ContactForm() {
 
             {/* Phone */}
             <div className="flex flex-col gap-3 w-full">
-              <label htmlFor="phone" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }}>
+              <label htmlFor="phone" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                 {t('labels.phone')}
               </label>
               <input
@@ -244,7 +245,7 @@ export default function ContactForm() {
 
             {/* Event Type */}
             <div className="flex flex-col gap-3 w-full">
-              <label htmlFor="eventType" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }}>
+              <label htmlFor="eventType" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                 {t('labels.eventType')}
               </label>
               <input
@@ -260,7 +261,7 @@ export default function ContactForm() {
 
             {/* Budget */}
             <div className="flex flex-col gap-3 w-full">
-              <label htmlFor="budget" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }}>
+              <label htmlFor="budget" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                 {t('labels.budget')}
               </label>
               <input
@@ -276,7 +277,7 @@ export default function ContactForm() {
 
             {/* Goals */}
             <div className="flex flex-col gap-3 w-full">
-              <label htmlFor="goals" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }}>
+              <label htmlFor="goals" className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight" style={{ fontFamily: '"Poppins", sans-serif' }} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                 {t('labels.goals')}
               </label>
               <textarea
@@ -293,7 +294,7 @@ export default function ContactForm() {
             {/* Urgent Request */}
             <div className="flex flex-col gap-3 w-full">
               <fieldset>
-                <legend className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight mb-3" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                <legend className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize leading-tight mb-3" style={{ fontFamily: '"Poppins", sans-serif' }} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                   {t('labels.isUrgent')}
                 </legend>
                 <div className="flex gap-6 items-center" role="radiogroup" aria-labelledby="urgent-request-legend">
@@ -320,10 +321,11 @@ export default function ContactForm() {
                         <div className="w-2 h-2 bg-[#2c2c2b] rounded-sm" />
                       )}
                     </div>
-                    <span 
-                      className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize group-hover:text-white/90 transition-colors" 
+                    <span
+                      className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize group-hover:text-white/90 transition-colors"
                       style={{ fontFamily: '"Poppins", sans-serif' }}
                       id="urgent-yes-description"
+                      dir={locale === 'ar' ? 'rtl' : 'ltr'}
                     >
                       {t('radioOptions.yes')}
                     </span>
@@ -351,10 +353,11 @@ export default function ContactForm() {
                         <div className="w-2 h-2 bg-[#2c2c2b] rounded-sm" />
                       )}
                     </div>
-                    <span 
-                      className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize group-hover:text-white/90 transition-colors" 
+                    <span
+                      className="text-white text-base sm:text-lg md:text-xl lg:text-[22px] font-bold capitalize group-hover:text-white/90 transition-colors"
                       style={{ fontFamily: '"Poppins", sans-serif' }}
                       id="urgent-no-description"
+                      dir={locale === 'ar' ? 'rtl' : 'ltr'}
                     >
                       {t('radioOptions.no')}
                     </span>
@@ -364,10 +367,10 @@ export default function ContactForm() {
             </div>
 
             {/* Submit Button */}
-            <div className="lg:col-span-2 flex justify-center lg:justify-start pt-8 pb-4 px-4 lg:px-0">
+            <div className="lg:col-span-2 flex justify-center pt-8 pb-4 px-4 lg:px-0">
               {/* Loading indicator for screen readers */}
               {isSubmitting && (
-                <div className="sr-only" id="submit-status" aria-live="polite" aria-atomic="true">
+                <div className="sr-only" id="submit-status" aria-live="polite" aria-atomic="true" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                   {t('submit.loadingStatus')}
                 </div>
               )}
@@ -378,7 +381,7 @@ export default function ContactForm() {
                 ariaLabel={isSubmitting ? t('submit.loadingStatus') : t('submit.button')}
               >
                 {isSubmitting && (
-                  <div className="w-4 h-4 border-2 border-[#2c2c2b] border-t-transparent rounded-full animate-spin mr-2" role="presentation" aria-hidden="true" />
+                  <div className="w-4 h-4 border-2 border-[#2c2c2b] border-t-transparent rounded-full animate-spin me-2" role="presentation" aria-hidden="true" />
                 )}
                 {isSubmitting ? t('submit.submitting') : t('submit.button')}
               </CTAButton>
@@ -388,7 +391,7 @@ export default function ContactForm() {
       </div>
 
       {/* Toast Notifications */}
-      <div className="fixed top-4 right-4 z-50 space-y-2">
+      <div className="fixed top-4 end-4 z-50 space-y-2">
         {toasts.map((toast) => (
           <div
             key={toast.id}
@@ -403,7 +406,7 @@ export default function ContactForm() {
             aria-live="polite"
             aria-atomic="true"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               <div className="flex items-center gap-2">
                 <div className="flex-shrink-0">
                   {toast.type === 'success' && (
@@ -428,7 +431,7 @@ export default function ContactForm() {
               </div>
               <button
                 onClick={() => removeToast(toast.id)}
-                className="ml-2 text-white/80 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white/20 rounded-md p-1"
+                className="ms-2 text-white/80 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white/20 rounded-md p-1"
                 aria-label={t('toasts.closeNotification')}
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">

@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { useTranslations, useLocale } from 'next-intl';
 import Button from './Button';
 
-// CRITICAL FIX: Ultra-optimized WebP images - quality 20 for mobile, 30 for desktop
 const imgScreenshot1Desktop = "/optimized/hero/aeb93871393e6e48280518ae29c12c43432c5df9-hero-main-bg.webp";
 const imgScreenshot1Mobile = "/optimized/hero/aeb93871393e6e48280518ae29c12c43432c5df9-hero-main-bg.webp";
 const imgScreenshot3 = "/optimized/hero/36266e42711b665cf6180bb2cfbd86ce5dfdc38d-hero-slide2-bg.webp";
@@ -19,7 +18,6 @@ const SLIDE_INTERVAL = 6000;
 const PAUSE_DURATION = 10000;
 const TOTAL_SLIDES = 2;
 
-// CRITICAL FIX: Optimized slide indicator component - no unnecessary re-renders
 const SlideIndicators = ({
   currentSlide,
   goToSlide,
@@ -97,7 +95,6 @@ export default function Hero() {
     setIsClient(true);
   }, []);
 
-  // CRITICAL FIX: Memoized style calculations to prevent re-renders
   const containerStyles = useMemo(() => ({
     mobile: {
       height: 'clamp(600px, 85vh, 800px)',
@@ -129,7 +126,6 @@ export default function Hero() {
     pauseTimeoutRef.current = setTimeout(() => setIsPaused(false), PAUSE_DURATION) as unknown as number;
   }, []);
 
-  // CRITICAL FIX: Stable slide indicator props - prevent unnecessary re-renders
   const slideIndicatorProps = useMemo(() => ({
     currentSlide,
     goToSlide,
@@ -236,7 +232,6 @@ export default function Hero() {
           transition: all 0.3s ease;
         }
 
-        /* CRITICAL FIX: Remove expensive backdrop-filter for better performance */
         .hero-backdrop-blur {
           background: rgba(255, 255, 255, 0.1);
           border: 1px solid rgba(255, 255, 255, 0.2);
@@ -248,14 +243,12 @@ export default function Hero() {
           contain: layout;
         }
 
-        /* CRITICAL FIX: Optimize GPU layers */
         .hero-mobile-content,
         .hero-desktop-content {
           transform: translateZ(0);
           contain: layout;
         }
 
-        /* CRITICAL FIX: Ultra-stable font rendering */
         .hero-text-stable {
           font-size: clamp(24px, 3vw, 36px);
           line-height: 1.5;
@@ -309,7 +302,6 @@ export default function Hero() {
           aria-hidden={currentSlide !== 0}
           {...(currentSlide !== 0 && { inert: true })}
         >
-          {/* CRITICAL FIX: Mobile Background Image - Ultra-optimized for LCP */}
           <Image
             src={imgScreenshot1Mobile}
             alt="KayanLive Hero Background"
@@ -370,7 +362,6 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Mobile Text Content - CRITICAL FIX: Stable text metrics */}
           <div
             className="hero-mobile-content absolute translate-x-[-50%]"
             style={{
@@ -497,7 +488,7 @@ export default function Hero() {
                         fontWeight: 'normal'
                       }}
                     >
-                      <div className="flex flex-col items-center justify-center gap-2 px-2">
+                      <div className="flex flex-col items-center justify-center gap-2 px-2" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                         <p className="mb-0 font-semibold" style={{ fontSize: 'clamp(16px, 3.2vw, 18px)' }}>
                           {t('hero.slide2Title')}
                         </p>
@@ -566,7 +557,6 @@ export default function Hero() {
           aria-hidden={currentSlide !== 0}
           {...(currentSlide !== 0 && { inert: true })}
         >
-          {/* CRITICAL FIX: Desktop Background Image - Ultra-optimized for LCP */}
           <Image
             src={imgScreenshot1Desktop}
             alt="KayanLive Hero Background"
@@ -607,7 +597,6 @@ export default function Hero() {
             />
           </div>
 
-          {/* CRITICAL FIX: Multiple Arrows - Optimized SVG loading */}
           <div className="absolute left-0 right-0 w-full z-10 pointer-events-none" aria-hidden="true" style={{
             bottom: '60px'
           }}>
@@ -633,7 +622,6 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Text Content - CRITICAL FIX: Stable text metrics */}
           <div
             className="hero-desktop-content absolute"
             style={{
@@ -823,6 +811,7 @@ export default function Hero() {
                         minHeight: 'fit-content',
                         fontFamily: "var(--font-poppins), 'Poppins-Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif"
                       }}
+                      dir={locale === 'ar' ? 'rtl' : 'ltr'}
                     >
                       <p className="mb-6 text-3xl font-bold">
                         {t('hero.slide2Title')}

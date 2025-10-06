@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import type { ReactNode, CSSProperties } from 'react';
+import { useLocale } from 'next-intl';
 
 // ==================== CONSTANTS ====================
 const DECORATIVE_IMAGE_PATH = "/optimized/herotemplate/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.webp";
@@ -124,6 +125,8 @@ const sanitizeStringArray = (items: string[] | undefined): string[] => {
  * @returns JSX.Element The rendered hero section
  */
 export default function HeroTemplate(props: HeroTemplateProps) {
+  const locale = useLocale();
+
   // Sanitize all props upfront
   const sanitizedProps = useMemo(() => ({
     ariaLabel: sanitizeText(props.ariaLabel),
@@ -538,6 +541,7 @@ export default function HeroTemplate(props: HeroTemplateProps) {
             <header
               className={`text-center w-full max-w-md ${state.isVisible ? 'animate-fade-up-1' : 'opacity-0'}`}
               style={memoizedStyles.mobileHeader}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             >
               <h1 style={memoizedStyles.gradientText}>
                 {sanitizedProps.mobileTitle}
@@ -547,6 +551,7 @@ export default function HeroTemplate(props: HeroTemplateProps) {
             <div
               className={`text-center w-full max-w-lg ${state.isVisible ? 'animate-fade-up-2' : 'opacity-0'}`}
               style={memoizedStyles.mobileSubtitle}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             >
               {sanitizedProps.mobileSubtitleGradient.map((line, index) => (
                 <div
@@ -574,6 +579,7 @@ export default function HeroTemplate(props: HeroTemplateProps) {
               style={memoizedStyles.mobileBody}
               role="region"
               aria-label="Hero description"
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             >
               {sanitizedProps.mobileBodyParagraphs.map((paragraph, index) => (
                 paragraph ? (
@@ -591,7 +597,7 @@ export default function HeroTemplate(props: HeroTemplateProps) {
           <div className="hidden lg:grid lg:grid-cols-12 lg:grid-rows-3 lg:min-h-full">
             {/* Title - Top Left (Row 1, Cols 1-6) */}
             <div className="col-span-6 row-span-1 flex items-start pt-8">
-              <header className={`w-full ${state.isVisible ? 'animate-fade-up-1' : 'opacity-0'}`}>
+              <header className={`w-full ${state.isVisible ? 'animate-fade-up-1' : 'opacity-0'}`} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                 <h1
                   className="font-bold"
                   style={{
@@ -623,6 +629,7 @@ export default function HeroTemplate(props: HeroTemplateProps) {
                   fontFamily: FONT_FAMILIES.PRIMARY,
                   textTransform: 'capitalize'
                 }}
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}
               >
                 <div style={{
                   ...memoizedStyles.gradientText,
@@ -650,6 +657,7 @@ export default function HeroTemplate(props: HeroTemplateProps) {
                 }}
                 role="region"
                 aria-label="Hero description"
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}
               >
                 {sanitizedProps.desktopBodyParagraphs.map((paragraph, index) => (
                   paragraph ? (

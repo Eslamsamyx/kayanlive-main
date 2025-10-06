@@ -16,28 +16,28 @@ export default function WhyKayanLive() {
   
   return (
     <div ref={sectionRef} className="bg-white relative w-full overflow-hidden min-h-screen lg:min-h-[1450px]">
-      {/* Left/Right Pattern - positioned exactly as in Figma with black filter - Hidden on mobile and tablet */}
-      <div 
+      {/* Left Pattern - positioned exactly as in Figma with black filter - Hidden on mobile and tablet */}
+      <div
         className="absolute bg-center bg-cover bg-no-repeat z-0 hidden lg:block"
-        style={{ 
+        style={{
           backgroundImage: `url('${imgPattern}')`,
           width: '370px',
           height: '572px',
-          [locale === 'ar' ? 'right' : 'left']: '-124px',
+          left: '-124px',
           top: '-30px',
           zIndex: 1,
           filter: 'invert(1) brightness(0)',
           opacity: 0.5
         }}
       />
-      
-      {/* Right/Left Pattern - Bottom (rotated 180 degrees with black filter) - Hidden on mobile and tablet */}
+
+      {/* Right Pattern - Bottom (rotated 180 degrees with black filter) - Hidden on mobile and tablet */}
       <div
         className="absolute z-0 hidden lg:block"
         style={{
           width: '370px',
           height: '572px',
-          [locale === 'ar' ? 'left' : 'right']: '0px',
+          right: '0px',
           bottom: '-30px',
           zIndex: 1
         }}
@@ -59,7 +59,7 @@ export default function WhyKayanLive() {
       {/* Desktop Content Container */}
       <div className="hidden lg:block max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20 relative z-10" style={{ paddingTop: '85px', paddingBottom: '0px' }}>
         {/* Why heading - Original position */}
-        <h2 
+        <h2
           className="text-[#2c2c2b] font-medium capitalize"
           style={{
             fontSize: '220px',
@@ -69,6 +69,7 @@ export default function WhyKayanLive() {
             marginBottom: '37px',
             fontFamily: '"Poppins", sans-serif'
           }}
+          dir={locale === 'ar' ? 'rtl' : 'ltr'}
         >
           {t('whyKayan.title')}
         </h2>
@@ -93,7 +94,7 @@ export default function WhyKayanLive() {
           marginRight: '0',
           marginBottom: '40px'
         }}>
-          <h3 className="text-[#2c2c2b] font-semibold text-[36px] leading-[44px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}>
+          <h3 className="text-[#2c2c2b] font-semibold text-[36px] leading-[44px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
             {t('whyKayan.openingStatement')}
           </h3>
         </div>
@@ -105,7 +106,7 @@ export default function WhyKayanLive() {
           marginRight: '0',
           marginBottom: '20px'
         }}>
-          <h4 className="text-[#74cfaa] font-bold text-[28px] leading-[36px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}>
+          <h4 className="text-[#74cfaa] font-bold text-[28px] leading-[36px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
             {t('whyKayan.sectionTitle')}
           </h4>
         </div>
@@ -119,6 +120,7 @@ export default function WhyKayanLive() {
         }}>
           <p className="text-[#888888] text-[24px] leading-[32px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}
             dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.founderText'))}
+            dir={locale === 'ar' ? 'rtl' : 'ltr'}
           />
         </div>
 
@@ -131,6 +133,7 @@ export default function WhyKayanLive() {
         }}>
           <p className="text-[#888888] text-[24px] leading-[32px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}
             dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.creativityExecution'))}
+            dir={locale === 'ar' ? 'rtl' : 'ltr'}
           />
         </div>
 
@@ -142,10 +145,12 @@ export default function WhyKayanLive() {
         }}>
           <p className="text-[#888888] text-[24px] leading-[32px] text-left mb-6" style={{ fontFamily: '"Poppins", sans-serif' }}
             dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.philosophy1'))}
+            dir={locale === 'ar' ? 'rtl' : 'ltr'}
           />
-          
+
           <p className="text-[#888888] text-[24px] leading-[32px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}
             dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.philosophy2'))}
+            dir={locale === 'ar' ? 'rtl' : 'ltr'}
           />
         </div>
 
@@ -157,10 +162,12 @@ export default function WhyKayanLive() {
         }}>
             <p className="text-[#888888] text-[24px] leading-[32px] text-left mb-6" style={{ fontFamily: '"Poppins", sans-serif' }}
               dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.experience1'))}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             />
-            
+
           <p className="text-[#888888] text-[24px] leading-[32px] text-left" style={{ fontFamily: '"Poppins", sans-serif' }}
             dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.experience2'))}
+            dir={locale === 'ar' ? 'rtl' : 'ltr'}
           />
         </div>
       </div>
@@ -169,13 +176,14 @@ export default function WhyKayanLive() {
       <section className="lg:hidden flex flex-col items-center justify-center w-full min-h-screen py-8 px-4 sm:px-6 md:px-8 gap-8 sm:gap-10 md:gap-12 relative z-10">
         {/* Why heading - Mobile version with larger fluid typography */}
         <header className="text-center">
-          <h1 
+          <h1
             className="font-medium text-[#2c2c2b] leading-tight tracking-tight"
             style={{
               fontSize: 'clamp(4.5rem, 16vw, 7rem)',
               letterSpacing: 'clamp(-1.5px, -0.2vw, -1.2px)',
               fontFamily: '"Poppins", sans-serif'
             }}
+            dir={locale === 'ar' ? 'rtl' : 'ltr'}
           >
             {t('whyKayan.title')}
           </h1>
@@ -203,6 +211,7 @@ export default function WhyKayanLive() {
               lineHeight: 'clamp(1.5, 6vw, 2.25)',
               fontFamily: '"Poppins", sans-serif'
             }}
+            dir={locale === 'ar' ? 'rtl' : 'ltr'}
           >
             {t('whyKayan.openingStatement')}
           </h2>
@@ -219,6 +228,7 @@ export default function WhyKayanLive() {
                 lineHeight: 'clamp(1.4, 5vw, 1.8)',
                 fontFamily: '"Poppins", sans-serif'
               }}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             >
               {t('whyKayan.sectionTitle')}
             </h3>
@@ -237,6 +247,7 @@ export default function WhyKayanLive() {
                 fontFamily: '"Poppins", sans-serif'
               }}
               dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.founderText'))}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             />
           </section>
 
@@ -253,14 +264,15 @@ export default function WhyKayanLive() {
                 fontFamily: '"Poppins", sans-serif'
               }}
               dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.creativityExecution'))}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             />
           </section>
-          
+
           {/* Company philosophy */}
           <section>
             <h2 className="sr-only">Our Philosophy</h2>
             <div className="space-y-4">
-              <p 
+              <p
                 className="text-[#555555] leading-relaxed"
                 style={{
                   fontSize: 'clamp(0.875rem, 3vw, 1rem)',
@@ -270,9 +282,10 @@ export default function WhyKayanLive() {
                   fontFamily: '"Poppins", sans-serif'
                 }}
                 dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.philosophy1'))}
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}
               />
-              
-              <p 
+
+              <p
                 className="text-[#555555] leading-relaxed"
                 style={{
                   fontSize: 'clamp(0.875rem, 3vw, 1rem)',
@@ -282,15 +295,16 @@ export default function WhyKayanLive() {
                   fontFamily: '"Poppins", sans-serif'
                 }}
                 dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.philosophy2'))}
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}
               />
             </div>
           </section>
-          
+
           {/* Company experience and approach */}
           <section>
             <h2 className="sr-only">Our Experience</h2>
             <div className="space-y-4">
-              <p 
+              <p
                 className="text-[#555555] leading-relaxed"
                 style={{
                   fontSize: 'clamp(0.875rem, 3vw, 1rem)',
@@ -300,9 +314,10 @@ export default function WhyKayanLive() {
                   fontFamily: '"Poppins", sans-serif'
                 }}
                 dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.experience1'))}
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}
               />
-              
-              <p 
+
+              <p
                 className="text-[#555555] leading-relaxed"
                 style={{
                   fontSize: 'clamp(0.875rem, 3vw, 1rem)',
@@ -312,6 +327,7 @@ export default function WhyKayanLive() {
                   fontFamily: '"Poppins", sans-serif'
                 }}
                 dangerouslySetInnerHTML={getMarkdownHTML(t('whyKayan.experience2'))}
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}
               />
             </div>
           </section>

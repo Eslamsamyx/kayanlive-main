@@ -1,7 +1,8 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 const imgRectangle6 = "/optimized/hero-slide/29064c5a0d86395e45b642fe4e6daf670490f723-hero-slide-desktop.webp";
 const imgPattern0212 = "/optimized/cta-background/ef25fd14e49122ddd6cbc03c8a92caff93500eb7-cta-background-desktop.webp";
@@ -14,7 +15,23 @@ const imgFrame1618874015 = "/assets/ca9b4647bcda5167d4ae65dc099e9f345b86ecff.svg
 
 export default function ExecutionSection() {
   const t = useTranslations();
-  
+  const locale = useLocale();
+  const [currentHeadline, setCurrentHeadline] = useState(0);
+
+  const headlines = [
+    t('execution.headlineV1'),
+    t('execution.headlineV2'),
+    t('execution.headlineV3')
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHeadline((prev) => (prev + 1) % headlines.length);
+    }, 4000); // Rotate every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [headlines.length]);
+
   return (
     <div className="relative w-full bg-white overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-4 py-8 md:py-12 lg:py-20">
@@ -153,48 +170,42 @@ export default function ExecutionSection() {
               transform: 'translate(-50%, -50%)'
             }}
           >
-            {/* Content section with heading, subtitle and description */}
+            {/* Content section with rotating headline and guarantee text */}
             <div className="flex flex-col gap-4 md:gap-6">
-              {/* Heading - responsive font sizing */}
-              <h2 className="capitalize text-white font-normal w-full lg:w-[524px]"
+              {/* Rotating Headline - responsive font sizing */}
+              <h2 className="capitalize text-white font-normal w-full lg:w-[700px] transition-opacity duration-500"
                 style={{
                   fontSize: 'clamp(32px, 8vw, 80px)',
                   lineHeight: 'clamp(36px, 9vw, 77px)'
-                }}>
-                {t('execution.heading')}
+                }}
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+                {headlines[currentHeadline]}
               </h2>
 
-              {/* Subtitle */}
-              <p className="text-white/90 font-medium w-full lg:w-[650px]"
+              {/* Guarantee Text */}
+              <p className="text-white/90 font-medium w-full lg:w-[700px]"
                 style={{
                   fontSize: 'clamp(18px, 3vw, 24px)',
                   lineHeight: 'clamp(24px, 3.5vw, 32px)'
-                }}>
-                {t('execution.subtitle')}
-              </p>
-
-              {/* Description */}
-              <p className="text-white/80 font-normal w-full lg:w-[700px]"
-                style={{
-                  fontSize: 'clamp(14px, 2vw, 18px)',
-                  lineHeight: 'clamp(20px, 2.5vw, 28px)'
-                }}>
-                {t('execution.description')}
+                }}
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+                {t('execution.guarantee2')}
               </p>
             </div>
 
             {/* CTA Button - responsive */}
             <div className="flex flex-row items-center">
               <button className="flex items-center justify-center gap-2 md:gap-2.5 bg-[#7afdd6] hover:bg-[#6ee8c5] transition-colors duration-300 rounded-full px-4 py-3 md:px-6 md:py-4 lg:px-[25px] lg:py-[18px] h-[50px] md:h-[60px] lg:h-[65px]">
-                <span className="capitalize text-[#231f20] font-normal whitespace-nowrap"
+                <span className="text-[#231f20] font-normal"
                   style={{
-                    fontSize: 'clamp(16px, 2vw, 20px)',
-                    lineHeight: 'clamp(22px, 2.5vw, 28px)'
-                  }}>
-                  {t('execution.cta')}
+                    fontSize: 'clamp(14px, 1.8vw, 18px)',
+                    lineHeight: 'clamp(20px, 2.2vw, 26px)'
+                  }}
+                  dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+                  {t('execution.ctaTag')}
                 </span>
               </button>
-              <div className="relative ml-[-3px] md:ml-[-4px] lg:ml-[-5px]"
+              <div className={`relative ${locale === 'ar' ? 'mr-[-3px] md:mr-[-4px] lg:mr-[-5px]' : 'ml-[-3px] md:ml-[-4px] lg:ml-[-5px]'}`}
                 style={{
                   width: 'clamp(50px, 5vw, 65px)',
                   height: 'clamp(50px, 5vw, 65px)'

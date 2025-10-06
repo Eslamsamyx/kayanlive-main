@@ -57,13 +57,17 @@ export default function Navbar({ locale }: NavbarProps) {
     [languages, locale]
   );
 
-  const navItems: NavItem[] = useMemo(() => [
-    { name: t('navigation.home'), href: `/${locale}`, path: `/${locale}` },
-    { name: t('navigation.aboutUs'), href: `/${locale}/about`, path: `/${locale}/about` },
-    { name: t('navigation.services'), href: `/${locale}/services`, path: `/${locale}/services` },
-    { name: t('navigation.ourWork'), href: `/${locale}/work`, path: `/${locale}/work` },
-    { name: t('navigation.clientsPartners'), href: `/${locale}/clients-partners`, path: `/${locale}/clients-partners` },
-  ], [locale, t]);
+  const navItems: NavItem[] = useMemo(() => {
+    const items = [
+      { name: t('navigation.home'), href: `/${locale}`, path: `/${locale}` },
+      { name: t('navigation.aboutUs'), href: `/${locale}/about`, path: `/${locale}/about` },
+      { name: t('navigation.services'), href: `/${locale}/services`, path: `/${locale}/services` },
+      { name: t('navigation.ourWork'), href: `/${locale}/work`, path: `/${locale}/work` },
+      { name: t('navigation.clientsPartners'), href: `/${locale}/clients-partners`, path: `/${locale}/clients-partners` },
+    ];
+    // Reverse order for RTL languages
+    return locale === 'ar' ? [...items].reverse() : items;
+  }, [locale, t]);
 
   const isActive = useCallback((path: string) => {
     if (path === `/${locale}`) {
@@ -243,7 +247,7 @@ export default function Navbar({ locale }: NavbarProps) {
 
         {/* Center Navigation - Hidden on mobile/tablet, expands on lg+ */}
         <div className="lg:flex items-center justify-center flex-1 min-w-0 overflow-hidden hidden">
-          <div className="flex items-center space-x-1 lg:space-x-2 xl:space-x-4 max-w-full">
+          <div className={`flex items-center gap-1 lg:gap-2 xl:gap-4 max-w-full ${locale === 'ar' ? 'flex-row-reverse' : ''}`}>
             {navItems.map((item) => (
               <Link
                 key={item.name}

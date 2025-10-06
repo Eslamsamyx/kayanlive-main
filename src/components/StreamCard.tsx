@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { Eye, Heart, MessageCircle } from 'lucide-react';
 
 interface StreamCardProps {
@@ -28,6 +28,7 @@ export default function StreamCard({
   duration
 }: StreamCardProps) {
   const t = useTranslations();
+  const locale = useLocale();
 
   const formatCount = (count: number) => {
     if (count >= 1000000) {
@@ -72,7 +73,7 @@ export default function StreamCard({
 
         {/* Hover Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-          <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors">
+          <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
             {t('watch')}
           </button>
         </div>
@@ -94,7 +95,7 @@ export default function StreamCard({
             <h3 className="font-semibold text-gray-900 dark:text-white line-clamp-1">
               {streamerName}
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+            <p className="text-sm text-gray-500 dark:text-gray-400" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               {t('streamer')}
             </p>
           </div>

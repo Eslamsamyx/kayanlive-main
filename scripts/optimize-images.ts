@@ -5,8 +5,6 @@ import path from 'path';
 import sharp from 'sharp';
 import tinify from 'tinify';
 import { glob } from 'glob';
-import imagemin from 'imagemin';
-import imageminWebp from 'imagemin-webp';
 
 // Configuration
 const IMAGE_SIZES = {

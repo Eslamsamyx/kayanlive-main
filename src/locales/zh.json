@@ -21,10 +21,8 @@
     }
   },
   "highImpact": {
-    "title": "您在迪拜活动管理方面的首选，提供沉浸式、引人入胜的高压力交付。",
-    "subtitle": "当时间至关重要且精确度不容商量时，请联系KayanLive，迪拜领先的活动管理公司。",
-    "testimonial": "KayanLive将三周的危机转变为创纪录的展台。",
-    "testimonialAuthor": "活动负责人，全球快消品公司"
+    "title": "我们是您在迪拜举办沉浸式、引人入胜活动的首选，以精准和承诺为特色。",
+    "subtitle": "当时间至关重要且精确度不容妥协时，KayanLive 脱颖而出，成为迪拜领先的展览和会议公司之一。我们凭借多元化的专业知识和经过验证的成就，不断证明我们在沙特阿拉伯精英活动组织者中的地位。"
   },
   "aboutServices": {
     "title": "我们做什么？",
@@ -116,7 +114,6 @@
     "experience2": "无论您是启动展馆、开幕文化活动，还是修复别人的混乱，我们都是您在时钟滴答作响时呼叫的合作伙伴。"
   },
   "industries": {
-    "badge": "我们合作的对象",
     "title": "行业",
     "government": "政府和半政府机构",
     "governmentDesc": "我们支持了部委、旅游局和皇家倡议的重大**沙特阿拉伯活动管理**项目，与**2030愿景**、**2020年世博会**和**国庆日**庆祝活动保持一致。我们预见障碍并在压力到达您之前处理它。",
@@ -128,7 +125,6 @@
     "agenciesDesc": "当您需要可靠性、实力和零自负时，我们就会出现。我们无缝地以白标方式融入您的团队，构建您的愿景，并以优雅、安静、快速和可靠的方式交付。"
   },
   "whereWeWork": {
-    "badge": "我们的工作地点",
     "title": "我们在哪里工作？",
     "description": "总部位于沙特阿拉伯和迪拜，KayanLive提供高影响力活动，从公共激活和企业启动到政府主导的展示。",
     "operateText": "我们在整个海湾合作委员会地区运营：",
@@ -139,13 +135,13 @@
     "cta": "让我们一起建设"
   },
   "achievements": {
-    "title": "成就",
-    "turnaroundTime": "72小时周转时间",
-    "pressCoverage": "3倍新闻报道增长",
-    "missedDeadlines": "0个错过的截止日期",
-    "clientsServed": "120+服务客户",
-    "projectsCompleted": "400+完成项目（2015-2025）",
-    "yearsExpertise": "15+年专业经验"
+    "title": "我们的成就与数据",
+    "missedDeadlines": "0 截止日期延误。",
+    "pressCoverage": "x2 媒体报道。",
+    "turnaroundTime": "72 小时活动执行时间。",
+    "yearsExpertise": "超过15年的专业经验。",
+    "projectsCompleted": "十年内完成超过400个项目。2015-2025",
+    "clientsServed": "我们帮助了超过120位客户。"
   },
   "execution": {
     "heading": "自信开始",
@@ -156,10 +152,117 @@
     "headlineV2": "当大多数团队崩溃时，我们让事情发生",
     "headlineV3": "当其他人挣扎时，我们精准执行",
     "promise": "我们以让事情发生为业。",
-    "guarantee1": "没有第二次机会。没有最后一刻的惊喜。",
     "guarantee2": "KayanLive确保从开始到结束的顺利执行。",
     "cta": "今天获得支持",
     "ctaTag": "预订15分钟战略电话"
+  },
+  "trustedBy": {
+    "title": "行业领导者的信赖之选",
+    "description": "为海湾合作委员会地区的知名组织提供卓越活动"
+  },
+  "companies": {
+    "tatweer": {
+      "fullName": "Tatweer教育技术公司",
+      "industry": "教育技术",
+      "description": "在沙特阿拉伯和阿联酋提供技术驱动的教育解决方案和服务的数字解决方案公司。",
+      "headquarters": "利雅得，沙特阿拉伯"
+    },
+    "dctAbuDhabi": {
+      "fullName": "文化和旅游部",
+      "industry": "政府旅游与文化",
+      "description": "推动阿布扎比文化和旅游业可持续发展的主要机构。",
+      "headquarters": "阿布扎比，阿联酋"
+    },
+    "mohap": {
+      "fullName": "卫生与预防部",
+      "industry": "医疗保健治理",
+      "description": "通过世界一流的政策和计划确保主动医疗保健服务的联邦实体。",
+      "headquarters": "阿布扎比，阿联酋"
+    },
+    "dhcc": {
+      "fullName": "迪拜医疗城",
+      "industry": "医疗保健基础设施",
+      "description": "结合医疗服务、教育、研究和健康设施的医疗保健自由区。",
+      "headquarters": "迪拜，阿联酋"
+    },
+    "thiqah": {
+      "fullName": "Thiqah商业服务",
+      "industry": "数字解决方案",
+      "description": "为政府和私营部门合作伙伴提供定制数字平台。",
+      "headquarters": "利雅得，沙特阿拉伯"
+    },
+    "elm": {
+      "fullName": "Elm信息安全公司",
+      "industry": "信息安全",
+      "description": "专门从事数字政府服务和网络安全解决方案的沙特公司。",
+      "headquarters": "利雅得，沙特阿拉伯"
+    },
+    "modon": {
+      "fullName": "沙特工业城管理局",
+      "industry": "工业发展",
+      "description": "管理沙特阿拉伯39个工业城市，投资超过4400亿里亚尔。",
+      "headquarters": "利雅得，沙特阿拉伯"
+    },
+    "maveMarketing": {
+      "fullName": "Mave营销解决方案",
+      "industry": "营销服务",
+      "description": "提供活动、制作、创意和技术解决方案的全方位服务机构。",
+      "headquarters": "利雅得，沙特阿拉伯"
+    },
+    "tawal": {
+      "fullName": "Tawal电信基础设施",
+      "industry": "电信",
+      "description": "沙特阿拉伯最大的电信基础设施公司，管理超过21,000座塔。",
+      "headquarters": "利雅得，沙特阿拉伯"
+    },
+    "hisense": {
+      "fullName": "海信电子",
+      "industry": "消费电子",
+      "description": "世界第四大电视制造商，拥有全球生产设施。",
+      "headquarters": "青岛，中国"
+    },
+    "tdra": {
+      "fullName": "电信和数字政府监管局",
+      "industry": "电信监管",
+      "description": "阿联酋联邦机构，负责监管电信并推动数字化转型。",
+      "headquarters": "阿布扎比，阿联酋"
+    },
+    "hopscotch": {
+      "fullName": "HOPSCOTCH娱乐公司",
+      "industry": "通信与娱乐",
+      "description": "拥有40个办事处的国际通信集团，专门从事公关和数字通信。",
+      "headquarters": "巴黎，法国"
+    },
+    "solutionsByStc": {
+      "fullName": "沙特电信公司解决方案",
+      "industry": "IT服务",
+      "description": "IT服务先驱，提供全面的数字化转型解决方案。",
+      "headquarters": "利雅得，沙特阿拉伯"
+    },
+    "goTelecom": {
+      "fullName": "GO Telecom KSA",
+      "industry": "电信",
+      "description": "沙特阿拉伯第二大固定电话运营商，提供语音和宽带服务。",
+      "headquarters": "利雅得，沙特阿拉伯"
+    },
+    "smt": {
+      "fullName": "安全管理技术",
+      "industry": "网络安全",
+      "description": "端到端网络安全服务、咨询和IT基础设施解决方案。",
+      "headquarters": "安曼，约旦"
+    },
+    "adnoc": {
+      "fullName": "阿布扎比国家石油公司",
+      "industry": "能源与石化",
+      "description": "领先的多元化能源集团，专注于负责任的碳氢化合物勘探。",
+      "headquarters": "阿布扎比，阿联酋"
+    },
+    "haboob": {
+      "fullName": "Haboob知识解决方案",
+      "industry": "网络安全",
+      "description": "领先的沙特网络安全公司，提供综合安全服务。",
+      "headquarters": "利雅得，沙特阿拉伯"
+    }
   },
   "about": {
     "page": {

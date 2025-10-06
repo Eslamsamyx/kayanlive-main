@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import CTAButton from './CTAButton';
 
 // Assets from Figma - Optimized WebP images
@@ -17,6 +17,7 @@ interface WorkCallToActionProps {
 
 export default function WorkCallToAction({ locale = 'en' }: WorkCallToActionProps) {
   const t = useTranslations('work.callToAction');
+  const currentLocale = useLocale();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -117,25 +118,26 @@ export default function WorkCallToAction({ locale = 'en' }: WorkCallToActionProp
                         lineHeight: 'clamp(2rem, 4.5vw, 5.5rem)',
                         letterSpacing: 'clamp(-0.5px, -0.08vw, -1.6px)'
                       }}
+                      dir={currentLocale === 'ar' ? 'rtl' : 'ltr'}
                     >
                       {t('title')}
                     </h2>
 
                     {/* Content with better responsive typography */}
                     <div className="space-y-3 md:space-y-4 lg:space-y-5 text-[#c3c3c3]">
-                      <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed">
+                      <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed" dir={currentLocale === 'ar' ? 'rtl' : 'ltr'}>
                         {t('question')}
                       </p>
 
-                      <p className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
+                      <p className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl" dir={currentLocale === 'ar' ? 'rtl' : 'ltr'}>
                         {t('callout')}
                       </p>
 
-                      <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed pt-2 md:pt-3 lg:pt-4">
+                      <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed pt-2 md:pt-3 lg:pt-4" dir={currentLocale === 'ar' ? 'rtl' : 'ltr'}>
                         {t('description')}
                       </p>
 
-                      <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed">
+                      <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed" dir={currentLocale === 'ar' ? 'rtl' : 'ltr'}>
                         {t('promise')}
                       </p>
                     </div>

@@ -21,10 +21,8 @@
     }
   },
   "highImpact": {
-    "title": "Votre référence en gestion d'événements à Dubaï pour une livraison immersive, engageante et haute pression.",
-    "subtitle": "Quand le timing compte et que la précision n'est pas négociable, appelez KayanLive, une société leader en gestion d'événements à Dubaï.",
-    "testimonial": "KayanLive a transformé une crise de trois semaines en un stand record.",
-    "testimonialAuthor": "Directeur des Événements, FMCG Mondial"
+    "title": "Nous sommes votre premier choix à Dubaï pour des événements immersifs et engageants, caractérisés par la précision et l'engagement.",
+    "subtitle": "Lorsque le temps est un élément critique et la précision non négociable, KayanLive se distingue parmi les entreprises leaders d'organisation d'expositions et de conférences à Dubaï. Nous affirmons constamment notre position parmi l'élite des organisateurs d'événements en Arabie Saoudite grâce à notre expertise diversifiée et nos réalisations éprouvées."
   },
   "aboutServices": {
     "title": "Que Faisons-Nous ?",
@@ -116,7 +114,6 @@
     "experience2": "Que vous lanciez un pavillon, ouvriez un événement culturel ou répariez le désordre de quelqu'un d'autre, nous sommes le partenaire que vous appelez quand l'horloge tourne déjà."
   },
   "industries": {
-    "badge": "Avec Qui Nous Travaillons",
     "title": "Industries",
     "government": "Organismes Gouvernementaux et Semi-Gouvernementaux",
     "governmentDesc": "Nous avons soutenu des ministères, offices de tourisme et initiatives royales sur des projets majeurs de **gestion d'événements Arabie Saoudite** alignés avec **Vision 2030**, **Expo 2020** et les célébrations de la **Fête Nationale**. Nous anticipons les obstacles et gérons le stress avant qu'il vous atteigne.",
@@ -128,7 +125,6 @@
     "agenciesDesc": "Quand vous avez besoin de fiabilité, de force et de zéro ego, nous nous présentons. Nous nous intégrons en marque blanche sans effort dans votre équipe, construisons votre vision et livrons avec raffinement, silencieusement, rapidement et de manière fiable."
   },
   "whereWeWork": {
-    "badge": "Où Nous Travaillons",
     "title": "Où Travaillons-Nous ?",
     "description": "Basée en Arabie Saoudite et à Dubaï, KayanLive livre des événements à fort impact, des activations publiques et lancements d'entreprise aux présentations dirigées par le gouvernement.",
     "operateText": "Nous opérons à travers le CCG :",
@@ -139,13 +135,13 @@
     "cta": "Construisons Ensemble"
   },
   "achievements": {
-    "title": "Réalisations",
-    "turnaroundTime": "Délai de 72 Heures",
-    "pressCoverage": "3× Augmentation de Couverture Presse",
-    "missedDeadlines": "0 Échéance Manquée",
-    "clientsServed": "120+ Clients Servis",
-    "projectsCompleted": "400+ Projets Terminés (2015-2025)",
-    "yearsExpertise": "15+ Années d'Expertise"
+    "title": "Nos Réalisations & Chiffres",
+    "missedDeadlines": "0 retard de délais.",
+    "pressCoverage": "x2 couverture médiatique.",
+    "turnaroundTime": "72 heures temps d'exécution d'événements.",
+    "yearsExpertise": "Plus de 15 ans d'expertise.",
+    "projectsCompleted": "Plus de 400 projets réalisés en une décennie. 2015-2025",
+    "clientsServed": "Nous avons aidé plus de 120 clients."
   },
   "execution": {
     "heading": "Commencez avec Confiance",
@@ -156,10 +152,117 @@
     "headlineV2": "Quand la Plupart des Équipes Craquent, Nous Faisons que Ça Arrive",
     "headlineV3": "Là où d'Autres Peinent, Nous Exécutons avec Précision",
     "promise": "Nous avons fait un business de faire que ça arrive.",
-    "guarantee1": "Pas de seconde chance. Pas de surprises de dernière minute.",
     "guarantee2": "KayanLive assure une exécution fluide du début à la fin.",
     "cta": "Obtenez du Soutien Aujourd'hui",
     "ctaTag": "Réservez un Appel Stratégique de 15 minutes"
+  },
+  "trustedBy": {
+    "title": "Approuvé par les Leaders de l'Industrie",
+    "description": "Offrant des événements exceptionnels pour des organisations prestigieuses à travers la région du CCG"
+  },
+  "companies": {
+    "tatweer": {
+      "fullName": "Tatweer Educational Technologies Co.",
+      "industry": "Technologie Éducative",
+      "description": "Entreprise de solutions numériques fournissant des solutions éducatives basées sur la technologie en Arabie Saoudite et aux EAU.",
+      "headquarters": "Riyad, Arabie Saoudite"
+    },
+    "dctAbuDhabi": {
+      "fullName": "Département de la Culture et du Tourisme",
+      "industry": "Tourisme et Culture Gouvernementaux",
+      "description": "Autorité principale pilotant la croissance durable des secteurs culturel et touristique d'Abu Dhabi.",
+      "headquarters": "Abu Dhabi, EAU"
+    },
+    "mohap": {
+      "fullName": "Ministère de la Santé et de la Prévention",
+      "industry": "Gouvernance de la Santé",
+      "description": "Entité fédérale garantissant des services de santé proactifs via des politiques et programmes de classe mondiale.",
+      "headquarters": "Abu Dhabi, EAU"
+    },
+    "dhcc": {
+      "fullName": "Dubai Healthcare City",
+      "industry": "Infrastructure de Santé",
+      "description": "Zone franche de santé combinant services médicaux, éducation, recherche et installations de bien-être.",
+      "headquarters": "Dubaï, EAU"
+    },
+    "thiqah": {
+      "fullName": "Thiqah Business Services",
+      "industry": "Solutions Numériques",
+      "description": "Fournit des plateformes numériques personnalisées pour les partenaires gouvernementaux et du secteur privé.",
+      "headquarters": "Riyad, Arabie Saoudite"
+    },
+    "elm": {
+      "fullName": "Elm Information Security Company",
+      "industry": "Sécurité de l'Information",
+      "description": "Entreprise saoudienne spécialisée dans les services gouvernementaux numériques et solutions de cybersécurité.",
+      "headquarters": "Riyad, Arabie Saoudite"
+    },
+    "modon": {
+      "fullName": "Autorité Saoudienne des Cités Industrielles",
+      "industry": "Développement Industriel",
+      "description": "Gère 39 cités industrielles en Arabie Saoudite avec des investissements dépassant 440 milliards de riyals.",
+      "headquarters": "Riyad, Arabie Saoudite"
+    },
+    "maveMarketing": {
+      "fullName": "Mave Marketing Solution",
+      "industry": "Services Marketing",
+      "description": "Agence à service complet offrant des solutions d'événements, production, créativité et technologie.",
+      "headquarters": "Riyad, Arabie Saoudite"
+    },
+    "tawal": {
+      "fullName": "Tawal Telecom Infrastructure",
+      "industry": "Télécommunications",
+      "description": "Plus grande entreprise d'infrastructure télécom d'Arabie Saoudite gérant plus de 21 000 tours.",
+      "headquarters": "Riyad, Arabie Saoudite"
+    },
+    "hisense": {
+      "fullName": "Hisense Electronics",
+      "industry": "Électronique Grand Public",
+      "description": "Quatrième plus grand fabricant de téléviseurs au monde avec installations de production mondiales.",
+      "headquarters": "Qingdao, Chine"
+    },
+    "tdra": {
+      "fullName": "Autorité de Régulation des Télécommunications et du Gouvernement Numérique",
+      "industry": "Régulation des Télécommunications",
+      "description": "Agence fédérale des EAU régulant les télécommunications et favorisant la transformation numérique.",
+      "headquarters": "Abu Dhabi, EAU"
+    },
+    "hopscotch": {
+      "fullName": "HOPSCOTCH Entertainment Company",
+      "industry": "Communication & Divertissement",
+      "description": "Groupe de communication international avec 40 bureaux spécialisé en RP et communication digitale.",
+      "headquarters": "Paris, France"
+    },
+    "solutionsByStc": {
+      "fullName": "Saudi Telecom Company Solutions",
+      "industry": "Services Informatiques",
+      "description": "Pionnier des services informatiques offrant des solutions complètes de transformation numérique.",
+      "headquarters": "Riyad, Arabie Saoudite"
+    },
+    "goTelecom": {
+      "fullName": "GO Telecom KSA",
+      "industry": "Télécommunications",
+      "description": "Deuxième opérateur de ligne fixe d'Arabie Saoudite fournissant services vocaux et haut débit.",
+      "headquarters": "Riyad, Arabie Saoudite"
+    },
+    "smt": {
+      "fullName": "Security Management Technology",
+      "industry": "Cybersécurité",
+      "description": "Services de cybersécurité de bout en bout, conseil et solutions d'infrastructure informatique.",
+      "headquarters": "Amman, Jordanie"
+    },
+    "adnoc": {
+      "fullName": "Abu Dhabi National Oil Company",
+      "industry": "Énergie & Pétrochimie",
+      "description": "Groupe énergétique diversifié leader axé sur l'exploration responsable des hydrocarbures.",
+      "headquarters": "Abu Dhabi, EAU"
+    },
+    "haboob": {
+      "fullName": "Haboob Knowledge Solutions",
+      "industry": "Cybersécurité",
+      "description": "Entreprise saoudienne leader en cybersécurité fournissant des services de sécurité intégrés.",
+      "headquarters": "Riyad, Arabie Saoudite"
+    }
   },
   "about": {
     "page": {

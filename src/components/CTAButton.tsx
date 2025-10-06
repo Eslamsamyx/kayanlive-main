@@ -25,32 +25,38 @@ export default function CTAButton({
 }: CTAButtonProps) {
   const locale = useLocale();
 
-  // Variant styles
-  const variantStyles = {
-    default: {
-      gradient: 'bg-gradient-to-r from-[#74CFAA] to-[#A095E1]',
-      textColor: 'text-[#4a4a49]',
-      hoverTextColor: 'group-hover:text-[#f3f3f3]',
-      circleColor: 'bg-[#A095E1]',
-      hoverCircleColor: 'group-hover:bg-[#74CFAA]',
-      arrowColor: 'fill-[#4a4a49]',
-      hoverArrowColor: 'group-hover:fill-[#f3f3f3]'
-    },
-    white: {
-      gradient: 'bg-white',
-      textColor: 'text-[#2c2c2b]',
-      hoverTextColor: 'group-hover:text-[#2c2c2b]',
-      circleColor: 'bg-white',
-      hoverCircleColor: 'group-hover:bg-white',
-      arrowColor: 'fill-[#2c2c2b]',
-      hoverArrowColor: 'group-hover:fill-[#2c2c2b]'
-    }
+  // Variant styles function with RTL gradient support
+  const getVariantStyles = (variant: 'default' | 'white', locale: string) => {
+    const gradientDirection = locale === 'ar' ? 'l' : 'r';
+
+    const variantStyles = {
+      default: {
+        gradient: `bg-gradient-to-${gradientDirection} from-[#74CFAA] to-[#A095E1]`,
+        textColor: 'text-[#4a4a49]',
+        hoverTextColor: 'group-hover:text-[#f3f3f3]',
+        circleColor: 'bg-[#A095E1]',
+        hoverCircleColor: 'group-hover:bg-[#74CFAA]',
+        arrowColor: 'fill-[#4a4a49]',
+        hoverArrowColor: 'group-hover:fill-[#f3f3f3]'
+      },
+      white: {
+        gradient: 'bg-white',
+        textColor: 'text-[#2c2c2b]',
+        hoverTextColor: 'group-hover:text-[#2c2c2b]',
+        circleColor: 'bg-white',
+        hoverCircleColor: 'group-hover:bg-white',
+        arrowColor: 'fill-[#2c2c2b]',
+        hoverArrowColor: 'group-hover:fill-[#2c2c2b]'
+      }
+    };
+
+    return variantStyles[variant];
   };
 
-  const styles = variantStyles[variant];
+  const styles = getVariantStyles(variant, locale);
 
   const content = (
-    <div className={`group relative ${className}`}>
+    <div className={`group relative overflow-visible ${className}`}>
       <style>{`
         .cta-button:focus-visible {
           outline: 2px solid #7afdd6;
@@ -60,10 +66,11 @@ export default function CTAButton({
 
       <button
         className={`cta-button inline-flex items-center
+                   ${locale === 'ar' ? 'flex-row-reverse' : 'flex-row'}
                    focus:outline-none
                    touch-manipulation
                    transition-all duration-450 ease-[cubic-bezier(0.43,0.13,0.23,0.96)]
-                   group-hover:flex-row-reverse
+                   ${locale === 'ar' ? 'group-hover:flex-row' : 'group-hover:flex-row-reverse'}
                    ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
         aria-label={ariaLabel}
         type={type}
@@ -106,13 +113,14 @@ export default function CTAButton({
               viewBox="0 0 17 16"
               fill="none"
               className="block transition-all duration-450 ease-[cubic-bezier(0.43,0.13,0.23,0.96)]"
+              style={{
+                transform: locale === 'ar' ? 'scaleX(-1)' : 'none',
+                transformOrigin: 'center'
+              }}
             >
               <path
                 d="M16.0208 8.70711C16.4113 8.31658 16.4113 7.68342 16.0208 7.29289L9.65685 0.928932C9.26633 0.538408 8.63316 0.538408 8.24264 0.928932C7.85212 1.31946 7.85212 1.95262 8.24264 2.34315L13.8995 8L8.24264 13.6569C7.85212 14.0474 7.85212 14.6805 8.24264 15.0711C8.63316 15.4616 9.26633 15.4616 9.65685 15.0711L16.0208 8.70711ZM0 8V9H15.3137V8V7H0V8Z"
                 className={`${styles.arrowColor} ${styles.hoverArrowColor} transition-all duration-450 ease-[cubic-bezier(0.43,0.13,0.23,0.96)]`}
-                style={{
-                  transform: locale === 'ar' ? 'scaleX(-1)' : 'none'
-                }}
               />
             </svg>
           </div>

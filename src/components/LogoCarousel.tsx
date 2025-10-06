@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
+import { useTranslations, useLocale } from 'next-intl';
 
 interface TooltipPortalProps {
   children: React.ReactNode;
@@ -54,12 +55,11 @@ interface LogoCardProps {
   className?: string;
 }
 
-// CRITICAL FIX: Memoized LogoCard to prevent unnecessary re-renders
 const LogoCard = ({ item, className = '' }: LogoCardProps) => {
+  const locale = useLocale();
   const [showTooltip, setShowTooltip] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  // CRITICAL FIX: Optimize tooltip interactions for better performance
   const handleMouseEnter = useCallback(() => {
     setShowTooltip(true);
   }, []);
@@ -104,7 +104,7 @@ const LogoCard = ({ item, className = '' }: LogoCardProps) => {
       </div>
 
       <TooltipPortal isVisible={showTooltip} targetRef={cardRef}>
-        <div className="max-w-sm bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden backdrop-blur-lg">
+        <div className="max-w-sm bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden backdrop-blur-lg" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
           {/* Header with gradient background */}
           <div className="bg-gradient-to-r from-[#74cfaa] to-[#7afdd6] px-6 py-4">
             <h3 className="text-[#2c2c2b] font-bold text-lg leading-tight">{item.fullName}</h3>
@@ -139,169 +139,169 @@ const LogoCard = ({ item, className = '' }: LogoCardProps) => {
 };
 
 export default function LogoCarousel() {
+  const t = useTranslations();
+  const locale = useLocale();
   const [isPaused, setIsPaused] = useState(false);
   const animationRef = useRef<number | undefined>(undefined);
   const trackRef = useRef<HTMLDivElement>(null);
   const scrollPosition = useRef<number>(0);
 
-  // CRITICAL FIX: Optimized logo data - memoized to prevent re-creation
   const logoItems: LogoItem[] = useMemo(() => [
     {
       id: 1,
       name: 'Tatweer',
-      fullName: 'Tatweer Educational Technologies Co.',
+      fullName: t('companies.tatweer.fullName'),
       image: '/optimized/logos-tinypng/tatweer.webp',
-      industry: 'Educational Technology',
-      description: 'A digital solutions company providing technology-driven educational solutions and services across Saudi Arabia and UAE.',
-      headquarters: 'Riyadh, Saudi Arabia'
+      industry: t('companies.tatweer.industry'),
+      description: t('companies.tatweer.description'),
+      headquarters: t('companies.tatweer.headquarters')
     },
     {
       id: 2,
       name: 'DCT Abu Dhabi',
-      fullName: 'Department of Culture and Tourism',
+      fullName: t('companies.dctAbuDhabi.fullName'),
       image: '/optimized/logos-tinypng/dct-abu-dhabi.webp',
-      industry: 'Government Tourism & Culture',
-      description: 'Principal authority driving sustainable growth of Abu Dhabi\'s culture and tourism sectors.',
-      headquarters: 'Abu Dhabi, UAE'
+      industry: t('companies.dctAbuDhabi.industry'),
+      description: t('companies.dctAbuDhabi.description'),
+      headquarters: t('companies.dctAbuDhabi.headquarters')
     },
     {
       id: 3,
       name: 'MOHAP',
-      fullName: 'Ministry of Health & Prevention',
+      fullName: t('companies.mohap.fullName'),
       image: '/optimized/logos-tinypng/mohap.webp',
-      industry: 'Healthcare Governance',
-      description: 'Federal entity ensuring proactive healthcare services through world-class policies and programs.',
-      headquarters: 'Abu Dhabi, UAE'
+      industry: t('companies.mohap.industry'),
+      description: t('companies.mohap.description'),
+      headquarters: t('companies.mohap.headquarters')
     },
     {
       id: 4,
       name: 'DHCC',
-      fullName: 'Dubai Healthcare City',
+      fullName: t('companies.dhcc.fullName'),
       image: '/optimized/logos-tinypng/dhcc.webp',
-      industry: 'Healthcare Infrastructure',
-      description: 'A healthcare free zone combining medical services, education, research, and wellness facilities.',
-      headquarters: 'Dubai, UAE'
+      industry: t('companies.dhcc.industry'),
+      description: t('companies.dhcc.description'),
+      headquarters: t('companies.dhcc.headquarters')
     },
     {
       id: 5,
       name: 'Thiqah',
-      fullName: 'Thiqah Business Services',
+      fullName: t('companies.thiqah.fullName'),
       image: '/optimized/logos-tinypng/thiqah-ksa.webp',
-      industry: 'Digital Solutions',
-      description: 'Provides customized digital platforms for governmental and private sector partners.',
-      headquarters: 'Riyadh, Saudi Arabia'
+      industry: t('companies.thiqah.industry'),
+      description: t('companies.thiqah.description'),
+      headquarters: t('companies.thiqah.headquarters')
     },
     {
       id: 6,
       name: 'Elm',
-      fullName: 'Elm Information Security Company',
+      fullName: t('companies.elm.fullName'),
       image: '/optimized/logos-tinypng/elm-ksa.webp',
-      industry: 'Information Security',
-      description: 'Saudi company specializing in digital government services and cybersecurity solutions.',
-      headquarters: 'Riyadh, Saudi Arabia'
+      industry: t('companies.elm.industry'),
+      description: t('companies.elm.description'),
+      headquarters: t('companies.elm.headquarters')
     },
     {
       id: 7,
       name: 'Modon',
-      fullName: 'Saudi Authority for Industrial Cities',
+      fullName: t('companies.modon.fullName'),
       image: '/optimized/logos-tinypng/modon-ksa-1.webp',
-      industry: 'Industrial Development',
-      description: 'Manages 39 industrial cities across Saudi Arabia with investments over 440 billion riyals.',
-      headquarters: 'Riyadh, Saudi Arabia'
+      industry: t('companies.modon.industry'),
+      description: t('companies.modon.description'),
+      headquarters: t('companies.modon.headquarters')
     },
     {
       id: 8,
       name: 'Mave Marketing',
-      fullName: 'Mave Marketing Solution',
+      fullName: t('companies.maveMarketing.fullName'),
       image: '/optimized/logos-tinypng/mave-marketing.svg',
-      industry: 'Marketing Services',
-      description: 'Full-service agency offering event, production, creative, and technology solutions.',
-      headquarters: 'Riyadh, Saudi Arabia'
+      industry: t('companies.maveMarketing.industry'),
+      description: t('companies.maveMarketing.description'),
+      headquarters: t('companies.maveMarketing.headquarters')
     },
     {
       id: 9,
       name: 'Tawal',
-      fullName: 'Tawal Telecom Infrastructure',
+      fullName: t('companies.tawal.fullName'),
       image: '/optimized/logos-tinypng/tawal-ksa.webp',
-      industry: 'Telecommunications',
-      description: 'Saudi Arabia\'s largest telecom infrastructure company managing over 21,000 towers.',
-      headquarters: 'Riyadh, Saudi Arabia'
+      industry: t('companies.tawal.industry'),
+      description: t('companies.tawal.description'),
+      headquarters: t('companies.tawal.headquarters')
     },
     {
       id: 10,
       name: 'Hisense',
-      fullName: 'Hisense Electronics',
+      fullName: t('companies.hisense.fullName'),
       image: '/optimized/logos-tinypng/hisense.webp',
-      industry: 'Consumer Electronics',
-      description: 'World\'s fourth-largest TV manufacturer with global production facilities.',
-      headquarters: 'Qingdao, China'
+      industry: t('companies.hisense.industry'),
+      description: t('companies.hisense.description'),
+      headquarters: t('companies.hisense.headquarters')
     },
     {
       id: 11,
       name: 'TDRA',
-      fullName: 'Telecommunications and Digital Government Regulatory Authority',
+      fullName: t('companies.tdra.fullName'),
       image: '/optimized/logos-tinypng/tdra.webp',
-      industry: 'Telecom Regulation',
-      description: 'UAE federal agency regulating telecommunications and enabling digital transformation.',
-      headquarters: 'Abu Dhabi, UAE'
+      industry: t('companies.tdra.industry'),
+      description: t('companies.tdra.description'),
+      headquarters: t('companies.tdra.headquarters')
     },
     {
       id: 12,
       name: 'HOPSCOTCH',
-      fullName: 'HOPSCOTCH Entertainment Company',
+      fullName: t('companies.hopscotch.fullName'),
       image: '/optimized/logos-tinypng/hopscotch.webp',
-      industry: 'Communication & Entertainment',
-      description: 'International communication group with 40 offices specializing in PR and digital communication.',
-      headquarters: 'Paris, France'
+      industry: t('companies.hopscotch.industry'),
+      description: t('companies.hopscotch.description'),
+      headquarters: t('companies.hopscotch.headquarters')
     },
     {
       id: 13,
       name: 'Solutions by STC',
-      fullName: 'Saudi Telecom Company Solutions',
+      fullName: t('companies.solutionsByStc.fullName'),
       image: '/optimized/logos-tinypng/solutions-by-stc.webp',
-      industry: 'IT Services',
-      description: 'Pioneer in IT services offering comprehensive digital transformation solutions.',
-      headquarters: 'Riyadh, Saudi Arabia'
+      industry: t('companies.solutionsByStc.industry'),
+      description: t('companies.solutionsByStc.description'),
+      headquarters: t('companies.solutionsByStc.headquarters')
     },
     {
       id: 14,
       name: 'GO Telecom',
-      fullName: 'GO Telecom KSA',
+      fullName: t('companies.goTelecom.fullName'),
       image: '/optimized/logos-tinypng/go-telecom-ksa.webp',
-      industry: 'Telecommunications',
-      description: 'Saudi Arabia\'s second fixed-line operator providing voice and broadband services.',
-      headquarters: 'Riyadh, Saudi Arabia'
+      industry: t('companies.goTelecom.industry'),
+      description: t('companies.goTelecom.description'),
+      headquarters: t('companies.goTelecom.headquarters')
     },
     {
       id: 15,
       name: 'SMT',
-      fullName: 'Security Management Technology',
+      fullName: t('companies.smt.fullName'),
       image: '/optimized/logos-tinypng/smt.webp',
-      industry: 'Cybersecurity',
-      description: 'End-to-end cybersecurity services, consultancy, and IT infrastructure solutions.',
-      headquarters: 'Amman, Jordan'
+      industry: t('companies.smt.industry'),
+      description: t('companies.smt.description'),
+      headquarters: t('companies.smt.headquarters')
     },
     {
       id: 16,
       name: 'ADNOC',
-      fullName: 'Abu Dhabi National Oil Company',
+      fullName: t('companies.adnoc.fullName'),
       image: '/optimized/logos-tinypng/adnoc.webp',
-      industry: 'Energy & Petrochemicals',
-      description: 'Leading diversified energy group focusing on responsible hydrocarbon exploration.',
-      headquarters: 'Abu Dhabi, UAE'
+      industry: t('companies.adnoc.industry'),
+      description: t('companies.adnoc.description'),
+      headquarters: t('companies.adnoc.headquarters')
     },
     {
       id: 17,
       name: 'Haboob',
-      fullName: 'Haboob Knowledge Solutions',
+      fullName: t('companies.haboob.fullName'),
       image: '/optimized/logos-tinypng/haboob-ksa.webp',
-      industry: 'Cybersecurity',
-      description: 'Leading Saudi cybersecurity company providing integrated security services.',
-      headquarters: 'Riyadh, Saudi Arabia'
+      industry: t('companies.haboob.industry'),
+      description: t('companies.haboob.description'),
+      headquarters: t('companies.haboob.headquarters')
     },
-  ], []);
+  ], [t]);
 
-  // CRITICAL FIX: Optimized animation logic with better performance
   useEffect(() => {
     const animate = () => {
       if (!isPaused && trackRef.current) {
@@ -316,7 +316,6 @@ export default function LogoCarousel() {
           scrollPosition.current = 0;
         }
 
-        // CRITICAL FIX: Optimized transform with better performance
         trackRef.current.style.transform = `translateX(-${scrollPosition.current}px)`;
         trackRef.current.style.willChange = 'transform';
       }
@@ -333,7 +332,6 @@ export default function LogoCarousel() {
     };
   }, [isPaused, logoItems.length]);
 
-  // CRITICAL FIX: Optimized mouse event handlers
   const handleMouseEnter = useCallback(() => setIsPaused(true), []);
   const handleMouseLeave = useCallback(() => setIsPaused(false), []);
 
@@ -341,11 +339,11 @@ export default function LogoCarousel() {
     <section className="relative w-full py-12 overflow-visible px-4 bg-gradient-to-b from-white via-gray-50 to-white">
       {/* Section Header */}
       <header className="text-center mb-12">
-        <h2 className="text-3xl font-bold text-[#2c2c2b] mb-3">
-          Trusted by Industry Leaders
+        <h2 className="text-3xl font-bold text-[#2c2c2b] mb-3" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+          {t('trustedBy.title')}
         </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Delivering exceptional events for prestigious organizations across the GCC region
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+          {t('trustedBy.description')}
         </p>
       </header>
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 // Assets - Optimized WebP images
 const imgRectangle4242 = "/optimized/services/80ad948f4065ef9e73a5bf9a2fb549550f90c7f5-2d3d-content.webp"; // 2D/3D Content
@@ -15,10 +15,11 @@ const imgRectangle4250 = "/optimized/services/90a62ba64674d19ad8ac0b613d6a845796
 
 export default function ServicesGrid() {
   const t = useTranslations('services.grid');
+  const locale = useLocale();
 
   return (
     <section className="relative w-full" aria-labelledby="services-grid-title">
-      <h2 id="services-grid-title" className="sr-only">{t('screenReaderTitle')}</h2>
+      <h2 id="services-grid-title" className="sr-only" dir={locale === 'ar' ? 'rtl' : 'ltr'}>{t('screenReaderTitle')}</h2>
       {/* Services Grid Container */}
       <div 
         className="box-border grid gap-4 md:gap-7 py-6 md:py-9"
@@ -49,7 +50,7 @@ export default function ServicesGrid() {
           
           {/* Content */}
           <div className="absolute bottom-6 md:bottom-12 right-4 md:right-12 text-right p-4 md:p-0" style={{ maxWidth: 'clamp(300px, 87vw, 1315px)' }}>
-            <h3 
+            <h3
               id="service-2d-3d-title"
               className="text-white font-bold mb-4 md:mb-7 capitalize"
               style={{
@@ -57,6 +58,7 @@ export default function ServicesGrid() {
                 lineHeight: 'clamp(26px, 3.6vw, 52px)',
                 fontFamily: '"Poppins", sans-serif'
               }}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             >
               {t('services.2d3dContent.title')}
             </h3>
@@ -69,6 +71,7 @@ export default function ServicesGrid() {
                 maxWidth: 'clamp(280px, 86vw, 1298px)',
                 fontFamily: '"Poppins", sans-serif'
               }}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             >
               {t('services.2d3dContent.description')}
             </p>
@@ -95,7 +98,7 @@ export default function ServicesGrid() {
           
           {/* Content */}
           <div className="absolute bottom-6 md:bottom-12 right-4 md:right-[53px] text-right p-4 md:p-0">
-            <h3 
+            <h3
               id="service-video-editing-title"
               className="text-white font-bold capitalize"
               style={{
@@ -104,10 +107,11 @@ export default function ServicesGrid() {
                 maxWidth: 'clamp(280px, 39.4vw, 596px)',
                 fontFamily: '"Poppins", sans-serif'
               }}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             >
               {t('services.videoEditing.title')}
             </h3>
-            <div id="service-video-editing-description" className="sr-only">
+            <div id="service-video-editing-description" className="sr-only" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               {t('services.videoEditing.description')}
             </div>
           </div>
@@ -133,7 +137,7 @@ export default function ServicesGrid() {
           
           {/* Content */}
           <div className="absolute bottom-6 md:bottom-12 right-4 md:right-[50px] text-right p-4 md:p-0">
-            <h3 
+            <h3
               id="service-conferences-title"
               className="text-white font-bold capitalize"
               style={{
@@ -142,10 +146,11 @@ export default function ServicesGrid() {
                 maxWidth: 'clamp(190px, 24.9vw, 377px)',
                 fontFamily: '"Poppins", sans-serif'
               }}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             >
               {t('services.conferences.title')}
             </h3>
-            <div id="service-conferences-description" className="sr-only">
+            <div id="service-conferences-description" className="sr-only" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               {t('services.conferences.description')}
             </div>
           </div>
@@ -171,7 +176,7 @@ export default function ServicesGrid() {
           
           {/* Content */}
           <div className="absolute bottom-6 md:bottom-12 right-4 md:right-12 text-right p-4 md:p-0">
-            <h3 
+            <h3
               id="service-hologram-title"
               className="text-white font-bold capitalize"
               style={{
@@ -180,10 +185,11 @@ export default function ServicesGrid() {
                 maxWidth: 'clamp(530px, 70.2vw, 1061px)',
                 fontFamily: '"Poppins", sans-serif'
               }}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             >
               {t('services.hologramActivations.title')}
             </h3>
-            <div id="service-hologram-description" className="sr-only">
+            <div id="service-hologram-description" className="sr-only" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               {t('services.hologramActivations.description')}
             </div>
           </div>
@@ -209,7 +215,7 @@ export default function ServicesGrid() {
           
           {/* Content */}
           <div className="absolute bottom-6 md:bottom-12 right-1/2 translate-x-1/2 text-center p-4 md:p-0">
-            <h3 
+            <h3
               id="service-interactive-title"
               className="text-white font-bold capitalize"
               style={{
@@ -218,10 +224,11 @@ export default function ServicesGrid() {
                 maxWidth: 'clamp(290px, 38.8vw, 586px)',
                 fontFamily: '"Poppins", sans-serif'
               }}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             >
               {t('services.interactiveActivations.title')}
             </h3>
-            <div id="service-interactive-description" className="sr-only">
+            <div id="service-interactive-description" className="sr-only" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               {t('services.interactiveActivations.description')}
             </div>
           </div>
@@ -247,7 +254,7 @@ export default function ServicesGrid() {
           
           {/* Content */}
           <div className="absolute bottom-6 md:bottom-12 right-4 md:right-[53px] text-right p-4 md:p-0">
-            <h3 
+            <h3
               id="service-live-events-title"
               className="text-white font-bold capitalize"
               style={{
@@ -256,10 +263,11 @@ export default function ServicesGrid() {
                 maxWidth: 'clamp(290px, 39.4vw, 596px)',
                 fontFamily: '"Poppins", sans-serif'
               }}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             >
               {t('services.liveEvents.title')}
             </h3>
-            <div id="service-live-events-description" className="sr-only">
+            <div id="service-live-events-description" className="sr-only" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               {t('services.liveEvents.description')}
             </div>
           </div>
@@ -285,7 +293,7 @@ export default function ServicesGrid() {
           
           {/* Content */}
           <div className="absolute bottom-6 md:bottom-12 right-4 md:right-12 text-right p-4 md:p-0">
-            <h3 
+            <h3
               id="service-corporate-title"
               className="text-white font-bold capitalize"
               style={{
@@ -294,10 +302,11 @@ export default function ServicesGrid() {
                 maxWidth: 'clamp(530px, 70.2vw, 1061px)',
                 fontFamily: '"Poppins", sans-serif'
               }}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             >
               {t('services.corporateEvents.title')}
             </h3>
-            <div id="service-corporate-description" className="sr-only">
+            <div id="service-corporate-description" className="sr-only" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               {t('services.corporateEvents.description')}
             </div>
           </div>
@@ -323,7 +332,7 @@ export default function ServicesGrid() {
           
           {/* Content */}
           <div className="absolute bottom-6 md:bottom-12 right-4 md:right-[53px] text-right p-4 md:p-0">
-            <h3 
+            <h3
               id="service-av-production-title"
               className="text-white font-bold capitalize"
               style={{
@@ -332,10 +341,11 @@ export default function ServicesGrid() {
                 maxWidth: 'clamp(282px, 37.3vw, 564px)',
                 fontFamily: '"Poppins", sans-serif'
               }}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             >
               {t('services.immersiveAV.title')}
             </h3>
-            <div id="service-av-production-description" className="sr-only">
+            <div id="service-av-production-description" className="sr-only" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               {t('services.immersiveAV.description')}
             </div>
           </div>
@@ -361,7 +371,7 @@ export default function ServicesGrid() {
           
           {/* Content */}
           <div className="absolute bottom-6 md:bottom-12 right-4 md:right-[53px] text-right p-4 md:p-0">
-            <h3 
+            <h3
               id="service-tech-driven-title"
               className="text-white font-bold capitalize"
               style={{
@@ -370,10 +380,11 @@ export default function ServicesGrid() {
                 maxWidth: 'clamp(242px, 32vw, 484px)',
                 fontFamily: '"Poppins", sans-serif'
               }}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
             >
               {t('services.techDriven.title')}
             </h3>
-            <div id="service-tech-driven-description" className="sr-only">
+            <div id="service-tech-driven-description" className="sr-only" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               {t('services.techDriven.description')}
             </div>
           </div>

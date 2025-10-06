@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { useEffect, useState, useRef, useMemo } from 'react';
 
 // Constants
@@ -70,7 +70,7 @@ function OriginCard({
       />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col flex-1">
+      <div className="relative z-10 flex flex-col flex-1" dir="ltr">
         <header className="flex-shrink-0 mb-6 md:mb-7 lg:mb-8 xl:mb-10">
           <h2
             id={`card-title-${variant}`}
@@ -159,6 +159,7 @@ function BackgroundPattern({ position, rotation }: BackgroundPatternProps) {
  */
 export default function AboutOrigin() {
   const t = useTranslations('about.origin');
+  const locale = useLocale();
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const sectionRef = useRef<HTMLElement>(null);
 

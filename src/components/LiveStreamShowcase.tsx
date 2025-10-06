@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import { Play, Users, Heart, Share2, Bell, MoreVertical } from 'lucide-react';
 
@@ -33,6 +33,7 @@ export default function LiveStreamShowcase({
   isFollowing = false
 }: LiveStreamShowcaseProps) {
   const t = useTranslations();
+  const locale = useLocale();
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(likes);
   const [following, setFollowing] = useState(isFollowing);
@@ -109,7 +110,7 @@ export default function LiveStreamShowcase({
           </div>
           
           {/* Action Buttons */}
-          <div className="flex items-center gap-2 ml-4">
+          <div className="flex items-center gap-2 ms-4">
             <button
               onClick={handleLike}
               className={`p-2 rounded-lg transition-colors ${
@@ -189,7 +190,7 @@ export default function LiveStreamShowcase({
         </div>
 
         {/* Watch Button */}
-        <button className="w-full mt-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">
+        <button className="w-full mt-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
           {t('watch')} Stream
         </button>
       </div>

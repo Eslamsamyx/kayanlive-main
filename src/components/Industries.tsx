@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { parseMarkdown } from '@/utils/markdownUtils';
 import ClientsPartnersTemplate, { CardConfig, BackgroundElement } from './ClientsPartnersTemplate';
 
@@ -112,7 +112,8 @@ const backgroundElements: BackgroundElement[] = [
 
 export default function Industries() {
   const t = useTranslations();
-  
+  const locale = useLocale();
+
   const cards: CardConfig[] = [
     {
       id: 'government',
@@ -159,10 +160,10 @@ export default function Industries() {
       aspectRatio: '465px'
     }
   ];
-  
+
   return (
     <ClientsPartnersTemplate
-      badgeText={t('industries.badge')}
+      badgeText=""
       badgeWidth="266px"
       title={t('industries.title')}
       cards={cards}

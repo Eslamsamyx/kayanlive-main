@@ -39,6 +39,7 @@ export default function HighImpactExperienceLegacy() {
                   fontSize: 'clamp(20px, 5vw, 28px)',
                   lineHeight: 'clamp(26px, 6vw, 36px)'
                 }}
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}
               >
                 {t('highImpact.title')}
               </h2>
@@ -49,32 +50,13 @@ export default function HighImpactExperienceLegacy() {
                   fontSize: 'clamp(16px, 3.5vw, 20px)',
                   lineHeight: 'clamp(22px, 4.5vw, 28px)'
                 }}
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}
               >
                 {t('highImpact.subtitle')}
               </p>
             </div>
           </div>
 
-          {/* Mobile Testimonial */}
-          <div className="bg-[#f8f9fa] rounded-2xl p-6 border-l-4 border-[#74cfaa]">
-            <blockquote className="mb-4">
-              <p
-                className="text-[#2c2c2b] font-medium italic"
-                style={{
-                  fontSize: 'clamp(16px, 3.5vw, 18px)',
-                  lineHeight: 'clamp(22px, 4.5vw, 26px)'
-                }}
-              >
-                &ldquo;{t('highImpact.testimonial')}&rdquo;
-              </p>
-            </blockquote>
-            <cite
-              className="text-[#0A5D5A] font-semibold not-italic"
-              style={{ fontSize: 'clamp(14px, 3vw, 16px)' }}
-            >
-              — {t('highImpact.testimonialAuthor')}
-            </cite>
-          </div>
         </div>
 
         {/* Desktop Layout */}
@@ -105,6 +87,7 @@ export default function HighImpactExperienceLegacy() {
                       fontSize: 'clamp(28px, 3.5vw, 42px)',
                       lineHeight: 'clamp(36px, 4.5vw, 54px)'
                     }}
+                    dir={locale === 'ar' ? 'rtl' : 'ltr'}
                   >
                     {t('highImpact.title')}
                   </h2>
@@ -115,31 +98,12 @@ export default function HighImpactExperienceLegacy() {
                       fontSize: 'clamp(18px, 1.8vw, 24px)',
                       lineHeight: 'clamp(26px, 2.6vw, 36px)'
                     }}
+                    dir={locale === 'ar' ? 'rtl' : 'ltr'}
                   >
                     {t('highImpact.subtitle')}
                   </p>
                 </div>
 
-                {/* Desktop Testimonial */}
-                <div className="bg-[#f8f9fa] rounded-2xl p-8 border-l-4 border-[#74cfaa] max-w-4xl">
-                  <blockquote className="mb-4">
-                    <p
-                      className="text-[#2c2c2b] font-medium italic"
-                      style={{
-                        fontSize: 'clamp(18px, 2vw, 24px)',
-                        lineHeight: 'clamp(26px, 2.8vw, 34px)'
-                      }}
-                    >
-                      &ldquo;{t('highImpact.testimonial')}&rdquo;
-                    </p>
-                  </blockquote>
-                  <cite
-                    className="text-[#0A5D5A] font-semibold not-italic"
-                    style={{ fontSize: 'clamp(16px, 1.6vw, 20px)' }}
-                  >
-                    — {t('highImpact.testimonialAuthor')}
-                  </cite>
-                </div>
               </div>
             </div>
           </div>

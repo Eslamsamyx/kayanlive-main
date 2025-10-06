@@ -2,6 +2,7 @@
 
 import { ReactNode } from 'react';
 import Image from 'next/image';
+import { useLocale } from 'next-intl';
 import CTAButton from './CTAButton';
 
 // Common assets
@@ -39,10 +40,11 @@ export default function InfoSectionTemplate({
   ctaButtonText,
   backgroundImage = "/optimized/gallery-thumbnail/a4bd38b73259c4fd4f099d834871f17ed5486466-gallery-thumbnail-desktop.webp",
   gradientFrom = "#b8a4ff",
-  gradientVia = "#7afdd6", 
+  gradientVia = "#7afdd6",
   gradientTo = "#7afdd6",
   showTopSection = true
 }: InfoSectionProps) {
+  const locale = useLocale();
 
   const renderChecklistText = (item: ChecklistItem) => {
     if (!item.highlights) {
@@ -113,7 +115,7 @@ export default function InfoSectionTemplate({
               {/* Checklist Items */}
               <div className="flex flex-col gap-4">
                 {checklistItems.map((item, index) => (
-                  <div key={index} className="flex items-start gap-[9px]">
+                  <div key={index} className={`flex items-start ${locale === 'ar' ? 'flex-row-reverse' : ''} gap-[9px]`}>
                     <Image src={imgCheckmark} alt="" className="w-[30px] h-[30px] mt-[2px]" width={30} height={30} />
                     <p className="text-[24px] leading-[32px] capitalize">
                       {renderChecklistText(item)}

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 const imgMaskGroup = "/optimized/achievements/638442c54db92ce49b3ad8194a062a52ba973004.webp";
 const imgEllipse1 = "/assets/575a92ae113574b10651d37ad7654adf9fb7bd85.svg";
@@ -10,6 +10,7 @@ const imgEllipse2 = "/assets/dcc83c6de9d9f4b919b448af6ce767c528855540.svg";
 
 export default function Achievements() {
   const t = useTranslations();
+  const locale = useLocale();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
 
@@ -107,7 +108,7 @@ export default function Achievements() {
       {/* Desktop Content */}
       <div className="hidden lg:block max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20 relative z-10">
         {/* Title */}
-        <h2 
+        <h2
           className="text-center capitalize font-normal mb-6 md:mb-12 lg:mb-16"
           style={{
             fontSize: '200px',
@@ -117,8 +118,11 @@ export default function Achievements() {
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
-            fontFamily: '"Poppins", sans-serif'
+            fontFamily: '"Poppins", sans-serif',
+            paddingTop: '24px',
+            paddingBottom: '24px'
           }}
+          dir={locale === 'ar' ? 'rtl' : 'ltr'}
         >
           {t('achievements.title')}
         </h2>
@@ -143,16 +147,16 @@ export default function Achievements() {
             }}
           >
             <div className="flex items-center justify-center px-8">
-              <h3 className="text-[#7afdd6] text-[40px] leading-[45px]" style={{ fontFamily: '"Poppins", sans-serif' }}>{t('achievements.turnaroundTime')}</h3>
+              <h3 className="text-[#7afdd6] text-[40px] leading-[45px]" style={{ fontFamily: '"Poppins", sans-serif' }} dir={locale === 'ar' ? 'rtl' : 'ltr'}>{t('achievements.turnaroundTime')}</h3>
             </div>
-            <div 
+            <div
               className="flex items-center justify-center px-8 relative"
               style={{ background: 'rgba(122, 253, 214, 0.11)' }}
             >
-              <h3 className="text-[#7afdd6] text-[40px] leading-[45px] text-center" style={{ fontFamily: '"Poppins", sans-serif' }}>{t('achievements.pressCoverage')}</h3>
+              <h3 className="text-[#7afdd6] text-[40px] leading-[45px] text-center" style={{ fontFamily: '"Poppins", sans-serif' }} dir={locale === 'ar' ? 'rtl' : 'ltr'}>{t('achievements.pressCoverage')}</h3>
             </div>
             <div className="flex items-center justify-center px-8">
-              <h3 className="text-[#7afdd6] text-[40px] leading-[45px]" style={{ fontFamily: '"Poppins", sans-serif' }}>{t('achievements.missedDeadlines')}</h3>
+              <h3 className="text-[#7afdd6] text-[40px] leading-[45px]" style={{ fontFamily: '"Poppins", sans-serif' }} dir={locale === 'ar' ? 'rtl' : 'ltr'}>{t('achievements.missedDeadlines')}</h3>
             </div>
           </div>
 
@@ -162,16 +166,16 @@ export default function Achievements() {
           {/* Data Row 1 */}
           <div className="grid grid-cols-3" style={{ height: '112px' }}>
             <div className="flex items-center px-[60px]">
-              <p className="text-white text-[25px] leading-[50px]" style={{ fontFamily: '"Poppins", sans-serif' }}>{t('achievements.clientsServed')}</p>
+              <p className="text-white text-[25px] leading-[50px]" style={{ fontFamily: '"Poppins", sans-serif' }} dir={locale === 'ar' ? 'rtl' : 'ltr'}>{t('achievements.clientsServed')}</p>
             </div>
             <div
               className="flex items-center px-[60px]"
               style={{ background: 'rgba(122, 253, 214, 0.05)' }}
             >
-              <p className="text-white text-[22px] leading-[28px]" style={{ fontFamily: '"Poppins", sans-serif' }}>{t('achievements.projectsCompleted')}</p>
+              <p className="text-white text-[22px] leading-[28px]" style={{ fontFamily: '"Poppins", sans-serif' }} dir={locale === 'ar' ? 'rtl' : 'ltr'}>{t('achievements.projectsCompleted')}</p>
             </div>
             <div className="flex items-center px-[60px]">
-              <p className="text-white text-[25px] leading-[50px]">{t('achievements.yearsExpertise')}</p>
+              <p className="text-white text-[25px] leading-[50px]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>{t('achievements.yearsExpertise')}</p>
             </div>
           </div>
 
@@ -181,15 +185,18 @@ export default function Achievements() {
       {/* Mobile Version - Matches Figma Design Exactly */}
       <section className="lg:hidden flex flex-col gap-[31px] items-center justify-center px-[27px] py-0 relative w-full">
         {/* Mobile Title */}
-        <div 
+        <div
           className="text-center capitalize font-normal text-[50px] leading-[137px] tracking-[-0.5px] w-full"
           style={{
             background: 'linear-gradient(90deg, #b8a4ff 0%, #7afdd6 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
-            fontFamily: '"Poppins", sans-serif'
+            fontFamily: '"Poppins", sans-serif',
+            paddingTop: '16px',
+            paddingBottom: '16px'
           }}
+          dir={locale === 'ar' ? 'rtl' : 'ltr'}
         >
           {t('achievements.title')}
         </div>
@@ -199,7 +206,7 @@ export default function Achievements() {
           <div className="flex flex-col items-center justify-start overflow-clip relative w-full">
             {/* Header Row */}
             <div className="bg-[rgba(122,253,214,0.21)] box-border flex flex-col gap-2.5 items-start justify-start overflow-clip px-[11px] py-3.5 relative w-full rounded-t-[24px]">
-              <div className="flex font-normal items-center justify-between leading-[1.12] not-italic relative text-[#7afdd6] text-[14px] w-full" style={{ fontFamily: '"Poppins", sans-serif' }}>
+              <div className="flex font-normal items-center justify-between leading-[1.12] not-italic relative text-[#7afdd6] text-[14px] w-full" style={{ fontFamily: '"Poppins", sans-serif' }} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                 <div className="relative flex-1 text-center">
                   {t('achievements.turnaroundTime')}
                 </div>
@@ -215,7 +222,7 @@ export default function Achievements() {
             {/* Data Row 1 */}
             <div className="bg-[rgba(122,253,214,0.03)] relative w-full border-t border-b border-[#888888]">
               <div className="box-border flex flex-col gap-2.5 items-start justify-start overflow-clip px-[11px] py-3.5 relative">
-                <div className="flex font-normal items-center justify-between leading-[1.12] not-italic relative text-[14px] text-white w-full" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                <div className="flex font-normal items-center justify-between leading-[1.12] not-italic relative text-[14px] text-white w-full" style={{ fontFamily: '"Poppins", sans-serif' }} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                   <div className="relative flex-1 text-center">
                     {t('achievements.clientsServed')}
                   </div>

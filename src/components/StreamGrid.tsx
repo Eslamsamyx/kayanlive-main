@@ -1,7 +1,7 @@
 'use client';
 
 import StreamCard from './StreamCard';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 interface Stream {
   id: string;
@@ -23,6 +23,7 @@ interface StreamGridProps {
 
 export default function StreamGrid({ streams, title }: StreamGridProps) {
   const t = useTranslations();
+  const locale = useLocale();
 
   return (
     <section className="py-8">
@@ -53,7 +54,7 @@ export default function StreamGrid({ streams, title }: StreamGridProps) {
 
       {streams.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-gray-500 dark:text-gray-400">
+          <p className="text-gray-500 dark:text-gray-400" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
             {t('noStreamsAvailable')}
           </p>
         </div>

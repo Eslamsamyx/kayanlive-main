@@ -22,10 +22,8 @@
     }
   },
   "highImpact": {
-    "title": "Your go-to event management in Dubai for immersive, engaging, high-pressure event delivery.",
-    "subtitle": "When timing matters and precision is non-negotiable, call KayanLive, a leading event management company in Dubai.",
-    "testimonial": "KayanLive turned a three week crisis into a record-breaking booth.",
-    "testimonialAuthor": "Head of Events, Global FMCG"
+    "title": "We are your first choice in Dubai for immersive, engaging events delivered with precision and commitment.",
+    "subtitle": "When time is critical and precision is non-negotiable, KayanLive stands out as one of the leading exhibition and conference companies in Dubai. We consistently prove our position among Saudi Arabia's elite event organizers through diverse expertise and proven achievements."
   },
   "aboutServices": {
     "title": "What We Do?",
@@ -117,7 +115,6 @@
     "experience2": "Whether launching a pavilion, opening a cultural event, or fixing someone else's mess, we're the partner you call when the clock is ticking."
   },
   "industries": {
-    "badge": "Who We Work With",
     "title": "Industries",
     "government": "Government and Semi-Government Bodies",
     "governmentDesc": "We've supported ministries, tourism boards, and royal initiatives on major **event management Saudi Arabia** projects aligned with **Vision 2030**, **Expo 2020**, and **National Day** celebrations. We anticipate obstacles and handle stress before it reaches you.",
@@ -129,7 +126,6 @@
     "agenciesDesc": "When you need reliability, muscle, and zero ego, we show up. We white-label seamlessly into your team, build your vision, and deliver with polish, quietly, quickly, and dependably."
   },
   "whereWeWork": {
-    "badge": "Where We Work",
     "title": "Where We Work?",
     "description": "Headquartered in Saudi Arabia and Dubai, KayanLive delivers high-impact events, from public activations and corporate launches to government-led showcases.",
     "operateText": "We operate across the GCC:",
@@ -140,13 +136,13 @@
     "cta": "Let's Build Together"
   },
   "achievements": {
-    "title": "Achievements",
-    "turnaroundTime": "72 Hour Turnaround",
-    "pressCoverage": "3× Increased Press Coverage",
-    "missedDeadlines": "0 Missed Deadlines",
-    "clientsServed": "120+ Clients Served",
-    "projectsCompleted": "400+ Projects Completed (2015-2025)",
-    "yearsExpertise": "15+ Years of Expertise"
+    "title": "Our Achievements & Numbers",
+    "missedDeadlines": "0 deadline delays.",
+    "pressCoverage": "x2 media coverage.",
+    "turnaroundTime": "72 hours event execution time.",
+    "yearsExpertise": "Over 15 years of expertise.",
+    "projectsCompleted": "Over 400 projects completed in one decade. 2015-2025",
+    "clientsServed": "We helped over 120 clients."
   },
   "execution": {
     "heading": "Where Others Struggle, We Execute with Precision",
@@ -156,10 +152,117 @@
     "headlineV2": "When Most Teams Crack, We Make it Happen",
     "headlineV3": "Where Others Struggle, We Execute with Precision",
     "promise": "We've made a business out of making it happen.",
-    "guarantee1": "No second chances. No last-minute surprises.",
     "guarantee2": "KayanLive ensures smooth execution from start to finish.",
     "cta": "Get Support Today",
     "ctaTag": "Book a 15-minute Strategy Call"
+  },
+  "trustedBy": {
+    "title": "Trusted by Industry Leaders",
+    "description": "Delivering exceptional events for prestigious organizations across the GCC region"
+  },
+  "companies": {
+    "tatweer": {
+      "fullName": "Tatweer Educational Technologies Co.",
+      "industry": "Educational Technology",
+      "description": "A digital solutions company providing technology-driven educational solutions and services across Saudi Arabia and UAE.",
+      "headquarters": "Riyadh, Saudi Arabia"
+    },
+    "dctAbuDhabi": {
+      "fullName": "Department of Culture and Tourism",
+      "industry": "Government Tourism & Culture",
+      "description": "Principal authority driving sustainable growth of Abu Dhabi's culture and tourism sectors.",
+      "headquarters": "Abu Dhabi, UAE"
+    },
+    "mohap": {
+      "fullName": "Ministry of Health & Prevention",
+      "industry": "Healthcare Governance",
+      "description": "Federal entity ensuring proactive healthcare services through world-class policies and programs.",
+      "headquarters": "Abu Dhabi, UAE"
+    },
+    "dhcc": {
+      "fullName": "Dubai Healthcare City",
+      "industry": "Healthcare Infrastructure",
+      "description": "A healthcare free zone combining medical services, education, research, and wellness facilities.",
+      "headquarters": "Dubai, UAE"
+    },
+    "thiqah": {
+      "fullName": "Thiqah Business Services",
+      "industry": "Digital Solutions",
+      "description": "Provides customized digital platforms for governmental and private sector partners.",
+      "headquarters": "Riyadh, Saudi Arabia"
+    },
+    "elm": {
+      "fullName": "Elm Information Security Company",
+      "industry": "Information Security",
+      "description": "Saudi company specializing in digital government services and cybersecurity solutions.",
+      "headquarters": "Riyadh, Saudi Arabia"
+    },
+    "modon": {
+      "fullName": "Saudi Authority for Industrial Cities",
+      "industry": "Industrial Development",
+      "description": "Manages 39 industrial cities across Saudi Arabia with investments over 440 billion riyals.",
+      "headquarters": "Riyadh, Saudi Arabia"
+    },
+    "maveMarketing": {
+      "fullName": "Mave Marketing Solution",
+      "industry": "Marketing Services",
+      "description": "Full-service agency offering event, production, creative, and technology solutions.",
+      "headquarters": "Riyadh, Saudi Arabia"
+    },
+    "tawal": {
+      "fullName": "Tawal Telecom Infrastructure",
+      "industry": "Telecommunications",
+      "description": "Saudi Arabia's largest telecom infrastructure company managing over 21,000 towers.",
+      "headquarters": "Riyadh, Saudi Arabia"
+    },
+    "hisense": {
+      "fullName": "Hisense Electronics",
+      "industry": "Consumer Electronics",
+      "description": "World's fourth-largest TV manufacturer with global production facilities.",
+      "headquarters": "Qingdao, China"
+    },
+    "tdra": {
+      "fullName": "Telecommunications and Digital Government Regulatory Authority",
+      "industry": "Telecom Regulation",
+      "description": "UAE federal agency regulating telecommunications and enabling digital transformation.",
+      "headquarters": "Abu Dhabi, UAE"
+    },
+    "hopscotch": {
+      "fullName": "HOPSCOTCH Entertainment Company",
+      "industry": "Communication & Entertainment",
+      "description": "International communication group with 40 offices specializing in PR and digital communication.",
+      "headquarters": "Paris, France"
+    },
+    "solutionsByStc": {
+      "fullName": "Saudi Telecom Company Solutions",
+      "industry": "IT Services",
+      "description": "Pioneer in IT services offering comprehensive digital transformation solutions.",
+      "headquarters": "Riyadh, Saudi Arabia"
+    },
+    "goTelecom": {
+      "fullName": "GO Telecom KSA",
+      "industry": "Telecommunications",
+      "description": "Saudi Arabia's second fixed-line operator providing voice and broadband services.",
+      "headquarters": "Riyadh, Saudi Arabia"
+    },
+    "smt": {
+      "fullName": "Security Management Technology",
+      "industry": "Cybersecurity",
+      "description": "End-to-end cybersecurity services, consultancy, and IT infrastructure solutions.",
+      "headquarters": "Amman, Jordan"
+    },
+    "adnoc": {
+      "fullName": "Abu Dhabi National Oil Company",
+      "industry": "Energy & Petrochemicals",
+      "description": "Leading diversified energy group focusing on responsible hydrocarbon exploration.",
+      "headquarters": "Abu Dhabi, UAE"
+    },
+    "haboob": {
+      "fullName": "Haboob Knowledge Solutions",
+      "industry": "Cybersecurity",
+      "description": "Leading Saudi cybersecurity company providing integrated security services.",
+      "headquarters": "Riyadh, Saudi Arabia"
+    }
   },
   "about": {
     "page": {

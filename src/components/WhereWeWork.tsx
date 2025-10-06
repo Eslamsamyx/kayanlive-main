@@ -17,7 +17,7 @@ export default function WhereWeWork() {
       <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-20">
         {/* Title Section */}
         <div className="text-center mb-8 md:mb-12 lg:mb-16">
-          <h2 className="text-[#2c2c2b] font-bold text-4xl md:text-5xl lg:text-6xl" style={{ fontFamily: '"Poppins", sans-serif' }}>
+          <h2 className="text-[#2c2c2b] font-bold text-4xl md:text-5xl lg:text-6xl" style={{ fontFamily: '"Poppins", sans-serif' }} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
             {t('whereWeWork.title')}
           </h2>
         </div>
@@ -26,45 +26,37 @@ export default function WhereWeWork() {
         <div className="hidden md:flex justify-between gap-7 items-end mb-6 md:mb-12 lg:mb-16">
           {/* Left Column */}
           <div className="flex flex-col gap-[30px] flex-1 max-w-[543px]">
-            {/* Badge */}
-            <div 
-              className="inline-flex items-center justify-center rounded-[900px] border border-[#7afdd6] bg-[rgba(122,253,214,0.26)]"
-              style={{ width: '225px', height: '62px' }}
-            >
-              <span className="text-[#1a4b43] text-[20px] uppercase">{t('whereWeWork.badge')}</span>
-            </div>
-            
             {/* Description */}
-            <p className="text-[#5A5A5A] text-[24px] leading-[32px] capitalize">
+            <p className="text-[#5A5A5A] text-[24px] leading-[32px] capitalize" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               {t('whereWeWork.description')}
             </p>
           </div>
 
           {/* Right Column - Locations */}
           <div className="flex flex-col gap-6 flex-1 max-w-[697px]">
-            <p className="text-[#5A5A5A] text-[24px] leading-[32px] capitalize">
+            <p className="text-[#5A5A5A] text-[24px] leading-[32px] capitalize" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               {t('whereWeWork.operateText')}
             </p>
             
             {/* Location Items */}
             <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-[9px]">
+              <div className={`flex items-center ${locale === 'ar' ? 'flex-row-reverse' : ''} gap-[9px]`}>
                 <Image src={imgCheckmark} alt="" className="w-[30px] h-[30px]" width={30} height={30} />
-                <p className="text-[24px] leading-[32px] capitalize"
+                <p className="text-[24px] leading-[32px] capitalize" dir={locale === 'ar' ? 'rtl' : 'ltr'}
                   dangerouslySetInnerHTML={getMarkdownHTML(t('whereWeWork.saudi'))}
                 />
               </div>
-              
-              <div className="flex items-center gap-[9px]">
+
+              <div className={`flex items-center ${locale === 'ar' ? 'flex-row-reverse' : ''} gap-[9px]`}>
                 <Image src={imgCheckmark} alt="" className="w-[30px] h-[30px]" width={30} height={30} />
-                <p className="text-[24px] leading-[32px] capitalize"
+                <p className="text-[24px] leading-[32px] capitalize" dir={locale === 'ar' ? 'rtl' : 'ltr'}
                   dangerouslySetInnerHTML={getMarkdownHTML(t('whereWeWork.uae'))}
                 />
               </div>
-              
-              <div className="flex items-start gap-[9px]">
+
+              <div className={`flex items-start ${locale === 'ar' ? 'flex-row-reverse' : ''} gap-[9px]`}>
                 <Image src={imgCheckmark} alt="" className="w-[30px] h-[30px] mt-[2px]" width={30} height={30} />
-                <p className="text-[24px] leading-[32px] capitalize"
+                <p className="text-[24px] leading-[32px] capitalize" dir={locale === 'ar' ? 'rtl' : 'ltr'}
                   dangerouslySetInnerHTML={getMarkdownHTML(t('whereWeWork.partners'))}
                 />
               </div>
@@ -74,52 +66,42 @@ export default function WhereWeWork() {
 
         {/* Mobile Version - True Single Column Layout matching reference exactly */}
         <section className="md:hidden flex flex-col gap-[31px] items-start px-[27px] mb-6 md:mb-12 lg:mb-16">
-          {/* Badge - Mobile version */}
-          <div className="bg-[rgba(122,253,214,0.26)] h-[50px] rounded-[900px] relative w-auto">
-            <div className="box-border flex gap-2.5 h-[50px] items-center justify-center overflow-clip px-[27px] py-6 relative">
-              <div className="text-[#1a4b43] text-[14px] text-center text-nowrap uppercase leading-[28px]">
-                {t('whereWeWork.badge')}
-              </div>
-            </div>
-            <div aria-hidden="true" className="absolute border border-[#7afdd6] border-solid inset-0 pointer-events-none rounded-[900px]" />
-          </div>
-          
           {/* Description - Mobile version */}
-          <div className="text-[#5A5A5A] text-[16px] leading-[20px] w-full capitalize">
+          <div className="text-[#5A5A5A] text-[16px] leading-[20px] w-full capitalize" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
             {t('whereWeWork.description')}
           </div>
 
           {/* GCC Section Header - As next item in single column */}
-          <div className="text-[#5A5A5A] text-[20px] leading-[20px] capitalize w-full">
+          <div className="text-[#5A5A5A] text-[20px] leading-[20px] capitalize w-full" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
             {t('whereWeWork.operateText')}
           </div>
           
           {/* Location Item 1 - As next item in single column */}
-          <div className="flex gap-[9px] items-center justify-start w-full">
+          <div className={`flex gap-[9px] items-center justify-start w-full ${locale === 'ar' ? 'flex-row-reverse' : ''}`}>
             <div className="relative shrink-0 size-[25px]">
               <Image src={imgCheckmark} alt="" className="block max-w-none size-full" width={25} height={25} />
             </div>
-            <div className="text-[#231f20] text-[18px] leading-[20px] capitalize flex-1"
+            <div className="text-[#231f20] text-[18px] leading-[20px] capitalize flex-1" dir={locale === 'ar' ? 'rtl' : 'ltr'}
               dangerouslySetInnerHTML={getMarkdownHTML(t('whereWeWork.saudi'))}
             />
           </div>
-          
+
           {/* Location Item 2 - As next item in single column */}
-          <div className="flex gap-[9px] items-center justify-start w-full">
+          <div className={`flex gap-[9px] items-center justify-start w-full ${locale === 'ar' ? 'flex-row-reverse' : ''}`}>
             <div className="relative shrink-0 size-[25px]">
               <Image src={imgCheckmark} alt="" className="block max-w-none size-full" width={25} height={25} />
             </div>
-            <div className="text-[#231f20] text-[18px] leading-[20px] capitalize flex-1"
+            <div className="text-[#231f20] text-[18px] leading-[20px] capitalize flex-1" dir={locale === 'ar' ? 'rtl' : 'ltr'}
               dangerouslySetInnerHTML={getMarkdownHTML(t('whereWeWork.uae'))}
             />
           </div>
-          
+
           {/* Location Item 3 - As next item in single column */}
-          <div className="flex gap-[9px] items-start justify-start w-full">
+          <div className={`flex gap-[9px] items-start justify-start w-full ${locale === 'ar' ? 'flex-row-reverse' : ''}`}>
             <div className="relative shrink-0 size-[25px]">
               <Image src={imgCheckmark} alt="" className="block max-w-none size-full" width={25} height={25} />
             </div>
-            <div className="text-[#231f20] text-[18px] leading-[20px] capitalize flex-1"
+            <div className="text-[#231f20] text-[18px] leading-[20px] capitalize flex-1" dir={locale === 'ar' ? 'rtl' : 'ltr'}
               dangerouslySetInnerHTML={getMarkdownHTML(t('whereWeWork.partners'))}
             />
           </div>
@@ -214,6 +196,7 @@ export default function WhereWeWork() {
                 maxWidth: '100%',
                 margin: '0 auto'
               }}
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
               dangerouslySetInnerHTML={getMarkdownHTML(t('whereWeWork.question'))}
             />
 

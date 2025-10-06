@@ -136,6 +136,7 @@ const HeroSlide = memo<HeroSlideProps>(({
             textAlign: locale === 'ar' ? 'right' : 'left'
           })
         }}
+        dir={locale === 'ar' ? 'rtl' : 'ltr'}
       >
         {t('hero.title')}
       </div>
@@ -234,10 +235,10 @@ const HeroSlide = memo<HeroSlideProps>(({
                   className={`${styles.diamondText} ${isMobile ? styles.mobileDiamondText : styles.desktopDiamondText} flex flex-col items-center justify-center`}
                 >
                   <div className={`flex flex-col items-center justify-center gap-3 ${isMobile ? 'mt-8 sm:mt-0' : ''}`}>
-                    <p className={`mb-0 font-semibold ${isMobile ? 'text-lg' : 'text-3xl'}`}>
+                    <p className={`mb-0 font-semibold ${isMobile ? 'text-lg' : 'text-3xl'}`} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                       {t('hero.slide2Title')}
                     </p>
-                    <p className={`mb-0 ${isMobile ? 'text-sm' : 'text-xl'}`}>
+                    <p className={`mb-0 ${isMobile ? 'text-sm' : 'text-xl'}`} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                       {t('hero.slide2Subtitle')}
                     </p>
                     <div className="flex justify-center">

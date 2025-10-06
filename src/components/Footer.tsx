@@ -43,6 +43,7 @@ interface FooterSection {
     href: string;
     external?: boolean;
   }>;
+  isContact?: boolean;
 }
 
 export default React.memo(function Footer({ className = '' }: FooterProps) {
@@ -64,6 +65,7 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
 
   // Supported languages from Navbar component
   const languages: Language[] = useMemo(() => [
+    { code: 'ar', name: 'Arabic', nativeName: 'العربية', flag: '🇸🇦' },
     { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
     { code: 'fr', name: 'French', nativeName: 'Français', flag: '🇫🇷' },
     { code: 'zh', name: 'Chinese', nativeName: '中文', flag: '🇨🇳' },
@@ -121,6 +123,15 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
     }
   ], [t, locale]);
 
+  // All sections including contact, with RTL reversal
+  const allFooterSections = useMemo(() => {
+    const sections = [
+      ...footerSections.map(section => ({ ...section, isContact: false })),
+      { title: t('footer.sections.contact.title'), isContact: true, links: [] }
+    ];
+    return isRTL ? [...sections].reverse() : sections;
+  }, [footerSections, isRTL, t]);
+
   // Current year for copyright
   const currentYear = new Date().getFullYear();
 
@@ -144,11 +155,11 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
         transition={{ duration: 0.6 }}
       >
 
-        {/* Main Footer Content - Logo/Social Left, Menus Right */}
+        {/* Main Footer Content - Logo/Social Left (LTR) / Right (RTL), Menus Right (LTR) / Left (RTL) */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 mb-12 lg:mb-16">
 
-          {/* Left Column - Brand Section */}
-          <div className="flex flex-col items-center lg:items-start lg:flex-shrink-0 lg:w-80">
+          {/* Brand Section - First in DOM, dir attribute handles visual position */}
+          <div className={`flex flex-col items-center lg:flex-shrink-0 lg:w-80 ${isRTL ? 'lg:items-end' : 'lg:items-start'}`}>
             {/* Logo */}
             <div className="relative mb-6">
               <Link
@@ -170,7 +181,7 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
             </div>
 
             {/* Brand Description */}
-            <div className="text-center lg:text-left mb-6">
+            <div className={`text-center mb-6 ${isRTL ? 'lg:text-right' : 'lg:text-left'}`}>
               <p
                 className="text-[#b2b2b2] text-sm md:text-base leading-relaxed"
                 style={fontStyle}
@@ -180,7 +191,7 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
             </div>
 
             {/* Social Media Links */}
-            <div className="flex gap-4 mb-8">
+            <div className={`flex gap-4 mb-8 ${isRTL ? 'flex-row-reverse' : ''}`}>
               {socialLinks.map((social) => {
                 const brandColor = socialIconBrandColors[social.icon as keyof typeof socialIconBrandColors];
                 return (
@@ -222,89 +233,89 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
             </div>
           </div>
 
-          {/* Right Columns - Navigation Sections */}
-          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+          {/* Navigation Sections - Second in DOM, dir attribute handles visual position */}
+          <div className="flex-1 flex flex-col md:flex-row flex-wrap gap-8 lg:gap-12">
 
-            {/* Contact Information */}
-            <div>
-              <h3
-                className="text-white text-lg font-semibold mb-4"
-                style={fontStyle}
-              >
-                {t('footer.sections.contact.title')}
-              </h3>
-              <div className="space-y-3">
-                <div>
-                  <p className="text-[#b2b2b2] text-sm font-medium mb-1">
-                    {t('footer.sections.contact.address.label')}
-                  </p>
-                  <p className="text-[#B8B8B8] text-sm leading-relaxed">
-                    {t('footer.sections.contact.address.value')}
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-[#b2b2b2] text-sm font-medium mb-1">
-                    {t('footer.sections.contact.email.label')}
-                  </p>
-                  <a
-                    href={`mailto:${t('footer.sections.contact.email.value')}`}
-                    className="text-[#7afdd6] text-sm hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:ring-opacity-50 rounded"
-                  >
-                    {t('footer.sections.contact.email.value')}
-                  </a>
-                </div>
-
-                <div>
-                  <p className="text-[#b2b2b2] text-sm font-medium mb-1">
-                    {t('footer.sections.contact.phone.label')}
-                  </p>
-                  <a
-                    href={`tel:${t('footer.sections.contact.phone.value')}`}
-                    className="text-[#7afdd6] text-sm hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:ring-opacity-50 rounded"
-                  >
-                    {t('footer.sections.contact.phone.value')}
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Dynamic Navigation Sections */}
-            {footerSections.map((section) => (
-              <div key={section.title}>
-                <h3
-                  className="text-white text-lg font-semibold mb-4"
-                  style={fontStyle}
+            {/* All sections with automatic RTL reversal */}
+              {allFooterSections.map((section) => (
+                <div
+                  key={section.title}
+                  className="md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-2rem)]"
                 >
-                  {section.title}
-                </h3>
-                <nav aria-label={section.title}>
-                  <ul className="space-y-2">
-                    {section.links.map((link) => (
-                      <li key={link.name}>
-                        {link.external ? (
-                          <a
-                            href={link.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-[#B8B8B8] text-sm hover:text-[#7afdd6] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:ring-opacity-50 rounded inline-block"
-                          >
-                            {link.name}
-                          </a>
-                        ) : (
-                          <Link
-                            href={link.href}
-                            className="text-[#B8B8B8] text-sm hover:text-[#7afdd6] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:ring-opacity-50 rounded inline-block"
-                          >
-                            {link.name}
-                          </Link>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              </div>
-            ))}
+                  <h3
+                    className={`text-white text-lg font-semibold mb-4 ${isRTL ? 'text-right' : 'text-left'}`}
+                    style={fontStyle}
+                  >
+                    {section.title}
+                  </h3>
+
+                  {section.isContact ? (
+                    /* Contact Information Content */
+                    <div className={`space-y-3 ${isRTL ? 'text-right' : 'text-left'}`}>
+                      <div>
+                        <p className="text-[#b2b2b2] text-sm font-medium mb-1">
+                          {t('footer.sections.contact.address.label')}
+                        </p>
+                        <p className="text-[#B8B8B8] text-sm leading-relaxed">
+                          {t('footer.sections.contact.address.value')}
+                        </p>
+                      </div>
+
+                      <div>
+                        <p className="text-[#b2b2b2] text-sm font-medium mb-1">
+                          {t('footer.sections.contact.email.label')}
+                        </p>
+                        <a
+                          href={`mailto:${t('footer.sections.contact.email.value')}`}
+                          className="text-[#7afdd6] text-sm hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:ring-opacity-50 rounded"
+                        >
+                          {t('footer.sections.contact.email.value')}
+                        </a>
+                      </div>
+
+                      <div>
+                        <p className="text-[#b2b2b2] text-sm font-medium mb-1">
+                          {t('footer.sections.contact.phone.label')}
+                        </p>
+                        <a
+                          href={`tel:${t('footer.sections.contact.phone.value')}`}
+                          className="text-[#7afdd6] text-sm hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:ring-opacity-50 rounded"
+                          dir="ltr"
+                        >
+                          {t('footer.sections.contact.phone.value')}
+                        </a>
+                      </div>
+                    </div>
+                  ) : (
+                    /* Navigation Links Content */
+                    <nav aria-label={section.title}>
+                      <ul className={`space-y-2 ${isRTL ? 'text-right' : 'text-left'}`}>
+                        {section.links.map((link) => (
+                          <li key={link.name}>
+                            {link.external ? (
+                              <a
+                                href={link.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[#B8B8B8] text-sm hover:text-[#7afdd6] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:ring-opacity-50 rounded inline-block"
+                              >
+                                {link.name}
+                              </a>
+                            ) : (
+                              <Link
+                                href={link.href}
+                                className="text-[#B8B8B8] text-sm hover:text-[#7afdd6] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:ring-opacity-50 rounded inline-block"
+                              >
+                                {link.name}
+                              </Link>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    </nav>
+                  )}
+                </div>
+              ))}
 
           </div>
         </div>
@@ -312,12 +323,12 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
         {/* Language Selector */}
         <div className="mb-8 lg:mb-12">
           <h3
-            className="text-white text-lg font-semibold mb-4 text-center lg:text-left"
+            className={`text-white text-lg font-semibold mb-4 text-center ${isRTL ? 'lg:text-right' : 'lg:text-left'}`}
             style={fontStyle}
           >
             {t('footer.language.title')}
           </h3>
-          <div className="flex flex-wrap justify-center lg:justify-start gap-3">
+          <div className={`flex flex-wrap justify-center gap-3 ${isRTL ? 'lg:justify-end flex-row-reverse' : 'lg:justify-start'}`}>
             {languages.map((language) => (
               <Link
                 key={language.code}
