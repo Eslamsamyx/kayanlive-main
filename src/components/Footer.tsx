@@ -82,19 +82,19 @@ export default React.memo(function Footer({ className = '' }: FooterProps) {
     },
     {
       name: 'X',
-      href: 'https://x.com/kayanlive',
+      href: '#',
       icon: 'x',
       ariaLabel: t('footer.social.twitterAria')
     },
     {
       name: 'Instagram',
-      href: 'https://instagram.com/kayanlive',
+      href: '#',
       icon: 'instagram',
       ariaLabel: t('footer.social.instagramAria')
     },
     {
       name: 'Facebook',
-      href: 'https://facebook.com/kayanlive',
+      href: '#',
       icon: 'facebook',
       ariaLabel: t('footer.social.facebookAria')
     }
