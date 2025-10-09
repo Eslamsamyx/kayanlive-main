@@ -747,6 +747,7 @@ function UserItem({ user, isSelected, isChecked, onSelect, onCheck, onUserUpdate
     ADMIN: 'from-red-400 to-red-600',
     MODERATOR: 'from-blue-400 to-blue-600',
     CONTENT_CREATOR: 'from-green-400 to-green-600',
+    CLIENT: 'from-purple-400 to-purple-600',
   };
 
   const roleOptions: DropdownOption[] = [
