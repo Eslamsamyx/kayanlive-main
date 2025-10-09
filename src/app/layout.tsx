@@ -82,7 +82,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={poppins.variable}>
-      <GoogleTagManager gtmId="GTM-P9X25HCJ" />
       <head>
         <meta name="description" content="Leading event management company in Dubai and across the GCC. Delivering creativity, innovation, and execution for live events, exhibitions, conferences, and immersive experiences." />
 
@@ -115,6 +114,7 @@ export default function RootLayout({
             {children}
           </TRPCReactProvider>
         </Providers>
+        <GoogleTagManager gtmId="GTM-P9X25HCJ" />
       </body>
     </html>
   );

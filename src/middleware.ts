@@ -20,12 +20,11 @@ const authMiddleware = withAuth(
 
     // Allow public routes
     if (pathname.startsWith('/api/auth') ||
-        pathname.includes('/api/trpc/lead.create') ||
-        !pathname.includes('/admin')) {
+        pathname.includes('/api/trpc/lead.create')) {
       return intlMiddleware(req);
     }
 
-    // Require authentication for admin routes
+    // Require authentication for dashboard and admin routes
     if (!token) {
       const url = new URL('/en/login', req.url);
       url.searchParams.set('callbackUrl', pathname);
@@ -33,6 +32,11 @@ const authMiddleware = withAuth(
     }
 
     const userRole = token.role as string;
+
+    // Allow all authenticated users to access their dashboard routes
+    if (pathname.match(/\/[a-z]{2}\/dashboard/) && !pathname.includes('/admin')) {
+      return intlMiddleware(req);
+    }
 
     // Admin can access everything
     if (userRole === 'ADMIN') {
@@ -58,17 +62,24 @@ const authMiddleware = withAuth(
       return NextResponse.next();
     }
 
+    // CLIENT role - redirect to client dashboard
+    if (userRole === 'CLIENT') {
+      // Clients should not access admin routes
+      return NextResponse.redirect(new URL('/en/dashboard', req.url));
+    }
+
     // Default: redirect to dashboard if role is not recognized
-    return NextResponse.redirect(new URL('/admin/dashboard', req.url));
+    return NextResponse.redirect(new URL('/en/dashboard', req.url));
   },
   {
     callbacks: {
       authorized: ({ token, req }) => {
-        // Allow access to public routes
-        if (!req.nextUrl.pathname.includes('/admin')) {
+        const pathname = req.nextUrl.pathname;
+        // Allow access to public routes (not admin or dashboard)
+        if (!pathname.includes('/admin') && !pathname.match(/\/[a-z]{2}\/dashboard/)) {
           return true;
         }
-        // Require token for admin routes
+        // Require token for admin and dashboard routes
         return !!token;
       },
     },
@@ -83,8 +94,8 @@ export default function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/en', request.url));
   }
 
-  // Apply auth middleware for admin routes
-  if (pathname.includes('/admin')) {
+  // Apply auth middleware for admin routes and protected dashboard routes
+  if (pathname.includes('/admin') || pathname.match(/\/[a-z]{2}\/dashboard/)) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (authMiddleware as any)(request);
   }

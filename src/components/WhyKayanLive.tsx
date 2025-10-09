@@ -7,7 +7,7 @@ import { getMarkdownHTML } from '@/utils/markdownUtils';
 import AnimatedPath from './AnimatedPath';
 
 const imgPattern = "/optimized/whykayan-assets/1349ad630f81a3bb2a509dd8abfe0e4ef85fa329.webp";
-const kayanLogo = "/optimized/whykayan-assets/a01d943cb7ebcf5598b83131f56810cf97a4e883.webp";
+const kayanLogo = "/Kayan_Live_Logo.webp";
 
 export default function WhyKayanLive() {
   const t = useTranslations();

@@ -1,0 +1,29 @@
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "welcome": "Bienvenue",
+    "myBriefs": "Mes Briefs",
+    "submittedBriefs": "Briefs Soumis",
+    "noBriefs": "Aucun brief soumis",
+    "noBriefsDescription": "Vous n'avez pas encore soumis de brief de projet. Cliquez sur le bouton ci-dessous pour créer votre premier brief.",
+    "createBrief": "Créer un Nouveau Brief",
+    "viewBrief": "Voir le Brief",
+    "status": {
+      "pending": "En Attente de Révision",
+      "inReview": "En Cours d'Examen",
+      "approved": "Approuvé",
+      "rejected": "Rejeté",
+      "completed": "Terminé"
+    },
+    "submittedOn": "Soumis le",
+    "company": "Entreprise",
+    "industry": "Industrie",
+    "loading": "Chargement...",
+    "error": "Erreur lors du chargement des briefs",
+    "admin": {
+      "allBriefs": "Tous les Briefs Clients",
+      "clients": "Clients",
+      "statistics": "Statistiques"
+    }
+  }
+}

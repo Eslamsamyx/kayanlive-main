@@ -701,5 +701,76 @@
     "title": "KayanLive - Premier Event Management in Saudi Arabia, UAE & GCC",
     "description": "Leading event management company in Dubai and across the GCC. Delivering creativity, innovation, and execution for live events, exhibitions, conferences, and immersive experiences.",
     "keywords": "event management Dubai, event planning UAE, KayanLive, GCC events, Saudi Arabia events, live events, exhibitions, conferences, event company"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome",
+    "myBriefs": "My Briefs",
+    "submittedBriefs": "Submitted Briefs",
+    "noBriefs": "No briefs submitted yet",
+    "noBriefsDescription": "You haven't submitted any project briefs yet. Click the button below to create your first brief.",
+    "createBrief": "Create New Brief",
+    "viewBrief": "View Brief",
+    "status": {
+      "pending": "Pending Review",
+      "inReview": "In Review",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "completed": "Completed"
+    },
+    "submittedOn": "Submitted on",
+    "company": "Company",
+    "industry": "Industry",
+    "loading": "Loading...",
+    "error": "Error loading briefs",
+    "admin": {
+      "allBriefs": "All Client Briefs",
+      "clients": "Clients",
+      "statistics": "Statistics"
+    }
+  },
+  "cookies": {
+    "banner": {
+      "title": "We Value Your Privacy",
+      "description": "We use cookies to enhance your experience, analyze site traffic, and personalize content. You can choose which cookies to accept.",
+      "acceptAll": "Accept All",
+      "rejectAll": "Reject All",
+      "customize": "Customize Preferences",
+      "learnMore": "Learn More"
+    },
+    "preferences": {
+      "title": "Cookie Preferences",
+      "description": "Manage your cookie preferences below. You can enable or disable different types of cookies based on your preferences.",
+      "savePreferences": "Save Preferences",
+      "acceptAll": "Accept All",
+      "rejectAll": "Reject All",
+      "close": "Close"
+    },
+    "categories": {
+      "necessary": {
+        "title": "Necessary Cookies",
+        "description": "Essential for the website to function properly. These cookies enable core functionality such as security, authentication, and accessibility. They cannot be disabled.",
+        "alwaysActive": "Always Active"
+      },
+      "functional": {
+        "title": "Functional Cookies",
+        "description": "Help us remember your preferences and settings, such as language selection and region preferences, to provide a more personalized experience."
+      },
+      "analytics": {
+        "title": "Analytics Cookies",
+        "description": "Help us understand how visitors interact with our website by collecting and reporting information anonymously. This helps us improve our services."
+      },
+      "marketing": {
+        "title": "Marketing Cookies",
+        "description": "Used to track visitors across websites to display relevant advertisements and measure campaign effectiveness. These cookies help us show you content that may interest you."
+      }
+    },
+    "legal": {
+      "gdprCompliance": "This website complies with GDPR and PDPL regulations.",
+      "privacyPolicy": "Privacy Policy",
+      "cookiePolicy": "Cookie Policy",
+      "dataProtection": "Learn more about how we protect your data",
+      "yourRights": "You have the right to access, correct, or delete your personal data at any time."
+    }
   }
 }

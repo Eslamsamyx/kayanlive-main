@@ -638,5 +638,76 @@
     "title": "KayanLive - 沙特阿拉伯、阿联酋和海湾地区顶级活动管理",
     "description": "迪拜和整个海湾合作委员会地区领先的活动管理公司。为现场活动、展览、会议和沉浸式体验提供创意、创新和执行。",
     "keywords": "迪拜活动管理，阿联酋活动策划，KayanLive，海湾活动，沙特阿拉伯活动，现场活动，展览，会议，活动公司"
+  },
+  "dashboard": {
+    "title": "仪表板",
+    "welcome": "欢迎",
+    "myBriefs": "我的简报",
+    "submittedBriefs": "已提交的简报",
+    "noBriefs": "尚未提交简报",
+    "noBriefsDescription": "您尚未提交任何项目简报。点击下面的按钮创建您的第一个简报。",
+    "createBrief": "创建新简报",
+    "viewBrief": "查看简报",
+    "status": {
+      "pending": "待审核",
+      "inReview": "审核中",
+      "approved": "已批准",
+      "rejected": "已拒绝",
+      "completed": "已完成"
+    },
+    "submittedOn": "提交于",
+    "company": "公司",
+    "industry": "行业",
+    "loading": "加载中...",
+    "error": "加载简报时出错",
+    "admin": {
+      "allBriefs": "所有客户简报",
+      "clients": "客户",
+      "statistics": "统计"
+    }
+  },
+  "cookies": {
+    "banner": {
+      "title": "我们重视您的隐私",
+      "description": "我们使用Cookie来增强您的体验、分析网站流量并个性化内容。您可以选择接受哪些Cookie。",
+      "acceptAll": "全部接受",
+      "rejectAll": "全部拒绝",
+      "customize": "自定义偏好",
+      "learnMore": "了解更多"
+    },
+    "preferences": {
+      "title": "Cookie偏好设置",
+      "description": "在下方管理您的Cookie偏好。您可以根据您的偏好启用或禁用不同类型的Cookie。",
+      "savePreferences": "保存偏好",
+      "acceptAll": "全部接受",
+      "rejectAll": "全部拒绝",
+      "close": "关闭"
+    },
+    "categories": {
+      "necessary": {
+        "title": "必要Cookie",
+        "description": "网站正常运行所必需的。这些Cookie启用核心功能，如安全性、身份验证和可访问性。无法禁用。",
+        "alwaysActive": "始终启用"
+      },
+      "functional": {
+        "title": "功能性Cookie",
+        "description": "帮助我们记住您的偏好和设置，例如语言选择和区域偏好，以提供更个性化的体验。"
+      },
+      "analytics": {
+        "title": "分析Cookie",
+        "description": "通过匿名收集和报告信息，帮助我们了解访问者如何与我们的网站互动。这有助于我们改进服务。"
+      },
+      "marketing": {
+        "title": "营销Cookie",
+        "description": "用于跨网站跟踪访问者，以显示相关广告并衡量营销活动的效果。这些Cookie帮助我们向您展示可能感兴趣的内容。"
+      }
+    },
+    "legal": {
+      "gdprCompliance": "本网站符合GDPR和PDPL法规。",
+      "privacyPolicy": "隐私政策",
+      "cookiePolicy": "Cookie政策",
+      "dataProtection": "了解更多关于我们如何保护您的数据",
+      "yourRights": "您有权随时访问、更正或删除您的个人数据。"
+    }
   }
 }

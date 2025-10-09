@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import CookieConsentManager from '@/components/CookieConsentManager';
 
 export async function generateMetadata({
   params,
@@ -63,6 +64,7 @@ export default async function LocaleLayout({
           </div>
         </main>
         <Footer />
+        <CookieConsentManager />
       </div>
     </NextIntlClientProvider>
   );

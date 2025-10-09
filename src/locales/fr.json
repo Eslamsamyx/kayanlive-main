@@ -638,5 +638,76 @@
     "title": "KayanLive - Gestion d'Événements Premium en Arabie Saoudite, EAU et CCG",
     "description": "Société leader en gestion d'événements à Dubaï et dans tout le CCG. Nous offrons créativité, innovation et exécution pour événements en direct, expositions, conférences et expériences immersives.",
     "keywords": "gestion événements Dubaï, planification événements EAU, KayanLive, événements CCG, événements Arabie Saoudite, événements en direct, expositions, conférences, société événements"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "welcome": "Bienvenue",
+    "myBriefs": "Mes Briefs",
+    "submittedBriefs": "Briefs Soumis",
+    "noBriefs": "Aucun brief soumis",
+    "noBriefsDescription": "Vous n'avez pas encore soumis de brief de projet. Cliquez sur le bouton ci-dessous pour créer votre premier brief.",
+    "createBrief": "Créer un Nouveau Brief",
+    "viewBrief": "Voir le Brief",
+    "status": {
+      "pending": "En Attente de Révision",
+      "inReview": "En Cours d'Examen",
+      "approved": "Approuvé",
+      "rejected": "Rejeté",
+      "completed": "Terminé"
+    },
+    "submittedOn": "Soumis le",
+    "company": "Entreprise",
+    "industry": "Industrie",
+    "loading": "Chargement...",
+    "error": "Erreur lors du chargement des briefs",
+    "admin": {
+      "allBriefs": "Tous les Briefs Clients",
+      "clients": "Clients",
+      "statistics": "Statistiques"
+    }
+  },
+  "cookies": {
+    "banner": {
+      "title": "Nous Respectons Votre Vie Privée",
+      "description": "Nous utilisons des cookies pour améliorer votre expérience, analyser le trafic du site et personnaliser le contenu. Vous pouvez choisir les cookies que vous souhaitez accepter.",
+      "acceptAll": "Tout Accepter",
+      "rejectAll": "Tout Refuser",
+      "customize": "Personnaliser les Préférences",
+      "learnMore": "En Savoir Plus"
+    },
+    "preferences": {
+      "title": "Préférences des Cookies",
+      "description": "Gérez vos préférences de cookies ci-dessous. Vous pouvez activer ou désactiver différents types de cookies selon vos préférences.",
+      "savePreferences": "Enregistrer les Préférences",
+      "acceptAll": "Tout Accepter",
+      "rejectAll": "Tout Refuser",
+      "close": "Fermer"
+    },
+    "categories": {
+      "necessary": {
+        "title": "Cookies Nécessaires",
+        "description": "Essentiels au bon fonctionnement du site. Ces cookies activent des fonctionnalités de base telles que la sécurité, l'authentification et l'accessibilité. Ils ne peuvent pas être désactivés.",
+        "alwaysActive": "Toujours Actif"
+      },
+      "functional": {
+        "title": "Cookies Fonctionnels",
+        "description": "Nous aident à mémoriser vos préférences et paramètres, tels que la sélection de langue et les préférences régionales, pour offrir une expérience plus personnalisée."
+      },
+      "analytics": {
+        "title": "Cookies Analytiques",
+        "description": "Nous aident à comprendre comment les visiteurs interagissent avec notre site en collectant et en rapportant des informations de manière anonyme. Cela nous aide à améliorer nos services."
+      },
+      "marketing": {
+        "title": "Cookies Marketing",
+        "description": "Utilisés pour suivre les visiteurs sur les sites web afin d'afficher des publicités pertinentes et de mesurer l'efficacité des campagnes. Ces cookies nous aident à vous montrer du contenu susceptible de vous intéresser."
+      }
+    },
+    "legal": {
+      "gdprCompliance": "Ce site est conforme aux règlements RGPD et PDPL.",
+      "privacyPolicy": "Politique de Confidentialité",
+      "cookiePolicy": "Politique des Cookies",
+      "dataProtection": "En savoir plus sur la protection de vos données",
+      "yourRights": "Vous avez le droit d'accéder, de corriger ou de supprimer vos données personnelles à tout moment."
+    }
   }
 }

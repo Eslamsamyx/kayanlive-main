@@ -92,7 +92,8 @@ export default function AdminLogin() {
       } else {
         const session = await getSession();
         if (session?.user) {
-          router.push('/admin/dashboard');
+          // Redirect to unified dashboard which will route based on role
+          router.push('/en/dashboard');
         }
       }
     } catch {
@@ -190,18 +191,21 @@ export default function AdminLogin() {
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           className="text-center mb-8"
         >
-          <h1
-            className="text-6xl md:text-8xl font-normal mb-4 capitalize"
-            style={{
-              background: 'linear-gradient(90deg, #b8a4ff 0%, #7afdd6 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              fontFamily: '"Poppins", sans-serif'
-            }}
-          >
-            Admin
-          </h1>
+          <div className="flex justify-center items-center mb-4">
+            <h1
+              className="text-6xl md:text-8xl font-normal capitalize"
+              style={{
+                fontFamily: '"Poppins", sans-serif',
+                background: 'linear-gradient(90deg, #b8a4ff 0%, #7afdd6 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                display: 'inline-block'
+              }}
+            >
+              Kayanlive
+            </h1>
+          </div>
           <p className="text-white/80 text-lg">
             Portal Access
           </p>
@@ -340,7 +344,7 @@ export default function AdminLogin() {
             className="mt-8 text-center"
           >
             <p className="text-white/60 text-sm">
-              Secure admin access only
+              Secured access
             </p>
           </motion.div>
         </div>

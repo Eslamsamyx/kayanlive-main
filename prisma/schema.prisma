@@ -14,34 +14,38 @@ enum UserRole {
   ADMIN
   MODERATOR
   CONTENT_CREATOR
+  CLIENT
 }
 
 model User {
-  id            String    @id @default(cuid())
-  email         String    @unique
-  name          String?
-  password      String?
-  role          UserRole  @default(CONTENT_CREATOR)
-  emailVerified DateTime?
-  image         String?
-  isActive      Boolean   @default(true)
-  lastLogin     DateTime?
-  accounts      Account[]
-  sessions      Session[]
-  posts         Post[]
-  auditLogs     AuditLog[]
+  id              String     @id @default(cuid())
+  email           String     @unique
+  name            String?
+  password        String?
+  role            UserRole   @default(CONTENT_CREATOR)
+  emailVerified   DateTime?
+  image           String?
+  isActive        Boolean    @default(true)
+  lastLogin       DateTime?
+  accounts        Account[]
+  sessions        Session[]
+  posts           Post[]
+  auditLogs       AuditLog[]
   performedAudits AuditLog[] @relation("PerformedBy")
 
   // CMS Relations
-  articles      Article[]
-  articleRevisions ArticleRevision[]
-  articleComments ArticleComment[]
-  createdCategories Category[] @relation("CategoryCreator")
-  createdTags   Tag[] @relation("TagCreator")
-  uploadedFiles MediaFile[]
+  articles          Article[]
+  articleRevisions  ArticleRevision[]
+  articleComments   ArticleComment[]
+  createdCategories Category[]        @relation("CategoryCreator")
+  createdTags       Tag[]             @relation("TagCreator")
+  uploadedFiles     MediaFile[]
 
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  // Questionnaire Relations
+  questionnaireSubmissions QuestionnaireSubmission[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Account {
@@ -163,8 +167,8 @@ model AuditLog {
   userAgent   String?
   createdAt   DateTime    @default(now())
 
-  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  performer   User        @relation("PerformedBy", fields: [performedBy], references: [id])
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  performer User @relation("PerformedBy", fields: [performedBy], references: [id])
 
   @@map("audit_logs")
 }
@@ -198,74 +202,74 @@ enum PublishScheduleType {
 }
 
 model Article {
-  id                String    @id @default(cuid())
+  id String @id @default(cuid())
 
   // Basic Information
-  title             String
-  slug              String    @unique
-  excerpt           String?   @db.Text
-  content           String    @db.Text
+  title   String
+  slug    String  @unique
+  excerpt String? @db.Text
+  content String  @db.Text
 
   // Multi-language Support
-  locale            String    @default("en")
-  translations      ArticleTranslation[]
+  locale       String               @default("en")
+  translations ArticleTranslation[]
 
   // Status & Workflow
-  status            ArticleStatus @default(DRAFT)
-  type              ArticleType   @default(BLOG_POST)
+  status ArticleStatus @default(DRAFT)
+  type   ArticleType   @default(BLOG_POST)
 
   // Publishing
   publishScheduleType PublishScheduleType @default(MANUAL)
-  publishedAt       DateTime?
-  scheduledAt       DateTime?
+  publishedAt         DateTime?
+  scheduledAt         DateTime?
 
   // SEO & Metadata
-  metaTitle         String?
-  metaDescription   String?   @db.Text
-  metaKeywords      String?
-  ogTitle           String?
-  ogDescription     String?   @db.Text
-  ogImage           String?
-  twitterTitle      String?
-  twitterDescription String?  @db.Text
-  twitterImage      String?
-  canonicalUrl      String?
+  metaTitle          String?
+  metaDescription    String? @db.Text
+  metaKeywords       String?
+  ogTitle            String?
+  ogDescription      String? @db.Text
+  ogImage            String?
+  twitterTitle       String?
+  twitterDescription String? @db.Text
+  twitterImage       String?
+  canonicalUrl       String?
 
   // Content Settings
-  allowComments     Boolean   @default(true)
-  isFeatured        Boolean   @default(false)
-  isPinned          Boolean   @default(false)
-  readingTime       Int?      // in minutes
+  allowComments Boolean @default(true)
+  isFeatured    Boolean @default(false)
+  isPinned      Boolean @default(false)
+  readingTime   Int? // in minutes
 
   // Relationships
-  authorId          String
-  author            User      @relation(fields: [authorId], references: [id])
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
 
-  categoryId        String?
-  category          Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?
+  category   Category? @relation(fields: [categoryId], references: [id])
 
-  tags              ArticleTag[]
-  revisions         ArticleRevision[]
-  comments          ArticleComment[]
-  analytics         ArticleAnalytics[]
+  tags      ArticleTag[]
+  revisions ArticleRevision[]
+  comments  ArticleComment[]
+  analytics ArticleAnalytics[]
 
   // Images & Media
-  featuredImage     String?
-  featuredImageAlt  String?
-  gallery           String[]  // Array of image URLs
+  featuredImage    String?
+  featuredImageAlt String?
+  gallery          String[] // Array of image URLs
 
   // Advanced Features
-  template          String?   // Custom template for rendering
-  customCss         String?   @db.Text
-  customJs          String?   @db.Text
-  structuredData    Json?     // Schema.org JSON-LD
+  template       String? // Custom template for rendering
+  customCss      String? @db.Text
+  customJs       String? @db.Text
+  structuredData Json? // Schema.org JSON-LD
 
   // Tracking
-  viewCount         Int       @default(0)
-  shareCount        Int       @default(0)
+  viewCount  Int @default(0)
+  shareCount Int @default(0)
 
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([status, publishedAt])
   @@index([locale, status])
@@ -286,10 +290,10 @@ model ArticleTranslation {
   metaTitle       String?
   metaDescription String? @db.Text
 
-  article         Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
 
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([articleId, locale])
   @@unique([locale, slug])
@@ -297,19 +301,19 @@ model ArticleTranslation {
 }
 
 model ArticleRevision {
-  id            String   @id @default(cuid())
-  articleId     String
-  version       Int
-  title         String
-  content       String   @db.Text
-  excerpt       String?  @db.Text
-  changeLog     String?  @db.Text
+  id        String  @id @default(cuid())
+  articleId String
+  version   Int
+  title     String
+  content   String  @db.Text
+  excerpt   String? @db.Text
+  changeLog String? @db.Text
 
-  createdById   String
-  createdBy     User     @relation(fields: [createdById], references: [id])
-  article       Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  createdById String
+  createdBy   User    @relation(fields: [createdById], references: [id])
+  article     Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
 
-  createdAt     DateTime @default(now())
+  createdAt DateTime @default(now())
 
   @@unique([articleId, version])
   @@index([articleId, createdAt])
@@ -317,39 +321,39 @@ model ArticleRevision {
 }
 
 model Category {
-  id            String    @id @default(cuid())
-  name          String
-  slug          String    @unique
-  description   String?   @db.Text
-  image         String?
-  color         String?   // Hex color for UI
+  id          String  @id @default(cuid())
+  name        String
+  slug        String  @unique
+  description String? @db.Text
+  image       String?
+  color       String? // Hex color for UI
 
   // Hierarchy
-  parentId      String?
-  parent        Category? @relation("CategoryHierarchy", fields: [parentId], references: [id])
-  children      Category[] @relation("CategoryHierarchy")
+  parentId String?
+  parent   Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children Category[] @relation("CategoryHierarchy")
 
   // SEO
-  metaTitle     String?
+  metaTitle       String?
   metaDescription String? @db.Text
 
   // Multi-language
-  locale        String    @default("en")
-  translations  CategoryTranslation[]
+  locale       String                @default("en")
+  translations CategoryTranslation[]
 
   // Settings
-  isActive      Boolean   @default(true)
-  sortOrder     Int       @default(0)
+  isActive  Boolean @default(true)
+  sortOrder Int     @default(0)
 
   // Relationships
-  articles      Article[]
+  articles Article[]
 
   // Tracking
-  createdById   String
-  createdBy     User      @relation("CategoryCreator", fields: [createdById], references: [id])
+  createdById String
+  createdBy   User   @relation("CategoryCreator", fields: [createdById], references: [id])
 
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([isActive, sortOrder])
   @@index([parentId])
@@ -357,17 +361,17 @@ model Category {
 }
 
 model CategoryTranslation {
-  id           String   @id @default(cuid())
-  categoryId   String
-  locale       String
-  name         String
-  slug         String
-  description  String?  @db.Text
+  id          String  @id @default(cuid())
+  categoryId  String
+  locale      String
+  name        String
+  slug        String
+  description String? @db.Text
 
-  category     Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([categoryId, locale])
   @@unique([locale, slug])
@@ -375,46 +379,46 @@ model CategoryTranslation {
 }
 
 model Tag {
-  id           String   @id @default(cuid())
-  name         String
-  slug         String   @unique
-  description  String?  @db.Text
-  color        String?  // Hex color for UI
+  id          String  @id @default(cuid())
+  name        String
+  slug        String  @unique
+  description String? @db.Text
+  color       String? // Hex color for UI
 
   // Multi-language
-  locale       String   @default("en")
+  locale       String           @default("en")
   translations TagTranslation[]
 
   // Settings
-  isActive     Boolean  @default(true)
+  isActive Boolean @default(true)
 
   // Relationships
-  articles     ArticleTag[]
+  articles ArticleTag[]
 
   // Tracking
-  usageCount   Int      @default(0)
-  createdById  String
-  createdBy    User     @relation("TagCreator", fields: [createdById], references: [id])
+  usageCount  Int    @default(0)
+  createdById String
+  createdBy   User   @relation("TagCreator", fields: [createdById], references: [id])
 
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([isActive, usageCount])
   @@map("tags")
 }
 
 model TagTranslation {
-  id          String @id @default(cuid())
+  id          String  @id @default(cuid())
   tagId       String
   locale      String
   name        String
   slug        String
   description String? @db.Text
 
-  tag         Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  tag Tag @relation(fields: [tagId], references: [id], onDelete: Cascade)
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([tagId, locale])
   @@unique([locale, slug])
@@ -422,12 +426,12 @@ model TagTranslation {
 }
 
 model ArticleTag {
-  id        String  @id @default(cuid())
+  id        String @id @default(cuid())
   articleId String
   tagId     String
 
-  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
-  tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  tag     Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
 
@@ -436,33 +440,33 @@ model ArticleTag {
 }
 
 model ArticleComment {
-  id          String   @id @default(cuid())
-  content     String   @db.Text
-  isApproved  Boolean  @default(false)
+  id         String  @id @default(cuid())
+  content    String  @db.Text
+  isApproved Boolean @default(false)
 
   // Hierarchy for replies
-  parentId    String?
-  parent      ArticleComment? @relation("CommentReplies", fields: [parentId], references: [id])
-  replies     ArticleComment[] @relation("CommentReplies")
+  parentId String?
+  parent   ArticleComment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies  ArticleComment[] @relation("CommentReplies")
 
   // Relationships
-  articleId   String
-  article     Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  articleId String
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
 
-  authorId    String?
-  author      User?    @relation(fields: [authorId], references: [id])
+  authorId String?
+  author   User?   @relation(fields: [authorId], references: [id])
 
   // Guest comment fields
-  guestName   String?
-  guestEmail  String?
+  guestName    String?
+  guestEmail   String?
   guestWebsite String?
 
   // Tracking
-  ipAddress   String?
-  userAgent   String?
+  ipAddress String?
+  userAgent String?
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([articleId, isApproved])
   @@index([parentId])
@@ -470,28 +474,28 @@ model ArticleComment {
 }
 
 model ArticleAnalytics {
-  id            String   @id @default(cuid())
-  articleId     String
-  date          DateTime @db.Date
+  id        String   @id @default(cuid())
+  articleId String
+  date      DateTime @db.Date
 
   // Metrics
-  views         Int      @default(0)
-  uniqueViews   Int      @default(0)
-  shares        Int      @default(0)
-  comments      Int      @default(0)
-  timeOnPage    Int      @default(0) // in seconds
-  bounceRate    Float    @default(0)
+  views       Int   @default(0)
+  uniqueViews Int   @default(0)
+  shares      Int   @default(0)
+  comments    Int   @default(0)
+  timeOnPage  Int   @default(0) // in seconds
+  bounceRate  Float @default(0)
 
   // Traffic Sources
-  organicViews  Int      @default(0)
-  socialViews   Int      @default(0)
-  referralViews Int      @default(0)
-  directViews   Int      @default(0)
+  organicViews  Int @default(0)
+  socialViews   Int @default(0)
+  referralViews Int @default(0)
+  directViews   Int @default(0)
 
-  article       Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([articleId, date])
   @@index([date])
@@ -499,38 +503,106 @@ model ArticleAnalytics {
 }
 
 model MediaFile {
-  id           String   @id @default(cuid())
+  id           String @id @default(cuid())
   filename     String
   originalName String
   mimeType     String
-  size         Int      // in bytes
+  size         Int // in bytes
   url          String
 
   // Image specific
-  width        Int?
-  height       Int?
-  altText      String?
+  width   Int?
+  height  Int?
+  altText String?
 
   // File organization
-  folder       String?
-  tags         String[] // Array of tags for organization
+  folder String?
+  tags   String[] // Array of tags for organization
 
   // SEO
-  title        String?
-  description  String?  @db.Text
+  title       String?
+  description String? @db.Text
 
   // Usage tracking
-  usageCount   Int      @default(0)
+  usageCount Int @default(0)
 
   // Upload info
   uploadedById String
-  uploadedBy   User     @relation(fields: [uploadedById], references: [id])
+  uploadedBy   User   @relation(fields: [uploadedById], references: [id])
 
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([mimeType])
   @@index([uploadedById])
   @@map("media_files")
 }
 
+// =============================================================================
+// QUESTIONNAIRE MODELS
+// =============================================================================
+
+model QuestionnaireSubmission {
+  id              String @id @default(cuid())
+  questionnaireId String // e.g., "project-brief"
+
+  // User relationship - links submission to authenticated client
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  submittedAt DateTime? // When fully submitted
+  isComplete  Boolean   @default(false)
+
+  // Denormalized company/client information for quick access
+  companyName   String?
+  contactPerson String?
+  email         String?
+  industry      String?
+
+  answers       SubmissionAnswer[]
+  uploadedFiles UploadedFile[]
+
+  @@index([userId, isComplete])
+  @@index([questionnaireId])
+  @@index([createdAt])
+  @@map("questionnaire_submissions")
+}
+
+model SubmissionAnswer {
+  id           String @id @default(cuid())
+  submissionId String
+  questionId   Int
+  questionType String // text, select, checkbox, etc.
+  section      String // Client Details, Event Details, etc.
+
+  // Store answers in different formats to handle various question types
+  textValue String? @db.Text
+  jsonValue Json? // For complex answers like multi-field, matrix, checkbox arrays
+
+  submission QuestionnaireSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+
+  @@unique([submissionId, questionId])
+  @@index([questionId])
+  @@index([section])
+  @@map("submission_answers")
+}
+
+model UploadedFile {
+  id           String   @id @default(cuid())
+  submissionId String
+  questionId   Int
+  fileName     String
+  originalName String
+  fileSize     Int
+  mimeType     String
+  filePath     String // Local file path or cloud storage URL
+  uploadedAt   DateTime @default(now())
+
+  submission QuestionnaireSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+
+  @@index([submissionId])
+  @@index([questionId])
+  @@map("uploaded_files")
+}
