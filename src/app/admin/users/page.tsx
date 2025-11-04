@@ -6,6 +6,7 @@ import { UserRole, User } from '@prisma/client';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 import { Search, Filter, Eye, Edit3, Calendar, Mail, Shield, Clock, UserCheck, UserX, Users as UsersIcon, Plus, Key, History, MoreVertical, Trash2, X, Check, AlertTriangle, Loader2 } from 'lucide-react';
+import { UserCompanies } from './UserCompanies';
 import Dropdown, { DropdownOption } from '@/components/ui/Dropdown';
 import { useSession } from 'next-auth/react';
 
@@ -266,6 +267,19 @@ export default function UsersPage() {
     { value: 'ADMIN', label: 'Admin' },
     { value: 'MODERATOR', label: 'Moderator' },
     { value: 'CONTENT_CREATOR', label: 'Content Creator' },
+    { value: 'TRANSLATOR', label: 'Translator' },
+    { value: 'CLIENT', label: 'Client' },
+    { value: 'ART_DIRECTOR', label: 'Art Director' },
+    { value: 'DESIGNER', label: 'Designer' },
+    { value: 'VIDEO_EDITOR', label: 'Video Editor' },
+    { value: 'DESIGNER_3D', label: '3D Designer' },
+    { value: 'DESIGNER_2D', label: '2D Designer' },
+    { value: 'VFX_CGI', label: 'VFX/CGI' },
+    { value: 'MOTION_GRAPHICS', label: 'Motion Graphics' },
+    { value: 'WEB_DEVELOPER', label: 'Web Developer' },
+    { value: 'UI_UX_DESIGNER', label: 'UI/UX Designer' },
+    { value: 'ANIMATOR', label: 'Animator' },
+    { value: 'PROJECT_MANAGER', label: 'Project Manager' },
   ];
 
   const statusOptions: DropdownOption[] = [
@@ -320,25 +334,25 @@ export default function UsersPage() {
             title="Total Users"
             value={userAnalytics.totalUsers}
             icon={<UsersIcon size={24} />}
-            gradient="from-[#7afdd6] to-[#b8a4ff]"
+            gradient="#7afdd6, #b8a4ff"
           />
           <AnalyticsCard
             title="Active Users"
             value={userAnalytics.activeUsers}
             icon={<UserCheck size={24} />}
-            gradient="from-[#b8a4ff] to-[#7afdd6]"
+            gradient="#b8a4ff, #7afdd6"
           />
           <AnalyticsCard
             title="Admins"
             value={userAnalytics.roleDistribution.admins}
             icon={<Shield size={24} />}
-            gradient="from-[#7afdd6] to-[#A095E1]"
+            gradient="#7afdd6, #A095E1"
           />
           <AnalyticsCard
             title="Recent Logins"
             value={userAnalytics.loginStats.usersWithLogin}
             icon={<Clock size={24} />}
-            gradient="from-[#A095E1] to-[#7afdd6]"
+            gradient="#A095E1, #7afdd6"
           />
         </motion.div>
       )}
@@ -707,23 +721,49 @@ function AnalyticsCard({ title, value, icon, gradient }: {
 }) {
   return (
     <div
-      className="rounded-[25px] p-6"
+      className="rounded-[25px] p-6 relative overflow-hidden"
       style={{
-        background: 'rgba(255, 255, 255, 0.01)',
+        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
         backdropFilter: 'blur(50.5px)',
         WebkitBackdropFilter: 'blur(50.5px)',
-        border: '1px solid rgba(122, 253, 214, 0.2)'
+        border: '2px solid rgba(122, 253, 214, 0.2)',
+        boxShadow: '0 4px 24px rgba(0, 0, 0, 0.12)'
       }}
     >
-      <div className="flex items-center justify-between">
-        <div className={`bg-gradient-to-r ${gradient} text-[#2c2c2b] p-3 rounded-[15px]`}>
-          {icon}
+      {/* Background gradient accent */}
+      <div
+        className="absolute top-0 right-0 w-32 h-32 opacity-10 blur-2xl"
+        style={{
+          background: `linear-gradient(135deg, ${gradient.split(',')[0]} 0%, ${gradient.split(',')[1]} 100%)`
+        }}
+      />
+
+      <div className="flex items-center justify-between relative z-10">
+        {/* Icon */}
+        <div
+          className="p-4 rounded-[18px]"
+          style={{
+            background: `linear-gradient(135deg, ${gradient.split(',')[0]} 0%, ${gradient.split(',')[1]} 100%)`,
+            boxShadow: `0 8px 16px ${gradient.split(',')[0]}40`
+          }}
+        >
+          <div className="text-[#1a1a19]">
+            {icon}
+          </div>
         </div>
+
+        {/* Title and Value */}
         <div className="text-right">
-          <p className="text-sm font-medium text-[#888888]" style={{ fontFamily: '"Poppins", sans-serif' }}>
+          <p
+            className="text-xs font-medium text-[#888888] uppercase tracking-wide mb-1"
+            style={{ fontFamily: '"Poppins", sans-serif' }}
+          >
             {title}
           </p>
-          <p className="text-2xl font-bold text-white" style={{ fontFamily: '"Poppins", sans-serif' }}>
+          <p
+            className="text-4xl font-bold text-white"
+            style={{ fontFamily: '"Poppins", sans-serif' }}
+          >
             {value.toLocaleString()}
           </p>
         </div>
@@ -744,16 +784,41 @@ function UserItem({ user, isSelected, isChecked, onSelect, onCheck, onUserUpdate
   currentUserRole: UserRole;
 }) {
   const roleColors = {
-    ADMIN: 'from-red-400 to-red-600',
-    MODERATOR: 'from-blue-400 to-blue-600',
-    CONTENT_CREATOR: 'from-green-400 to-green-600',
-    CLIENT: 'from-purple-400 to-purple-600',
+    ADMIN: 'from-[#b8a4ff] to-[#9b7cff]',
+    MODERATOR: 'from-[#7afdd6] to-[#5ee8c0]',
+    CONTENT_CREATOR: 'from-[#6ee8c5] to-[#7afdd6]',
+    CLIENT: 'from-[#a090e8] to-[#b8a4ff]',
+    TRANSLATOR: 'from-[#9890e8] to-[#7afdd6]',
+    ART_DIRECTOR: 'from-[#7afdd6] to-[#b8a4ff]',
+    DESIGNER: 'from-[#b8a4ff] to-[#7afdd6]',
+    VIDEO_EDITOR: 'from-[#8de8d0] to-[#6ee8c5]',
+    DESIGNER_3D: 'from-[#9890e8] to-[#a090e8]',
+    DESIGNER_2D: 'from-[#5ee8c0] to-[#8de8d0]',
+    VFX_CGI: 'from-[#9b7cff] to-[#b8a4ff]',
+    MOTION_GRAPHICS: 'from-[#7afdd6] to-[#8de8d0]',
+    WEB_DEVELOPER: 'from-[#5ee8c0] to-[#7afdd6]',
+    UI_UX_DESIGNER: 'from-[#a090e8] to-[#9b7cff]',
+    ANIMATOR: 'from-[#6ee8c5] to-[#5ee8c0]',
+    PROJECT_MANAGER: 'from-[#8de8d0] to-[#b8a4ff]',
   };
 
   const roleOptions: DropdownOption[] = [
     { value: 'ADMIN', label: 'Admin' },
     { value: 'MODERATOR', label: 'Moderator' },
     { value: 'CONTENT_CREATOR', label: 'Content Creator' },
+    { value: 'TRANSLATOR', label: 'Translator' },
+    { value: 'CLIENT', label: 'Client' },
+    { value: 'ART_DIRECTOR', label: 'Art Director' },
+    { value: 'DESIGNER', label: 'Designer' },
+    { value: 'VIDEO_EDITOR', label: 'Video Editor' },
+    { value: 'DESIGNER_3D', label: '3D Designer' },
+    { value: 'DESIGNER_2D', label: '2D Designer' },
+    { value: 'VFX_CGI', label: 'VFX/CGI' },
+    { value: 'MOTION_GRAPHICS', label: 'Motion Graphics' },
+    { value: 'WEB_DEVELOPER', label: 'Web Developer' },
+    { value: 'UI_UX_DESIGNER', label: 'UI/UX Designer' },
+    { value: 'ANIMATOR', label: 'Animator' },
+    { value: 'PROJECT_MANAGER', label: 'Project Manager' },
   ];
 
   const canEditUser = currentUserRole === 'ADMIN' ||
@@ -761,85 +826,102 @@ function UserItem({ user, isSelected, isChecked, onSelect, onCheck, onUserUpdate
 
   return (
     <div
-      className={`p-6 cursor-pointer transition-all duration-300 relative overflow-hidden ${
-        isSelected ? 'bg-white/10' : 'hover:bg-white/5'
+      className={`p-5 cursor-pointer relative overflow-hidden border-b border-white/5 ${
+        isSelected ? 'bg-gradient-to-r from-[#7afdd6]/5 to-[#b8a4ff]/5' : ''
       }`}
       onClick={onSelect}
+      style={{
+        background: isSelected
+          ? 'linear-gradient(90deg, rgba(122, 253, 214, 0.05) 0%, rgba(184, 164, 255, 0.05) 100%)'
+          : 'transparent'
+      }}
     >
+      {/* Selected indicator */}
       {isSelected && (
         <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#7afdd6] to-[#b8a4ff]" />
       )}
 
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3 flex-1">
-          {/* Checkbox */}
-          <label
-            className="flex items-center cursor-pointer"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <input
-              type="checkbox"
-              checked={isChecked}
-              onChange={(e) => onCheck(e.target.checked)}
-              className="sr-only"
-            />
-            <div className={`w-4 h-4 border border-[#7afdd6] rounded transition-all ${
-              isChecked ? 'bg-[#7afdd6]' : 'bg-transparent hover:bg-[#7afdd6]/20'
-            }`}>
-              {isChecked && (
-                <Check size={12} className="text-[#2c2c2b] ml-0.5 mt-0.5" />
-              )}
-            </div>
-          </label>
+      <div className="flex items-center gap-6 pl-2">
+        {/* Checkbox */}
+        <label
+          className="flex items-center cursor-pointer flex-shrink-0"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={(e) => onCheck(e.target.checked)}
+            className="sr-only"
+          />
+          <div className={`w-5 h-5 border-2 rounded flex items-center justify-center ${
+            isChecked ? 'border-[#7afdd6] bg-[#7afdd6]' : 'border-white/20 bg-transparent'
+          }`}>
+            {isChecked && (
+              <Check size={14} className="text-[#1a1a19]" />
+            )}
+          </div>
+        </label>
 
-          <div className="flex items-center gap-3 flex-1">
+        {/* Avatar and Name */}
+        <div className="flex items-center gap-4 flex-1 min-w-0">
+          <div className="relative flex-shrink-0">
             <div
-              className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold"
+              className={`w-12 h-12 rounded-full flex items-center justify-center text-base font-bold ring-2 ring-offset-2 ring-offset-[#1a1a19] ${
+                isSelected ? 'ring-[#7afdd6]/30' : 'ring-transparent'
+              }`}
               style={{
                 background: 'linear-gradient(135deg, #7afdd6 0%, #b8a4ff 100%)',
-                color: '#2c2c2b'
+                color: '#1a1a19'
               }}
             >
               {user.name ? user.name.charAt(0).toUpperCase() : user.email.charAt(0).toUpperCase()}
             </div>
-            <div>
-              <h4 className="text-lg font-medium text-white" style={{ fontFamily: '"Poppins", sans-serif' }}>
+            {/* Status indicator with pulse */}
+            <div className={`absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full border-2 border-[#1a1a19] ${
+              user.isActive ? 'bg-green-500' : 'bg-red-500'
+            }`}>
+              {user.isActive && (
+                <div className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-75" />
+              )}
+            </div>
+          </div>
+
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1">
+              <h4 className="text-base font-semibold text-white truncate" style={{ fontFamily: '"Poppins", sans-serif' }}>
                 {user.name || 'No Name'}
               </h4>
-              <div className="flex items-center gap-2">
-                <div className={`w-2 h-2 rounded-full ${user.isActive ? 'bg-green-500' : 'bg-red-500'}`} />
-                <span className="text-xs text-[#888888]">
-                  {user.isActive ? 'Active' : 'Inactive'}
-                </span>
-              </div>
+              <span className={`text-xs px-2 py-0.5 rounded-full ${
+                user.isActive ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'
+              }`}>
+                {user.isActive ? 'Active' : 'Inactive'}
+              </span>
             </div>
+            <p className="text-sm text-[#888888] truncate">{user.email}</p>
           </div>
         </div>
 
-        <div className="space-y-1">
-          <div className="flex items-center gap-2 text-sm text-[#888888]">
-            <Mail size={14} />
-            <span>{user.email}</span>
-          </div>
-
-          <div className="flex items-center gap-2 text-sm text-[#888888]">
-            <Calendar size={14} />
-            <span>Joined {format(new Date(user.createdAt), 'MMM dd, yyyy')}</span>
+        {/* Meta Information */}
+        <div className="flex items-center gap-6 text-xs text-[#888888] flex-shrink-0">
+          <div className="flex flex-col items-center gap-1">
+            <Calendar size={16} className="text-[#7afdd6]" />
+            <span>{format(new Date(user.createdAt), 'MMM dd, yyyy')}</span>
           </div>
 
           {user.lastLogin && (
-            <div className="flex items-center gap-2 text-sm text-[#888888]">
-              <Clock size={14} />
-              <span>Last login {format(new Date(user.lastLogin), 'MMM dd, yyyy')}</span>
+            <div className="flex flex-col items-center gap-1">
+              <Clock size={16} className="text-[#b8a4ff]" />
+              <span>{format(new Date(user.lastLogin), 'MMM dd, yyyy')}</span>
             </div>
           )}
         </div>
 
-        <div className="ml-4 flex flex-col gap-2">
-          {/* Role Dropdown */}
+        {/* Role and Actions */}
+        <div className="flex items-center gap-3 flex-shrink-0">
+          {/* Role Badge/Dropdown */}
           {canEditUser ? (
             <div
-              className={`bg-gradient-to-r ${roleColors[user.role]} rounded-full p-[1px]`}
+              className={`bg-gradient-to-r ${roleColors[user.role]} rounded-full`}
               onClick={(e) => e.stopPropagation()}
             >
               <Dropdown
@@ -850,50 +932,49 @@ function UserItem({ user, isSelected, isChecked, onSelect, onCheck, onUserUpdate
                 options={roleOptions}
                 variant="status"
                 size="sm"
-                className="bg-transparent border-0 text-white rounded-full min-w-[120px]"
+                className="bg-transparent border-0 text-[#1a1a19] font-semibold rounded-full min-w-[140px] px-3 py-2"
               />
             </div>
           ) : (
             <span
-              className={`text-xs font-medium px-3 py-2 rounded-full bg-gradient-to-r ${
+              className={`text-xs font-semibold px-4 py-2 rounded-full bg-gradient-to-r ${
                 roleColors[user.role]
-              } text-white`}
+              } text-[#1a1a19]`}
               style={{ fontFamily: '"Poppins", sans-serif' }}
             >
               {user.role.replace('_', ' ')}
             </span>
           )}
 
-          <div className="flex gap-1">
-            {/* Status Toggle */}
+          {/* Action Buttons */}
+          <div className="flex gap-2">
             {canEditUser && (
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   onToggleStatus(user.id);
                 }}
-                className={`text-xs px-2 py-1 rounded-full transition-all duration-300 ${
+                className={`p-2 rounded-lg ${
                   user.isActive
-                    ? 'bg-red-500/20 text-red-400 hover:bg-red-500/30'
-                    : 'bg-green-500/20 text-green-400 hover:bg-green-500/30'
+                    ? 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
+                    : 'bg-green-500/10 text-green-400 hover:bg-green-500/20'
                 }`}
                 title={user.isActive ? 'Deactivate user' : 'Activate user'}
               >
-                {user.isActive ? <UserX size={12} /> : <UserCheck size={12} />}
+                {user.isActive ? <UserX size={16} /> : <UserCheck size={16} />}
               </button>
             )}
 
-            {/* Delete Button - Only for Admins */}
             {currentUserRole === 'ADMIN' && (
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   onDelete();
                 }}
-                className="text-xs px-2 py-1 rounded-full bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-all duration-300"
+                className="p-2 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20"
                 title="Delete user"
               >
-                <Trash2 size={12} />
+                <Trash2 size={16} />
               </button>
             )}
           </div>
@@ -977,6 +1058,19 @@ function UserDetails({ user, onUserUpdate, onPasswordChange, onDelete, currentUs
     { value: 'ADMIN', label: 'Admin' },
     { value: 'MODERATOR', label: 'Moderator' },
     { value: 'CONTENT_CREATOR', label: 'Content Creator' },
+    { value: 'TRANSLATOR', label: 'Translator' },
+    { value: 'CLIENT', label: 'Client' },
+    { value: 'ART_DIRECTOR', label: 'Art Director' },
+    { value: 'DESIGNER', label: 'Designer' },
+    { value: 'VIDEO_EDITOR', label: 'Video Editor' },
+    { value: 'DESIGNER_3D', label: '3D Designer' },
+    { value: 'DESIGNER_2D', label: '2D Designer' },
+    { value: 'VFX_CGI', label: 'VFX/CGI' },
+    { value: 'MOTION_GRAPHICS', label: 'Motion Graphics' },
+    { value: 'WEB_DEVELOPER', label: 'Web Developer' },
+    { value: 'UI_UX_DESIGNER', label: 'UI/UX Designer' },
+    { value: 'ANIMATOR', label: 'Animator' },
+    { value: 'PROJECT_MANAGER', label: 'Project Manager' },
   ];
 
   return (
@@ -1176,6 +1270,8 @@ function UserDetails({ user, onUserUpdate, onPasswordChange, onDelete, currentUs
             value={format(new Date(user.lastLogin), 'MMM dd, yyyy HH:mm')}
           />
         )}
+        {/* User Companies Section */}
+        <UserCompanies userId={user.id} onUpdate={() => {}} />
       </div>
     </div>
   );
@@ -1507,9 +1603,21 @@ function CreateUserModal({ isOpen, onClose, onSubmit, isLoading }: {
               value={formData.role}
               onValueChange={(value) => handleChange('role', value)}
               options={[
-                { value: 'CONTENT_CREATOR', label: 'Content Creator' },
+                { value: 'ADMIN', label: 'Admin' },
                 { value: 'MODERATOR', label: 'Moderator' },
-                { value: 'ADMIN', label: 'Admin' }
+                { value: 'CONTENT_CREATOR', label: 'Content Creator' },
+                { value: 'CLIENT', label: 'Client' },
+                { value: 'ART_DIRECTOR', label: 'Art Director' },
+                { value: 'DESIGNER', label: 'Designer' },
+                { value: 'VIDEO_EDITOR', label: 'Video Editor' },
+                { value: 'DESIGNER_3D', label: '3D Designer' },
+                { value: 'DESIGNER_2D', label: '2D Designer' },
+                { value: 'VFX_CGI', label: 'VFX/CGI' },
+                { value: 'MOTION_GRAPHICS', label: 'Motion Graphics' },
+                { value: 'WEB_DEVELOPER', label: 'Web Developer' },
+                { value: 'UI_UX_DESIGNER', label: 'UI/UX Designer' },
+                { value: 'ANIMATOR', label: 'Animator' },
+                { value: 'PROJECT_MANAGER', label: 'Project Manager' },
               ]}
               placeholder="Select role"
               className="w-full"
@@ -1954,9 +2062,22 @@ function BulkActionModal({ isOpen, onClose, onSubmit, isLoading, selectedCount, 
                 style={{ fontFamily: '"Poppins", sans-serif' }}
                 disabled={isLoading}
               >
-                <option value="CONTENT_CREATOR">Content Creator</option>
-                <option value="MODERATOR">Moderator</option>
                 <option value="ADMIN">Admin</option>
+                <option value="MODERATOR">Moderator</option>
+                <option value="CONTENT_CREATOR">Content Creator</option>
+                <option value="TRANSLATOR">Translator</option>
+                <option value="CLIENT">Client</option>
+                <option value="ART_DIRECTOR">Art Director</option>
+                <option value="DESIGNER">Designer</option>
+                <option value="VIDEO_EDITOR">Video Editor</option>
+                <option value="DESIGNER_3D">3D Designer</option>
+                <option value="DESIGNER_2D">2D Designer</option>
+                <option value="VFX_CGI">VFX/CGI</option>
+                <option value="MOTION_GRAPHICS">Motion Graphics</option>
+                <option value="WEB_DEVELOPER">Web Developer</option>
+                <option value="UI_UX_DESIGNER">UI/UX Designer</option>
+                <option value="ANIMATOR">Animator</option>
+                <option value="PROJECT_MANAGER">Project Manager</option>
               </select>
             </div>
           )}

@@ -11,6 +11,7 @@ import Dropdown, { DropdownOption } from '@/components/ui/Dropdown';
 export default function LeadsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [statusFilter, setStatusFilter] = useState<string>('ALL');
+  const [companyFilter, setCompanyFilter] = useState<string>('ALL');
   const [selectedLead, setSelectedLead] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -18,6 +19,11 @@ export default function LeadsPage() {
     page: currentPage,
     limit: 10,
     status: statusFilter === 'ALL' ? undefined : (statusFilter as LeadStatus),
+  });
+
+  const { data: companiesData } = api.company.getAll.useQuery({
+    page: 1,
+    limit: 100,
   });
 
   const { data: leadDetails } = api.lead.getById.useQuery(
@@ -39,6 +45,10 @@ export default function LeadsPage() {
     await updateLeadMutation.mutateAsync({ id: leadId, notes });
   };
 
+  const handleCompanyUpdate = async (leadId: string, companyId: string | null) => {
+    await updateLeadMutation.mutateAsync({ id: leadId, companyId });
+  };
+
   const statusOptions: DropdownOption[] = [
     { value: 'ALL', label: 'All Statuses' },
     { value: 'NEW', label: 'New' },
@@ -50,11 +60,26 @@ export default function LeadsPage() {
     { value: 'NURTURING', label: 'Nurturing' }
   ];
 
-  const filteredLeads = leadsData?.leads.filter(lead =>
-    lead.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    lead.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (lead.organization && lead.organization.toLowerCase().includes(searchTerm.toLowerCase()))
-  ) || [];
+  const companyOptions: DropdownOption[] = [
+    { value: 'ALL', label: 'All Companies' },
+    { value: 'NONE', label: 'Unassigned' },
+    ...(companiesData?.companies.map(company => ({
+      value: company.id,
+      label: company.name,
+    })) || []),
+  ];
+
+  const filteredLeads = leadsData?.leads.filter(lead => {
+    const matchesSearch = lead.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      lead.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (lead.organization && lead.organization.toLowerCase().includes(searchTerm.toLowerCase()));
+
+    const matchesCompany = companyFilter === 'ALL' ||
+      (companyFilter === 'NONE' && !lead.companyId) ||
+      lead.companyId === companyFilter;
+
+    return matchesSearch && matchesCompany;
+  }) || [];
 
   return (
     <div className="space-y-8">
@@ -101,16 +126,27 @@ export default function LeadsPage() {
           />
         </div>
 
-        {/* Status Filter */}
-        <Dropdown
-          value={statusFilter}
-          onValueChange={(value) => setStatusFilter(value)}
-          options={statusOptions}
-          placeholder="Filter by status"
-          variant="filter"
-          icon={<Filter size={20} />}
-          className="min-w-[200px]"
-        />
+        {/* Filters */}
+        <div className="flex gap-4">
+          <Dropdown
+            value={statusFilter}
+            onValueChange={(value) => setStatusFilter(value)}
+            options={statusOptions}
+            placeholder="Filter by status"
+            variant="filter"
+            icon={<Filter size={20} />}
+            className="min-w-[200px]"
+          />
+          <Dropdown
+            value={companyFilter}
+            onValueChange={(value) => setCompanyFilter(value)}
+            options={companyOptions}
+            placeholder="Filter by company"
+            variant="filter"
+            icon={<Building size={20} />}
+            className="min-w-[200px]"
+          />
+        </div>
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -190,7 +226,12 @@ export default function LeadsPage() {
           className="lg:col-span-1"
         >
           {selectedLead && leadDetails ? (
-            <LeadDetails lead={leadDetails} onNotesUpdate={handleNotesUpdate} />
+            <LeadDetails
+              lead={leadDetails}
+              onNotesUpdate={handleNotesUpdate}
+              onCompanyUpdate={handleCompanyUpdate}
+              companies={companiesData?.companies || []}
+            />
           ) : (
             <div
               className="rounded-[25px] p-8 text-center"
@@ -281,6 +322,13 @@ function LeadItem({ lead, isSelected, onSelect, onStatusUpdate }: {
               </div>
             )}
 
+            {(lead as any).company && (
+              <div className="flex items-center gap-2 text-sm text-[#7afdd6]">
+                <Building size={14} />
+                <span>Company: {(lead as any).company.name}</span>
+              </div>
+            )}
+
             {lead.eventType && (
               <div className="text-sm text-[#7afdd6]">
                 Event: {lead.eventType}
@@ -318,9 +366,11 @@ function LeadItem({ lead, isSelected, onSelect, onStatusUpdate }: {
   );
 }
 
-function LeadDetails({ lead, onNotesUpdate }: {
-  lead: Lead;
+function LeadDetails({ lead, onNotesUpdate, onCompanyUpdate, companies }: {
+  lead: Lead & { company?: { id: string; name: string; type: string } | null };
   onNotesUpdate: (id: string, notes: string) => void;
+  onCompanyUpdate: (id: string, companyId: string | null) => void;
+  companies: Array<{ id: string; name: string }>;
 }) {
   const [notes, setNotes] = useState(lead.notes || '');
   const [isEditing, setIsEditing] = useState(false);
@@ -328,6 +378,10 @@ function LeadDetails({ lead, onNotesUpdate }: {
   const handleSaveNotes = () => {
     onNotesUpdate(lead.id, notes);
     setIsEditing(false);
+  };
+
+  const handleCompanyChange = (companyId: string) => {
+    onCompanyUpdate(lead.id, companyId === 'NONE' ? null : companyId);
   };
 
   return (
@@ -350,6 +404,27 @@ function LeadDetails({ lead, onNotesUpdate }: {
 
         {lead.phone && <DetailField label="Phone" value={lead.phone} />}
         {lead.organization && <DetailField label="Organization" value={lead.organization} />}
+
+        {/* Company Assignment */}
+        <div>
+          <label className="text-sm font-medium text-[#7afdd6] block mb-2" style={{ fontFamily: '"Poppins", sans-serif' }}>
+            Assigned Company
+          </label>
+          <select
+            value={lead.company?.id || 'NONE'}
+            onChange={(e) => handleCompanyChange(e.target.value)}
+            className="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:border-transparent transition-all duration-300"
+            style={{ fontFamily: '"Poppins", sans-serif' }}
+          >
+            <option value="NONE" className="bg-[#2c2c2b]">No Company Assigned</option>
+            {companies.map((company) => (
+              <option key={company.id} value={company.id} className="bg-[#2c2c2b]">
+                {company.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
         {lead.eventType && <DetailField label="Event Type" value={lead.eventType} />}
         {lead.budget && <DetailField label="Budget" value={lead.budget} />}
         {lead.goals && <DetailField label="Goals" value={lead.goals} />}

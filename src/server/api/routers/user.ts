@@ -545,18 +545,25 @@ export const userRouter = createTRPCRouter({
     }),
 
   getStats: moderatorProcedure.query(async ({ ctx }) => {
-    const [total, admins, moderators, contentCreators] = await Promise.all([
+    // Get all role counts dynamically
+    const allRoles = Object.values(UserRole);
+
+    const [total, ...roleCounts] = await Promise.all([
       ctx.prisma.user.count(),
-      ctx.prisma.user.count({ where: { role: 'ADMIN' } }),
-      ctx.prisma.user.count({ where: { role: 'MODERATOR' } }),
-      ctx.prisma.user.count({ where: { role: 'CONTENT_CREATOR' } }),
+      ...allRoles.map(role =>
+        ctx.prisma.user.count({ where: { role } })
+      ),
     ]);
+
+    // Build role distribution object
+    const roleDistribution: Record<string, number> = {};
+    allRoles.forEach((role, index) => {
+      roleDistribution[role] = roleCounts[index] || 0;
+    });
 
     return {
       total,
-      admins,
-      moderators,
-      contentCreators,
+      roleDistribution,
     };
   }),
 });

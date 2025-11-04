@@ -26,10 +26,25 @@ import {
   RefreshCw,
   Languages,
   User,
-  BarChart3
+  BarChart3,
+  FileEdit,
+  CheckCircle2,
+  XCircle,
+  Rocket,
+  Package
 } from 'lucide-react';
 import Dropdown, { DropdownOption } from '@/components/ui/Dropdown';
 import { useSession } from 'next-auth/react';
+import { ArticleDetailModal } from '@/components/articles/ArticleDetailModal';
+
+const STATUS_COLORS: Record<ArticleStatus, string> = {
+  DRAFT: 'bg-gray-500/20 text-gray-400 border-gray-500/30',
+  PENDING_REVIEW: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
+  APPROVED: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+  PUBLISHED: 'bg-[#7afdd6]/20 text-[#7afdd6] border-[#7afdd6]/30',
+  REJECTED: 'bg-red-500/20 text-red-400 border-red-500/30',
+  ARCHIVED: 'bg-gray-600/20 text-gray-500 border-gray-600/30',
+};
 
 type ExtendedArticle = {
   id: string;
@@ -112,13 +127,49 @@ const LOCALES = [
   { value: 'ru', label: 'Русский', flag: '🇷🇺' },
 ];
 
-const STATUS_COLORS = {
-  DRAFT: 'bg-gray-500/20 text-gray-400 border-gray-500/20',
-  PENDING_REVIEW: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/20',
-  APPROVED: 'bg-blue-500/20 text-blue-400 border-blue-500/20',
-  PUBLISHED: 'bg-green-500/20 text-green-400 border-green-500/20',
-  REJECTED: 'bg-red-500/20 text-red-400 border-red-500/20',
-  ARCHIVED: 'bg-purple-500/20 text-purple-400 border-purple-500/20',
+const STATUS_STYLES = {
+  DRAFT: {
+    background: 'rgba(156, 163, 175, 0.15)',
+    border: '1.5px solid rgba(156, 163, 175, 0.4)',
+    color: '#9CA3AF',
+    icon: FileEdit,
+    label: 'Draft'
+  },
+  PENDING_REVIEW: {
+    background: 'rgba(251, 191, 36, 0.15)',
+    border: '1.5px solid rgba(251, 191, 36, 0.4)',
+    color: '#FBB024',
+    icon: Clock,
+    label: 'Pending Review'
+  },
+  APPROVED: {
+    background: 'rgba(122, 253, 214, 0.15)',
+    border: '1.5px solid rgba(122, 253, 214, 0.4)',
+    color: '#7afdd6',
+    icon: CheckCircle2,
+    label: 'Approved'
+  },
+  PUBLISHED: {
+    background: 'rgba(34, 197, 94, 0.15)',
+    border: '1.5px solid rgba(34, 197, 94, 0.4)',
+    color: '#22C55E',
+    icon: Rocket,
+    label: 'Published'
+  },
+  REJECTED: {
+    background: 'rgba(239, 68, 68, 0.15)',
+    border: '1.5px solid rgba(239, 68, 68, 0.4)',
+    color: '#EF4444',
+    icon: XCircle,
+    label: 'Rejected'
+  },
+  ARCHIVED: {
+    background: 'rgba(184, 164, 255, 0.15)',
+    border: '1.5px solid rgba(184, 164, 255, 0.4)',
+    color: '#b8a4ff',
+    icon: Package,
+    label: 'Archived'
+  },
 };
 
 const TYPE_COLORS = {
@@ -137,6 +188,7 @@ export default function ArticlesPage() {
   const [typeFilter, setTypeFilter] = useState<string>('ALL');
   const [localeFilter, setLocaleFilter] = useState<string>('ALL');
   const [selectedArticle, setSelectedArticle] = useState<string | null>(null);
+  const [showDetailModal, setShowDetailModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'createdAt' | 'updatedAt' | 'publishedAt' | 'title' | 'viewCount'>('createdAt');
   const [sortOrder] = useState<'asc' | 'desc'>('desc');
@@ -172,9 +224,9 @@ export default function ArticlesPage() {
     sortOrder,
   });
 
-  const { refetch: refetchArticleDetails } = api.article.getById.useQuery(
+  const { data: articleDetails } = api.article.getById.useQuery(
     { id: selectedArticle! },
-    { enabled: !!selectedArticle }
+    { enabled: !!selectedArticle && showDetailModal }
   );
 
   const { data: analytics } = api.article.getDashboardAnalytics.useQuery(
@@ -187,9 +239,6 @@ export default function ArticlesPage() {
   api.article.update.useMutation({
     onSuccess: async () => {
       refetch();
-      if (selectedArticle) {
-        await refetchArticleDetails();
-      }
       addToast('Article updated successfully', 'success');
     },
     onError: (error) => {
@@ -583,6 +632,9 @@ export default function ArticlesPage() {
                       Language
                     </th>
                     <th className="text-left p-4 text-[#7afdd6] font-medium" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                      Translations
+                    </th>
+                    <th className="text-left p-4 text-[#7afdd6] font-medium" style={{ fontFamily: '"Poppins", sans-serif' }}>
                       Author
                     </th>
                     <th className="text-left p-4 text-[#7afdd6] font-medium" style={{ fontFamily: '"Poppins", sans-serif' }}>
@@ -661,7 +713,7 @@ export default function ArticlesPage() {
                         </div>
                       </td>
                       <td className="p-4">
-                        <div className="flex items-center gap-2">
+                        <div className="flex flex-col items-start gap-2">
                           <StatusBadge status={article.status} />
                           {(userRole === 'ADMIN' || userRole === 'MODERATOR' ||
                             (userRole === 'CONTENT_CREATOR' && article.author.id === session?.user?.id && article.status === 'DRAFT')) && (
@@ -686,6 +738,28 @@ export default function ArticlesPage() {
                           <span className="text-sm text-white" style={{ fontFamily: '"Poppins", sans-serif' }}>
                             {LOCALES.find(l => l.value === article.locale)?.label || article.locale}
                           </span>
+                        </div>
+                      </td>
+                      <td className="p-4">
+                        <div className="flex items-center gap-1">
+                          {article.translations && article.translations.length > 0 ? (
+                            <>
+                              {article.translations.slice(0, 3).map((translation) => (
+                                <span key={translation.id} className="text-lg" title={`${LOCALES.find(l => l.value === translation.locale)?.label} translation`}>
+                                  {LOCALES.find(l => l.value === translation.locale)?.flag}
+                                </span>
+                              ))}
+                              {article.translations.length > 3 && (
+                                <span className="text-xs text-[#888888] ml-1">
+                                  +{article.translations.length - 3}
+                                </span>
+                              )}
+                            </>
+                          ) : (
+                            <span className="text-xs text-[#888888]" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                              No translations
+                            </span>
+                          )}
                         </div>
                       </td>
                       <td className="p-4">
@@ -723,35 +797,56 @@ export default function ArticlesPage() {
                         </div>
                       </td>
                       <td className="p-4">
-                        <div className="flex items-center justify-center gap-2">
+                        <div className="flex flex-col items-center justify-center gap-2">
+                          {/* View Details Button */}
                           <button
-                            onClick={() => setSelectedArticle(article.id)}
-                            className="p-2 text-[#888888] hover:text-[#7afdd6] transition-colors"
-                            title="View Details"
+                            onClick={() => {
+                              setSelectedArticle(article.id);
+                              setShowDetailModal(true);
+                            }}
+                            className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg w-full min-w-[120px] justify-center"
+                            style={{
+                              background: 'rgba(59, 130, 246, 0.15)',
+                              border: '1.5px solid rgba(59, 130, 246, 0.4)',
+                              fontFamily: '"Poppins", sans-serif',
+                            }}
                           >
-                            <Eye size={16} />
+                            <Eye size={16} className="text-blue-400 flex-shrink-0" />
+                            <span className="text-blue-400 font-medium text-sm whitespace-nowrap">View</span>
                           </button>
 
+                          {/* Edit Button */}
                           {canEditArticle(article) && (
                             <button
                               onClick={() => router.push(`/admin/articles/${article.id}/edit`)}
-                              className="p-2 text-[#888888] hover:text-[#7afdd6] transition-colors"
-                              title="Edit Article"
+                              className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg w-full min-w-[120px] justify-center"
+                              style={{
+                                background: 'rgba(34, 197, 94, 0.15)',
+                                border: '1.5px solid rgba(34, 197, 94, 0.4)',
+                                fontFamily: '"Poppins", sans-serif',
+                              }}
                             >
-                              <Edit3 size={16} />
+                              <Edit3 size={16} className="text-green-400 flex-shrink-0" />
+                              <span className="text-green-400 font-medium text-sm whitespace-nowrap">Edit</span>
                             </button>
                           )}
 
+                          {/* Delete Button */}
                           {canDeleteArticle(article) && (
                             <button
                               onClick={() => {
                                 setArticleToDelete(article);
                                 setShowDeleteModal(true);
                               }}
-                              className="p-2 text-[#888888] hover:text-red-400 transition-colors"
-                              title="Delete Article"
+                              className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg w-full min-w-[120px] justify-center"
+                              style={{
+                                background: 'rgba(239, 68, 68, 0.15)',
+                                border: '1.5px solid rgba(239, 68, 68, 0.4)',
+                                fontFamily: '"Poppins", sans-serif',
+                              }}
                             >
-                              <Trash2 size={16} />
+                              <Trash2 size={16} className="text-red-400 flex-shrink-0" />
+                              <span className="text-red-400 font-medium text-sm whitespace-nowrap">Delete</span>
                             </button>
                           )}
                         </div>
@@ -987,29 +1082,25 @@ export default function ArticlesPage() {
           </motion.div>
         ))}
       </div>
+
+      {/* Article Detail Modal */}
+      {articleDetails && (
+        <ArticleDetailModal
+          article={articleDetails}
+          isOpen={showDetailModal}
+          onClose={() => {
+            setShowDetailModal(false);
+            setSelectedArticle(null);
+          }}
+        />
+      )}
     </div>
   );
 }
 
 function StatusBadge({ status }: { status: ArticleStatus }) {
-  const getStatusIcon = () => {
-    switch (status) {
-      case 'DRAFT':
-        return <Edit3 size={12} />;
-      case 'PENDING_REVIEW':
-        return <Clock size={12} />;
-      case 'APPROVED':
-        return <Check size={12} />;
-      case 'PUBLISHED':
-        return <Globe size={12} />;
-      case 'REJECTED':
-        return <X size={12} />;
-      case 'ARCHIVED':
-        return <Archive size={12} />;
-      default:
-        return <Edit3 size={12} />;
-    }
-  };
+  const statusConfig = STATUS_STYLES[status];
+  const StatusIcon = statusConfig.icon;
 
   const getStatusTooltip = () => {
     switch (status) {
@@ -1031,12 +1122,32 @@ function StatusBadge({ status }: { status: ArticleStatus }) {
   };
 
   return (
-    <div
-      className={`inline-flex items-center gap-2 px-3 py-1 text-xs font-medium rounded-full border ${STATUS_COLORS[status]}`}
-      title={getStatusTooltip()}
-    >
-      {getStatusIcon()}
-      <span>{status.replace('_', ' ')}</span>
+    <div className="group relative inline-block">
+      <div
+        className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105"
+        style={{
+          background: statusConfig.background,
+          border: statusConfig.border,
+          fontFamily: '"Poppins", sans-serif',
+        }}
+      >
+        <StatusIcon size={16} style={{ color: statusConfig.color }} />
+        <span style={{ color: statusConfig.color }}>{statusConfig.label}</span>
+      </div>
+
+      {/* Tooltip */}
+      <div
+        className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10"
+        style={{
+          boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.3)',
+          fontFamily: '"Poppins", sans-serif'
+        }}
+      >
+        {getStatusTooltip()}
+        <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-px">
+          <div className="border-4 border-transparent border-t-gray-900"></div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -1068,25 +1179,25 @@ function AnalyticsView({ analytics }: { analytics: ArticleAnalytics | undefined 
           title="Total Articles"
           value={analytics.totalArticles}
           icon={<FileText size={24} />}
-          gradient="from-[#7afdd6] to-[#b8a4ff]"
+          gradient="#7afdd6, #b8a4ff"
         />
         <StatCard
           title="Published"
           value={analytics.publishedArticles}
           icon={<Check size={24} />}
-          gradient="from-[#b8a4ff] to-[#7afdd6]"
+          gradient="#b8a4ff, #7afdd6"
         />
         <StatCard
           title="Total Views"
           value={analytics.totalViews}
           icon={<Eye size={24} />}
-          gradient="from-[#7afdd6] to-[#A095E1]"
+          gradient="#7afdd6, #A095E1"
         />
         <StatCard
           title="Avg Reading Time"
           value={`${analytics.avgReadingTime}min`}
           icon={<Clock size={24} />}
-          gradient="from-[#A095E1] to-[#7afdd6]"
+          gradient="#A095E1, #7afdd6"
         />
       </div>
 

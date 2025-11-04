@@ -41,22 +41,22 @@ export default function CookieConsent() {
           isVisible ? 'translate-y-0' : 'translate-y-full'
         }`}
       >
-        <div className="max-w-[1600px] mx-auto px-4 pb-6">
-          <div className="bg-gradient-to-br from-[#2c2c2b] via-[#1a1a1a] to-[#2c2c2b] rounded-2xl shadow-2xl border border-[#3a3a3a] overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-4 pb-4">
+          <div className="bg-gradient-to-br from-[#2c2c2b] via-[#1a1a1a] to-[#2c2c2b] rounded-xl shadow-2xl border border-[#3a3a3a] overflow-hidden">
             {/* Accent gradient line */}
-            <div className="h-1 bg-gradient-to-r from-[#a095e1] via-[#7afdd6] to-[#74cfaa]" />
+            <div className="h-0.5 bg-gradient-to-r from-[#a095e1] via-[#7afdd6] to-[#74cfaa]" />
 
-            <div className="p-6 md:p-8">
-              <div className="flex flex-col lg:flex-row lg:items-center gap-6">
+            <div className="p-4 md:p-5">
+              <div className="flex flex-col lg:flex-row lg:items-center gap-4">
                 {/* Icon and Content */}
-                <div className="flex-1 space-y-3">
-                  <div className="flex items-center gap-3">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-r from-[#7afdd6] to-[#74cfaa] flex items-center justify-center">
-                      <Cookie className="w-5 h-5 text-[#2c2c2b]" />
+                <div className="flex-1 space-y-2">
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-[#7afdd6] to-[#74cfaa] flex items-center justify-center">
+                      <Cookie className="w-4 h-4 text-[#2c2c2b]" />
                     </div>
                     <h2
                       id="cookie-consent-title"
-                      className="text-xl md:text-2xl font-bold text-white"
+                      className="text-base md:text-lg font-bold text-white"
                       style={{ fontFamily: '"Poppins", sans-serif' }}
                     >
                       {t('banner.title')}
@@ -65,17 +65,17 @@ export default function CookieConsent() {
 
                   <p
                     id="cookie-consent-description"
-                    className="text-[#c3c3c3] text-sm md:text-base leading-relaxed"
+                    className="text-[#c3c3c3] text-xs md:text-sm leading-relaxed"
                   >
                     {t('banner.description')}
                   </p>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3 lg:min-w-[280px]">
+                <div className="flex flex-col sm:flex-row gap-2 lg:min-w-[320px]">
                   <button
                     onClick={acceptAll}
-                    className="flex-1 bg-gradient-to-r from-[#7afdd6] to-[#74cfaa] hover:from-[#6ee8c5] hover:to-[#68e09f] text-[#2c2c2b] font-semibold px-6 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-[#7afdd6]/20 hover:scale-105"
+                    className="whitespace-nowrap bg-gradient-to-r from-[#7afdd6] to-[#74cfaa] hover:from-[#6ee8c5] hover:to-[#68e09f] text-[#2c2c2b] font-semibold px-5 py-2.5 rounded-full transition-all duration-300 shadow-lg hover:shadow-[#7afdd6]/20"
                     style={{ fontFamily: '"Poppins", sans-serif' }}
                   >
                     {t('banner.acceptAll')}
@@ -83,7 +83,7 @@ export default function CookieConsent() {
 
                   <button
                     onClick={rejectAll}
-                    className="flex-1 bg-[#3a3a3a] hover:bg-[#4a4a4a] text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 border border-[#5a5a5a] hover:border-[#7afdd6]"
+                    className="whitespace-nowrap bg-[#3a3a3a] hover:bg-[#4a4a4a] text-white font-semibold px-5 py-2.5 rounded-full transition-all duration-300 border border-[#5a5a5a] hover:border-[#7afdd6]"
                     style={{ fontFamily: '"Poppins", sans-serif' }}
                   >
                     {t('banner.rejectAll')}
@@ -91,7 +91,7 @@ export default function CookieConsent() {
 
                   <button
                     onClick={openPreferences}
-                    className="sm:col-span-2 lg:col-span-1 xl:col-span-2 bg-transparent hover:bg-[#3a3a3a] text-[#7afdd6] font-semibold px-6 py-3 rounded-full transition-all duration-300 border border-[#7afdd6] hover:border-[#6ee8c5]"
+                    className="whitespace-nowrap bg-transparent hover:bg-[#3a3a3a] text-[#7afdd6] font-semibold px-5 py-2.5 rounded-full transition-all duration-300 border border-[#7afdd6] hover:border-[#6ee8c5]"
                     style={{ fontFamily: '"Poppins", sans-serif' }}
                   >
                     {t('banner.customize')}
@@ -100,8 +100,8 @@ export default function CookieConsent() {
               </div>
 
               {/* Legal footer */}
-              <div className="mt-4 pt-4 border-t border-[#3a3a3a]">
-                <p className="text-xs text-[#888888] text-center">
+              <div className="mt-3 pt-3 border-t border-[#3a3a3a]">
+                <p className="text-[10px] text-[#888888] text-center">
                   {t('legal.gdprCompliance')}
                 </p>
               </div>

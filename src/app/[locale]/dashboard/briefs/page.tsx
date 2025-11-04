@@ -1,18 +1,23 @@
 'use client';
 
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { api } from '@/trpc/react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
+import { FolderKanban, Building2 } from 'lucide-react';
 
 export default function ClientBriefsPage() {
   const t = useTranslations('dashboard');
   const { data: session, status } = useSession();
+  const [selectedProjectId, setSelectedProjectId] = useState<string>('ALL');
 
   const { data, isLoading, error } = api.questionnaire.getMySubmissions.useQuery({
     limit: 20,
   });
+
+  const { data: projectsData } = api.project.getMyProjects.useQuery();
 
   // Redirect if not authenticated
   if (status === 'unauthenticated') {
@@ -44,49 +49,82 @@ export default function ClientBriefsPage() {
   }
 
   const submissions = data?.submissions || [];
+  const projects = projectsData || [];
+
+  // Filter submissions by project
+  const filteredSubmissions = submissions.filter(submission => {
+    if (selectedProjectId === 'ALL') return true;
+    return submission.projectId === selectedProjectId;
+  });
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-6 py-8 bg-[#1a1a19] min-h-screen">
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">My Project Briefs</h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className="text-3xl font-bold text-white">
+            My Project Briefs
+          </h1>
+          <p className="text-[#b2b2b2] mt-2 font-medium">
             View and manage your submitted questionnaires
           </p>
         </div>
         <Link
           href="/questionnaire/project-brief"
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+          className="group px-6 py-3 bg-[#7afdd6] text-[#2c2c2b] rounded-xl hover:bg-[#6ee8c5] transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center gap-2"
         >
-          + New Brief
+          <svg className="w-5 h-5 transition-transform group-hover:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+          </svg>
+          New Brief
         </Link>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-          <div className="text-sm text-gray-600 mb-1">Total Submissions</div>
-          <div className="text-3xl font-bold text-gray-900">{submissions.length}</div>
+        <div className="bg-[#2c2c2b] rounded-xl shadow-lg p-6 border border-[#333] hover:border-[#7afdd6] hover:shadow-xl transition-all">
+          <div className="text-sm font-semibold text-[#7afdd6] mb-1">Total Submissions</div>
+          <div className="text-3xl font-bold text-white">{filteredSubmissions.length}</div>
         </div>
-        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-          <div className="text-sm text-gray-600 mb-1">Completed</div>
-          <div className="text-3xl font-bold text-green-600">
-            {submissions.filter(s => s.isComplete).length}
+        <div className="bg-[#2c2c2b] rounded-xl shadow-lg p-6 border border-[#333] hover:border-green-400 hover:shadow-xl transition-all">
+          <div className="text-sm font-semibold text-green-400 mb-1">Completed</div>
+          <div className="text-3xl font-bold text-green-400">
+            {filteredSubmissions.filter(s => s.isComplete).length}
           </div>
         </div>
-        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-          <div className="text-sm text-gray-600 mb-1">Drafts</div>
-          <div className="text-3xl font-bold text-yellow-600">
-            {submissions.filter(s => !s.isComplete).length}
+        <div className="bg-[#2c2c2b] rounded-xl shadow-lg p-6 border border-[#333] hover:border-yellow-400 hover:shadow-xl transition-all">
+          <div className="text-sm font-semibold text-yellow-400 mb-1">Drafts</div>
+          <div className="text-3xl font-bold text-yellow-400">
+            {filteredSubmissions.filter(s => !s.isComplete).length}
           </div>
         </div>
       </div>
 
+      {/* Project Filter */}
+      {projects.length > 0 && (
+        <div className="mb-6">
+          <label className="block text-sm font-semibold text-[#b2b2b2] mb-2">
+            Filter by Project
+          </label>
+          <select
+            value={selectedProjectId}
+            onChange={(e) => setSelectedProjectId(e.target.value)}
+            className="px-4 py-3 border border-[#333] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#7afdd6] focus:border-[#7afdd6] w-full md:w-auto bg-[#2c2c2b] shadow-lg hover:border-[#444] transition-colors font-medium text-white"
+          >
+            <option value="ALL">All Projects</option>
+            {projects.map((project) => (
+              <option key={project.id} value={project.id}>
+                {project.name} ({project.company.name})
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
       {/* Submissions List */}
-      {submissions.length === 0 ? (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
-          <div className="text-gray-400 mb-4">
+      {filteredSubmissions.length === 0 ? (
+        <div className="bg-[#2c2c2b] rounded-xl shadow-lg border border-[#333] p-12 text-center">
+          <div className="text-[#7afdd6] mb-4">
             <svg
               className="mx-auto h-16 w-16"
               fill="none"
@@ -101,62 +139,84 @@ export default function ClientBriefsPage() {
               />
             </svg>
           </div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">
-            No briefs yet
+          <h3 className="text-xl font-bold text-white mb-2">
+            {submissions.length === 0 ? 'No briefs yet' : 'No briefs found'}
           </h3>
-          <p className="text-gray-600 mb-6">
-            Get started by creating your first project brief
+          <p className="text-[#b2b2b2] mb-6 font-medium">
+            {submissions.length === 0
+              ? 'Get started by creating your first project brief'
+              : 'Try adjusting your filters to see more results'}
           </p>
           <Link
             href="/questionnaire/project-brief"
-            className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#7afdd6] text-[#2c2c2b] rounded-xl hover:bg-[#6ee8c5] transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
           >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
             Create Your First Brief
           </Link>
         </div>
       ) : (
         <div className="grid gap-4">
-          {submissions.map((submission) => (
+          {filteredSubmissions.map((submission) => {
+            const submissionProject = projects.find(p => p.id === submission.projectId);
+            return (
             <div
               key={submission.id}
-              className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
+              className="bg-[#2c2c2b] rounded-xl shadow-lg border border-[#333] p-6 hover:shadow-xl hover:border-[#7afdd6] transition-all duration-200 transform hover:-translate-y-1"
             >
               <div className="flex justify-between items-start">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-xl font-semibold text-gray-900">
+                    <h3 className="text-xl font-semibold text-white">
                       {submission.companyName || 'Untitled Brief'}
                     </h3>
                     <span
-                      className={`px-3 py-1 rounded-full text-sm font-medium ${
+                      className={`px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide ${
                         submission.isComplete
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-yellow-100 text-yellow-800'
+                          ? 'bg-green-900/30 text-green-400 border border-green-700'
+                          : 'bg-yellow-900/30 text-yellow-400 border border-yellow-700'
                       }`}
                     >
                       {submission.isComplete ? 'Complete' : 'Draft'}
                     </span>
                   </div>
 
+                  {/* Project Information */}
+                  {submissionProject && (
+                    <div className="flex items-center gap-2 mb-3 text-sm">
+                      <div className="flex items-center gap-1 text-[#7afdd6]">
+                        <FolderKanban className="h-4 w-4" />
+                        <span className="font-medium">{submissionProject.name}</span>
+                      </div>
+                      <span className="text-[#666]">•</span>
+                      <div className="flex items-center gap-1 text-[#b2b2b2]">
+                        <Building2 className="h-4 w-4" />
+                        <span>{submissionProject.company.name}</span>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="space-y-1 mb-4">
                     {submission.contactPerson && (
-                      <p className="text-gray-600">
-                        <span className="font-medium">Contact:</span> {submission.contactPerson}
+                      <p className="text-[#b2b2b2]">
+                        <span className="font-medium text-white">Contact:</span> {submission.contactPerson}
                       </p>
                     )}
                     {submission.email && (
-                      <p className="text-gray-600">
-                        <span className="font-medium">Email:</span> {submission.email}
+                      <p className="text-[#b2b2b2]">
+                        <span className="font-medium text-white">Email:</span> {submission.email}
                       </p>
                     )}
                     {submission.industry && (
-                      <p className="text-gray-600">
-                        <span className="font-medium">Industry:</span> {submission.industry}
+                      <p className="text-[#b2b2b2]">
+                        <span className="font-medium text-white">Industry:</span> {submission.industry}
                       </p>
                     )}
                   </div>
 
-                  <div className="flex items-center gap-4 text-sm text-gray-500">
+                  <div className="flex items-center gap-4 text-sm text-[#999]">
                     <span className="flex items-center gap-1">
                       <svg
                         className="h-4 w-4"
@@ -214,13 +274,17 @@ export default function ClientBriefsPage() {
 
                 <Link
                   href={`/dashboard/briefs/${submission.id}`}
-                  className="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-medium"
+                  className="group px-5 py-2.5 text-[#7afdd6] hover:bg-[#7afdd6]/10 rounded-xl transition-all duration-200 font-semibold border border-transparent hover:border-[#7afdd6] hover:shadow-sm flex items-center gap-2"
                 >
-                  View Details →
+                  View Details
+                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
                 </Link>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

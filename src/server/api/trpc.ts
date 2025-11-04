@@ -6,9 +6,12 @@ import type { Session } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { type UserRole } from '@prisma/client';
+import { PermissionChecker, Permission } from '@/lib/permissions';
+import { headers } from 'next/headers';
 
 interface CreateContextOptions {
   session: Session | null;
+  headers: Headers;
 }
 
 
@@ -16,6 +19,8 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
     session: opts.session,
     prisma,
+    permissionChecker: new PermissionChecker(prisma),
+    headers: opts.headers,
   };
 };
 
@@ -23,9 +28,11 @@ export const createTRPCContext = async () => {
   // Get the session from the server using the getServerSession wrapper function
   // For App Router, we don't need to pass req/res to getServerSession
   const session = await getServerSession(authOptions);
+  const headersList = await headers();
 
   return createInnerTRPCContext({
     session,
+    headers: headersList,
   });
 };
 
@@ -141,3 +148,58 @@ export const canManageUser = (currentUserRole: UserRole, targetUserRole: UserRol
   if (currentUserRole === 'MODERATOR' && targetUserRole !== 'ADMIN') return true;
   return false;
 };
+
+/**
+ * Permission-based procedure factory
+ * Creates a procedure that requires a specific permission
+ * @param requiredPermission - The permission required to access this endpoint
+ */
+export const createPermissionProcedure = (requiredPermission: Permission) => {
+  return protectedProcedure.use(async ({ ctx, next }) => {
+    const userId = ctx.session.user.id;
+    const hasPermission = await ctx.permissionChecker.hasPermission(
+      userId,
+      requiredPermission
+    );
+
+    if (!hasPermission) {
+      throw new TRPCError({
+        code: 'FORBIDDEN',
+        message: `Missing required permission: ${requiredPermission}`,
+      });
+    }
+
+    return next({ ctx });
+  });
+};
+
+/**
+ * Multi-permission procedure factory
+ * Creates a procedure that requires multiple permissions
+ * @param requiredPermissions - Array of permissions required
+ * @param mode - 'all' requires all permissions, 'any' requires at least one
+ */
+export const createMultiPermissionProcedure = (
+  requiredPermissions: Permission[],
+  mode: 'all' | 'any' = 'all'
+) => {
+  return protectedProcedure.use(async ({ ctx, next }) => {
+    const userId = ctx.session.user.id;
+    const hasPermissions =
+      mode === 'all'
+        ? await ctx.permissionChecker.hasAllPermissions(userId, requiredPermissions)
+        : await ctx.permissionChecker.hasAnyPermission(userId, requiredPermissions);
+
+    if (!hasPermissions) {
+      throw new TRPCError({
+        code: 'FORBIDDEN',
+        message: `Missing required permissions: ${requiredPermissions.join(', ')} (mode: ${mode})`,
+      });
+    }
+
+    return next({ ctx });
+  });
+};
+
+// Export Permission enum for use in routers
+export { Permission };

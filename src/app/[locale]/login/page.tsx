@@ -92,8 +92,13 @@ export default function AdminLogin() {
       } else {
         const session = await getSession();
         if (session?.user) {
-          // Redirect to unified dashboard which will route based on role
-          router.push('/en/dashboard');
+          // Redirect based on role to prevent flash of wrong dashboard
+          const userRole = session.user.role;
+          if (userRole === 'ADMIN' || userRole === 'MODERATOR' || userRole === 'CONTENT_CREATOR') {
+            router.push('/admin/dashboard');
+          } else {
+            router.push('/en/dashboard');
+          }
         }
       }
     } catch {

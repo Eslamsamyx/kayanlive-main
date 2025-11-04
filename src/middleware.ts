@@ -94,6 +94,26 @@ export default function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/en', request.url));
   }
 
+  // Allow /auth routes to bypass middleware (for sign-out page, etc.)
+  if (pathname.startsWith('/auth/')) {
+    return NextResponse.next();
+  }
+
+  // Allow /share routes to bypass middleware (public share links)
+  if (pathname.startsWith('/share/')) {
+    return NextResponse.next();
+  }
+
+  // Allow /api routes to bypass middleware (including public file serving)
+  if (pathname.startsWith('/api/')) {
+    return NextResponse.next();
+  }
+
+  // Allow public file serving for share links
+  if (pathname.startsWith('/api/files/public/')) {
+    return NextResponse.next();
+  }
+
   // Apply auth middleware for admin routes and protected dashboard routes
   if (pathname.includes('/admin') || pathname.match(/\/[a-z]{2}\/dashboard/)) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -14,19 +14,169 @@ enum UserRole {
   ADMIN
   MODERATOR
   CONTENT_CREATOR
+  TRANSLATOR
   CLIENT
+  // Industry-specific roles
+  ART_DIRECTOR
+  DESIGNER
+  VIDEO_EDITOR
+  DESIGNER_3D
+  DESIGNER_2D
+  VFX_CGI
+  MOTION_GRAPHICS
+  WEB_DEVELOPER
+  UI_UX_DESIGNER
+  ANIMATOR
+  PROJECT_MANAGER
+}
+
+enum CompanyType {
+  PERSONAL // Auto-created personal workspace
+  ORGANIZATION // Actual companies
+}
+
+enum CompanyRole {
+  OWNER // Full control, can delete company
+  ADMIN // Can manage users and projects
+  MEMBER // Can participate in projects
+  VIEWER // Read-only access
+}
+
+enum ProjectStatus {
+  DRAFT
+  PLANNING
+  IN_PROGRESS
+  REVIEW
+  COMPLETED
+  ARCHIVED
+}
+
+enum AssetType {
+  IMAGE
+  VIDEO
+  DOCUMENT
+  MODEL_3D
+  AUDIO
+  DESIGN
+  OTHER
+}
+
+enum Visibility {
+  INTERNAL // Company only
+  EXTERNAL // Can be shared externally
+}
+
+enum UsageType {
+  INTERNAL
+  PUBLIC
+}
+
+enum TagCategory {
+  // Content Type
+  FILE_TYPE
+  ASSET_TYPE
+  // Creative
+  STYLE
+  COLOR
+  THEME
+  MOOD
+  // Technical
+  RESOLUTION
+  FORMAT
+  ORIENTATION
+  // Usage
+  PLATFORM
+  PURPOSE
+  REGION
+  LANGUAGE
+  // Industry
+  INDUSTRY
+  // Campaign
+  CAMPAIGN_TYPE
+  // Status
+  STATUS
+  // Custom
+  CUSTOM
+  // CMS (for backward compatibility)
+  GENERAL
+}
+
+enum UploadStatus {
+  PENDING
+  UPLOADING
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum ProcessingStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  SKIPPED
+  REVIEWING
+  NEEDS_REVISION
+}
+
+enum VariantType {
+  THUMBNAIL
+  PREVIEW
+  WEB_OPTIMIZED
+  MOBILE
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  NEEDS_REVISION
+}
+
+enum AssetActivityType {
+  // Asset Actions
+  ASSET_UPLOADED
+  ASSET_UPDATED
+  ASSET_DOWNLOADED
+  ASSET_VIEWED
+  ASSET_SHARED
+  ASSET_ARCHIVED
+  ASSET_DELETED
+  SHARE_LINK_REVOKED
+  // Collection Actions
+  COLLECTION_CREATED
+  COLLECTION_UPDATED
+  ASSET_ADDED_TO_COLLECTION
+  ASSET_REMOVED_FROM_COLLECTION
+  // Review Actions
+  ASSET_SUBMITTED_FOR_REVIEW
+  ASSET_APPROVED
+  ASSET_REJECTED
+  CHANGES_REQUESTED
 }
 
 model User {
-  id              String     @id @default(cuid())
-  email           String     @unique
-  name            String?
-  password        String?
-  role            UserRole   @default(CONTENT_CREATOR)
-  emailVerified   DateTime?
-  image           String?
-  isActive        Boolean    @default(true)
-  lastLogin       DateTime?
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  password      String?
+  role          UserRole  @default(CONTENT_CREATOR)
+  emailVerified DateTime?
+  image         String?
+  avatar        String? // DAM: User avatar
+  isActive      Boolean   @default(true)
+  lastLogin     DateTime?
+
+  // Permission System Fields
+  additionalPermissions String[] @default([]) // Custom permissions beyond role defaults
+  canDownloadDirectly   Boolean  @default(false) // Bypass download approval workflow
+
+  // DAM Profile Fields
+  bio         String?
+  location    String?
+  socialLinks Json? // { twitter, linkedin, website, etc }
+
   accounts        Account[]
   sessions        Session[]
   posts           Post[]
@@ -34,15 +184,67 @@ model User {
   performedAudits AuditLog[] @relation("PerformedBy")
 
   // CMS Relations
-  articles          Article[]
-  articleRevisions  ArticleRevision[]
-  articleComments   ArticleComment[]
-  createdCategories Category[]        @relation("CategoryCreator")
-  createdTags       Tag[]             @relation("TagCreator")
-  uploadedFiles     MediaFile[]
+  articles              Article[]
+  articleRevisions      ArticleRevision[]
+  articleComments       ArticleComment[]
+  translatedArticles    ArticleTranslation[]  @relation("TranslatedArticles")
+  translationRevisions  TranslationRevision[] @relation("TranslationRevisionCreator")
+  requestedTranslations TranslationRequest[]  @relation("RequestedTranslations")
+  assignedTranslations  TranslationRequest[]  @relation("AssignedTranslations")
+  createdCategories     Category[]            @relation("CategoryCreator")
+  createdTags           Tag[]                 @relation("TagCreator")
+  uploadedFiles         MediaFile[]
 
   // Questionnaire Relations
   questionnaireSubmissions QuestionnaireSubmission[]
+
+  // Company & Project Relations
+  createdCompanies      Company[]             @relation("CompanyCreator")
+  companies             CompanyUser[]
+  createdProjects       Project[]             @relation("ProjectCreator")
+  projectCollaborations ProjectCollaborator[]
+  uploadedProjectAssets Asset[]
+  addedProjectAssets    ProjectAsset[]
+  addedCompanyAssets    CompanyAsset[]
+
+  // Task Management Relations
+  assignedTasks Task[]         @relation("TaskAssignees")
+  taskComments  TaskComment[]  @relation("TaskComments")
+  notifications Notification[]
+
+  // Milestone Relations
+  signedOffMilestones Milestone[] @relation("MilestoneSignedOff")
+  approvedMilestones  Milestone[] @relation("MilestoneApproved")
+
+  // Meeting Relations
+  meetings Meeting[] @relation("MeetingAttendees")
+
+  // Presentation Relations
+  createdPresentations Presentation[] @relation("PresentationCreator")
+
+  // Download Request Relations
+  downloadRequests         DownloadRequest[] @relation("DownloadRequester")
+  reviewedDownloadRequests DownloadRequest[] @relation("DownloadReviewer")
+
+  // DAM Relations
+  assetDownloads       AssetDownload[]
+  collections          Collection[]
+  assetActivities      AssetActivity[]
+  assetReviews         AssetReview[]
+  assetFavorites       AssetFavorite[]
+  createdExternalLinks AssetExternalLink[]      @relation("CreatedLinks")
+  shareLinks           AssetShareLink[]
+  searchHistory        SearchHistory[]
+  notificationPrefs    NotificationPreferences?
+
+  // Client Portal Relations
+  clientUploads ClientUpload[]
+  comments      Comment[]
+
+  // Permission System Relations
+  updatedRoleTemplates RoleTemplate[] @relation("RoleTemplateUpdatedBy")
+  sentInvitations      Invitation[]   @relation("InvitationSender")
+  receivedInvitations  Invitation[]   @relation("InvitationReceiver")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -118,6 +320,10 @@ model Lead {
   notes        String?
   assignedTo   String?
 
+  // Company relationship
+  companyId String?
+  company   Company? @relation(fields: [companyId], references: [id], onDelete: SetNull)
+
   // Tracking fields
   ipAddress    String?
   userAgent    String?
@@ -129,6 +335,8 @@ model Lead {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@index([companyId])
+  @@index([status])
   @@map("leads")
 }
 
@@ -155,22 +363,121 @@ enum AuditAction {
   TAG_UPDATED
   TAG_DELETED
   BULK_ARTICLE_UPDATE
+  // Company & Project Actions
+  COMPANY_CREATED
+  COMPANY_UPDATED
+  COMPANY_DELETED
+  COMPANY_USER_ADDED
+  COMPANY_USER_REMOVED
+  PROJECT_CREATED
+  PROJECT_UPDATED
+  PROJECT_DELETED
+  PROJECT_COLLABORATOR_ADDED
+  PROJECT_COLLABORATOR_REMOVED
+  QUESTIONNAIRE_LINKED_TO_PROJECT
+  QUESTIONNAIRE_UNLINKED_FROM_PROJECT
+  // Asset Actions
+  ASSET_UPLOADED
+  ASSET_UPDATED
+  ASSET_DELETED
+  ASSET_LINKED_TO_PROJECT
+  ASSET_UNLINKED_FROM_PROJECT
+  ASSET_LINKED_TO_COMPANY
+  ASSET_UNLINKED_FROM_COMPANY
+  ASSET_DOWNLOADED
+  ASSET_SHARED
+  // Permission System Actions
+  USER_PERMISSIONS_UPDATED
+  USER_DOWNLOAD_ACCESS_CHANGED
+  ROLE_TEMPLATE_CREATED
+  ROLE_TEMPLATE_UPDATED
+  ROLE_TEMPLATE_DELETED
+  PROJECT_COLLABORATOR_UPDATED
+  // Invitation System Actions
+  INVITATION_SENT
+  INVITATION_ACCEPTED
+  INVITATION_EXPIRED
+  INVITATION_CANCELLED
+  // Download Request Actions
+  DOWNLOAD_REQUEST_APPROVED
+  DOWNLOAD_REQUEST_REJECTED
 }
 
 model AuditLog {
   id          String      @id @default(cuid())
   userId      String
   action      AuditAction
-  details     Json?
+  details     Json? // Legacy field, migrate to metadata
   performedBy String
   ipAddress   String?
   userAgent   String?
   createdAt   DateTime    @default(now())
 
+  // Enhanced audit tracking
+  entityType String? // "User", "Project", "Task", "Asset", "RoleTemplate", etc.
+  entityId   String? // ID of the affected entity
+  metadata   Json? // { oldValues, newValues, additionalData }
+
   user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
   performer User @relation("PerformedBy", fields: [performedBy], references: [id])
 
+  @@index([entityType])
+  @@index([entityId])
+  @@index([action])
   @@map("audit_logs")
+}
+
+// =============================================================================
+// PERMISSION SYSTEM MODELS
+// =============================================================================
+
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  EXPIRED
+  CANCELLED
+}
+
+model RoleTemplate {
+  id          String   @id @default(cuid())
+  role        UserRole @unique
+  permissions String[] // Array of Permission enum values (stored as strings)
+  category    String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  updatedById String
+  updatedBy   User     @relation("RoleTemplateUpdatedBy", fields: [updatedById], references: [id])
+
+  @@index([role])
+  @@index([updatedAt])
+  @@map("role_templates")
+}
+
+model Invitation {
+  id           String           @id @default(cuid())
+  email        String
+  token        String           @unique
+  status       InvitationStatus @default(PENDING)
+  expires      DateTime
+  projectId    String
+  role         String           @default("MEMBER") // ProjectCollaborator role: LEAD, MEMBER, VIEWER
+  permissions  Json? // Custom permissions for this invitation { canEdit, canDelete, canInvite }
+  invitedById  String
+  acceptedById String?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  acceptedBy User?   @relation("InvitationReceiver", fields: [acceptedById], references: [id], onDelete: Cascade)
+  invitedBy  User    @relation("InvitationSender", fields: [invitedById], references: [id], onDelete: Cascade)
+  project    Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([status])
+  @@index([projectId])
+  @@index([email])
+  @@index([expires])
+  @@map("invitations")
 }
 
 // =============================================================================
@@ -206,13 +513,14 @@ model Article {
 
   // Basic Information
   title   String
-  slug    String  @unique
+  slug    String
   excerpt String? @db.Text
   content String  @db.Text
 
   // Multi-language Support
-  locale       String               @default("en")
-  translations ArticleTranslation[]
+  locale              String               @default("en")
+  translations        ArticleTranslation[]
+  translationRequests TranslationRequest[]
 
   // Status & Workflow
   status ArticleStatus @default(DRAFT)
@@ -268,9 +576,11 @@ model Article {
   viewCount  Int @default(0)
   shareCount Int @default(0)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  Notification Notification[]
 
+  @@unique([locale, slug])
   @@index([status, publishedAt])
   @@index([locale, status])
   @@index([authorId, status])
@@ -280,24 +590,107 @@ model Article {
 }
 
 model ArticleTranslation {
-  id              String  @id @default(cuid())
-  articleId       String
-  locale          String
-  title           String
-  slug            String
-  excerpt         String? @db.Text
-  content         String  @db.Text
-  metaTitle       String?
-  metaDescription String? @db.Text
+  id        String @id @default(cuid())
+  articleId String
+  locale    String
 
-  article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  // Content
+  title   String
+  slug    String
+  excerpt String? @db.Text
+  content String  @db.Text
+
+  // Status & Workflow (Independent per translation)
+  status      ArticleStatus @default(DRAFT)
+  publishedAt DateTime?
+  scheduledAt DateTime?
+
+  // SEO & Metadata (Complete per translation)
+  metaTitle          String?
+  metaDescription    String? @db.Text
+  metaKeywords       String?
+  ogTitle            String?
+  ogDescription      String? @db.Text
+  ogImage            String?
+  twitterTitle       String?
+  twitterDescription String? @db.Text
+  twitterImage       String?
+  canonicalUrl       String?
+
+  // Content Settings (Can differ per translation)
+  readingTime   Int?
+  allowComments Boolean @default(true)
+
+  // Images & Media (Can differ per translation)
+  featuredImage    String?
+  featuredImageAlt String?
+  gallery          String[] @default([])
+
+  // Advanced Features (Can differ per translation)
+  template       String?
+  customCss      String? @db.Text
+  customJs       String? @db.Text
+  structuredData Json?
+
+  // Translation Tracking
+  translatorId  String?
+  translator    User?    @relation("TranslatedArticles", fields: [translatorId], references: [id])
+  translatedAt  DateTime @default(now())
+  sourceVersion Int? // Which version of main article this translates
+  lastSyncedAt  DateTime @default(now())
+  isOutdated    Boolean  @default(false)
+
+  // Tracking
+  viewCount  Int @default(0)
+  shareCount Int @default(0)
+
+  // Relationships
+  article   Article               @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  revisions TranslationRevision[]
+  request   TranslationRequest? // Link to translation request
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@unique([articleId, locale])
   @@unique([locale, slug])
+  @@index([status, publishedAt])
+  @@index([translatorId])
+  @@index([isOutdated])
   @@map("article_translations")
+}
+
+model TranslationRequest {
+  id              String @id @default(cuid())
+  articleId       String
+  requestedLocale String // 'ar', 'fr', 'zh', 'ru'
+
+  requestedById String
+  assignedToId  String?
+
+  status   TranslationRequestStatus @default(PENDING)
+  priority TranslationPriority      @default(MEDIUM)
+
+  dueDate DateTime?
+  notes   String?   @db.Text
+
+  translationId String? @unique // Link to created translation
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  article       Article             @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  requestedBy   User                @relation("RequestedTranslations", fields: [requestedById], references: [id])
+  assignedTo    User?               @relation("AssignedTranslations", fields: [assignedToId], references: [id])
+  translation   ArticleTranslation? @relation(fields: [translationId], references: [id])
+  notifications Notification[]
+
+  @@index([articleId])
+  @@index([status])
+  @@index([assignedToId])
+  @@index([requestedLocale])
+  @@map("translation_requests")
 }
 
 model ArticleRevision {
@@ -318,6 +711,26 @@ model ArticleRevision {
   @@unique([articleId, version])
   @@index([articleId, createdAt])
   @@map("article_revisions")
+}
+
+model TranslationRevision {
+  id            String  @id @default(cuid())
+  translationId String
+  version       Int
+  title         String
+  content       String  @db.Text
+  excerpt       String? @db.Text
+  changeLog     String? @db.Text
+
+  createdById String
+  createdBy   User               @relation("TranslationRevisionCreator", fields: [createdById], references: [id])
+  translation ArticleTranslation @relation(fields: [translationId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([translationId, version])
+  @@index([translationId, createdAt])
+  @@map("translation_revisions")
 }
 
 model Category {
@@ -379,11 +792,12 @@ model CategoryTranslation {
 }
 
 model Tag {
-  id          String  @id @default(cuid())
+  id          String      @id @default(cuid())
   name        String
-  slug        String  @unique
-  description String? @db.Text
+  slug        String      @unique
+  description String?     @db.Text
   color       String? // Hex color for UI
+  category    TagCategory @default(GENERAL) // Support both CMS and DAM
 
   // Multi-language
   locale       String           @default("en")
@@ -394,6 +808,7 @@ model Tag {
 
   // Relationships
   articles ArticleTag[]
+  assets   AssetTagRelation[] // DAM: Asset tagging
 
   // Tracking
   usageCount  Int    @default(0)
@@ -404,6 +819,7 @@ model Tag {
   updatedAt DateTime @updatedAt
 
   @@index([isActive, usageCount])
+  @@index([category])
   @@map("tags")
 }
 
@@ -443,6 +859,7 @@ model ArticleComment {
   id         String  @id @default(cuid())
   content    String  @db.Text
   isApproved Boolean @default(false)
+  locale     String  @default("en") // Language of the comment
 
   // Hierarchy for replies
   parentId String?
@@ -468,7 +885,7 @@ model ArticleComment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([articleId, isApproved])
+  @@index([articleId, locale, isApproved])
   @@index([parentId])
   @@map("article_comments")
 }
@@ -477,6 +894,7 @@ model ArticleAnalytics {
   id        String   @id @default(cuid())
   articleId String
   date      DateTime @db.Date
+  locale    String   @default("en") // Track analytics per language
 
   // Metrics
   views       Int   @default(0)
@@ -497,8 +915,9 @@ model ArticleAnalytics {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([articleId, date])
+  @@unique([articleId, date, locale])
   @@index([date])
+  @@index([locale])
   @@map("article_analytics")
 }
 
@@ -550,12 +969,16 @@ model QuestionnaireSubmission {
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  // Project relationship - links submission to a project
+  projectId String?
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   submittedAt DateTime? // When fully submitted
   isComplete  Boolean   @default(false)
 
-  // Denormalized company/client information for quick access
+  // Denormalized company/client information for quick access (legacy support)
   companyName   String?
   contactPerson String?
   email         String?
@@ -565,6 +988,7 @@ model QuestionnaireSubmission {
   uploadedFiles UploadedFile[]
 
   @@index([userId, isComplete])
+  @@index([projectId])
   @@index([questionnaireId])
   @@index([createdAt])
   @@map("questionnaire_submissions")
@@ -605,4 +1029,1244 @@ model UploadedFile {
   @@index([submissionId])
   @@index([questionId])
   @@map("uploaded_files")
+}
+
+// =============================================================================
+// COMPANY & PROJECT MODELS
+// =============================================================================
+
+model Company {
+  id       String      @id @default(cuid())
+  name     String
+  type     CompanyType @default(ORGANIZATION)
+  email    String?
+  phone    String?
+  industry String?
+  website  String?
+  logo     String?
+
+  // Location
+  country String?
+  city    String?
+  address String?
+
+  // Metadata
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime? // Soft delete
+
+  // Creator
+  createdBy String
+  creator   User   @relation("CompanyCreator", fields: [createdBy], references: [id])
+
+  // Relations
+  users    CompanyUser[]
+  projects Project[]
+  assets   CompanyAsset[]
+  leads    Lead[]
+
+  @@index([createdBy])
+  @@index([isActive])
+  @@index([type])
+  @@map("companies")
+}
+
+model CompanyUser {
+  id        String      @id @default(cuid())
+  companyId String
+  userId    String
+  role      CompanyRole @default(MEMBER)
+
+  // Permissions
+  canCreateProjects Boolean @default(false)
+  canManageUsers    Boolean @default(false)
+  canManageAssets   Boolean @default(true)
+
+  invitedBy String?
+  joinedAt  DateTime @default(now())
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, userId])
+  @@index([companyId])
+  @@index([userId])
+  @@map("company_users")
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  name        String
+  description String?       @db.Text
+  companyId   String
+  status      ProjectStatus @default(DRAFT)
+  startDate   DateTime?
+  endDate     DateTime?
+  budget      Float?
+
+  // Metadata
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String
+
+  // Relations
+  company        Company                   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  creator        User                      @relation("ProjectCreator", fields: [createdBy], references: [id])
+  collaborators  ProjectCollaborator[]
+  questionnaires QuestionnaireSubmission[]
+  assets         ProjectAsset[]
+
+  // Task Management Relations
+  tasks         Task[]
+  milestones    Milestone[]
+  notifications Notification[]
+  meetings      Meeting[]
+  presentations Presentation[]
+
+  // Exhibition & Lead Relations
+  exhibitionLeads ExhibitionLead[]
+
+  // Client Portal Relations
+  clientUploads ClientUpload[]
+  comments      Comment[]
+
+  // Permission System Relations
+  invitations Invitation[]
+
+  @@index([companyId])
+  @@index([createdBy])
+  @@index([status])
+  @@map("projects")
+}
+
+model ProjectCollaborator {
+  id        String @id @default(cuid())
+  projectId String
+  userId    String
+  role      String @default("MEMBER") // LEAD, MEMBER, VIEWER
+
+  // Permissions
+  canEdit   Boolean @default(true)
+  canDelete Boolean @default(false)
+  canInvite Boolean @default(false)
+
+  addedAt DateTime @default(now())
+  addedBy String
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, userId])
+  @@index([projectId])
+  @@index([userId])
+  @@map("project_collaborators")
+}
+
+// =============================================================================
+// ASSET MANAGEMENT MODELS
+// =============================================================================
+
+model Asset {
+  id          String    @id @default(cuid())
+  name        String
+  title       String? // DAM: More formal title
+  description String?   @db.Text
+  type        AssetType
+
+  // File info
+  fileName     String
+  originalName String
+  fileSize     BigInt // Changed from Int to BigInt for large files
+  mimeType     String
+  format       String? // File extension
+  checksum     String? // MD5/SHA for integrity
+
+  // S3 Storage Keys (DAM)
+  fileKey      String? @unique // "assets/2024/01/file.jpg"
+  thumbnailKey String? // "thumbnails/2024/01/file.jpg"
+  previewKey   String? // "previews/2024/01/file.jpg"
+
+  // Legacy paths (for backward compatibility)
+  filePath      String? // S3/storage path
+  thumbnailPath String?
+
+  // Processing Status (DAM)
+  uploadStatus     UploadStatus     @default(PENDING)
+  processingStatus ProcessingStatus @default(PENDING)
+  processingError  String?
+
+  // Asset Type & Categorization (DAM)
+  category       String? // Marketing, Product, Brand, etc.
+  eventName      String? // Event association
+  company        String? // Client/Company name
+  project        String? // Project name
+  campaign       String? // Campaign name
+  productionYear Int?
+
+  // Dimensions (for images/videos)
+  width    Int?
+  height   Int?
+  duration Int? // For videos/audio in seconds
+
+  // Organization & Visibility (DAM)
+  visibility         Visibility @default(INTERNAL)
+  usage              UsageType  @default(INTERNAL)
+  readyForPublishing Boolean    @default(false)
+  isArchived         Boolean    @default(false)
+
+  // Usage Rights (DAM)
+  license   String?
+  copyright String?
+
+  // Batch Upload Support (DAM)
+  batchId String? // Groups assets uploaded together
+
+  // Stats (DAM)
+  viewCount     Int @default(0)
+  downloadCount Int @default(0)
+
+  // Metadata
+  tags     String[]
+  metadata Json? // Additional metadata
+
+  uploadedBy String
+  uploadedAt DateTime @default(now())
+
+  // Relations
+  uploader         User              @relation(fields: [uploadedBy], references: [id])
+  projects         ProjectAsset[]
+  companies        CompanyAsset[]
+  downloadRequests DownloadRequest[]
+
+  // DAM Relations
+  assetMetadata AssetMetadata?
+  variants      AssetVariant[]
+  tagRelations  AssetTagRelation[]
+  downloads     AssetDownload[]
+  collections   AssetCollection[]
+  reviews       AssetReview[]
+  favorites     AssetFavorite[]
+  activities    AssetActivity[]
+  externalLinks AssetExternalLink[]
+  shareLinks    AssetShareLink[]
+  analytics     AssetAnalytics[]
+
+  // Client Portal
+  comments Comment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([uploadedBy])
+  @@index([type])
+  @@index([uploadedAt])
+  @@index([fileKey])
+  @@index([uploadStatus])
+  @@index([processingStatus])
+  @@index([category])
+  @@index([visibility])
+  @@index([usage])
+  @@index([readyForPublishing])
+  @@index([eventName])
+  @@index([company])
+  @@index([project])
+  @@index([campaign])
+  @@index([batchId])
+  @@index([title])
+  @@map("assets")
+}
+
+model ProjectAsset {
+  id        String @id @default(cuid())
+  projectId String
+  assetId   String
+
+  addedBy String
+  addedAt DateTime @default(now())
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  asset   Asset   @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [addedBy], references: [id])
+
+  @@unique([projectId, assetId])
+  @@index([projectId])
+  @@index([assetId])
+  @@map("project_assets")
+}
+
+model CompanyAsset {
+  id        String @id @default(cuid())
+  companyId String
+  assetId   String
+
+  addedBy String
+  addedAt DateTime @default(now())
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  asset   Asset   @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [addedBy], references: [id])
+
+  @@unique([companyId, assetId])
+  @@index([companyId])
+  @@index([assetId])
+  @@map("company_assets")
+}
+
+// =============================================================================
+// PROJECT MANAGEMENT ENUMS
+// =============================================================================
+
+enum TaskStatus {
+  CONCEPT
+  IN_PROGRESS
+  IN_REVIEW
+  COMPLETED
+  APPROVED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum MilestoneStatus {
+  PENDING
+  IN_PROGRESS
+  IN_REVIEW
+  COMPLETED
+  DELAYED
+  CANCELLED
+}
+
+enum NotificationType {
+  TASK_ASSIGNED
+  TASK_STATUS_CHANGED
+  TASK_DUE_SOON
+  TASK_COMMENT_ADDED
+  MILESTONE_APPROVED
+  MILESTONE_SIGNED_OFF
+  MILESTONE_DUE_SOON
+  PROJECT_UPDATED
+  PROJECT_MEMBER_ADDED
+  PROJECT_MEMBER_REMOVED
+  MEETING_SCHEDULED
+  MEETING_UPDATED
+  ASSET_UPLOADED
+  ASSET_DOWNLOAD_REQUESTED
+  ASSET_DOWNLOAD_APPROVED
+  ASSET_DOWNLOAD_REJECTED
+  PRESENTATION_CREATED
+  PRESENTATION_UPDATED
+  INVITATION_RECEIVED
+  // Translation-related notifications
+  TRANSLATION_REQUESTED
+  TRANSLATION_ASSIGNED
+  TRANSLATION_COMPLETED
+  TRANSLATION_OUTDATED
+  TRANSLATION_REVIEW_REQUESTED
+}
+
+enum TranslationRequestStatus {
+  PENDING
+  ASSIGNED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum TranslationPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum PresentationStatus {
+  DRAFT
+  REVIEW
+  READY
+  PRESENTING
+  COMPLETED
+  ARCHIVED
+}
+
+enum SlideType {
+  TITLE
+  CONTENT
+  IMAGE
+  VIDEO
+  CHART
+  QUOTE
+  BULLET_POINTS
+  TWO_COLUMN
+  FULL_IMAGE
+  BLANK
+}
+
+enum DownloadRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// =============================================================================
+// TASK MANAGEMENT MODELS
+// =============================================================================
+
+model Task {
+  id            String     @id @default(cuid())
+  name          String
+  description   String?    @db.Text
+  status        TaskStatus @default(CONCEPT)
+  priority      Priority   @default(MEDIUM)
+  dueDate       DateTime?
+  estimatedTime Int? // minutes
+  actualTime    Int? // minutes
+  order         Int        @default(0)
+  tags          String[]   @default([])
+  completedAt   DateTime?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  // Relations
+  projectId   String
+  milestoneId String?
+  project     Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  milestone   Milestone? @relation(fields: [milestoneId], references: [id], onDelete: SetNull)
+
+  // Many-to-many with Users (assignees)
+  assignees User[] @relation("TaskAssignees")
+
+  // Task attachments
+  taskComments  TaskComment[]
+  notifications Notification[]
+
+  // Client Portal
+  comments Comment[]
+
+  @@index([projectId])
+  @@index([milestoneId])
+  @@index([status])
+  @@index([priority])
+  @@index([dueDate])
+  @@map("tasks")
+}
+
+model Milestone {
+  id             String          @id @default(cuid())
+  name           String
+  description    String?         @db.Text
+  dueDate        DateTime
+  startDate      DateTime?
+  status         MilestoneStatus @default(PENDING)
+  progress       Int             @default(0)
+  deliverables   String[]        @default([])
+  signedOffBy    String?
+  signedOffAt    DateTime?
+  clientApproval Boolean         @default(false)
+  approvedBy     String?
+  approvedAt     DateTime?
+  feedback       String?         @db.Text
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  // Relations
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  tasks         Task[]
+  notifications Notification[]
+
+  // Relations for users who signed off/approved
+  signedOffUser  User? @relation("MilestoneSignedOff", fields: [signedOffBy], references: [id])
+  approvedByUser User? @relation("MilestoneApproved", fields: [approvedBy], references: [id])
+
+  // Client Portal
+  comments Comment[]
+
+  @@index([projectId])
+  @@index([status])
+  @@index([dueDate])
+  @@map("milestones")
+}
+
+model TaskComment {
+  id        String   @id @default(cuid())
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  taskId String
+  userId String
+  task   Task   @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user   User   @relation("TaskComments", fields: [userId], references: [id])
+
+  @@index([taskId])
+  @@index([userId])
+  @@map("task_comments")
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  type      NotificationType
+  title     String
+  message   String           @db.Text
+  read      Boolean          @default(false)
+  data      Json?
+  createdAt DateTime         @default(now())
+
+  // Relations
+  userId               String
+  projectId            String?
+  taskId               String?
+  milestoneId          String?
+  meetingId            String?
+  articleId            String?
+  translationRequestId String?
+
+  user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project            Project?            @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  task               Task?               @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  milestone          Milestone?          @relation(fields: [milestoneId], references: [id], onDelete: Cascade)
+  meeting            Meeting?            @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+  article            Article?            @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  translationRequest TranslationRequest? @relation(fields: [translationRequestId], references: [id], onDelete: Cascade)
+
+  @@index([userId, read])
+  @@index([projectId])
+  @@index([createdAt])
+  @@index([articleId])
+  @@index([translationRequestId])
+  @@map("notifications")
+}
+
+// =============================================================================
+// MEETING MANAGEMENT MODELS
+// =============================================================================
+
+model Meeting {
+  id          String   @id @default(cuid())
+  title       String
+  description String?  @db.Text
+  startTime   DateTime
+  endTime     DateTime
+  location    String?
+  agenda      String?  @db.Text
+  minutes     String?  @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  projectId String?
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  attendees     User[]         @relation("MeetingAttendees")
+  notifications Notification[]
+
+  @@index([projectId])
+  @@index([startTime])
+  @@map("meetings")
+}
+
+// =============================================================================
+// PRESENTATION BUILDER MODELS
+// =============================================================================
+
+model Presentation {
+  id          String             @id @default(cuid())
+  title       String
+  description String?            @db.Text
+  status      PresentationStatus @default(DRAFT)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  // Relations
+  projectId String
+  createdBy String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  creator   User    @relation("PresentationCreator", fields: [createdBy], references: [id])
+
+  slides Slide[]
+
+  @@index([projectId])
+  @@index([createdBy])
+  @@index([status])
+  @@map("presentations")
+}
+
+model Slide {
+  id              String    @id @default(cuid())
+  type            SlideType
+  title           String?
+  content         String?   @db.Text
+  imageUrl        String?
+  videoUrl        String?
+  chartData       Json?
+  backgroundColor String?
+  textColor       String?
+  order           Int       @default(0)
+  notes           String?   @db.Text
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  presentationId String
+  presentation   Presentation @relation(fields: [presentationId], references: [id], onDelete: Cascade)
+
+  @@index([presentationId, order])
+  @@map("slides")
+}
+
+// =============================================================================
+// DOWNLOAD REQUEST WORKFLOW MODELS
+// =============================================================================
+
+model DownloadRequest {
+  id         String                @id @default(cuid())
+  reason     String?               @db.Text
+  status     DownloadRequestStatus @default(PENDING)
+  reviewedBy String?
+  reviewedAt DateTime?
+  createdAt  DateTime              @default(now())
+  updatedAt  DateTime              @updatedAt
+
+  // Relations
+  userId  String
+  assetId String
+  user    User   @relation("DownloadRequester", fields: [userId], references: [id])
+  asset   Asset  @relation(fields: [assetId], references: [id], onDelete: Cascade)
+
+  reviewer User? @relation("DownloadReviewer", fields: [reviewedBy], references: [id])
+
+  @@index([userId])
+  @@index([assetId])
+  @@index([status])
+  @@map("download_requests")
+}
+
+// =============================================================================
+// DIGITAL ASSET MANAGEMENT (DAM) MODELS
+// =============================================================================
+
+model AssetMetadata {
+  id      String @id @default(cuid())
+  asset   Asset  @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId String @unique
+
+  // Technical metadata
+  colorSpace String?
+  dpi        Int?
+  bitDepth   Int?
+  frameRate  Float?
+  bitRate    Int?
+  codec      String?
+
+  // Camera/Equipment (for photos)
+  camera       String?
+  lens         String?
+  iso          Int?
+  aperture     Float?
+  shutterSpeed String?
+  gpsLat       Float?
+  gpsLng       Float?
+
+  // Custom fields for flexibility
+  customFields Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("asset_metadata")
+}
+
+model AssetVariant {
+  id          String           @id @default(cuid())
+  asset       Asset            @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId     String
+  variantType VariantType
+  fileKey     String           @unique
+  url         String? // CDN/S3 URL for the variant
+  width       Int?
+  height      Int?
+  fileSize    BigInt
+  format      String
+  quality     Int?
+  status      ProcessingStatus @default(PENDING) // Track generation status
+  error       String? // Error message if generation failed
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@index([assetId])
+  @@index([variantType])
+  @@index([status])
+  @@map("asset_variants")
+}
+
+model AssetTagRelation {
+  asset   Asset    @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId String
+  tag     Tag      @relation(fields: [tagId], references: [id])
+  tagId   String
+  addedAt DateTime @default(now())
+  addedBy String // User ID
+
+  @@id([assetId, tagId])
+  @@index([assetId])
+  @@index([tagId])
+  @@map("asset_tags")
+}
+
+model Collection {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  coverImage  String? // Can be an asset key
+  isPublic    Boolean  @default(false)
+  isPinned    Boolean  @default(false)
+  sortOrder   Int      @default(0)
+  createdBy   User     @relation(fields: [createdById], references: [id])
+  createdById String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relationships
+  assets     AssetCollection[]
+  activities AssetActivity[]
+
+  @@index([createdById])
+  @@index([isPublic])
+  @@map("collections")
+}
+
+model AssetCollection {
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  collectionId String
+  asset        Asset      @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId      String
+  position     Int        @default(0)
+  addedAt      DateTime   @default(now())
+  addedBy      String // User ID
+
+  @@id([collectionId, assetId])
+  @@index([collectionId])
+  @@index([assetId])
+  @@map("asset_collections")
+}
+
+model AssetExternalLink {
+  id            String                   @id @default(cuid())
+  asset         Asset                    @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId       String
+  token         String                   @unique @default(cuid())
+  password      String?
+  expiresAt     DateTime?
+  maxDownloads  Int?
+  downloadCount Int                      @default(0)
+  isActive      Boolean                  @default(true)
+  allowDownload Boolean                  @default(true)
+  createdBy     User                     @relation("CreatedLinks", fields: [createdById], references: [id])
+  createdById   String
+  createdAt     DateTime                 @default(now())
+  accessLogs    AssetExternalAccessLog[]
+
+  @@index([token])
+  @@index([assetId])
+  @@index([expiresAt])
+  @@map("asset_external_links")
+}
+
+model AssetExternalAccessLog {
+  id         String            @id @default(cuid())
+  link       AssetExternalLink @relation(fields: [linkId], references: [id], onDelete: Cascade)
+  linkId     String
+  ipAddress  String
+  userAgent  String?
+  action     String // VIEW, DOWNLOAD
+  accessedAt DateTime          @default(now())
+
+  @@index([linkId])
+  @@map("asset_external_access_logs")
+}
+
+model AssetDownload {
+  id        String   @id @default(cuid())
+  asset     Asset    @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId   String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  purpose   String? // Optional: Why they downloaded
+  project   String? // Optional: For which project
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  @@index([assetId])
+  @@index([userId])
+  @@index([createdAt])
+  @@map("asset_downloads")
+}
+
+model AssetAnalytics {
+  id        String   @id @default(cuid())
+  asset     Asset    @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId   String
+  date      DateTime @db.Date
+  views     Int      @default(0)
+  downloads Int      @default(0)
+
+  @@unique([assetId, date])
+  @@index([date])
+  @@index([assetId])
+  @@map("asset_analytics")
+}
+
+model AssetActivity {
+  id           String            @id @default(cuid())
+  type         AssetActivityType
+  description  String
+  user         User              @relation(fields: [userId], references: [id])
+  userId       String
+  asset        Asset?            @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId      String?
+  collection   Collection?       @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  collectionId String?
+  metadata     Json? // Additional context
+  createdAt    DateTime          @default(now())
+
+  @@index([userId])
+  @@index([type])
+  @@index([createdAt])
+  @@map("asset_activities")
+}
+
+model AssetReview {
+  id         String       @id @default(cuid())
+  asset      Asset        @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId    String
+  reviewer   User         @relation(fields: [reviewerId], references: [id])
+  reviewerId String
+  status     ReviewStatus
+  comments   String?
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+
+  @@index([assetId])
+  @@index([reviewerId])
+  @@index([status])
+  @@map("asset_reviews")
+}
+
+model AssetFavorite {
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  asset     Asset    @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId   String
+  createdAt DateTime @default(now())
+
+  @@id([userId, assetId])
+  @@index([userId])
+  @@index([assetId])
+  @@map("asset_favorites")
+}
+
+model NotificationPreferences {
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+
+  // Email notifications
+  emailEnabled          Boolean @default(true)
+  emailAssetApproved    Boolean @default(true)
+  emailAssetRejected    Boolean @default(true)
+  emailReviewAssigned   Boolean @default(true)
+  emailAssetShared      Boolean @default(true)
+  emailCollectionShared Boolean @default(true)
+
+  // In-app notifications
+  inAppEnabled          Boolean @default(true)
+  inAppAssetApproved    Boolean @default(true)
+  inAppAssetRejected    Boolean @default(true)
+  inAppReviewAssigned   Boolean @default(true)
+  inAppAssetShared      Boolean @default(true)
+  inAppCollectionShared Boolean @default(true)
+  inAppSystemUpdates    Boolean @default(true)
+
+  // Digest preferences
+  digestEnabled   Boolean   @default(false)
+  digestFrequency String    @default("weekly") // daily, weekly, monthly
+  lastDigestSent  DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("notification_preferences")
+}
+
+model AssetShareLink {
+  id               String            @id @default(cuid())
+  token            String            @unique
+  asset            Asset             @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId          String
+  createdBy        User              @relation(fields: [createdById], references: [id])
+  createdById      String
+  password         String? // Hashed password if protected
+  expiresAt        DateTime?
+  maxDownloads     Int?
+  currentDownloads Int               @default(0)
+  allowDownload    Boolean           @default(true)
+  isActive         Boolean           @default(true)
+  metadata         Json? // Track IP addresses, user agents, etc.
+  createdAt        DateTime          @default(now())
+  lastAccessedAt   DateTime?
+  viewCount        Int               @default(0)
+  downloadCount    Int               @default(0)
+  accessLogs       ShareLinkAccess[]
+
+  @@index([token])
+  @@index([assetId])
+  @@index([createdById])
+  @@index([expiresAt])
+  @@map("asset_share_links")
+}
+
+model ShareLinkAccess {
+  id          String         @id @default(cuid())
+  shareLink   AssetShareLink @relation(fields: [shareLinkId], references: [id], onDelete: Cascade)
+  shareLinkId String
+  accessType  String // VIEW, DOWNLOAD
+  ipAddress   String?
+  userAgent   String?
+  country     String?
+  city        String?
+  referrer    String?
+  createdAt   DateTime       @default(now())
+
+  @@index([shareLinkId])
+  @@index([accessType])
+  @@index([createdAt])
+  @@map("share_link_access")
+}
+
+model SearchHistory {
+  id            String   @id @default(cuid())
+  user          User     @relation(fields: [userId], references: [id])
+  userId        String
+  query         String
+  filters       Json? // Store applied filters
+  resultCount   Int      @default(0)
+  clickedAssets String[] // Array of asset IDs that were clicked
+  createdAt     DateTime @default(now())
+
+  @@index([userId])
+  @@index([query])
+  @@index([createdAt])
+  @@map("search_history")
+}
+
+// =============================================================================
+// EXHIBITION & LEAD MANAGEMENT MODELS
+// =============================================================================
+
+model Exhibition {
+  id           String   @id @default(cuid())
+  name         String
+  slug         String   @unique
+  industry     String?
+  startDate    DateTime
+  endDate      DateTime
+  durationDays Int?
+  status       String   @default("confirmed") // confirmed or tentative
+  eventWebsite String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  venue               Venue?                @relation(fields: [venueId], references: [id])
+  venueId             String?
+  organizer           Organizer?            @relation(fields: [organizerId], references: [id])
+  organizerId         String?
+  exhibitors          ExhibitionExhibitor[]
+  calendarEvents      CalendarEvent[]
+  participationStatus ParticipationStatus?
+  leads               ExhibitionLead[]
+
+  @@index([startDate])
+  @@index([slug])
+  @@map("exhibitions")
+}
+
+model Venue {
+  id          String       @id @default(cuid())
+  name        String
+  address     String?
+  city        String?
+  country     String?
+  createdAt   DateTime     @default(now())
+  exhibitions Exhibition[]
+
+  @@unique([name, city])
+  @@map("venues")
+}
+
+model Organizer {
+  id          String       @id @default(cuid())
+  name        String
+  email       String?
+  phone       String?
+  website     String?
+  createdAt   DateTime     @default(now())
+  exhibitions Exhibition[]
+
+  @@unique([name])
+  @@map("organizers")
+}
+
+model Exhibitor {
+  id                 String                @id @default(cuid())
+  name               String
+  website            String?
+  industry           String?
+  country            String?
+  companyProfileLink String?
+  createdAt          DateTime              @default(now())
+  updatedAt          DateTime              @updatedAt
+  exhibitions        ExhibitionExhibitor[]
+  leads              ExhibitionLead[]
+  contacts           ExhibitorContact[]
+
+  @@unique([name])
+  @@map("exhibitors")
+}
+
+model ExhibitionExhibitor {
+  id           String     @id @default(cuid())
+  exhibitionId String
+  exhibitorId  String
+  standNumber  String?
+  standSizeSqm Float?
+  category     String?
+  remarks      String?
+  createdAt    DateTime   @default(now())
+  exhibition   Exhibition @relation(fields: [exhibitionId], references: [id], onDelete: Cascade)
+  exhibitor    Exhibitor  @relation(fields: [exhibitorId], references: [id], onDelete: Cascade)
+
+  @@unique([exhibitionId, exhibitorId])
+  @@index([exhibitionId])
+  @@index([exhibitorId])
+  @@map("exhibition_exhibitors")
+}
+
+model CalendarEvent {
+  id           String     @id @default(cuid())
+  exhibitionId String
+  eventDate    DateTime
+  eventType    String     @default("exhibition") // exhibition, build_up, dismantle
+  exhibition   Exhibition @relation(fields: [exhibitionId], references: [id], onDelete: Cascade)
+
+  @@index([eventDate])
+  @@index([exhibitionId])
+  @@map("calendar_events")
+}
+
+model ParticipationStatus {
+  id           String     @id @default(cuid())
+  exhibitionId String     @unique
+  status       String     @default("not_participating") // not_participating, evaluating, visiting, supporting_client, exhibiting
+  teamLead     String?
+  notes        String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  exhibition   Exhibition @relation(fields: [exhibitionId], references: [id], onDelete: Cascade)
+
+  @@map("participation_statuses")
+}
+
+model ExhibitorContact {
+  id            String    @id @default(cuid())
+  exhibitorId   String
+  name          String
+  title         String? // Job title/position
+  email         String?
+  phone         String?
+  mobile        String?
+  isPrimary     Boolean   @default(false)
+  department    String? // e.g., Marketing, Sales, Operations
+  linkedIn      String?
+  notes         String?
+  lastContacted DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  exhibitor     Exhibitor @relation(fields: [exhibitorId], references: [id], onDelete: Cascade)
+
+  @@index([exhibitorId])
+  @@map("exhibitor_contacts")
+}
+
+// Enhanced Lead model merging both systems
+model ExhibitionLead {
+  id           String @id @default(cuid())
+  exhibitorId  String
+  exhibitionId String
+  status       String @default("new") // new, qualified, contacted, proposal_sent, negotiating, won, lost, disqualified
+
+  // Contact Information
+  contactName  String?
+  contactEmail String?
+  contactPhone String?
+  contactRole  String? // CEO, Marketing Manager, Procurement, etc.
+
+  // Lead Qualification
+  qualityScore      Int     @default(0) // 0-100 score based on multiple factors
+  leadSource        String? // exhibition_list, referral, website, cold_call
+  standSize         Float?
+  competitorQuotes  String? // Names of competitors also quoting
+  decisionTimeframe String? // immediate, this_month, this_quarter, next_year
+
+  // Business Details
+  previousClient       Boolean @default(false)
+  preferredDesignStyle String? // modern, traditional, tech-focused, luxury, etc.
+  specialRequirements  String? // Two-story, LED walls, meeting rooms, etc.
+
+  // Activity Tracking
+  notes            String?
+  lastContactDate  DateTime?
+  nextFollowUpDate DateTime?
+  proposalSentDate DateTime?
+  proposalDeadline DateTime?
+  wonLostReason    String? // Why deal was won or lost
+
+  // Project conversion
+  projectId String? // Links to created project when won
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  exhibitor  Exhibitor      @relation(fields: [exhibitorId], references: [id], onDelete: Cascade)
+  exhibition Exhibition     @relation(fields: [exhibitionId], references: [id], onDelete: Cascade)
+  activities LeadActivity[]
+
+  @@unique([exhibitorId, exhibitionId])
+  @@index([status])
+  @@index([nextFollowUpDate])
+  @@index([projectId])
+  @@map("exhibition_leads")
+}
+
+model LeadActivity {
+  id          String         @id @default(cuid())
+  leadId      String
+  type        String // call, email, meeting, proposal, note
+  description String
+  createdAt   DateTime       @default(now())
+  lead        ExhibitionLead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId])
+  @@map("lead_activities")
+}
+
+// ============================================================================
+// CLIENT PORTAL FEATURES
+// ============================================================================
+
+enum CommentableType {
+  PROJECT
+  TASK
+  MILESTONE
+  ASSET
+  UPLOAD
+}
+
+// Client File Uploads - Allows clients to upload files to projects
+model ClientUpload {
+  id          String  @id @default(cuid())
+  fileName    String
+  fileKey     String // S3 key or local path
+  fileSize    BigInt
+  mimeType    String
+  description String? @db.Text
+  folder      String? @default("general") // Category/folder organization
+
+  // Relations
+  projectId  String
+  uploadedBy String
+  project    Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  uploader   User    @relation(fields: [uploadedBy], references: [id])
+
+  // Comments on uploads
+  comments Comment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([projectId])
+  @@index([uploadedBy])
+  @@index([folder])
+  @@index([createdAt])
+  @@map("client_uploads")
+}
+
+// Universal Comment System - Comments on any entity
+model Comment {
+  id      String @id @default(cuid())
+  content String @db.Text
+
+  // Polymorphic relation to any commentable entity
+  commentableType CommentableType
+  commentableId   String
+
+  // Threading support
+  parentId String?
+  parent   Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies  Comment[] @relation("CommentReplies")
+
+  // Author
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  // Mentions (notify these users)
+  mentions String[] @default([])
+
+  // Status
+  resolved   Boolean   @default(false)
+  resolvedBy String?
+  resolvedAt DateTime?
+
+  // Soft delete
+  isDeleted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations to specific entities (for easier querying)
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String?
+
+  task   Task?   @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  taskId String?
+
+  milestone   Milestone? @relation(fields: [milestoneId], references: [id], onDelete: Cascade)
+  milestoneId String?
+
+  asset   Asset?  @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId String?
+
+  clientUpload   ClientUpload? @relation(fields: [clientUploadId], references: [id], onDelete: Cascade)
+  clientUploadId String?
+
+  @@index([commentableType, commentableId])
+  @@index([authorId])
+  @@index([parentId])
+  @@index([projectId])
+  @@index([taskId])
+  @@index([milestoneId])
+  @@index([assetId])
+  @@index([clientUploadId])
+  @@index([createdAt])
+  @@index([resolved])
+  @@map("comments")
 }

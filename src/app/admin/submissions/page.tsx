@@ -3,9 +3,12 @@
 import { api } from '@/trpc/react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { FileText, CheckCircle, Edit3, Users, Loader2, AlertTriangle, ExternalLink, Copy, Check } from 'lucide-react';
 
 export default function AdminSubmissionsPage() {
   const [filter, setFilter] = useState<'all' | 'completed' | 'draft'>('all');
+  const [copied, setCopied] = useState(false);
 
   const { data, isLoading, error } = api.questionnaire.getAllSubmissions.useQuery({
     limit: 50,
@@ -14,14 +17,26 @@ export default function AdminSubmissionsPage() {
 
   const { data: stats } = api.questionnaire.getStats.useQuery();
 
+  const publicFormUrl = typeof window !== 'undefined'
+    ? `${window.location.origin}/en/questionnaire/project-brief`
+    : '/en/questionnaire/project-brief';
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(publicFormUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
   if (isLoading) {
     return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading submissions...</p>
-          </div>
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <Loader2 className="animate-spin h-12 w-12 text-[#7afdd6] mx-auto mb-4" />
+          <p className="text-[#888888]" style={{ fontFamily: '"Poppins", sans-serif' }}>Loading submissions...</p>
         </div>
       </div>
     );
@@ -29,11 +44,22 @@ export default function AdminSubmissionsPage() {
 
   if (error) {
     return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-          <h3 className="text-red-800 font-semibold mb-2">Error Loading Submissions</h3>
-          <p className="text-red-600">{error.message}</p>
+      <div
+        className="rounded-[25px] p-6"
+        style={{
+          background: 'rgba(239, 68, 68, 0.1)',
+          backdropFilter: 'blur(50.5px)',
+          WebkitBackdropFilter: 'blur(50.5px)',
+          border: '2px solid rgba(239, 68, 68, 0.3)',
+        }}
+      >
+        <div className="flex items-center gap-3 mb-2">
+          <AlertTriangle className="text-red-400" size={24} />
+          <h3 className="text-red-400 font-semibold" style={{ fontFamily: '"Poppins", sans-serif' }}>
+            Error Loading Submissions
+          </h3>
         </div>
+        <p className="text-red-400/80">{error.message}</p>
       </div>
     );
   }
@@ -41,254 +67,412 @@ export default function AdminSubmissionsPage() {
   const submissions = data?.submissions || [];
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="space-y-8">
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-center"
+      >
+        <h1
+          className="text-4xl md:text-6xl font-normal mb-4 capitalize"
+          style={{
+            background: 'linear-gradient(90deg, #b8a4ff 0%, #7afdd6 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            fontFamily: '"Poppins", sans-serif',
+            lineHeight: '1.1',
+          }}
+        >
           Client Brief Submissions
         </h1>
-        <p className="text-gray-600">
+        <p className="text-[#888888] text-lg mb-6">
           View and manage all client questionnaire submissions
         </p>
-      </div>
+
+        {/* Link to Public Form */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-3"
+        >
+          <Link
+            href="/en/questionnaire/project-brief"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105"
+            style={{
+              background: 'linear-gradient(90deg, #7afdd6 0%, #b8a4ff 100%)',
+              color: '#2c2c2b',
+              fontFamily: '"Poppins", sans-serif',
+            }}
+          >
+            <FileText size={20} />
+            <span>View Public Form</span>
+            <ExternalLink size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
+
+          <button
+            onClick={handleCopyLink}
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg border-2"
+            style={{
+              background: copied ? 'rgba(74, 222, 128, 0.2)' : 'rgba(255, 255, 255, 0.05)',
+              borderColor: copied ? 'rgba(74, 222, 128, 0.5)' : 'rgba(122, 253, 214, 0.3)',
+              color: copied ? '#4ade80' : 'white',
+              fontFamily: '"Poppins", sans-serif',
+            }}
+          >
+            {copied ? (
+              <>
+                <Check size={20} />
+                <span>Link Copied!</span>
+              </>
+            ) : (
+              <>
+                <Copy size={20} />
+                <span>Copy Link</span>
+              </>
+            )}
+          </button>
+
+          <div
+            className="hidden md:block px-4 py-2 rounded-xl text-xs text-[#888888]"
+            style={{
+              background: 'rgba(255, 255, 255, 0.03)',
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
+              fontFamily: '"Poppins", sans-serif',
+            }}
+          >
+            💡 Share this link with clients
+          </div>
+        </motion.div>
+      </motion.div>
 
       {/* Stats Dashboard */}
       {stats && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-medium text-gray-600">Total Submissions</h3>
-              <svg
-                className="h-5 w-5 text-blue-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+        >
+          <div
+            className="p-6 rounded-[25px] relative overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
+              backdropFilter: 'blur(50.5px)',
+              WebkitBackdropFilter: 'blur(50.5px)',
+              border: '2px solid rgba(122, 253, 214, 0.2)',
+              boxShadow: '0 4px 24px rgba(0, 0, 0, 0.12)'
+            }}
+          >
+            <div className="absolute top-0 right-0 w-32 h-32 opacity-10 blur-2xl" style={{ background: 'linear-gradient(135deg, #7afdd6 0%, #b8a4ff 100%)' }} />
+            <div className="flex items-center justify-between relative z-10">
+              <div
+                className="p-4 rounded-[18px]"
+                style={{
+                  background: 'linear-gradient(135deg, #7afdd6 0%, #b8a4ff 100%)',
+                  boxShadow: '0 8px 16px rgba(122, 253, 214, 0.4)'
+                }}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
+                <FileText className="text-[#1a1a19]" size={24} />
+              </div>
+              <div className="text-right">
+                <p className="text-xs font-medium text-[#888888] uppercase tracking-wide mb-1" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                  Total Submissions
+                </p>
+                <p className="text-4xl font-bold text-white" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                  {stats.totalSubmissions.toLocaleString()}
+                </p>
+              </div>
             </div>
-            <p className="text-3xl font-bold text-gray-900">{stats.totalSubmissions}</p>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-medium text-gray-600">Completed</h3>
-              <svg
-                className="h-5 w-5 text-green-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+          <div
+            className="p-6 rounded-[25px] relative overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
+              backdropFilter: 'blur(50.5px)',
+              WebkitBackdropFilter: 'blur(50.5px)',
+              border: '2px solid rgba(74, 222, 128, 0.2)',
+              boxShadow: '0 4px 24px rgba(0, 0, 0, 0.12)'
+            }}
+          >
+            <div className="absolute top-0 right-0 w-32 h-32 opacity-10 blur-2xl" style={{ background: 'radial-gradient(circle, #4ade80 0%, transparent 70%)' }} />
+            <div className="flex items-center justify-between relative z-10">
+              <div
+                className="p-4 rounded-[18px]"
+                style={{
+                  background: 'linear-gradient(135deg, #4ade80 0%, #22c55e 100%)',
+                  boxShadow: '0 8px 16px rgba(74, 222, 128, 0.4)'
+                }}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
+                <CheckCircle className="text-[#1a1a19]" size={24} />
+              </div>
+              <div className="text-right">
+                <p className="text-xs font-medium text-[#888888] uppercase tracking-wide mb-1" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                  Completed
+                </p>
+                <p className="text-4xl font-bold text-green-400" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                  {stats.completedSubmissions.toLocaleString()}
+                </p>
+                <p className="text-xs text-[#888888] mt-1">{stats.completionRate}% rate</p>
+              </div>
             </div>
-            <p className="text-3xl font-bold text-green-600">{stats.completedSubmissions}</p>
-            <p className="text-sm text-gray-500 mt-1">{stats.completionRate}% completion rate</p>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-medium text-gray-600">Draft</h3>
-              <svg
-                className="h-5 w-5 text-yellow-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+          <div
+            className="p-6 rounded-[25px] relative overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
+              backdropFilter: 'blur(50.5px)',
+              WebkitBackdropFilter: 'blur(50.5px)',
+              border: '2px solid rgba(250, 204, 21, 0.2)',
+              boxShadow: '0 4px 24px rgba(0, 0, 0, 0.12)'
+            }}
+          >
+            <div className="absolute top-0 right-0 w-32 h-32 opacity-10 blur-2xl" style={{ background: 'radial-gradient(circle, #facc15 0%, transparent 70%)' }} />
+            <div className="flex items-center justify-between relative z-10">
+              <div
+                className="p-4 rounded-[18px]"
+                style={{
+                  background: 'linear-gradient(135deg, #facc15 0%, #eab308 100%)',
+                  boxShadow: '0 8px 16px rgba(250, 204, 21, 0.4)'
+                }}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                />
-              </svg>
+                <Edit3 className="text-[#1a1a19]" size={24} />
+              </div>
+              <div className="text-right">
+                <p className="text-xs font-medium text-[#888888] uppercase tracking-wide mb-1" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                  Draft
+                </p>
+                <p className="text-4xl font-bold text-yellow-400" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                  {stats.draftSubmissions.toLocaleString()}
+                </p>
+              </div>
             </div>
-            <p className="text-3xl font-bold text-yellow-600">{stats.draftSubmissions}</p>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-medium text-gray-600">Total Clients</h3>
-              <svg
-                className="h-5 w-5 text-purple-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+          <div
+            className="p-6 rounded-[25px] relative overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
+              backdropFilter: 'blur(50.5px)',
+              WebkitBackdropFilter: 'blur(50.5px)',
+              border: '2px solid rgba(168, 85, 247, 0.2)',
+              boxShadow: '0 4px 24px rgba(0, 0, 0, 0.12)'
+            }}
+          >
+            <div className="absolute top-0 right-0 w-32 h-32 opacity-10 blur-2xl" style={{ background: 'radial-gradient(circle, #a855f7 0%, transparent 70%)' }} />
+            <div className="flex items-center justify-between relative z-10">
+              <div
+                className="p-4 rounded-[18px]"
+                style={{
+                  background: 'linear-gradient(135deg, #a855f7 0%, #9333ea 100%)',
+                  boxShadow: '0 8px 16px rgba(168, 85, 247, 0.4)'
+                }}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                />
-              </svg>
+                <Users className="text-[#1a1a19]" size={24} />
+              </div>
+              <div className="text-right">
+                <p className="text-xs font-medium text-[#888888] uppercase tracking-wide mb-1" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                  Total Clients
+                </p>
+                <p className="text-4xl font-bold text-purple-400" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                  {stats.totalClients.toLocaleString()}
+                </p>
+                <p className="text-xs text-[#888888] mt-1">{stats.recentSubmissions} in last 7 days</p>
+              </div>
             </div>
-            <p className="text-3xl font-bold text-purple-600">{stats.totalClients}</p>
-            <p className="text-sm text-gray-500 mt-1">{stats.recentSubmissions} in last 7 days</p>
           </div>
-        </div>
+        </motion.div>
       )}
 
       {/* Filter Tabs */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
-        <div className="flex border-b border-gray-200">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="rounded-[25px] overflow-hidden"
+        style={{
+          background: 'rgba(255, 255, 255, 0.01)',
+          backdropFilter: 'blur(50.5px)',
+          WebkitBackdropFilter: 'blur(50.5px)',
+          border: '2px solid rgba(122, 253, 214, 0.3)',
+        }}
+      >
+        <div className="flex border-b border-[#7afdd6]/20">
           <button
             onClick={() => setFilter('all')}
-            className={`px-6 py-3 font-medium transition-colors ${
+            className={`px-6 py-3 font-medium transition-all ${
               filter === 'all'
-                ? 'text-blue-600 border-b-2 border-blue-600'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'text-[#7afdd6] border-b-2 border-[#7afdd6]'
+                : 'text-[#888888] hover:text-white'
             }`}
+            style={{ fontFamily: '"Poppins", sans-serif' }}
           >
             All Submissions ({stats?.totalSubmissions || 0})
           </button>
           <button
             onClick={() => setFilter('completed')}
-            className={`px-6 py-3 font-medium transition-colors ${
+            className={`px-6 py-3 font-medium transition-all ${
               filter === 'completed'
-                ? 'text-blue-600 border-b-2 border-blue-600'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'text-[#7afdd6] border-b-2 border-[#7afdd6]'
+                : 'text-[#888888] hover:text-white'
             }`}
+            style={{ fontFamily: '"Poppins", sans-serif' }}
           >
             Completed ({stats?.completedSubmissions || 0})
           </button>
           <button
             onClick={() => setFilter('draft')}
-            className={`px-6 py-3 font-medium transition-colors ${
+            className={`px-6 py-3 font-medium transition-all ${
               filter === 'draft'
-                ? 'text-blue-600 border-b-2 border-blue-600'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'text-[#7afdd6] border-b-2 border-[#7afdd6]'
+                : 'text-[#888888] hover:text-white'
             }`}
+            style={{ fontFamily: '"Poppins", sans-serif' }}
           >
             Drafts ({stats?.draftSubmissions || 0})
           </button>
         </div>
-      </div>
+      </motion.div>
 
       {/* Submissions Table */}
-      {submissions.length === 0 ? (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
-          <div className="text-gray-400 mb-4">
-            <svg
-              className="mx-auto h-16 w-16"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+      >
+        {submissions.length === 0 ? (
+          <div
+            className="rounded-[25px] p-12 text-center"
+            style={{
+              background: 'rgba(255, 255, 255, 0.01)',
+              backdropFilter: 'blur(50.5px)',
+              WebkitBackdropFilter: 'blur(50.5px)',
+              border: '2px solid rgba(122, 253, 214, 0.3)',
+            }}
+          >
+            <FileText className="mx-auto h-16 w-16 text-[#888888] mb-4" />
+            <h3 className="text-xl font-semibold text-white mb-2" style={{ fontFamily: '"Poppins", sans-serif' }}>
+              No submissions found
+            </h3>
+            <p className="text-[#888888]">There are no {filter !== 'all' && filter} submissions yet.</p>
           </div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">No submissions found</h3>
-          <p className="text-gray-600">There are no {filter !== 'all' && filter} submissions yet.</p>
-        </div>
-      ) : (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Client
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Company
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Email
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Industry
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Date
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {submissions.map((submission) => (
-                  <tr key={submission.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <div className="h-10 w-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center">
-                          <span className="text-blue-600 font-medium">
-                            {submission.user.name?.charAt(0).toUpperCase() || 'U'}
-                          </span>
-                        </div>
-                        <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">
-                            {submission.user.name || 'Unknown'}
-                          </div>
-                          <div className="text-sm text-gray-500">{submission.user.email}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="text-sm text-gray-900">
-                        {submission.companyName || <span className="text-gray-400 italic">N/A</span>}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="text-sm text-gray-900">
-                        {submission.email || <span className="text-gray-400 italic">N/A</span>}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="text-sm text-gray-900">
-                        {submission.industry || <span className="text-gray-400 italic">N/A</span>}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {submission.submittedAt
-                        ? new Date(submission.submittedAt).toLocaleDateString()
-                        : new Date(submission.createdAt).toLocaleDateString()}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span
-                        className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                          submission.isComplete
-                            ? 'bg-green-100 text-green-800'
-                            : 'bg-yellow-100 text-yellow-800'
-                        }`}
-                      >
-                        {submission.isComplete ? 'Complete' : 'Draft'}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <Link
-                        href={`/admin/submissions/${submission.id}`}
-                        className="text-blue-600 hover:text-blue-900 transition-colors"
-                      >
-                        View Details
-                      </Link>
-                    </td>
+        ) : (
+          <div
+            className="rounded-[25px] overflow-hidden"
+            style={{
+              background: 'rgba(255, 255, 255, 0.01)',
+              backdropFilter: 'blur(50.5px)',
+              WebkitBackdropFilter: 'blur(50.5px)',
+              border: '2px solid rgba(122, 253, 214, 0.3)',
+            }}
+          >
+            <div className="overflow-x-auto">
+              <table className="min-w-full">
+                <thead>
+                  <tr className="border-b border-[#7afdd6]/20">
+                    <th className="px-6 py-4 text-left text-xs font-medium text-[#888888] uppercase tracking-wider" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                      Client
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-medium text-[#888888] uppercase tracking-wider" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                      Company
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-medium text-[#888888] uppercase tracking-wider" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                      Email
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-medium text-[#888888] uppercase tracking-wider" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                      Industry
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-medium text-[#888888] uppercase tracking-wider" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                      Date
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-medium text-[#888888] uppercase tracking-wider" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                      Status
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-medium text-[#888888] uppercase tracking-wider" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                      Actions
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-[#7afdd6]/10">
+                  {submissions.map((submission) => (
+                    <tr key={submission.id} className="hover:bg-white/5 transition-colors">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center gap-3">
+                          <div
+                            className="h-10 w-10 flex-shrink-0 rounded-full flex items-center justify-center"
+                            style={{
+                              background: 'linear-gradient(135deg, #7afdd6 0%, #b8a4ff 100%)',
+                            }}
+                          >
+                            <span className="text-[#1a1a19] font-semibold text-sm">
+                              {submission.user.name?.charAt(0).toUpperCase() || 'U'}
+                            </span>
+                          </div>
+                          <div>
+                            <div className="text-sm font-medium text-white" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                              {submission.user.name || 'Unknown'}
+                            </div>
+                            <div className="text-xs text-[#888888]">{submission.user.email}</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="text-sm text-white" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                          {submission.companyName || <span className="text-[#888888] italic">N/A</span>}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="text-sm text-white" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                          {submission.email || <span className="text-[#888888] italic">N/A</span>}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="text-sm text-white" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                          {submission.industry || <span className="text-[#888888] italic">N/A</span>}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-[#888888]">
+                        {submission.submittedAt
+                          ? new Date(submission.submittedAt).toLocaleDateString()
+                          : new Date(submission.createdAt).toLocaleDateString()}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span
+                          className={`px-3 py-1 inline-flex text-xs font-semibold rounded-full ${
+                            submission.isComplete
+                              ? 'bg-green-500/20 text-green-400'
+                              : 'bg-yellow-500/20 text-yellow-400'
+                          }`}
+                          style={{ fontFamily: '"Poppins", sans-serif' }}
+                        >
+                          {submission.isComplete ? 'Complete' : 'Draft'}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <Link
+                          href={`/admin/submissions/${submission.id}`}
+                          className="text-[#7afdd6] hover:text-[#b8a4ff] transition-colors"
+                          style={{ fontFamily: '"Poppins", sans-serif' }}
+                        >
+                          View Details
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </motion.div>
     </div>
   );
 }

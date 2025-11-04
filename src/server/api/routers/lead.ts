@@ -25,6 +25,7 @@ const updateLeadSchema = z.object({
   status: z.nativeEnum(LeadStatus).optional(),
   notes: z.string().optional(),
   assignedTo: z.string().optional(),
+  companyId: z.string().nullable().optional(),
 });
 
 export const leadRouter = createTRPCRouter({
@@ -56,6 +57,15 @@ export const leadRouter = createTRPCRouter({
           skip,
           take: limit,
           orderBy: { createdAt: 'desc' },
+          include: {
+            company: {
+              select: {
+                id: true,
+                name: true,
+                type: true,
+              },
+            },
+          },
         }),
         ctx.prisma.lead.count({ where }),
       ]);
@@ -73,6 +83,15 @@ export const leadRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       return ctx.prisma.lead.findUnique({
         where: { id: input.id },
+        include: {
+          company: {
+            select: {
+              id: true,
+              name: true,
+              type: true,
+            },
+          },
+        },
       });
     }),
 

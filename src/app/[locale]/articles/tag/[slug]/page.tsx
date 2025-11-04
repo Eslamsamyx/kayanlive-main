@@ -236,7 +236,9 @@ export default function TagPage() {
   const [showFilters, setShowFilters] = useState(false);
 
   // Fetch all tags to find the current one by slug
-  const { data: allTags } = api.article.getTags.useQuery();
+  const { data: allTags } = api.article.getTags.useQuery(undefined, {
+    suspense: false,
+  });
   const tag = allTags?.find(t => t.slug === tagSlug);
 
   // Fetch articles with this tag
@@ -249,10 +251,21 @@ export default function TagPage() {
     sortOrder: sortBy === 'oldest' ? 'asc' : 'desc',
     page: currentPage,
     limit: 12,
+  }, {
+    suspense: false,
   });
 
-  if (!tag) {
+  if (!tag && allTags) {
     notFound();
+  }
+
+  // Show loading state if tag hasn't loaded yet
+  if (!tag) {
+    return (
+      <div className="min-h-screen bg-[#2c2c2b] flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#7afdd6]"></div>
+      </div>
+    );
   }
 
   // Filter articles that have the current tag

@@ -35,6 +35,7 @@ const FileUploadSchema = z.object({
 // Schema for questionnaire submission
 const QuestionnaireSubmissionSchema = z.object({
   questionnaireId: z.string(),
+  projectId: z.string().optional(), // Optional link to project
   companyName: z.string().optional(),
   contactPerson: z.string().optional(),
   email: z.string().email().optional(),
@@ -67,6 +68,7 @@ export const questionnaireRouter = createTRPCRouter({
             data: {
               questionnaireId: sanitizeText(input.questionnaireId) || input.questionnaireId,
               userId: ctx.session.user.id, // Link to authenticated user
+              projectId: input.projectId || null, // Link to project if provided
               ...sanitizedData,
               isComplete: input.isComplete,
               submittedAt: input.isComplete ? new Date() : null,

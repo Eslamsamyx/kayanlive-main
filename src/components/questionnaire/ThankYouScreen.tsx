@@ -38,7 +38,8 @@ export function ThankYouScreen({
       return answer.length > 0 ? answer.join(", ") : "Not answered";
     }
 
-    if (typeof answer === 'object' && question.type === "multi-field") {
+    // Handle any object type (including multi-field and other object answers)
+    if (typeof answer === 'object' && answer !== null) {
       const entries = Object.entries(answer);
       if (entries.length === 0) return "Not answered";
 
@@ -46,7 +47,7 @@ export function ThankYouScreen({
         .filter(([_, value]) => value && value.trim() !== "")
         .map(([key, value]) => {
           const field = question.fields?.find(f => f.id === key);
-          const label = field?.label || key;
+          const label = field?.label || key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
           return `${label}: ${value}`;
         })
         .join(" | ");
@@ -56,7 +57,7 @@ export function ThankYouScreen({
       return `${answer}/${question.max || 10}`;
     }
 
-    return answer as string;
+    return String(answer);
   };
 
   const getFilesSummary = (questionId: number) => {
@@ -249,6 +250,15 @@ export function ThankYouScreen({
                             <span className="font-medium">Files:</span>
                           </div>
                           <div className="text-sm">{getFilesSummary(question.id)}</div>
+                        </div>
+                      ) : question.type === "signature" && typeof answer === 'string' && answer.startsWith('data:image') ? (
+                        <div className="bg-white rounded-xl p-4 border-2 border-dashed border-white/20">
+                          <img
+                            src={answer}
+                            alt="Signature"
+                            className="max-w-full h-auto"
+                            style={{ maxHeight: '200px' }}
+                          />
                         </div>
                       ) : (
                         <div className="text-gray-300 bg-white/10 rounded-lg p-4">

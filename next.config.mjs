@@ -279,9 +279,25 @@ const nextConfig = {
         ],
       },
 
-      // CRITICAL FIX: Performance and security headers for all pages
+      // File serving routes - allow iframe embedding for PDF preview
+      // Note: We only set CSP and don't set X-Frame-Options to avoid conflicts
       {
-        source: '/(.*)',
+        source: '/api/files/(.*)',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'self'",
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+        ],
+      },
+
+      // CRITICAL FIX: Performance and security headers for all pages (except file serving)
+      {
+        source: '/:path((?!api/files).*)*',
         headers: [
           {
             key: 'X-DNS-Prefetch-Control',

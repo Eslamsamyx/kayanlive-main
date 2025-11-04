@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import CookieConsentManager from '@/components/CookieConsentManager';
+import { LocaleLayoutContent } from '@/components/LocaleLayoutContent';
 
 export async function generateMetadata({
   params,
@@ -52,20 +50,9 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages} locale={locale}>
-      <div className="min-h-screen bg-white overflow-x-hidden">
-          <div className="fixed top-0 left-0 right-0 z-50">
-          <div className="max-w-[1600px] mx-auto px-4 py-4">
-            <Navbar locale={locale} />
-          </div>
-        </div>
-        <main className="pt-32 overflow-x-hidden">
-          <div className="max-w-[1600px] mx-auto px-4">
-            {children}
-          </div>
-        </main>
-        <Footer />
-        <CookieConsentManager />
-      </div>
+      <LocaleLayoutContent locale={locale}>
+        {children}
+      </LocaleLayoutContent>
     </NextIntlClientProvider>
   );
 }

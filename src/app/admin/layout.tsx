@@ -3,8 +3,8 @@
 import { useSession } from 'next-auth/react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { BarChart3, Target, Users, FileText, LogOut } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { BarChart3, Target, Users, FileText, LogOut, Building2, FolderKanban, FileQuestion, Package, FolderHeart, CalendarDays, TrendingUp, Shield, ArrowLeft, Download, Share2, HardDrive } from 'lucide-react';
+import { NotificationCenter } from '@/components/notifications/NotificationCenter';
 
 export default function AdminLayout({
   children,
@@ -68,11 +68,32 @@ export default function AdminLayout({
 
       <div className="flex relative z-10">
         <AdminSidebar session={session} />
-        <main className="flex-1 p-4 md:p-8 overflow-y-auto h-screen">
-          <div className="max-w-7xl mx-auto">
-            {children}
+        <div className="flex-1 flex flex-col h-screen overflow-hidden">
+          {/* Top Header Bar */}
+          <div
+            className="px-4 md:px-8 py-4 border-b relative z-30"
+            style={{
+              background: 'rgba(255, 255, 255, 0.01)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              borderColor: 'rgba(122, 253, 214, 0.2)',
+            }}
+          >
+            <div className="max-w-7xl mx-auto flex items-center justify-between">
+              <div className="flex-1" />
+              <div className="flex items-center gap-3">
+                <NotificationCenter />
+              </div>
+            </div>
           </div>
-        </main>
+
+          {/* Main Content */}
+          <main className="flex-1 p-4 md:p-8 overflow-y-auto">
+            <div className="max-w-7xl mx-auto">
+              {children}
+            </div>
+          </main>
+        </div>
       </div>
     </div>
   );
@@ -93,12 +114,40 @@ function AdminSidebar({ session }: AdminSidebarProps) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
 
-  const navigation = [
+  // Detect if we're in the Assets Portal
+  const isAssetsPortal = pathname.startsWith('/admin/assets') ||
+                         pathname.startsWith('/admin/collections') ||
+                         pathname.startsWith('/admin/analytics') ||
+                         pathname.startsWith('/admin/download-requests') ||
+                         pathname.startsWith('/admin/shared-links') ||
+                         pathname.startsWith('/admin/storage');
+
+  // Main navigation (without Collections and Analytics - they're in Assets Portal)
+  const mainNavigation = [
     { name: 'Dashboard', href: '/admin/dashboard', icon: 'BarChart3' },
-    { name: 'Leads', href: '/admin/leads', icon: 'Target' },
+    { name: 'Companies', href: '/admin/companies', icon: 'Building2' },
+    { name: 'Projects', href: '/admin/projects', icon: 'FolderKanban' },
     { name: 'Users', href: '/admin/users', icon: 'Users' },
+    { name: 'Permissions', href: '/admin/permissions', icon: 'Shield' },
+    { name: 'Assets', href: '/admin/assets', icon: 'Package' },
+    { name: 'Exhibitions', href: '/admin/exhibitions', icon: 'CalendarDays' },
+    { name: 'Leads', href: '/admin/leads', icon: 'Target' },
+    { name: 'Submissions', href: '/admin/submissions', icon: 'FileQuestion' },
     { name: 'Articles', href: '/admin/articles', icon: 'FileText' },
   ];
+
+  // Assets Portal navigation
+  const assetsNavigation = [
+    { name: 'Assets Overview', href: '/admin/assets', icon: 'Package' },
+    { name: 'Collections', href: '/admin/collections', icon: 'FolderHeart' },
+    { name: 'Analytics', href: '/admin/analytics', icon: 'TrendingUp' },
+    { name: 'Download Requests', href: '/admin/download-requests', icon: 'Download' },
+    { name: 'Shared Links', href: '/admin/shared-links', icon: 'Share2' },
+    { name: 'Storage & Settings', href: '/admin/storage', icon: 'HardDrive' },
+  ];
+
+  // Choose navigation based on current portal
+  const navigation = isAssetsPortal ? assetsNavigation : mainNavigation;
 
   // Filter navigation based on user role
   const filteredNavigation = navigation.filter(item => {
@@ -106,6 +155,11 @@ function AdminSidebar({ session }: AdminSidebarProps) {
 
     if (userRole === 'ADMIN') {
       return true; // Admin can access everything
+    }
+
+    // Permissions and Analytics are ADMIN-only
+    if (item.name === 'Permissions' || item.name === 'Analytics') {
+      return false;
     }
 
     if (userRole === 'MODERATOR') {
@@ -136,12 +190,34 @@ function AdminSidebar({ session }: AdminSidebarProps) {
     switch (iconName) {
       case 'BarChart3':
         return <BarChart3 {...iconProps} />;
+      case 'Building2':
+        return <Building2 {...iconProps} />;
+      case 'FolderKanban':
+        return <FolderKanban {...iconProps} />;
       case 'Target':
         return <Target {...iconProps} />;
       case 'Users':
         return <Users {...iconProps} />;
+      case 'Shield':
+        return <Shield {...iconProps} />;
+      case 'FileQuestion':
+        return <FileQuestion {...iconProps} />;
       case 'FileText':
         return <FileText {...iconProps} />;
+      case 'Package':
+        return <Package {...iconProps} />;
+      case 'FolderHeart':
+        return <FolderHeart {...iconProps} />;
+      case 'CalendarDays':
+        return <CalendarDays {...iconProps} />;
+      case 'TrendingUp':
+        return <TrendingUp {...iconProps} />;
+      case 'Download':
+        return <Download {...iconProps} />;
+      case 'Share2':
+        return <Share2 {...iconProps} />;
+      case 'HardDrive':
+        return <HardDrive {...iconProps} />;
       default:
         return null;
     }
@@ -149,7 +225,7 @@ function AdminSidebar({ session }: AdminSidebarProps) {
 
   return (
     <div
-      className="w-64 h-screen sticky top-0 relative overflow-hidden"
+      className="w-64 h-screen sticky top-0 relative overflow-hidden flex flex-col"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onMouseMove={handleMouseMove}
@@ -170,13 +246,22 @@ function AdminSidebar({ session }: AdminSidebarProps) {
         }}
       />
 
+      {/* Back Button - shown only in Assets Portal */}
+      {isAssetsPortal && (
+        <div className="p-4 border-b border-[#7afdd6]/20 relative z-10">
+          <button
+            onClick={() => router.push('/admin/dashboard')}
+            className="flex items-center gap-2 text-sm text-[#888888] hover:text-[#7afdd6] transition-colors duration-300 group"
+            style={{ fontFamily: '"Poppins", sans-serif' }}
+          >
+            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform duration-300" />
+            <span>Back to Admin</span>
+          </button>
+        </div>
+      )}
+
       {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="p-6 border-b border-[#7afdd6]/20 relative z-10"
-      >
+      <div className="p-6 border-b border-[#7afdd6]/20 relative z-10">
         <h1
           className="text-xl font-bold mb-2"
           style={{
@@ -187,30 +272,31 @@ function AdminSidebar({ session }: AdminSidebarProps) {
             backgroundClip: 'text'
           }}
         >
-          KayanLive
+          {isAssetsPortal ? 'Assets Portal' : 'KayanLive'}
         </h1>
-        <p className="text-sm text-[#888888] mb-3">{session?.user?.email}</p>
-        <span
-          className="inline-block px-3 py-1 text-xs font-medium rounded-full capitalize"
-          style={{
-            background: 'linear-gradient(90deg, #7afdd6 0%, #b8a4ff 100%)',
-            color: '#2c2c2b'
-          }}
-        >
-          {session?.user?.role?.toLowerCase()}
-        </span>
-      </motion.div>
+        <p className="text-sm text-[#888888] mb-3">
+          {isAssetsPortal ? 'Manage your digital assets and collections' : session?.user?.email}
+        </p>
+        {!isAssetsPortal && (
+          <span
+            className="inline-block px-3 py-1 text-xs font-medium rounded-full capitalize"
+            style={{
+              background: 'linear-gradient(90deg, #7afdd6 0%, #b8a4ff 100%)',
+              color: '#2c2c2b'
+            }}
+          >
+            {session?.user?.role?.toLowerCase()}
+          </span>
+        )}
+      </div>
 
       {/* Navigation */}
-      <nav className="flex-1 p-4 relative z-10">
-        <div className="space-y-2">
+      <nav className="flex-1 p-4 relative z-10 overflow-y-auto">
+        <div className="space-y-2 pb-4">
           {filteredNavigation.map((item, index) => (
-            <motion.a
+            <a
               key={item.name}
               href={item.href}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
               onClick={(e) => {
                 e.preventDefault();
                 router.push(item.href);
@@ -227,30 +313,25 @@ function AdminSidebar({ session }: AdminSidebarProps) {
               )}
               <span className="mr-3 flex-shrink-0 relative z-10">{getIcon(item.icon)}</span>
               <span className="relative z-10">{item.name}</span>
-            </motion.a>
+            </a>
           ))}
+
+          {/* Sign Out Button - at the end of nav */}
+          <div className="pt-4 mt-4 border-t border-[#7afdd6]/20">
+            <button
+              onClick={() => {
+                router.push('/auth/signout');
+              }}
+              className="w-full flex items-center px-4 py-3 text-sm font-medium text-[#888888] hover:bg-white/10 hover:text-red-400 rounded-xl transition-all duration-300 group relative overflow-hidden"
+              style={{ fontFamily: '"Poppins", sans-serif' }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-red-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <LogOut size={20} strokeWidth={2} className="mr-3 flex-shrink-0 relative z-10" />
+              <span className="relative z-10">Sign out</span>
+            </button>
+          </div>
         </div>
       </nav>
-
-      {/* Footer */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-        className="p-4 border-t border-[#7afdd6]/20 relative z-10"
-      >
-        <button
-          onClick={() => {
-            window.location.href = '/api/auth/signout';
-          }}
-          className="w-full flex items-center px-4 py-3 text-sm font-medium text-[#888888] hover:bg-white/10 hover:text-[#7afdd6] rounded-xl transition-all duration-300 group relative overflow-hidden"
-          style={{ fontFamily: '"Poppins", sans-serif' }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-red-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          <LogOut size={20} strokeWidth={2} className="mr-3 flex-shrink-0 relative z-10" />
-          <span className="relative z-10">Sign out</span>
-        </button>
-      </motion.div>
     </div>
   );
 }

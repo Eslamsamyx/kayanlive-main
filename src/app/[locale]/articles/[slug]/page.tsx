@@ -25,6 +25,8 @@ import {
 } from 'lucide-react';
 import { format } from 'date-fns';
 import Head from 'next/head';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { TranslationBanner } from '@/components/translations/TranslationBanner';
 
 const LOCALES = [
   { value: 'en', label: 'English', flag: '🇺🇸' },
@@ -57,6 +59,15 @@ export default function ArticlePage() {
     slug,
     locale,
   });
+
+  // Fetch hreflang links for SEO
+  const { data: hreflangData } = api.article.getHreflangLinks.useQuery(
+    { articleId: article?.id || '' },
+    {
+      enabled: !!article?.id,
+      refetchOnWindowFocus: false,
+    }
+  );
 
   // Fetch related articles
   const { data: relatedArticlesData } = api.article.getAll.useQuery({
@@ -162,6 +173,23 @@ export default function ArticlePage() {
 
         {/* Canonical URL */}
         <link rel="canonical" href={article.canonicalUrl || articleUrl} />
+
+        {/* Hreflang Links for SEO */}
+        {hreflangData?.links.map((link) => (
+          <link
+            key={link.locale}
+            rel="alternate"
+            hrefLang={link.locale}
+            href={`https://kayanlive.com${link.href}`}
+          />
+        ))}
+        {hreflangData?.xDefault && (
+          <link
+            rel="alternate"
+            hrefLang="x-default"
+            href={`https://kayanlive.com${hreflangData.xDefault}`}
+          />
+        )}
 
         {/* Schema.org structured data */}
         <script
@@ -377,15 +405,32 @@ export default function ArticlePage() {
                 )}
               </div>
 
-              {/* Language Indicator */}
-              <div className="flex items-center gap-2 px-3 py-2 bg-white/10 rounded-[10px]">
-                <span className="text-lg">{currentLocale.flag}</span>
-                <span className="text-[#7afdd6] text-sm font-medium" style={{ fontFamily: '"Poppins", sans-serif' }}>
-                  {currentLocale.label}
-                </span>
-              </div>
+              {/* Language Switcher */}
+              <LanguageSwitcher
+                currentLocale={locale}
+                currentSlug={slug}
+                articleId={article.id}
+                translations={article.translations}
+                mainArticleLocale={article.locale}
+              />
             </div>
           </motion.header>
+
+          {/* Translation Banner - show when viewing fallback content */}
+          {article._meta?.isFallback && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              <TranslationBanner
+                requestedLocale={article._meta.requestedLocale}
+                actualLocale={article._meta.actualLocale}
+                isFallback={article._meta.isFallback}
+                articleId={article.id}
+              />
+            </motion.div>
+          )}
 
           {/* Featured Image */}
           {article.featuredImage && (
