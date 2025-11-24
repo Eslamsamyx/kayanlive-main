@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
+import localFont from 'next/font/local';
 import { GoogleTagManager } from '@next/third-parties/google';
 import { TRPCReactProvider } from '@/trpc/react';
 import { Providers } from '@/components/Providers';
@@ -13,6 +14,45 @@ const poppins = Poppins({
   fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Arial', 'sans-serif'],
   variable: '--font-poppins',
   adjustFontFallback: true, // CRITICAL: Automatic fallback font metrics matching
+});
+
+// Arabic font for Arabic locale
+const arabicFont = localFont({
+  src: [
+    {
+      path: '../fonts/ArabicFont-UltraLight.ttf',
+      weight: '200',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/ArabicFont-Light.ttf',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/ArabicFont-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/ArabicFont-Medium.ttf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/ArabicFont-Bold.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/ArabicFont-Heavy.ttf',
+      weight: '900',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-arabic',
+  display: 'swap',
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -81,7 +121,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={poppins.variable}>
+    <html lang="en" className={`${poppins.variable} ${arabicFont.variable}`}>
       <head>
         <meta name="description" content="Leading event management company in Dubai and across the GCC. Delivering creativity, innovation, and execution for live events, exhibitions, conferences, and immersive experiences." />
 

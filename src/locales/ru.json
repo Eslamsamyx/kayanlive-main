@@ -709,5 +709,45 @@
       "dataProtection": "Узнайте больше о том, как мы защищаем ваши данные",
       "yourRights": "Вы имеете право на доступ, исправление или удаление своих персональных данных в любое время."
     }
+  },
+  "links": {
+    "title": "Свяжитесь с Нами",
+    "subtitle": "Подпишитесь на KayanLive в социальных сетях",
+    "links": {
+      "home": {
+        "name": "Посетите Наш Сайт",
+        "description": "Изучите наши услуги и портфолио",
+        "aria": "Посетить сайт KayanLive"
+      },
+      "youtube": {
+        "name": "YouTube",
+        "description": "Смотрите лучшие моменты наших мероприятий",
+        "aria": "Подписаться на KayanLive на YouTube"
+      },
+      "facebook": {
+        "name": "Facebook",
+        "description": "Присоединяйтесь к нашему сообществу",
+        "aria": "Подписаться на KayanLive на Facebook"
+      },
+      "instagram": {
+        "name": "Instagram",
+        "description": "Загляните за кулисы",
+        "aria": "Подписаться на KayanLive на Instagram"
+      },
+      "tiktok": {
+        "name": "TikTok",
+        "description": "Смотрите наши короткие видео",
+        "aria": "Подписаться на KayanLive на TikTok"
+      },
+      "linkedin": {
+        "name": "LinkedIn",
+        "description": "Профессиональное общение",
+        "aria": "Подписаться на KayanLive на LinkedIn"
+      }
+    },
+    "footer": {
+      "copyright": "{year} KayanLive. Все права защищены.",
+      "tagline": "Премиальное Управление Мероприятиями в Странах Персидского Залива"
+    }
   }
 }

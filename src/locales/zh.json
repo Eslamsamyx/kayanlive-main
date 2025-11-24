@@ -709,5 +709,45 @@
       "dataProtection": "了解更多关于我们如何保护您的数据",
       "yourRights": "您有权随时访问、更正或删除您的个人数据。"
     }
+  },
+  "links": {
+    "title": "联系我们",
+    "subtitle": "在社交媒体上关注 KayanLive",
+    "links": {
+      "home": {
+        "name": "访问我们的网站",
+        "description": "探索我们的服务和作品集",
+        "aria": "访问 KayanLive 网站"
+      },
+      "youtube": {
+        "name": "YouTube",
+        "description": "观看我们的活动精彩集锦",
+        "aria": "在 YouTube 上关注 KayanLive"
+      },
+      "facebook": {
+        "name": "Facebook",
+        "description": "加入我们的社区",
+        "aria": "在 Facebook 上关注 KayanLive"
+      },
+      "instagram": {
+        "name": "Instagram",
+        "description": "查看幕后花絮",
+        "aria": "在 Instagram 上关注 KayanLive"
+      },
+      "tiktok": {
+        "name": "TikTok",
+        "description": "观看我们的短视频",
+        "aria": "在 TikTok 上关注 KayanLive"
+      },
+      "linkedin": {
+        "name": "LinkedIn",
+        "description": "专业社交连接",
+        "aria": "在 LinkedIn 上关注 KayanLive"
+      }
+    },
+    "footer": {
+      "copyright": "{year} KayanLive. 保留所有权利。",
+      "tagline": "海湾合作委员会地区首选活动管理"
+    }
   }
 }

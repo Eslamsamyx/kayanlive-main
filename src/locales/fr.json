@@ -709,5 +709,45 @@
       "dataProtection": "En savoir plus sur la protection de vos données",
       "yourRights": "Vous avez le droit d'accéder, de corriger ou de supprimer vos données personnelles à tout moment."
     }
+  },
+  "links": {
+    "title": "Connectez-vous avec Nous",
+    "subtitle": "Suivez KayanLive sur les réseaux sociaux",
+    "links": {
+      "home": {
+        "name": "Visitez Notre Site",
+        "description": "Explorez nos services et portfolio",
+        "aria": "Visiter le site KayanLive"
+      },
+      "youtube": {
+        "name": "YouTube",
+        "description": "Regardez nos moments forts",
+        "aria": "Suivez KayanLive sur YouTube"
+      },
+      "facebook": {
+        "name": "Facebook",
+        "description": "Rejoignez notre communauté",
+        "aria": "Suivez KayanLive sur Facebook"
+      },
+      "instagram": {
+        "name": "Instagram",
+        "description": "Découvrez les coulisses",
+        "aria": "Suivez KayanLive sur Instagram"
+      },
+      "tiktok": {
+        "name": "TikTok",
+        "description": "Regardez nos vidéos courtes",
+        "aria": "Suivez KayanLive sur TikTok"
+      },
+      "linkedin": {
+        "name": "LinkedIn",
+        "description": "Connectez-vous professionnellement",
+        "aria": "Suivez KayanLive sur LinkedIn"
+      }
+    },
+    "footer": {
+      "copyright": "{year} KayanLive. Tous droits réservés.",
+      "tagline": "Gestion d'Événements Premium dans le CCG"
+    }
   }
 }

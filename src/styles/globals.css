@@ -97,6 +97,96 @@ body {
   position: relative;
 }
 
+/* Arabic Language Font */
+html[dir="rtl"] body,
+html[lang="ar"] body,
+[dir="rtl"],
+[lang="ar"] {
+  font-family: var(--font-arabic), system-ui, -apple-system, sans-serif;
+}
+
+/* Ensure Arabic font applies to all text elements in RTL */
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] h4,
+html[dir="rtl"] h5,
+html[dir="rtl"] h6,
+html[dir="rtl"] p,
+html[dir="rtl"] span,
+html[dir="rtl"] a,
+html[dir="rtl"] button,
+html[dir="rtl"] input,
+html[dir="rtl"] textarea,
+html[dir="rtl"] label,
+html[dir="rtl"] li,
+html[dir="rtl"] div {
+  font-family: var(--font-arabic), system-ui, -apple-system, sans-serif;
+}
+
+/* Arabic Font Weight Utilities - Maps Tailwind weights to Arabic font weights */
+/* UltraLight: 200, Light: 300, Regular: 400, Medium: 500, Bold: 700, Heavy: 900 */
+html[dir="rtl"] .font-extralight,
+html[dir="rtl"] .font-thin {
+  font-weight: 200;
+}
+
+html[dir="rtl"] .font-light {
+  font-weight: 300;
+}
+
+html[dir="rtl"] .font-normal,
+html[dir="rtl"] .font-regular {
+  font-weight: 400;
+}
+
+html[dir="rtl"] .font-medium {
+  font-weight: 500;
+}
+
+html[dir="rtl"] .font-semibold,
+html[dir="rtl"] .font-bold {
+  font-weight: 700;
+}
+
+html[dir="rtl"] .font-extrabold,
+html[dir="rtl"] .font-black {
+  font-weight: 900;
+}
+
+/* Arabic heading weights - heavier by default for better readability */
+html[dir="rtl"] h1 {
+  font-weight: 700;
+}
+
+html[dir="rtl"] h2 {
+  font-weight: 700;
+}
+
+html[dir="rtl"] h3 {
+  font-weight: 500;
+}
+
+html[dir="rtl"] h4,
+html[dir="rtl"] h5,
+html[dir="rtl"] h6 {
+  font-weight: 500;
+}
+
+/* Arabic body text - regular weight */
+html[dir="rtl"] p,
+html[dir="rtl"] span,
+html[dir="rtl"] li {
+  font-weight: 400;
+}
+
+/* Arabic buttons and labels - medium weight */
+html[dir="rtl"] button,
+html[dir="rtl"] label,
+html[dir="rtl"] a {
+  font-weight: 500;
+}
+
 /* CRITICAL FIX: Optimize Next.js Image component for LCP */
 [data-nimg] {
   /* Ensure images don't cause layout shifts */

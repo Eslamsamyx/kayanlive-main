@@ -772,5 +772,45 @@
       "dataProtection": "Learn more about how we protect your data",
       "yourRights": "You have the right to access, correct, or delete your personal data at any time."
     }
+  },
+  "links": {
+    "title": "Connect With Us",
+    "subtitle": "Follow KayanLive on social media",
+    "links": {
+      "home": {
+        "name": "Visit Our Website",
+        "description": "Explore our services and portfolio",
+        "aria": "Visit KayanLive website"
+      },
+      "youtube": {
+        "name": "YouTube",
+        "description": "Watch our event highlights",
+        "aria": "Follow KayanLive on YouTube"
+      },
+      "facebook": {
+        "name": "Facebook",
+        "description": "Join our community",
+        "aria": "Follow KayanLive on Facebook"
+      },
+      "instagram": {
+        "name": "Instagram",
+        "description": "See behind the scenes",
+        "aria": "Follow KayanLive on Instagram"
+      },
+      "tiktok": {
+        "name": "TikTok",
+        "description": "Watch our short videos",
+        "aria": "Follow KayanLive on TikTok"
+      },
+      "linkedin": {
+        "name": "LinkedIn",
+        "description": "Connect professionally",
+        "aria": "Follow KayanLive on LinkedIn"
+      }
+    },
+    "footer": {
+      "copyright": "{year} KayanLive. All rights reserved.",
+      "tagline": "Premier Event Management in the GCC"
+    }
   }
 }

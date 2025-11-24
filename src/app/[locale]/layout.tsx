@@ -48,11 +48,24 @@ export default async function LocaleLayout({
     messages = {};
   }
 
+  const isRTL = locale === 'ar';
+
   return (
-    <NextIntlClientProvider messages={messages} locale={locale}>
-      <LocaleLayoutContent locale={locale}>
-        {children}
-      </LocaleLayoutContent>
-    </NextIntlClientProvider>
+    <>
+      {/* Set HTML attributes for RTL and Arabic font */}
+      <style>{`
+        html {
+          direction: ${isRTL ? 'rtl' : 'ltr'};
+        }
+        html[lang="${locale}"] body {
+          ${isRTL ? 'font-family: var(--font-arabic), system-ui, sans-serif;' : ''}
+        }
+      `}</style>
+      <NextIntlClientProvider messages={messages} locale={locale}>
+        <LocaleLayoutContent locale={locale}>
+          {children}
+        </LocaleLayoutContent>
+      </NextIntlClientProvider>
+    </>
   );
 }
